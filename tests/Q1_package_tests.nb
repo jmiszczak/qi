@@ -1,0 +1,343 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     12749,        334]
+NotebookOptionsPosition[     12374,        316]
+NotebookOutlinePosition[     12731,        332]
+CellTagsIndexPosition[     12688,        329]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"<<", "Q1`"}]], "Input",
+ CellChangeTimes->{{3.45309130785712*^9, 3.453091311021535*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Q1`**"}]], "Input",
+ CellChangeTimes->{{3.453091062234786*^9, 3.4530910670838614`*^9}, 
+   3.453091317227117*^9, 3.453091396702965*^9, 3.453091447688842*^9, 
+   3.453091725136195*^9}],
+
+Cell[BoxData[
+ DynamicModuleBox[{Typeset`open$$ = True}, 
+  PaneSelectorBox[{False->
+   RowBox[{
+    OpenerBox[Dynamic[Typeset`open$$],
+     ImageSize->Small], 
+    StyleBox["Q1`", "InfoHeading"]}], True->GridBox[{
+     {
+      RowBox[{
+       OpenerBox[Dynamic[Typeset`open$$],
+        ImageSize->Small], 
+       StyleBox["Q1`", "InfoHeading"]}]},
+     {GridBox[{
+        {
+         ButtonBox["BaseMatrices",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"BaseMatrices", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Lambda1",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Lambda1", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["QubitGeneralState",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"QubitGeneralState", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["sx",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"sx", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["BaseVectors",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"BaseVectors", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Lambda2",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Lambda2", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["QubitKet",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"QubitKet", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["sy",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"sy", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]1",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]1", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["CNot",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"CNot", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Lambda3",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Lambda3", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["QubitPureState",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"QubitPureState", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["SymbolicMatrix",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"SymbolicMatrix", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]2",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]2", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["ComplexToPoint",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"ComplexToPoint", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["MatrixAbs",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"MatrixAbs", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["QubitState",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"QubitState", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["SymbolicVector",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"SymbolicVector", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]3",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]3", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["Fidelity",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Fidelity", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["MatrixSqrt",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"MatrixSqrt", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Res",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Res", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["sz",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"sz", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]4",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]4", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["GellMannMatrices",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"GellMannMatrices", "Q1`"}},
+          
+          ButtonNote->"Q1`"], 
+         ButtonBox["MaxEnt",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"MaxEnt", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Reshuffle",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Reshuffle", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["TraceDistance",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"TraceDistance", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]5",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]5", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["GeneralizedPauliMatrices",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info3453101471-5420182", {"GeneralizedPauliMatrices", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["MaxMix",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"MaxMix", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["SchmidtDecomposition",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info3453101471-5420182", {"SchmidtDecomposition", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Unitary2",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Unitary2", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]6",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]6", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["id",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"id", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["PauliMatrices",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"PauliMatrices", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["SpecialUnitary2",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"SpecialUnitary2", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Unres",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Unres", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]7",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]7", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["Ket",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Ket", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["ProbablityDistribution",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info3453101471-5420182", {"ProbablityDistribution", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["StateVector",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"StateVector", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Unvec",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Unvec", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Lambda]8",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Lambda]8", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["Ketbra",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Ketbra", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Proj",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Proj", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Subfidelity",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Subfidelity", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Vec",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Vec", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Sigma]x",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Sigma]x", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["KroneckerDeltaMatrix",
+          BaseStyle->"InformationLink",
+          ButtonData:>{
+           "Info3453101471-5420182", {"KroneckerDeltaMatrix", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["QFT",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"QFT", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Superfidelity",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Superfidelity", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["WernerState",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"WernerState", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Sigma]y",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Sigma]y", "Q1`"}},
+          ButtonNote->"Q1`"]},
+        {
+         ButtonBox["KroneckerSum",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"KroneckerSum", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["QubitBlochState",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"QubitBlochState", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["Swap",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"Swap", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["wh",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"wh", "Q1`"}},
+          ButtonNote->"Q1`"], 
+         ButtonBox["\[Sigma]z",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3453101471-5420182", {"\[Sigma]z", "Q1`"}},
+          ButtonNote->"Q1`"]}
+       },
+       DefaultBaseStyle->"InfoGrid",
+       GridBoxItemSize->{"Columns" -> {{
+            Scaled[0.19]}}}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}]}, 
+   Dynamic[Typeset`open$$],
+   ImageSize->Automatic]]], "Print", "InfoCell",
+ CellChangeTimes->{3.4530942714980783`*^9}]
+}, Open  ]]
+},
+WindowSize->{1270, 968},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 112, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[682, 26, 212, 4, 32, "Input"],
+Cell[897, 32, 11461, 281, 357, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,257 @@
+%%
+%% This is file `elsarticle-template-num.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% elsarticle.dtx  (with options: `numtemplate')
+%% 
+%% Copyright 2007, 2008 Elsevier Ltd.
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% -------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+\documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\newcommand{\Mathematica}{\emph{Mathematica}}
+\newcommand{\wek}{\mathbf{vec}}
+\newcommand{\res}{\mathbf{res}}
+\newcommand{\1}{{\rm 1\hspace{-0.9mm}l}}
+\newcommand{\Id}{\1}
+\newcommand{\SWAP}{\ensuremath{\mathrm{SWAP}}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\M}{\ensuremath{\mathbb{M}}}
+
+\journal{Computer Physics Communications}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{Q1---A \Mathematica\ package for analyzing geometry of quantum states}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \address[label1]{}
+%% \address[label2]{}
+
+\author{P.~Gawron}
+\author{J.~A.~Miszczak\corref{cor1}}
+\author{Z.~Pucha{\l}a}
+\address{Institute of Theoretical and Applied Informatics, Polish Academy of 
+Sciences, Ba{\l}tycka 5, 44-100 Gliwice, Poland}
+
+\begin{abstract}
+We present a package of functions for \Mathematica\ computer algebra system, 
+which implements number of functions used in the analysis of quantum states.
+
+In contrast to many available packages for symbolic and numerical simulation of
+quantum computation presented package is focused on geometrical aspects of 
+quantum information theory.
+
+\end{abstract}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+quantum information\sep symbolic computation
+%% PACS codes here, in the form: \PACS code \sep code
+\PACS
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Developement of quantum information processing demands computational tools 
+for analyzing starnge behaviour of quantum mechanical states and operations \cite{qdensity,radtke08simulation}.
+
+For a most comprehensive list of quantum computing simulators see \cite{quantiki}.
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overivew of functionality}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Desing principles}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+\item user know what she/he is doing -- function do not expect to get positive/unitary/\ldots\
+matrix
+\item only basic \Mathematica\ structures are used -- functions operator on 
+plain \Mathematica\ lists and return lists
+\item as simple as possible -- functions have mimimum reasonable numer of arguments
+\item only basic version are provided -- functions perform only simple 
+operations, for example in order to get partial trace on few subsystems user
+needs to perform premutation and then applay partial trace
+\item some data are used more often thn other -- Q1 predefines some commomly used
+matrice, for example matrice for \SWAP\ operatio for some small dimensions.
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Parametrizations of states}\label{sec:states}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{One-qubit states}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Generalizations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cite{tilma02generalized}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Partial operation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partial transposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Q1 implements partial operations using general method for constructing channels
+acting on subsystems. This method is based on formula
+\begin{equation}\label{eqn:def-tensor}
+(\Phi\otimes\Id)(\rho) = 
+\left(\res^{-1}\left(M_\Phi\res\left(\rho^R\right)\right)\right)^R
+\end{equation}
+where ${}^R$ denotes the reshuffling operation and $M_\Phi$ denotes the matrix
+of the linear map $\Phi$
+\begin{equation}
+M_\Phi = \tr \epsilon_i \Phi(\epsilon_j),
+\end{equation}
+where $\{\epsilon_i\}_i=1,\ldots,n^2$ is a canonical basis in $\M_n$. In the 
+Eq.~\ref{eqn:def-tensor} operation $\Phi$ is applied to the first subsystem 
+only.
+
+In the case of transposition $M_\Phi$ is equivalent to \SWAP. For example in the
+case of $4$-dimensional density matrix
+\begin{equation}
+X=\left(
+\begin{array}{cccc}
+ \alpha_{1,1} & \alpha_{1,2} & \alpha_{1,3} & \alpha_{1,4} \\
+ \alpha_{2,1} & \alpha_{2,2} & \alpha_{2,3} & \alpha_{2,4} \\
+ \alpha_{3,1} & \alpha_{3,2} & \alpha_{3,3} & \alpha_{3,4} \\
+ \alpha_{4,1} & \alpha_{4,2} & \alpha_{4,3} & \alpha_{4,4}
+\end{array}
+\right)
+\end{equation}
+partial transposition with respect to second subsystems ib obtaines using
+\verb+PartialTransposeB[X, 2, 2]+ and it gives
+\begin{equation}
+X^{T_B}=\left(
+\begin{array}{cccc}
+ \alpha_{1,1} & \alpha_{2,1} & \alpha_{1,3} & \alpha_{2,3} \\
+ \alpha_{1,2} & \alpha_{2,2} & \alpha_{1,4} & \alpha_{2,4} \\
+ \alpha_{3,1} & \alpha_{4,1} & \alpha_{3,3} & \alpha_{4,3} \\
+ \alpha_{3,2} & \alpha_{4,2} & \alpha_{3,4} & \alpha_{4,4}
+\end{array}
+\right).
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partial trace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Operation of tracing out a subsystem can be achived in a similar manner. We 
+define tracing map as
+\begin{equation}
+\Phi_\mathrm{tr}(\rho) = \tr \rho \Id,
+\end{equation}
+which for gives
+\begin{equation}
+D_{\Phi_\mathrm{tr}} =
+\left(
+\begin{array}{cccc}
+ 1 & 0 & 0 & 1 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 1 & 0 & 0 & 1
+\end{array}
+\right)
+\end{equation}
+for one qubit. Note that this matrix after reshuffling is equal to $\Id$ and 
+thus $\Phi_\tr$ is CP-TP map.
+\bibliography{q1}
+\bibliographystyle{elsarticle-num}
+
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.

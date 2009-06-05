@@ -1,0 +1,79 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      2098,         69]
+NotebookOptionsPosition[      1850,         56]
+NotebookOutlinePosition[      2187,         71]
+CellTagsIndexPosition[      2144,         68]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Reshuffle2", "[", "m_", "]"}], ":=", 
+   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Res", "[", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"BaseMatrices", "[", 
+           RowBox[{"\[Sqrt]", 
+            RowBox[{"Length", "[", "m", "]"}]}], "]"}], "[", 
+          RowBox[{"[", "l", "]"}], "]"}], "\[CircleTimes]", 
+         RowBox[{
+          RowBox[{"BaseMatrices", "[", 
+           RowBox[{"\[Sqrt]", 
+            RowBox[{"Length", "[", "m", "]"}]}], "]"}], "[", 
+          RowBox[{"[", "k", "]"}], "]"}]}], ")"}], "]"}], ".", 
+      RowBox[{"Res", "[", "m", "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "[", "m", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"l", ",", "1", ",", 
+       RowBox[{"Length", "[", "m", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Reshuffle2", "::", "usage"}], " ", "=", " ", 
+   "\"\<Reshuffle2[m] returns alternative representation of the matrix m in \
+the basis consisting of product matrices. This is equivalent to \
+(Swap[Sqrt[Length[m]]].Reshuffle[m].Sqrt[Length[m]]])\[Transpose]\>\""}], 
+  ";"}]}], "Input"]
+},
+WindowSize->{640, 750},
+WindowMargins->{{123, Automatic}, {Automatic, 7}},
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 1301, 34, 233, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
