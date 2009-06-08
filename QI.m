@@ -463,7 +463,7 @@ NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -593,7 +593,7 @@ PauliMatrices={sx,sy,sz};
 GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lambda]6,\[Lambda]7,\[Lambda]8};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum gates*)
 
 
@@ -871,7 +871,7 @@ QubitPhaseflipKraus[p_]:={\[Sqrt]p id,\[Sqrt](1-p) sz};
 QubitBitphaseflipKraus[p_]:={\[Sqrt]p id,\[Sqrt](1-p) sy};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entropies*)
 
 
@@ -879,11 +879,11 @@ Log0[x_]:=If[x==0,0,Log[2,x]];
 SetAttributes[Log0,Listable];
 
 
-\[Eta][x_]:= -x Log[x];
+\[Eta][x_]:= -x Log[2,x];
 SetAttributes[\[Eta],Protected];
 
 
-\[Eta]2[x_]:= -x Log[x] - (1-x)Log[2,1-x];
+\[Eta]2[x_]:= -x Log[2,x] - (1-x)Log[2,1-x];
 \[Eta]2::usage = "\[Eta]2[x] = \[Eta][x]+\[Eta][1-x]";
 
 
