@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[      2098,         69]
-NotebookOptionsPosition[      1850,         56]
-NotebookOutlinePosition[      2187,         71]
-CellTagsIndexPosition[      2144,         68]
+NotebookDataLength[      7968,        241]
+NotebookOptionsPosition[      7639,        226]
+NotebookOutlinePosition[      7976,        241]
+CellTagsIndexPosition[      7933,        238]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -52,11 +52,181 @@ Cell[BoxData[{
    "\"\<Reshuffle2[m] returns alternative representation of the matrix m in \
 the basis consisting of product matrices. This is equivalent to \
 (Swap[Sqrt[Length[m]]].Reshuffle[m].Sqrt[Length[m]]])\[Transpose]\>\""}], 
-  ";"}]}], "Input"]
+  ";"}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"QubitLocMaxReal", "[", 
+   RowBox[{"X_", ",", 
+    RowBox[{"giveState_:", " ", "False"}]}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "UU", ",", "VV", ",", "UV", ",", "r1", ",", "r2", ",", "Y", ",", "rozw", 
+      ",", "wektoryU", ",", "wektoryV", ",", "tablicaWynikow", ",", "lmax", 
+      ",", "pos"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"UU", "=", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "s"}], "}"}]}], ";", 
+     RowBox[{"VV", "=", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "t"}], "}"}]}], ";", 
+     RowBox[{"UV", "=", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{"KroneckerProduct", "[", 
+        RowBox[{"UU", ",", "VV"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Y", "=", 
+      RowBox[{
+       RowBox[{"Partition", "[", 
+        RowBox[{
+         RowBox[{"X", ".", "UV"}], ",", "2"}], "]"}], "\[Transpose]"}]}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"r1", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"Y", ".", "UU"}], ")"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], " ", "t"}], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Y", ".", "UU"}], ")"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"r2", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"VV", ".", "Y"}], ")"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], " ", "s"}], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"VV", ".", "Y"}], ")"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"rozw", "=", 
+      RowBox[{"NSolve", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"r1", "\[Equal]", "0"}], ",", 
+          RowBox[{"r2", "\[Equal]", "0"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"s", ",", "t"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"wektoryU", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Normalize", "[", 
+         RowBox[{"UU", "/.", 
+          RowBox[{"rozw", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "8"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"wektoryV", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Normalize", "[", 
+         RowBox[{"VV", "/.", 
+          RowBox[{"rozw", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "8"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"tablicaWynikow", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Flatten", "[", 
+          RowBox[{"KroneckerProduct", "[", 
+           RowBox[{
+            RowBox[{"wektoryU", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"wektoryV", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}], ".", "X", ".", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{"KroneckerProduct", "[", 
+           RowBox[{
+            RowBox[{"wektoryU", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"wektoryV", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "8"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"lmax", "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{"Select", "[", 
+        RowBox[{"tablicaWynikow", ",", 
+         RowBox[{
+          RowBox[{"#", "\[Element]", "Reals"}], "&"}]}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"pos", "=", 
+      RowBox[{"Position", "[", 
+       RowBox[{"tablicaWynikow", ",", "lmax"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"giveState", ",", 
+       RowBox[{"{", 
+        RowBox[{"lmax", ",", 
+         RowBox[{"wektoryV", "[", 
+          RowBox[{"[", 
+           RowBox[{"pos", "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], "}"}], 
+       ",", "lmax"}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.453449765857009*^9, 3.45344977585602*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"QubitMinOutEntrReal", "[", 
+   RowBox[{"X_", ",", 
+    RowBox[{"giveState_:", " ", "False"}]}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"lmax", ",", "lstate"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"lmax", ",", "lstate"}], "}"}], "=", 
+      RowBox[{"LocMax", "[", 
+       RowBox[{"X", ",", "True"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"giveState", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "lmax"}], " ", 
+           RowBox[{"Log", "[", 
+            RowBox[{"2", ",", "lmax"}], "]"}]}], "-", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "-", "lmax"}], ")"}], " ", 
+           RowBox[{"Log", "[", 
+            RowBox[{"2", ",", 
+             RowBox[{"1", "-", "lmax"}]}], "]"}]}]}], ",", "lstate"}], "}"}], 
+       ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "lmax"}], " ", 
+         RowBox[{"Log", "[", 
+          RowBox[{"2", ",", "lmax"}], "]"}]}], "-", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", "lmax"}], ")"}], " ", 
+         RowBox[{"Log", "[", 
+          RowBox[{"2", ",", 
+           RowBox[{"1", "-", "lmax"}]}], "]"}]}]}]}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.453449789508328*^9, 3.453449793195108*^9}}]
 },
 WindowSize->{640, 750},
-WindowMargins->{{123, Automatic}, {Automatic, 7}},
-FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
+WindowMargins->{{118, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (November 10, 2008)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -70,10 +240,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[545, 20, 1301, 34, 233, "Input"]
+Cell[545, 20, 1301, 34, 212, "Input"],
+Cell[1849, 56, 4360, 123, 385, "Input"],
+Cell[6212, 181, 1423, 43, 99, "Input"]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
