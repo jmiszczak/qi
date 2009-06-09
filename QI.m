@@ -11,13 +11,13 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
 (* License: GPLv3 *)
-qiVersion = "0.1.1";
+qiVersion = "0.1.2";
 qiLastModification = "9 Jun 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."};
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
@@ -33,6 +33,9 @@ RowBox[{\"i\", \",\", \"j\"}]]\), i=1,...,m, j=1,...,n. If the second argument i
 
 
 SymbolicVector::usage = "SymbolicVector[a,m] is equavalent to Matrix[a,m,1] and it returns a vector with m elements \!\(\*SubscriptBox[\"a\", \"i\"]\),i=1,...,m, j=1,...,n. This function is usefoul, for example, for generating lists of parameters.";
+
+
+SymbolicHermitianMatrix::usage ="SymbolicHermitianMatrix[sym,d] produces d\[Cross]d hermitian matrix.";
 
 
 ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point in \!\(\*SuperscriptBox[\"R\", \"2\"]\)).";
@@ -418,7 +421,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probablity distri
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},] Probablity distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: \"Indicator\"";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -466,7 +469,7 @@ NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -494,6 +497,16 @@ SymbolicMatrix[sym_,d1_,d2_:0]:= Which[
 
 Clear[SymbolicVector];
 SymbolicVector[sym_,d1_]:= SymbolicMatrix[sym,d1,1];
+
+
+Clear[SymbolicHermitianMatrix];
+SymbolicHermitianMatrix[sym_,d_]:=Block[{mtx},
+	mtx=Table[0,{d},{d}];
+	Table[mtx[[i,j]]=Subscript[sym, i,j],{i,1,d},{j,1,i}];
+	mtx=mtx+mtx\[ConjugateTranspose];
+	Table[mtx[[i,i]]=Subscript[sym, i,i],{i,1,d}];
+	mtx
+];
 
 
 Clear[ComplexToPoint];
@@ -1067,7 +1080,7 @@ Clear[ProbHS];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
