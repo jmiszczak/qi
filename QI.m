@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -462,14 +462,14 @@ RandomState::usage = "RandomState[d] - random density matrix of dimension d. Thi
 NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.";
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -945,7 +945,7 @@ PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
 
 
 Clear[PartialTraceB];
-	PartialTraceB[\[Rho]_,m_,n_]:=Block[{trMtx},
+PartialTraceB[\[Rho]_,m_,n_]:=Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[n]Tr[#]&,n];
 	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[Reshuffle[\[Rho],m,n]]]\[Transpose][[1]]]
 ];
