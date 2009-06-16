@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,13 +11,13 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
 (* License: GPLv3 *)
-qiVersion = "0.1.2";
-qiLastModification = "9 Jun 2009";
+qiVersion = "0.1.3";
+qiLastModification = "16 Jun 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
-qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."};
+qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit"};
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -370,7 +370,10 @@ QubitPhaseflipKraus::usage = "Kraus operators for one qubit phase-flip channel."
 QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip channel.";
 
 
-(* ::Subsection::Closed:: *)
+QubitChannel::usage = "Parametrization of one-qubit dynamical matrix. See: A. Fujiwara, P. Algoet, One-to-one parametrization of quantum channels, Phys. Rev. A 59, 3290 - 3294 (1999)";
+
+
+(* ::Subsection:: *)
 (*Entropies*)
 
 
@@ -462,7 +465,7 @@ RandomState::usage = "RandomState[d] - random density matrix of dimension d. Thi
 NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.";
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -971,7 +974,7 @@ If[sys==1,
 ](*endif*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -999,7 +1002,11 @@ Clear[QubitBitphaseflipKraus];
 QubitBitphaseflipKraus[p_]:={\[Sqrt]p id,\[Sqrt](1-p) sy};
 
 
-(* ::Subsection::Closed:: *)
+Clear[QubitChannel];
+QubitChannel[p_,q_,r_,x_,y_,z_,w_]:= Swap[2].{{1/2+p,x,r,w},{x\[Conjugate],1/2-p,y,-r},{r\[Conjugate],y\[Conjugate],1/2+q,z},{w\[Conjugate],-r\[Conjugate],z\[Conjugate],1/2-q}}.Swap[2]
+
+
+(* ::Subsection:: *)
 (*Entropies*)
 
 
