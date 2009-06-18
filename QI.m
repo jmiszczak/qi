@@ -11,8 +11,8 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
 (* License: GPLv3 *)
-qiVersion = "0.1.3";
-qiLastModification = "16 Jun 2009";
+qiVersion = "0.1.4";
+qiLastModification = "17 Jun 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit"};
 
@@ -348,7 +348,7 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, acording to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -370,10 +370,10 @@ QubitPhaseflipKraus::usage = "Kraus operators for one qubit phase-flip channel."
 QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip channel.";
 
 
-QubitChannel::usage = "Parametrization of one-qubit dynamical matrix. See: A. Fujiwara, P. Algoet, One-to-one parametrization of quantum channels, Phys. Rev. A 59, 3290 - 3294 (1999)";
+QubitDynamicalMatrix::usage = "Parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entropies*)
 
 
@@ -1002,8 +1002,13 @@ Clear[QubitBitphaseflipKraus];
 QubitBitphaseflipKraus[p_]:={\[Sqrt]p id,\[Sqrt](1-p) sy};
 
 
-Clear[QubitChannel];
-QubitChannel[p_,q_,r_,x_,y_,z_,w_]:= Swap[2].{{1/2+p,x,r,w},{x\[Conjugate],1/2-p,y,-r},{r\[Conjugate],y\[Conjugate],1/2+q,z},{w\[Conjugate],-r\[Conjugate],z\[Conjugate],1/2-q}}.Swap[2]
+Clear[QubitDynamicalMatrix];
+QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
+	{1 + nz + kz, 0, kx + I ky, nx + ny},
+	{0, 1 - nz + kz, nx - ny, kx + I ky},
+	{kx - I ky, nx - ny, 1 - nz - kz, 0},
+	{nx + ny, kx - I ky, 0, 1 + nz - kz}
+}
 
 
 (* ::Subsection:: *)
@@ -1087,7 +1092,7 @@ Clear[ProbHS];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
