@@ -373,6 +373,11 @@ QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip ch
 QubitDynamicalMatrix::usage = "Parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81";
 
 
+QubitDaviesDynamicalMatrix::usage = "Returns dynamical matrix for Davies channel with b = \!\(\*FractionBox[
+RowBox[{\"a\", \" \", \"p\"}], 
+RowBox[{\"1\", \"-\", \"p\"}]]\).";
+
+
 (* ::Subsection::Closed:: *)
 (*Entropies*)
 
@@ -472,7 +477,7 @@ NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -1009,6 +1014,9 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 	{kx - I ky, nx - ny, 1 - nz - kz, 0},
 	{nx + ny, kx - I ky, 0, 1 + nz - kz}
 }
+
+
+QubitDaviesDynamicalMatrix[a_,b_,c_]:={{a,0,0,c},{0,b,0,0},{0,0,a,0},{c,0,0,1-b}};
 
 
 (* ::Subsection:: *)
