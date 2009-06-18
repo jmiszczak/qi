@@ -1154,7 +1154,7 @@ RandomProductNumericalRange[A_,sys_,noPoints_:1]:=Block[{prod},
 
 
 Clear[RandomSpecialUnitary];
-RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u},
+RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u,e,phi0,psi0,chi0},
     Do[psi[r,s]=2*Pi*Random[];,{r,1,d-1},{s,r+1,d}];
 	Do[chi[r,s]=0;,{r,2,d-1},{s,r+1,d}];
 	Do[chi[1,s]=2*Pi*Random[];,{s,2,d}];
@@ -1183,12 +1183,12 @@ RandomState[d_]:=Block[{v},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Numerical range*)
 
 
 Clear[NumericalRangeBound];
-NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[{w,Ath,Hth,m,s,Kth,pKp,ee,rr,mm,sm,mM,sM},
+NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[{w,Ath,Hth,m,s,Kth,pKp,ee,rr,mm,sm,mM,sM,e,r},
 	w={};
 	Table[
 	Ath=Exp[I*(-\[Theta])]*A;
@@ -1198,15 +1198,15 @@ NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[{w,Ath,Hth,m,s,Kth,pKp,ee,rr,m
 	m=Max[e];
 	s=Position[e,m];
 	If[
-	Length[s]==1,(*then*)AppendTo[w,MatrixToScalar[Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose]]],
+	Length[s]==1,(*then*)AppendTo[w,ArrayFlatten[Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose]]],
 	(*else*)
 	Kth=I*(Hth-Ath); pKp=Extract[r,s]\[Conjugate].Kth.Extract[r,s]\[Transpose]; {ee,rr}=Eigensystem[pKp]; ee=Re[ee]; mm=Min[ee]; sm=Position[ee,mm];
-	AppendTo[w,MatrixToScalar[Extract[rr,sm]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sm]\[Transpose]]];
-	mM=Max[ee];sM=Position[ee,mM];AppendTo[w,MatrixToScalar[Extract[rr,sM]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sM]\[Transpose]]]
+	AppendTo[w,ArrayFlatten[Extract[rr,sm]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sm]\[Transpose]]];
+	mM=Max[ee];sM=Position[ee,mM];AppendTo[w,ArrayFlatten[Extract[rr,sM]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sM]\[Transpose]]]
 	(*end if*)
 	]
 	,{\[Theta],0,2\[Pi],step}];
-w
+Flatten[w,2]
 ]
 
 
