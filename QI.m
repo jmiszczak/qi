@@ -12,7 +12,7 @@ BeginPackage["QI`"];
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
 (* License: GPLv3 *)
 qiVersion = "0.1.4";
-qiLastModification = "17 Jun 2009";
+qiLastModification = "29 Jun 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit"};
 
@@ -348,7 +348,7 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, acording to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -470,6 +470,16 @@ RandomState::usage = "RandomState[d] - random density matrix of dimension d. Thi
 NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.";
 
 
+(* ::Subsection::Closed:: *)
+(*Bloch Representation*)
+
+
+BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coefficients obtained from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices"
+
+
+StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)"
+
+
 (* ::Section:: *)
 (*Private definitions*)
 
@@ -477,7 +487,7 @@ NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -522,7 +532,7 @@ ComplexToPoint[z_]:={Re[z],Im[z]};
 SetAttributes[ComplexToPoint,Listable];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
 
@@ -977,7 +987,7 @@ If[sys==1,
 ](*endif*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -1017,7 +1027,7 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 QubitDaviesDynamicalMatrix[a_,b_,c_]:={{a,0,0,c},{0,b,0,0},{0,0,a,0},{c,0,0,1-b}};
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entropies*)
 
 
@@ -1098,7 +1108,7 @@ Clear[ProbHS];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -1181,7 +1191,7 @@ RandomState[d_]:=Block[{v},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Numerical range*)
 
 
@@ -1205,6 +1215,25 @@ NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[{w,Ath,Hth,m,s,Kth,pKp,ee,rr,m
 	]
 	,{\[Theta],0,2\[Pi],step}];
 Flatten[w,2]
+]
+
+
+(* ::Subsection:: *)
+(*Bloch Representation*)
+
+
+Clear[BlochVector];
+BlochVector[A_MatrixQ]:=Block[{dim},
+dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[8])]
+
+
+Clear[StateFromBlochVector];
+StateFromBlochVector[vec_]:=Block[{dim},
+	If[IntegerQ[Sqrt[Length[vec]+1]],
+		dim= Sqrt[Length[vec]+1];
+		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
+		Print["StateFromBlochVector: given vector is not a Bloch vector of any dimension"];
+	]
 ]
 
 
