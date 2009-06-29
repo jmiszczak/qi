@@ -1065,7 +1065,7 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Distribution of eigenvalues*)
 
 
@@ -1100,7 +1100,7 @@ ProbBures[l_,delta_:"Dirac"]:=FullSimplify[ProbBuresNorm[Length[l]] \[Delta][\!\
 \*SubsuperscriptBox[\(\[Product]\), \(i = 1\), \(Length[l]\)]\(l[\([i]\)]\)\)) Det[VandermondeMatrix[l]]^2/ProdSum[l]];
 
 
-Clear[ProbHSNorm];;
+Clear[ProbHSNorm];
 ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 
 
