@@ -527,7 +527,7 @@ SetAttributes[ComplexToPoint,Listable];
 
 
 Clear[MatrixSqrt];
-MatrixSqrt[m_]:=Module[{u,w,v},{u,w,v}=SingularValueDecomposition[m];u.Sqrt[w].v\[ConjugateTranspose]]
+MatrixSqrt[m_]:=MatrixPower[m,1/2];
 
 
 Clear[MatrixAbs];
@@ -535,9 +535,7 @@ MatrixAbs[a_]:=MatrixSqrt[a.(a\[ConjugateTranspose])];
 
 
 Clear[Fidelity];
-Fidelity[a_,b_]:=Block[{sqrt=MatrixSqrt[a]},
-	Tr[MatrixSqrt[sqrt.b.sqrt]]^2
-];
+Fidelity[a_,b_]:=(Plus@@(Sqrt[Eigenvalues[a.b]]))^2;
 
 
 Clear[Superfidelity];
@@ -549,7 +547,7 @@ Subfidelity[a_,b_]:=Block[{prod = a.b},Tr[prod] +\[Sqrt]2\[Sqrt](Tr[prod]^2-Tr[p
 
 
 Clear[TraceDistance];
-TraceDistance[a_,b_]:=1/2Tr[MatrixAbs[a-b]];
+TraceDistance[a_,b_]:=1/2*Tr[MatrixAbs[a-b]];
 
 
 Clear[MatrixRe];
