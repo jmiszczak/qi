@@ -522,7 +522,7 @@ ComplexToPoint[z_]:={Re[z],Im[z]};
 SetAttributes[ComplexToPoint,Listable];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Fidelity, trace distance etc.*)
 
 
@@ -541,7 +541,7 @@ Fidelity[a_,b_]:=Block[{sqrt=MatrixSqrt[a]},
 
 
 Clear[Superfidelity];
-Superfidelity[a_,b_]:=Tr[a.b]+\[Sqrt](1-Tr[a.a])\[Sqrt](1-Tr[b.b]) ;
+Superfidelity[a_,b_]:=Tr[a.b]+Sqrt[(1-Tr[a.a])]*Sqrt[(1-Tr[b.b])];
 
 
 Clear[Subfidelity];
