@@ -11,8 +11,8 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
 (* License: GPLv3 *)
-qiVersion = "0.1.4";
-qiLastModification = "29 Jun 2009";
+qiVersion = "0.1.5";
+qiLastModification = "30 Jun 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit"};
 
@@ -376,6 +376,14 @@ QubitDynamicalMatrix::usage = "Parametrization of one-qubit dynamical matrix. Se
 QubitDaviesDynamicalMatrix::usage = "Returns dynamical matrix for Davies channel with b = \!\(\*FractionBox[
 RowBox[{\"a\", \" \", \"p\"}], 
 RowBox[{\"1\", \"-\", \"p\"}]]\).";
+
+
+(* ::Subsection::Closed:: *)
+(*One-qutrit channels*)
+
+
+QutritSpontaneousEmissionKraus::usage="QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit epontaneous emission channel with parameters A1, A2, t >= 0, see 
+A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2";
 
 
 (* ::Subsection::Closed:: *)
@@ -1025,6 +1033,14 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 
 
 QubitDaviesDynamicalMatrix[a_,b_,c_]:={{a,0,0,c},{0,b,0,0},{0,0,a,0},{c,0,0,1-b}};
+
+
+(* ::Subsection:: *)
+(*One-qutrit channels*)
+
+
+Clear[QutritSpontaneousEmissionKraus];
+QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1 t/2)],0},{0,0,Exp[-(A2 t/2)]}},{{0,Sqrt[1-Exp[-(A1 t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2 t)]]},{0,0,0},{0,0,0}}};
 
 
 (* ::Subsection::Closed:: *)
