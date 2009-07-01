@@ -271,7 +271,7 @@ QubitState::usage = "QubitState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - 
 QubitGeneralState::usage = "QubitGeneralState[a,b,c] - parametrization of the one-qubits mixed state using only normalization and self-adjointness.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -881,7 +881,7 @@ Clear[QubitGeneralState];
 QubitGeneralState [a_,b_,c_]:= {{a, b + I c},{b - I c ,1-a}};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -910,7 +910,7 @@ BitphaseflipChannel=Function[{dim,p,\[Rho]},p IdentityMatrix[dim].\[Rho]+(1-p)sy
 
 
 Clear[HolevoWernerChannel];
-HolevoWernerChannel=Function[{dim,p,\[Rho]},1/(dim-1) ( p \[Rho]\[Transpose]+ (1-p)Tr[\[Rho]]MaxMix[dim])];
+HolevoWernerChannel=Function[{dim,p,\[Rho]},( p \[Rho]\[Transpose]+ (1-p)Tr[\[Rho]]MaxMix[dim])];
 
 
 Clear[GeneralizedPauliKraus];
