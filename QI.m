@@ -228,6 +228,9 @@ Reshuffle::usage = "Reshuffle[\[Rho],m,n] returns representation of the m\[Cross
 Reshuffle2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: Reshuffle, BaseMatrices";
 
 
+ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix.";
+
+
 MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],div,M] - returns the matrix element of density matrix M indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim={dimA, dimB}";
 
 
@@ -784,7 +787,7 @@ SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx,svd,vals,snum=Min[d1,d2]},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -811,19 +814,24 @@ Unres[v_List,cols_:0]:=Which[
 
 
 Clear[Reshuffle];
-Reshuffle[\[Rho]_,m_:0,n_:0]:=Block[{base1,base2,dim},
-If[m==0 || n==0,
-	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}],
-	base1=BaseMatrices[m];base2=BaseMatrices[n];Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])].Res[\[Rho]],{k,1,m m},{l,1,n n}]]
+Reshuffle[\[Rho]_]:=Block[{base1,dim},
+	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}]
 ];
 
 
 Clear[Reshuffle2];
-Reshuffle2[\[Rho]_,m_:0,n_:0]:=Block[{base1,base2,dim},
-If[m==0 || n==0,
-	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}],
-	base1=BaseMatrices[m];base2=BaseMatrices[n];Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])\[Transpose]].Res[\[Rho]],{l,1,m m},{k,1,n n}]]
+Reshuffle2[\[Rho]_]:=Block[{base1,dim},
+	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}]
 ];
+
+
+Clear[ReshuffleGeneral];
+ReshuffleGeneral[A_,n1_,m1_,n2_,m2_]:=
+Flatten[
+ Table[
+  Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]]
+  ,{i1,0,n1 n2-1,n2},{i2,0,m1 m2-1,m2}]
+,1]
 
 
 Clear[MatrixElement];
