@@ -9,12 +9,12 @@ BeginPackage["QI`"];
 
 (* File: QI.m *)
 (* Description: Mathematica package for analysis of quantum states *)
-(* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
+(* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.1.5";
-qiLastModification = "30 Jun 2009";
+qiVersion = "0.1.6";
+qiLastModification = "3 July 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
-qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit"};
+qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling."};
 
 
 (* ::Section:: *)
@@ -206,7 +206,7 @@ WernerState4::usage = "Werner state for two qubits.";
 SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -223,6 +223,9 @@ Unres::usage = "de-reshaping of the vector into the matrix with c colummns. If t
 
 
 Reshuffle::usage = "Reshuffle[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces.";
+
+
+Reshuffle2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: Reshuffle, BaseMatrices";
 
 
 MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],div,M] - returns the matrix element of density matrix M indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim={dimA, dimB}";
@@ -271,7 +274,7 @@ QubitState::usage = "QubitState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - 
 QubitGeneralState::usage = "QubitGeneralState[a,b,c] - parametrization of the one-qubits mixed state using only normalization and self-adjointness.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -809,8 +812,17 @@ Unres[v_List,cols_:0]:=Which[
 
 Clear[Reshuffle];
 Reshuffle[\[Rho]_,m_:0,n_:0]:=Block[{base1,base2,dim},
-If[m==0 || n==0,dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}],
+If[m==0 || n==0,
+	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}],
 	base1=BaseMatrices[m];base2=BaseMatrices[n];Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])].Res[\[Rho]],{k,1,m m},{l,1,n n}]]
+];
+
+
+Clear[Reshuffle2];
+Reshuffle2[\[Rho]_,m_:0,n_:0]:=Block[{base1,base2,dim},
+If[m==0 || n==0,
+	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}],
+	base1=BaseMatrices[m];base2=BaseMatrices[n];Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])\[Transpose]].Res[\[Rho]],{l,1,m m},{k,1,n n}]]
 ];
 
 
@@ -881,7 +893,7 @@ Clear[QubitGeneralState];
 QubitGeneralState [a_,b_,c_]:= {{a, b + I c},{b - I c ,1-a}};
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -1035,7 +1047,7 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 QubitDaviesDynamicalMatrix[a_,b_,c_]:={{a,0,0,c},{0,b,0,0},{0,0,a,0},{c,0,0,1-b}};
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qutrit channels*)
 
 
@@ -1081,7 +1093,7 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Distribution of eigenvalues*)
 
 
@@ -1234,7 +1246,7 @@ Flatten[w,2]
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
