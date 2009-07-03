@@ -231,6 +231,9 @@ Reshuffle2::usage = "Alternative definition of the reshuffling operation. Reshuf
 ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix.";
 
 
+ReshuffleGeneral2::usage = "ReshuffleGeneral2[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.";
+
+
 MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],div,M] - returns the matrix element of density matrix M indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim={dimA, dimB}";
 
 
@@ -730,7 +733,7 @@ Clear[Circuit];
 Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Reverse[l]]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Spacial states*)
 
 
@@ -832,6 +835,15 @@ Flatten[
   Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]]
   ,{i1,0,n1 n2-1,n2},{i2,0,m1 m2-1,m2}]
 ,1]
+
+
+Clear[ReshuffleGeneral2];
+ReshuffleGeneral2[A_,n1_,m1_,n2_,m2_]:=
+Flatten[
+Table[
+Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]\[Transpose]]
+,{i2,0,m1 m2-1,m2},{i1,0,n1 n2-1,n2}]
+,1]\[Transpose]
 
 
 Clear[MatrixElement];
