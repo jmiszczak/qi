@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -11,10 +11,13 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.1.6";
-qiLastModification = "3 July 2009";
+qiVersion = "0.1.7";
+qiLastModification = "5 July 2009";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
-qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling."};
+qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling.","Changed default print output."};
+
+
+$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
 
 
 (* ::Section:: *)
@@ -222,10 +225,10 @@ Res::usage = "Res[m] is equvalent to Vec[m\[Transpose]]. Reshaping maps matrx m 
 Unres::usage = "de-reshaping of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unvec, Res.";
 
 
-Reshuffle::usage = "Reshuffle[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces.";
+Reshuffle::usage = "Reshuffle[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If  the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: ReshuffleGeneral, Reshuffle2.";
 
 
-Reshuffle2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: Reshuffle, BaseMatrices";
+Reshuffle2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: ReshuffleGeneral, Reshuffle, BaseMatrices";
 
 
 ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix.";
@@ -733,7 +736,7 @@ Clear[Circuit];
 Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Reverse[l]]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Spacial states*)
 
 
@@ -817,14 +820,20 @@ Unres[v_List,cols_:0]:=Which[
 
 
 Clear[Reshuffle];
-Reshuffle[\[Rho]_]:=Block[{base1,dim},
-	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}]
+Reshuffle[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
+	If[dim1==0||dim2==0,
+		dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}],
+		base1=BaseMatrices[dim1];base2=BaseMatrices[dim2];Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])].Res[\[Rho]],{k,1,dim1 dim1},{l,1,dim2 dim2}]
+	]
 ];
 
 
 Clear[Reshuffle2];
-Reshuffle2[\[Rho]_]:=Block[{base1,dim},
-	dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}]
+Reshuffle2[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
+	If[dim1==0||dim2==0,
+		dim=Length[\[Rho]];base1=BaseMatrices[Sqrt[dim]];Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}],
+		base1=BaseMatrices[dim1];base2=BaseMatrices[dim2];Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])].Res[\[Rho]],{k,1,dim1 dim1},{l,1,dim2 dim2}]
+	]
 ];
 
 
