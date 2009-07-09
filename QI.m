@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -28,7 +28,7 @@ Print["Package QI version ", qiVersion, " (last modification: ", qiLastModificat
 (*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
@@ -507,12 +507,13 @@ Begin["`Private`"];
 
 
 qiGenDoc[docFile_,dir_:"~/zksi-repo/qi/"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,lista},
+ExportString["","TeX"];
 SetDirectory[dir];
 lista=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
 latexHeader="\\documentclass[a4paper,12pt]{article}
 \\usepackage{amsmath,amssymb,graphicx}
 \\usepackage{fullpage}
-\\usepackage{notebook}
+\\parindent=0pt
 \\begin{document}
 \\title{QI Package for \\emph{Mathematica} 7.0 (version " <> qiVersion <> ")}" <>
 "\\author{Jaros{\\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\\l}a\\\\ \\small{The Institute of Theoretical and Applied Informatics}\\\\
