@@ -1,0 +1,221 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      8112,        212]
+NotebookOptionsPosition[      7617,        191]
+NotebookOutlinePosition[      7976,        207]
+CellTagsIndexPosition[      7933,        204]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"<<", "QI`"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", "\"\<~/zksi-repo/qi/\>\"", "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.4560473641732817`*^9, 3.456047374447275*^9}, {
+  3.456048057758984*^9, 3.4560480671982822`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Nf", "=", "137"}], ";"}]], "Input",
+ CellChangeTimes->{3.4560480726623087`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"lista", "=", 
+    RowBox[{"Table", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ToExpression", "[", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<::usage\>\""}], "]"}], 
+         "]"}]}], "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "Nf"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.456044690398609*^9, 3.4560447521337423`*^9}, {
+   3.456044871135253*^9, 3.456044881256835*^9}, {3.456044914237146*^9, 
+   3.456045050792963*^9}, {3.456045090552903*^9, 3.456045161596032*^9}, {
+   3.456045387624764*^9, 3.456045436226808*^9}, {3.456045482522373*^9, 
+   3.4560454920134687`*^9}, {3.456045540053956*^9, 3.4560455415217447`*^9}, {
+   3.45604561987521*^9, 3.456045682621685*^9}, {3.456046108034602*^9, 
+   3.4560461587759943`*^9}, {3.456046955670157*^9, 3.456047084165797*^9}, 
+   3.4560471527127666`*^9, {3.456047323178371*^9, 3.4560473274978313`*^9}, {
+   3.456047358284029*^9, 3.4560473626920013`*^9}, {3.456047555285568*^9, 
+   3.4560476195472937`*^9}, {3.4560478599740543`*^9, 3.456047869951576*^9}, {
+   3.456048077203301*^9, 3.45604807754988*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"header", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"body", "=", 
+   RowBox[{"Apply", "[", 
+    RowBox[{"StringJoin", ",", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"\"\<\\n\>\"", "<>", "\[IndentingNewLine]", 
+        RowBox[{"ToString", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"lista", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "1"}], "]"}], "]"}], "//", "MathMLForm"}], 
+         "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "<>", 
+        "\"\<\\n\>\"", "<>", "\[IndentingNewLine]", 
+        RowBox[{"ToString", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"lista", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "2"}], "]"}], "]"}], "//", "MathMLForm"}], 
+         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "Nf"}], "}"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"footer", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"txt", "=", 
+   RowBox[{"header", "<>", "body", "<>", "footer"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "=", 
+   RowBox[{"OpenWrite", "[", "\"\<plik.html\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"WriteString", "[", 
+   RowBox[{"f", ",", "txt"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Close", "[", "f", "]"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lista", "[", 
+   RowBox[{"[", 
+    RowBox[{"13", ",", "2"}], "]"}], "]"}], "//", "MathMLForm"}]}], "Input",
+ CellChangeTimes->{{3.456052935408358*^9, 3.4560530929662457`*^9}, {
+  3.456053139348052*^9, 3.456053155877631*^9}}],
+
+Cell["\<\
+<math>
+ <ms>DepolarizingChannel[n,p,&#961;] performs an action of the completely \
+depolarizing channel with paramaeter p acting on n-dimensional input state \
+&#961;. See also:
+   QubitDepolarizingKraus, HolevoWernerChannel.</ms>
+</math>\
+\>", "Output",
+ CellChangeTimes->{{3.456053050139229*^9, 3.456053093380239*^9}, 
+   3.456053158096464*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "header", "=", 
+   "\"\<\\documentclass[a4paper,12pt]{article}\n\\usepackage{amsmath, \
+amssymb, graphicx}\n\\\\newcommand{\\mathsym}[1]{{}}\n\
+\\\\newcommand{\\unicode}{{}}\n\\\\newcommand{\\\\text}{{}}\n\
+\\\\begin{document}\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"body", "=", 
+   RowBox[{"Apply", "[", 
+    RowBox[{"StringJoin", ",", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"\"\<\\n\>\"", "<>", "\[IndentingNewLine]", 
+        RowBox[{"ToString", "[", "\[IndentingNewLine]", 
+         RowBox[{"TeXForm", "[", "\[IndentingNewLine]", 
+          RowBox[{"lista", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "1"}], "]"}], "]"}], "\[IndentingNewLine]", 
+          "]"}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "<>", 
+        "\"\<\\n\>\"", "<>", "\[IndentingNewLine]", 
+        RowBox[{"ToString", "[", "\[IndentingNewLine]", 
+         RowBox[{"TeXForm", "\[IndentingNewLine]", "[", 
+          RowBox[{"lista", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "2"}], "]"}], "]"}], "\[IndentingNewLine]", 
+          "]"}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "Nf"}], "}"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"footer", "=", "\"\<\n\\end{document}\n\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"txt", "=", 
+   RowBox[{"header", "<>", "body", "<>", "footer"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "=", 
+   RowBox[{"OpenWrite", "[", "\"\<plik.tex\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"WriteString", "[", 
+   RowBox[{"f", ",", "txt"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Close", "[", "f", "]"}], ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.456047874734562*^9, 3.4560480515146847`*^9}, {
+  3.4560480826981792`*^9, 3.456048254235752*^9}, {3.456048305062797*^9, 
+  3.456048318867901*^9}, {3.456048699395685*^9, 3.45604882769106*^9}, {
+  3.456048910718893*^9, 3.4560489238414*^9}, {3.456050884112451*^9, 
+  3.456050887328855*^9}, {3.4560510635154047`*^9, 3.456051139090466*^9}, {
+  3.456051200890163*^9, 3.456051205676498*^9}, {3.456051253545718*^9, 
+  3.456051260803677*^9}, {3.456051313223337*^9, 3.4560514936341352`*^9}, {
+  3.456051538921084*^9, 3.456051577694029*^9}, {3.456051630387157*^9, 
+  3.4560516733139668`*^9}, {3.456051719911193*^9, 3.456051725637212*^9}, {
+  3.4560517884254*^9, 3.45605180666536*^9}, {3.456052002082646*^9, 
+  3.456052017418602*^9}, {3.456052087319065*^9, 3.4560521170770082`*^9}, {
+  3.456052783210382*^9, 3.456052834504489*^9}, {3.456052953359686*^9, 
+  3.456052953894588*^9}}]
+},
+WindowSize->{1600, 1126},
+WindowMargins->{{0, Automatic}, {25, Automatic}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 277, 6, 55, "Input"],
+Cell[825, 28, 114, 3, 32, "Input"],
+Cell[942, 33, 1575, 31, 165, "Input"],
+Cell[CellGroupData[{
+Cell[2542, 68, 1890, 48, 451, "Input"],
+Cell[4435, 118, 356, 9, 97, "Output"]
+}, Open  ]],
+Cell[4806, 130, 2807, 59, 649, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
