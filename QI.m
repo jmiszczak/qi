@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,13 +11,21 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.1.7";
-qiLastModification = "5 July 2009";
+qiVersion = "0.2.0";
+qiLastModification = "9 July 2009";
+qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling.","Changed default print output.", "Documentation generator added."};
+qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
+number of functions used in the analysis of quantum states. In contrast to many available 
+packages for symbolic and numerical simulation of quantum computation presented package is focused 
+on geometrical aspects of quantum information theory.";
+qiGenDoc::usage = "Generate documentation for QI package.";
+qiAbout::usage = "Display short information about QI package.";
+qiVersion::usage = "Display version of QI package.";
+qiHistory::usage = "Display history of modifications for QI package.";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
-qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling.","Changed default print output."};
 
 
-$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
+(*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
 
 
 (* ::Section:: *)
@@ -31,17 +39,16 @@ $PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
 KroneckerSum::usage = "KroneckerSum[A,B] returns the Kronecker sum of A and B defined as A\[CircleTimes]1+1\[CircleTimes]B. Alternative syntax A\[CirclePlus]B for KroneckerSum[A,B] is provided.";
 
 
-SymbolicMatrix::usage = "SymbolicMatrix[a,m,n] returns m\[Cross]n-matrix with elements \!\(\*SubscriptBox[\"a\", 
-RowBox[{\"i\", \",\", \"j\"}]]\), i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n\[Cross]n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporeted in LaTeX documents.";
+SymbolicMatrix::usage = "SymbolicMatrix[a,m,n] returns m\[Cross]n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n\[Cross]n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporeted in LaTeX documents.";
 
 
-SymbolicVector::usage = "SymbolicVector[a,m] is equavalent to Matrix[a,m,1] and it returns a vector with m elements \!\(\*SubscriptBox[\"a\", \"i\"]\),i=1,...,m, j=1,...,n. This function is usefoul, for example, for generating lists of parameters.";
+SymbolicVector::usage = "SymbolicVector[a,m] is equavalent to Matrix[a,m,1] and it returns a vector with m elements a[i],i=1,...,m, j=1,...,n. This function is useful, for example, for generating lists of parameters.";
 
 
 SymbolicHermitianMatrix::usage ="SymbolicHermitianMatrix[sym,d] produces d\[Cross]d hermitian matrix.";
 
 
-ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point in \!\(\*SuperscriptBox[\"R\", \"2\"]\)).";
+ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).";
 
 
 (* ::Subsection::Closed:: *)
@@ -51,10 +58,10 @@ ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a
 MatrixSqrt::usage= "MatrixSqrt[m] - square root for the matrix m.";
 
 
-MatrixAbs::usage= "MatrixAbs[m] - absolute value for matrix m calculated as MatrixSqrt[m.m\[ConjugateTranspose]].";
+MatrixAbs::usage= "MatrixAbs[m] - absolute value for matrix m defined as MatrixSqrt[m.ConjugateTranspose[m]].";
 
 
-Fidelity::usage = "Fidelity[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] returns quantum fidelity between states \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\).";
+Fidelity::usage = "Fidelity[\[Rho],\[Sigma]] returns quantum fidelity between states \[Rho] and \[Sigma].";
 
 
 Superfidelity::usage = "Superfidelity[A,B] calculates fuperfidelity between A and B defined as Tr[A.B] + Sqrt[1-Tr[A.A]]Sqrt[1-Tr[B.B]]."; 
@@ -66,10 +73,10 @@ Subfidelity::usage = "Subfidelity[A,B] returns superfidelity between states A an
 TraceDistance::usage = "TraceDistance[A,B] = 1/2tr|A-B|.";
 
 
-MatrixRe::usage = "Hermitian part of the matrix A - 1/2(A+A\[ConjugateTranspose]).";
+MatrixRe::usage = "Hermitian part of the matrix A - 1/2(A+ConjugateTranspose[A]).";
 
 
-MatrixIm::usage = "Antyhermitian part of the matrix A - 1/2(A-A\[ConjugateTranspose]).";
+MatrixIm::usage = "Antyhermitian part of the matrix A - 1/2(A-ConjugateTranspose[A]).";
 
 
 ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
@@ -83,8 +90,8 @@ Commutator::usage = "Comutator of matrices A and B.";
 
 
 sx::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\).";
-sy::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\).";
-sz::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\).";
+sy::usage = "Pauli matrix \[Sigma]y.";
+sz::usage = "Pauli matrix \[Sigma]x.";
 \[Sigma]x::usage=sx::usage;
 \[Sigma]y::usage=sy::usage;
 \[Sigma]z::usage=sz::usage;
@@ -92,14 +99,14 @@ id::usage  = "Identity matrix for one qubit.";
 wh::usage = "Hadamard gate for one qubit.";
 
 
-\[Lambda]1::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\).";
-\[Lambda]2::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\).";
-\[Lambda]3::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\).";
-\[Lambda]4::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"4\"]\).";
-\[Lambda]5::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"5\"]\).";
-\[Lambda]6::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"6\"]\).";
-\[Lambda]7::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"7\"]\).";
-\[Lambda]8::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"8\"]\).";
+\[Lambda]1::usage = "Gell-Mann matrix \[Lambda]1.";
+\[Lambda]2::usage = "Gell-Mann matrix \[Lambda]2.";
+\[Lambda]3::usage = "Gell-Mann matrix \[Lambda]3.";
+\[Lambda]4::usage = "Gell-Mann matrix \[Lambda]4.";
+\[Lambda]5::usage = "Gell-Mann matrix \[Lambda]5.";
+\[Lambda]6::usage = "Gell-Mann matrix \[Lambda]6.";
+\[Lambda]7::usage = "Gell-Mann matrix \[Lambda]7.";
+\[Lambda]8::usage = "Gell-Mann matrix \[Lambda]8.";
 
 
 Proj::usage = "Proj[{v1,...,v2}] returns projectors for the vectors in the input list.";
@@ -114,16 +121,13 @@ BaseMatrices::usage = "BaseMatrices[n] - canonical basis in n\[Cross]n-dimension
 KroneckerDeltaMatrix::usage = "KroneckerDeltaMatrix[i,j,d] returns d\[Cross]d matrix with 1 at position (i,j) and zeroes elsewhere.";
 
 
-Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix {\!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\)(i,j)\!\(\*SubscriptBox[\"}\", 
-RowBox[{\"k\", \",\", \"l\"}]]\)=\!\(\*SubscriptBox[\"\[Delta]\", \"jk\"]\)\!\(\*SubscriptBox[\"\[Delta]\", \"il\"]\)+\!\(\*SubscriptBox[\"\[Delta]\", \"jl\"]\)\!\(\*SubscriptBox[\"\[Delta]\", \"ik\"]\) for i<j. For example Lambda1[1,2,2] is equal to Pauli \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\).";
+Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x.";
 
 
-Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix {\!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\)(i,j)\!\(\*SubscriptBox[\"}\", 
-RowBox[{\"k\", \",\", \"l\"}]]\)=-\[ImaginaryI](\!\(\*SubscriptBox[\"\[Delta]\", \"ik\"]\)\!\(\*SubscriptBox[\"\[Delta]\", \"jl\"]\)-\!\(\*SubscriptBox[\"\[Delta]\", \"il\"]\)\!\(\*SubscriptBox[\"\[Delta]\", \"jk\"]\)) for i<j. For example Lambda2[1,2,2] is equal to \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\).";
+Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to \[Sigma]y.";
 
 
-Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix {\!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\)}= \[Sqrt](\!\(\*FractionBox[\"2\", 
-RowBox[{SuperscriptBox[\"n\", \"2\"], \"-\", \"n\"}]]\))diag(1,1,...,-1,0,...0), with -1 at n-th position, for i=2,...,n. For example Lambda3[2,2] is equal to \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\).";
+Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z.";
 
 
 GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] - list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";
@@ -184,10 +188,7 @@ KetFromDigits::usage = "KetFromDigits[list,base] - returns ket vector labeled by
 MaxMix::usage = "MaxMix[n] gies maximally mixed state in n-dimensional space of density matrices.";
 
 
-MaxEnt::usage = "MaxEnt[N] - maximally entangled state \!\(\*FractionBox[\"1\", 
-RowBox[{\"\[Sqrt]\", \"N\"}]]\) \!\(\*UnderoverscriptBox[\"\[Sum]\", 
-RowBox[{\"i\", \"=\", \"0\"}], 
-RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[CircleTimes]|i\[RightAngleBracket] with N = \!\(\*SuperscriptBox[\"n\", \"2\"]\).";
+MaxEnt::usage = "MaxEnt[N] - maximally entangled state in N dimensional vector space. Note that N must be perfect square.";
 
 
 WernerState::usage= "WernerState[p,n] - Werner state with parameter p\[Element][0,1] for n\[Cross]n-dimensional system. This state is defined as p \!\(\*FractionBox[\"2\", 
@@ -209,7 +210,7 @@ WernerState4::usage = "Werner state for two qubits.";
 SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -219,7 +220,7 @@ Vec::usage = "Vec[m] - vectorization of the matrix m column by column. See also:
 Unvec::usage = "Unvec[v,c] - de-vectorization of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unres, Vec.";
 
 
-Res::usage = "Res[m] is equvalent to Vec[m\[Transpose]]. Reshaping maps matrx m into vector row by row.";
+Res::usage = "Res[m] is equvalent to Vec[Transpose[m]]. Reshaping maps matrix m into vector row by row.";
 
 
 Unres::usage = "de-reshaping of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unvec, Res.";
@@ -237,7 +238,7 @@ ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of si
 ReshuffleGeneral2::usage = "ReshuffleGeneral2[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.";
 
 
-MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],div,M] - returns the matrix element of density matrix M indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim={dimA, dimB}";
+MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],div,M] - returns the matrix element of density matrix M indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim=dimA dimB.";
 
 
 (* ::Subsection::Closed:: *)
@@ -268,7 +269,7 @@ RowBox[{\"2\", \" \", \"n\"}]]\)}] returns pure n+1-dimensional pure state (ket 
 (*One-qubit states*)
 
 
-QubitKet::usage = "QubitKet[\[Alpha],\[Beta]] parametriation of the pure state (as a state vector) for one qubit as (cos(\[Alpha]) \!\(\*SuperscriptBox[\"\[ExponentialE]\", \"\[ImaginaryI]\[Beta]\"]\), sin(\[Alpha])). This is equivalent to StateVector[{\[Alpha],\[Beta]}]. See also: QubitPureState, StateVector.";
+QubitKet::usage = "QubitKet[\[Alpha],\[Beta]] parametriation of the pure state (as a state vector) for one qubit as (Cos[\[Alpha]] Exp[i\[Beta]], Sin[\[Alpha]]). This is equivalent to StateVector[{\[Alpha],\[Beta]}]. See also: QubitPureState, StateVector.";
 
 
 QubitPureState::usage = "QubitPureState[\[Alpha],\[Beta]] - parametriation of the pure state as a density matrix for one qubit. This is just a alias for Proj[QubitKet[\[Alpha],\[Beta]]]. See also: QubitKet.";
@@ -308,16 +309,10 @@ BitphaseflipChannel::usage  = "BitphaseflipChannel[2,p,\[Rho]].";
 HolevoWernerChannel::usage = "HolevoWernerChannel[n,p,\[Rho]] performs an action of the Holeve-Werner channel (also known as transpose depolarizing channel) with paramaeter p acting on n-dimensional input state \[Rho]. See also: DepolarizingChannel.";
 
 
-ChannelToMatrix::usage = "ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space \!\(\*
-StyleBox[\"i\",\nFontSlant->\"Italic\"]\)\!\(\*
-StyleBox[\".\",\nFontSlant->\"Italic\"]\)\!\(\*
-StyleBox[\"e\",\nFontSlant->\"Italic\"]\)\!\(\*
-StyleBox[\".\",\nFontSlant->\"Italic\"]\) matrix \!\(\*SubscriptBox[\"M\", \"E\"]\) such that \!\(\*SubscriptBox[\"M\", \"E\"]\) res(\[Rho])=\!\(\*SuperscriptBox[\"res\", 
-RowBox[{\"-\", \"1\"}]]\)(E(\[Rho])). Here res(M) is a reshaping of matrix M implemented by Res[M] and \!\(\*SuperscriptBox[\"res\", 
-RowBox[{\"-\", \"1\"}]]\)(M) is implemented as Unres[M]. First argument should be a pure function E such that E[\[Rho]] transforms input state according to the channel definition. For example for the Holevo-Werner channel one ca use ChannelToMatrix[HolevoWernerChannel[3,p,#]&,3] to obtain matrix representation of this channel acting on qutrits. See also: Superoperator.";
+ChannelToMatrix::usage = "ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[\[Rho]] transforms input state according to the channel definition. For example for the Holevo-Werner channel one ca use ChannelToMatrix[HolevoWernerChannel[3,p,#]&,3] to obtain matrix representation of this channel acting on qutrits. See also: Superoperator.";
 
 
-GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Imformation An Introduction, Springer 2006, Exampl 5.8, p .126.";
+GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Exampl 5.8, p .126.";
 
 
 ApplyKraus::usage = "ApplyKraus[ch,\[Rho]] - applay channel ch, given as a list of Kraus operators, to the input state \[Rho].";
@@ -357,10 +352,10 @@ PartialTraceB::usage = "PartialTraceB[\[Rho],m,n] performs partial trace on m\[C
 PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the partial trace, acording to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}. See alos: PartialTraceA, PartialTraceB.";
 
 
-PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, acording to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}";
+PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, acording to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -390,7 +385,7 @@ RowBox[{\"a\", \" \", \"p\"}],
 RowBox[{\"1\", \"-\", \"p\"}]]\).";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qutrit channels*)
 
 
@@ -424,14 +419,14 @@ QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy o
 (*Distribution of eigenvalues*)
 
 
-\[Delta]::usage = "\[Delta][x] represents Dirac delta at x. \[Delta][x,\"Indicator\"] is equal to 1 at x and zero elsewhere.";
+\[Delta]::usage = "\[Delta][x] represents Dirac delta at x.";
 
 
 VandermondeMatrix::usage = "VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}] - Vandermonde matrix for variables (\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)).";
 
 
 ProdSum::usage = "ProdSum[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}] gives \!\(\*SubsuperscriptBox[\"\[Product]\", 
-RowBox[{\"i\", \"<\", \"j\"}], \"n\"]\)(\!\(\*SubscriptBox[\"x\", \"i\"]\)+\!\(\*SubscriptBox[\"x\", \"j\"]\)).";
+RowBox[{\"i\", \"<\", \"j\"}], \"n\"]\)\!\(\*SubscriptBox[\"x\", \"i\"]\)+\!\(\*SubscriptBox[\"x\", \"j\"]\).";
 
 
 ProdDiff2::usage = "ProdDiff2[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}] is equivalent to Det[VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}]\!\(\*SuperscriptBox[\"]\", \"2\"]\) and gives a discriminant of the polynomial with roots {\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}.";
@@ -505,6 +500,52 @@ StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of 
 
 
 Begin["`Private`"];
+
+
+(* ::Subsection:: *)
+(*Misc*)
+
+
+qiGenDoc[docFile_,dir_:"~/zksi-repo/qi/"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,lista},
+SetDirectory[dir];
+lista=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
+latexHeader="\\documentclass[a4paper,12pt]{article}
+\\usepackage{amsmath,amssymb,graphicx}
+\\usepackage{fullpage}
+\\usepackage{notebook}
+\\begin{document}
+\\title{QI Package for \\emph{Mathematica} 7.0 (version " <> qiVersion <> ")}" <>
+"\\author{Jaros{\\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\\l}a\\\\ \\small{The Institute of Theoretical and Applied Informatics}\\\\
+\\small{Polish Academy of Sciences},\\\\ \\small{Ba{\\l}tycka 5, 44-100 Gliwice, Poland}}
+\\maketitle
+\\begin{abstract}"
+<> qiAbout <>
+"\\end{abstract}
+";
+latexFooter = "\\end{document}";
+f=OpenWrite[docFile];
+WriteString[f,latexHeader];
+For[i=1,i<= Length[lista],i++,
+name=ToString[TeXForm[lista[[i,1]]]];
+(*
+name=StringReplace[name,RegularExpression["\\\\text{(.*?)}"]->"$1"];
+name=StringReplace[name,RegularExpression["^\\\\delta"]->"$\\delta$"];
+name=StringReplace[name,RegularExpression["^\\\\lambda"]->"$\\lambda$"];
+name=StringReplace[name,RegularExpression["^\\\\eta"]->"$\\eta$"];
+*)
+name = "$ " <> name <> " $ ";
+usage=ToString[TeXForm[DisplayForm[lista[[i,2]]]]];
+usage=StringReplace[usage,"\{"->"LEWY"];
+usage=StringReplace[usage,"\}"->"PRAWY"];
+txt="\\textbf{"<>name<>"}"<>" - "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
+txt=StringReplace[txt,"LEWY"-> "\{"];
+txt=StringReplace[txt,"PRAWY"->"\}"];
+WriteString[f,txt];
+WriteString[f,"\n\n"];
+];
+WriteString[f,latexFooter];
+Close[f];
+]
 
 
 (* ::Subsection::Closed:: *)
@@ -793,7 +834,7 @@ SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx,svd,vals,snum=Min[d1,d2]},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
