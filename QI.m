@@ -495,14 +495,14 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Misc*)
 
 
