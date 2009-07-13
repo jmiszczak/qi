@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,9 +11,9 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.2.0";
-qiLastModification = "9 July 2009";
-qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling.","Changed default print output.", "Documentation generator added."};
+qiVersion = "0.2.1";
+qiLastModification = "13 July 2009";
+qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling.","Changed default print output.", "Documentation generator added.","Changed QubitGeneralState function."};
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
 packages for symbolic and numerical simulation of quantum computation presented package is focused 
@@ -28,7 +28,7 @@ Print["Package QI version ", qiVersion, " (last modification: ", qiLastModificat
 (*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -265,7 +265,7 @@ RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\",
 RowBox[{\"2\", \" \", \"n\"}]]\)}] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)} and phases {\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)}. See also: ProbablityDistribution, SymbolicVector.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit states*)
 
 
@@ -278,10 +278,7 @@ QubitPureState::usage = "QubitPureState[\[Alpha],\[Beta]] - parametriation of th
 QubitBlochState::usage = "Parametrization of the one-qubit mixed state on the Bloch sphere.";
 
 
-QubitState::usage = "QubitState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
-
-
-QubitGeneralState::usage = "QubitGeneralState[a,b,c] - parametrization of the one-qubits mixed state using only normalization and self-adjointness.";
+QubitGeneralState::usage = "QubitGeneralState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
 
 
 (* ::Subsection::Closed:: *)
@@ -355,7 +352,7 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, acording to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -390,7 +387,7 @@ RowBox[{\"1\", \"-\", \"p\"}]]\).";
 
 
 QutritSpontaneousEmissionKraus::usage="QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit epontaneous emission channel with parameters A1, A2, t >= 0, see 
-A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2";
+A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.";
 
 
 (* ::Subsection::Closed:: *)
@@ -495,7 +492,7 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -940,7 +937,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit states*)
 
 
@@ -956,12 +953,8 @@ Clear[QubitBlochState];
 QubitBlochState[a_,b_,c_]:=1/2id + a sx + b sy + c sz;
 
 
-Clear[QubitState];
-QubitState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
-
-
 Clear[QubitGeneralState];
-QubitGeneralState [a_,b_,c_]:= {{a, b + I c},{b - I c ,1-a}};
+QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
 (* ::Subsection::Closed:: *)
@@ -1317,13 +1310,13 @@ Flatten[w,2]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bloch Representation*)
 
 
 Clear[BlochVector];
 BlochVector[A_MatrixQ]:=Block[{dim},
-dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[8])]
+dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[8])];
 
 
 Clear[StateFromBlochVector];
@@ -1333,7 +1326,7 @@ StateFromBlochVector[vec_]:=Block[{dim},
 		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
 		Print["StateFromBlochVector: given vector is not a Bloch vector of any dimension"];
 	]
-]
+];
 
 
 (* ::Section::Closed:: *)
