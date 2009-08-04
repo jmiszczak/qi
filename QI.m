@@ -36,7 +36,7 @@ Print["Package QI version ", qiVersion, " (last modification: ", qiLastModificat
 (*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -93,7 +93,7 @@ ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
 Commutator::usage = "Comutator of matrices A and B.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Commonly used matrices*)
 
 
@@ -506,7 +506,7 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -846,7 +846,7 @@ SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx,svd,vals,snum=Min[d1,d2]},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -913,10 +913,10 @@ MatrixElement[n_,\[Nu]_,m_,\[Mu]_,dim_,M_]:=M[[(n-1)*dim[[2]]+\[Nu],(m-1)*dim[[2
 
 
 Clear[ReshufflePermutation];
-ReshufflePermutation[dim1_,dim2_]:=Block[{base,initPos},
-	base=BaseVectors[dim1*dim1*dim2*dim2];
+ReshufflePermutation[dim1_,dim2_]:=Block[{initPos},
 	initPos=Flatten[ReshuffleGeneral[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],dim1,dim1,dim2,dim2]];
-	Flatten[Table[base[[Position[initPos,i][[1]]]],{i,1,dim1*dim1*dim2*dim2}],1]
+	Flatten[Table[ UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1]]]
+,{i,1,dim1*dim1*dim2*dim2}],1]
 ];
 
 
