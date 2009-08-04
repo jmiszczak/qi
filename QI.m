@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -11,9 +11,17 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.2.1";
-qiLastModification = "13 July 2009";
-qiHistory = {"Initial version", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", "Added quantum channel parametrization for one qubit", "Added alternative reshuffling.","Changed default print output.", "Documentation generator added.","Changed QubitGeneralState function."};
+qiVersion = "0.2.2";
+qiLastModification = "4 August 2009";
+qiHistory = {"Initial version", 
+	"Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", 
+	"Added quantum channel parametrization for one qubit", 
+	"Added alternative reshuffling.",
+	"Changed default print output.", 
+	"Documentation generator added.",
+	"Changed QubitGeneralState function.",
+	"Added reshuffling permutation and product of superoperators."
+};
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
 packages for symbolic and numerical simulation of quantum computation presented package is focused 
@@ -28,7 +36,7 @@ Print["Package QI version ", qiVersion, " (last modification: ", qiLastModificat
 (*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
@@ -241,6 +249,12 @@ ReshuffleGeneral2::usage = "ReshuffleGeneral2[\[Rho],n1,m1,n2,m2] for matrix of 
 MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],div,M] - returns the matrix element of density matrix M indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim=dimA dimB.";
 
 
+ReshufflePermutation::usage = "ReshufflePermutation[dim1,dim2] produces permutation matrix equivalent to the resuffling operation on dim1\[Cross]dim2-dimensional system.";
+
+
+ProductSuperoperator::usage = "ProductSuperoperator[m1,m2] computes product superoperator of superoperatos m1 and m2.";
+
+
 (* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
@@ -265,7 +279,7 @@ RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\",
 RowBox[{\"2\", \" \", \"n\"}]]\)}] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)} and phases {\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)}. See also: ProbablityDistribution, SymbolicVector.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit states*)
 
 
@@ -382,7 +396,7 @@ RowBox[{\"a\", \" \", \"p\"}],
 RowBox[{\"1\", \"-\", \"p\"}]]\).";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qutrit channels*)
 
 
@@ -492,7 +506,7 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
@@ -898,6 +912,21 @@ Clear[MatrixElement];
 MatrixElement[n_,\[Nu]_,m_,\[Mu]_,dim_,M_]:=M[[(n-1)*dim[[2]]+\[Nu],(m-1)*dim[[2]]+\[Mu]]];
 
 
+Clear[ReshufflePermutation];
+ReshufflePermutation[dim1_,dim2_]:=Block[{base,initPos},
+	base=BaseVectors[dim1*dim1*dim2*dim2];
+	initPos=Flatten[ReshuffleGeneral[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],dim1,dim1,dim2,dim2]];
+	Flatten[Table[base[[Position[initPos,i][[1]]]],{i,1,dim1*dim1*dim2*dim2}],1]
+];
+
+
+Clear[ProductSuperoperator];
+ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
+	perm=ReshufflePermutation[Sqrt[dim1],Sqrt[dim2]];
+	perm.(m1\[CircleTimes]m2).perm\[Transpose]
+];
+
+
 (* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
@@ -937,7 +966,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit states*)
 
 
@@ -1310,7 +1339,7 @@ Flatten[w,2]
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
