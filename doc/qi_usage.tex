@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 (version 0.2.1)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
+\title{QI Package for \emph{Mathematica} 7.0 (version 0.2.2)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
 \small{Polish Academy of Sciences},\\ \small{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
 \begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
@@ -126,6 +126,8 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{ProdSum} $ } - ProdSum[$\{$$ x_1 $,...,$ x_n $$\}$] gives $ \prod _{i<j}^nx_i+x_j. $
 
+\textbf{$ \text{ProductSuperoperator} $ } - ProductSuperoperator[m1,m2] computes product superoperator of superoperatos m1 and m2.$  $
+
 \textbf{$ \text{Proj} $ } - Proj[$\{$v1,...,v2$\}$] returns projectors for the vectors in the input list.$  $
 
 \textbf{$ \text{QFT} $ } - QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifices method used in calculation. Parameter method can be equal to $\texttt{"$ $Symbloic$\texttt{"}$, which is default, or $\texttt{"}$Numerical$\texttt{"}$. The second option makes this function much faster.} $
@@ -168,7 +170,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{QubitPureState} $ } - QubitPureState[$\alpha $,$\beta $] - parametriation of the pure state as a density matrix for one qubit. This is just a alias for Proj[QubitKet[$\alpha $,$\beta $]]. See also: QubitKet.$  $
 
-\textbf{$ \text{QutritSpontaneousEmissionKraus} $ } - QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit epontaneous emission channel with parameters A1, A2, t $>$= 0, see $\backslash $nA. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2$  $
+\textbf{$ \text{QutritSpontaneousEmissionKraus} $ } - QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit epontaneous emission channel with parameters A1, A2, t $>$= 0, see $\backslash $nA. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $
 
 \textbf{$ \text{RandomDynamicalMatrix} $ } - RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equalt to 0.$  $
 
@@ -197,6 +199,8 @@ on geometrical aspects of quantum information theory.\end{abstract}
 \textbf{$ \text{ReshuffleGeneral} $ } - ReshuffleGeneral[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix.$  $
 
 \textbf{$ \text{ReshuffleGeneral2} $ } - ReshuffleGeneral2[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.$  $
+
+\textbf{$ \text{ReshufflePermutation} $ } - ReshufflePermutation[dim1,dim2] produces permutation matrix equivalent to the resuffling operation on dim1$\times $dim2-dimensional system.$  $
 
 \textbf{$ S $ } - S[m] = QuantumEntropy[m].$  $
 

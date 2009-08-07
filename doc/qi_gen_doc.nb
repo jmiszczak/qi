@@ -1,0 +1,72 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      1710,         62]
+NotebookOptionsPosition[      1336,         44]
+NotebookOutlinePosition[      1695,         60]
+CellTagsIndexPosition[      1652,         57]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "QI`"}]], "Input",
+ CellChangeTimes->{{3.458619720444915*^9, 3.458619721577434*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.2.2\"\>",
+    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"4 August 2009\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package QI version ", "0.2.2", " (last modification: ", "4 August 2009", 
+   ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.45861972228307*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"qiGenDoc", "[", "\"\<doc/qi_usage.tex\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.458619723771426*^9, 3.458619745123781*^9}, {
+  3.458619783234043*^9, 3.458619784345987*^9}}]
+},
+WindowSize->{640, 655},
+WindowMargins->{{128, Automatic}, {Automatic, 27}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 113, 2, 32, "Input"],
+Cell[683, 26, 435, 10, 24, "Print"]
+}, Open  ]],
+Cell[1133, 39, 199, 3, 32, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
