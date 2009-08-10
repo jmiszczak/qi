@@ -93,7 +93,7 @@ ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
 Commutator::usage = "Comutator of matrices A and B.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
@@ -218,7 +218,7 @@ WernerState4::usage = "Werner state for two qubits.";
 SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -915,8 +915,8 @@ MatrixElement[n_,\[Nu]_,m_,\[Mu]_,dim_,M_]:=M[[(n-1)*dim[[2]]+\[Nu],(m-1)*dim[[2
 Clear[ReshufflePermutation];
 ReshufflePermutation[dim1_,dim2_]:=Block[{initPos},
 	initPos=Flatten[ReshuffleGeneral[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],dim1,dim1,dim2,dim2]];
-	Flatten[Table[ UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1]]]
-,{i,1,dim1*dim1*dim2*dim2}],1]
+	Table[UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1,1]]]
+,{i,1,dim1*dim1*dim2*dim2}]
 ];
 
 
