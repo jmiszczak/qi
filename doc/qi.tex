@@ -1,31 +1,5 @@
-%%
-%% This is file `elsarticle-template-num.tex',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% elsarticle.dtx  (with options: `numtemplate')
-%% 
-%% Copyright 2007, 2008 Elsevier Ltd.
-%% 
-%% This file is part of the 'Elsarticle Bundle'.
-%% -------------------------------------------
-%% 
-%% It may be distributed under the conditions of the LaTeX Project Public
-%% License, either version 1.2 of this license or (at your option) any
-%% later version.  The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.2 or later is part of all distributions of LaTeX
-%% version 1999/12/01 or later.
-%% 
-%% The list of all files belonging to the 'Elsarticle Bundle' is
-%% given in the file `manifest.txt'.
-%% 
-
-%% Template article for Elsevier's document class `elsarticle'
-%% with numbered style bibliographic references
-%% SP 2008/03/01
-
+%
+% v. 0.2 - 11/08/2009 - Jarek - extended introductions and bibliography
 \documentclass[final,5p,times,twocolumn]{elsarticle}
 
 %% Use the option review to obtain double line spacing
@@ -66,6 +40,10 @@
 \newcommand{\SWAP}{\ensuremath{\mathrm{SWAP}}}
 \newcommand{\tr}{\mathrm{tr}}
 \newcommand{\M}{\ensuremath{\mathbb{M}}}
+\newcommand{\qi}{QI}
+
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
 
 \journal{Computer Physics Communications}
 
@@ -93,7 +71,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Q1---A \Mathematica\ package for analyzing geometry of quantum states}
+\title{Analysis of quantum states and operations with \qi\ package\\[6pt] \small{v. 0.2 (11 August 2009)}}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -101,8 +79,10 @@
 %% \address[label2]{}
 
 \author{P.~Gawron}
-\author{J.~A.~Miszczak\corref{cor1}}
-\author{Z.~Pucha{\l}a}
+\author{J.~A.~Miszczak}
+\author{Z.~Pucha{\l}a\corref{cor1}}
+\ead{z.puchala@iitis.pl}
+\cortext[cor1]{Corresponding Author}
 \address{Institute of Theoretical and Applied Informatics, Polish Academy of 
 Sciences, Ba{\l}tycka 5, 44-100 Gliwice, Poland}
 
@@ -118,9 +98,10 @@ quantum information theory.
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-quantum information\sep symbolic computation
+quantum states \sep quantum operations \sep partial operations
 %% PACS codes here, in the form: \PACS code \sep code
-\PACS
+%quantum information, symbolic computation (computer algebra) 
+\PACS 03.67.-a \sep 02.70.Wz
 
 %% MSC codes here, in the form: \MSC code \sep code
 %% or \MSC[2008] code \sep code (2000 is the default)
@@ -135,39 +116,73 @@ quantum information\sep symbolic computation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Quantum information theory aims to harness behavior of quantum mechanical
+objects to store, transfer and process information~\cite{hayashi}. This behavior
+is in many cases very different from the one we observe in classical world.
+Quantum algorithms and protocols take advantage of superposition of states and
+require the presence of entangled states. Both phenomena arise from the rich
+structure of the space of quantum states. Hence, to explore the capabilities of
+quantum information processing, one needs to fully understand this
+space~\cite{BZ06}. 
 
-Developement of quantum information processing demands computational tools 
-for analyzing starnge behaviour of quantum mechanical states and operations \cite{qdensity,radtke08simulation}.
+On the other hand quantum mechanics provides us also with much larger space of
+allowed operations which can be used to manipulate quantum states~\cite{BZ06}.
+Recent results concerning additivity problems~\cite{hastings09superadditivity}
+show that we are far from full understanding the nature of quantum channels.
+Exploring the space of quantum operations is fascinating, but cumbersome
+task~\cite{ruskai02analysis}
 
-For a most comprehensive list of quantum computing simulators see \cite{quantiki}.
+%One of the motivations behind quantum information theory was an observation that
+%the simulation of quantum systems on classical machine requires exponential 
+%resources.
+
+We present a~package of functions developed for \Mathematica\ 7.0 which aims to
+simplify the analysis of quantum states and quantum operations. The package was 
+developed in simplicity in mind and thus it uses only basic data structures
+available in \Mathematica. This allows to relatively easily port implemented
+functions to other scientific software systems.
+
+This paper is organized as follows. In Section~\ref{sec:qi-intro} we review
+basic notion of quantum density matrices and quantum channels representing
+allowed physical transformations of density matrices. Section~\ref{sec:over}
+presents an overview of functionality provided by \qi\ package and describes
+some operations used as building blocks in specialized functions.
+Sections~\ref{sec:states} and \ref{sec:channels} provide detailed description of
+functions implemented in~\qi. Finally Section~\ref{sec:comclude}.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
 %% \appendix
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overivew of functionality}
+\section{Quantum states and operations}\label{sec:qi-intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Desing principles}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{enumerate}
-\item user know what she/he is doing -- function do not expect to get positive/unitary/\ldots\
-matrix
-\item only basic \Mathematica\ structures are used -- functions operator on 
-plain \Mathematica\ lists and return lists
-\item as simple as possible -- functions have mimimum reasonable numer of arguments
-\item only basic version are provided -- functions perform only simple 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of \qi}\label{sec:over}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\todo{troche o zalozeniach projektowych czyli dlaczego \qi\ jest inne niz pozostale pakiety}
+\newcounter{principle}
+\begin{list}{(P\Roman{principle})}{\usecounter{principle}}
+\item user know what she/he is doing -- function do not expect to get
+positive/unitary/\ldots\ matrix 
+\item only basic \Mathematica\ structures are
+used -- functions operator on plain \Mathematica\ lists and return lists 
+\item as simple as possible -- functions have minimum reasonable number of
+arguments
+\item only basic version are provided -- functions perform only simple
 operations, for example in order to get partial trace on few subsystems user
-needs to perform premutation and then applay partial trace
-\item some data are used more often thn other -- Q1 predefines some commomly used
-matrice, for example matrice for \SWAP\ operatio for some small dimensions.
-\end{enumerate}
+needs to perform permutation and then apply partial trace 
+\item some data are
+used more often then other -- \qi\ predefines some commonly used matrices, for
+example matrix for \SWAP\ operation for some small dimensions.
+\end{list}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Parametrizations of states}\label{sec:states}
+\section{Quantum states in \qi}\label{sec:states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,14 +194,20 @@ matrice, for example matrice for \SWAP\ operatio for some small dimensions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cite{tilma02generalized}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Partial operation}
+\section{Quantum operations in \qi}\label{sec:channels}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Partial transposition}
+\section{Representation of quantum operations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Q1 implements partial operations using general method for constructing channels
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partial operations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\qi\ implements partial operations using general method for constructing channels
 acting on subsystems. This method is based on formula
 \begin{equation}\label{eqn:def-tensor}
 (\Phi\otimes\Id)(\rho) = 
@@ -201,6 +222,9 @@ where $\{\epsilon_i\}_i=1,\ldots,n^2$ is a canonical basis in $\M_n$. In the
 Eq.~\ref{eqn:def-tensor} operation $\Phi$ is applied to the first subsystem 
 only.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Partial transposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In the case of transposition $M_\Phi$ is equivalent to \SWAP. For example in the
 case of $4$-dimensional density matrix
 \begin{equation}
@@ -213,7 +237,7 @@ X=\left(
 \end{array}
 \right)
 \end{equation}
-partial transposition with respect to second subsystems ib obtaines using
+partial transposition with respect to second subsystems is obtained using
 \verb+PartialTransposeB[X, 2, 2]+ and it gives
 \begin{equation}
 X^{T_B}=\left(
@@ -226,10 +250,11 @@ X^{T_B}=\left(
 \right).
 \end{equation}
 
+\todo{dodac druga wersje}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Partial trace}
+\subsubsection{Partial trace}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Operation of tracing out a subsystem can be achived in a similar manner. We 
+Operation of tracing out a subsystem can be achieved in a similar manner. We 
 define tracing map as
 \begin{equation}
 \Phi_\mathrm{tr}(\rho) = \tr \rho \Id,
@@ -248,6 +273,16 @@ D_{\Phi_\mathrm{tr}} =
 \end{equation}
 for one qubit. Note that this matrix after reshuffling is equal to $\Id$ and 
 thus $\Phi_\tr$ is CP-TP map.
+
+\todo{dodac druga wersje}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Concluding remarks}\label{sec:comclude}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Package \qi\ provide set of functions which aims to simplify the task of
+exploring the space of quantum states and understanding quantum operations.
+  
+  
 \bibliography{qi}
 \bibliographystyle{elsarticle-num}
 
