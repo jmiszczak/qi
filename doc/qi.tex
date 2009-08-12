@@ -1,6 +1,7 @@
 %
 % v. 0.2 - 11/08/2009 - Jarek - extended introductions and bibliography
-\documentclass[final,5p,times,twocolumn]{elsarticle}
+% v. 0.21 - 12/08/2009 - Jarek - preliminary sections
+\documentclass[final,5p,times]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
@@ -41,6 +42,7 @@
 \newcommand{\tr}{\mathrm{tr}}
 \newcommand{\M}{\ensuremath{\mathbb{M}}}
 \newcommand{\qi}{QI}
+\newcommand{\code}[1]{\texttt{#1}}
 
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
@@ -71,7 +73,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Analysis of quantum states and operations with \qi\ package\\[6pt] \small{v. 0.2 (11 August 2009)}}
+\title{Analysis of quantum states and operations with \qi\ package\\[6pt] \small{v. 0.21 (12 August 2009)}}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -110,13 +112,32 @@ quantum states \sep quantum operations \sep partial operations
 
 \end{frontmatter}
 
+\newpage
+\noindent{\bf Program Summary}
+
+{\it Title of program:} \qi\\
+{\it Catalogue identifier:}\\
+{\it Program summary URL:} http://cpc.cs.qub.ac.uk/summaries\\
+{\it Program available from:} CPC Program Library, Queen's University of Belfast, N. Ireland\\
+{\it Operating systems:} Any which supports Mathematica; tested under Debian GNU/Linux 5.0 and Ubuntu Linux 9.04.\\
+{\it Programming language used:} Mathematica 7.0\\
+{\it Number of bytes in distributed program, including test code and 
+documentation: }\\
+{\it Distribution format:} tar.gz\\
+{\it Nature of Problem:} Analysis of quantum states and quantum channels, 
+distance measure for quantum states, quantum partial operations and quantum entropy.\\
+{\it Method of Solution:} A Mathematica package is provided implementing parametrization of quantum states and operations, calculation of quantum fidelity and other distance measures and using partial operations. Examples are enclosed in QiExamples.nb Mathematica notebook. \\
+
+\newpage
+\tableofcontents
+
 %% \linenumbers
 
 %% main text
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Quantum information theory aims to harness behavior of quantum mechanical
+Quantum information theory aims to harness the behavior of quantum mechanical
 objects to store, transfer and process information~\cite{hayashi}. This behavior
 is in many cases very different from the one we observe in classical world.
 Quantum algorithms and protocols take advantage of superposition of states and
@@ -125,12 +146,12 @@ structure of the space of quantum states. Hence, to explore the capabilities of
 quantum information processing, one needs to fully understand this
 space~\cite{BZ06}. 
 
-On the other hand quantum mechanics provides us also with much larger space of
-allowed operations which can be used to manipulate quantum states~\cite{BZ06}.
-Recent results concerning additivity problems~\cite{hastings09superadditivity}
-show that we are far from full understanding the nature of quantum channels.
-Exploring the space of quantum operations is fascinating, but cumbersome
-task~\cite{ruskai02analysis}
+Quantum mechanics provides us also with much larger than in classical case space
+of allowed operations which can be used to manipulate quantum
+states~\cite{hayashi,BZ06}. Recent results concerning additivity
+problems~\cite{hastings09superadditivity} show that we are far from full
+understanding the nature of quantum channels. Exploring the space of quantum
+operations is fascinating, but cumbersome task.
 
 %One of the motivations behind quantum information theory was an observation that
 %the simulation of quantum systems on classical machine requires exponential 
@@ -140,7 +161,13 @@ We present a~package of functions developed for \Mathematica\ 7.0 which aims to
 simplify the analysis of quantum states and quantum operations. The package was 
 developed in simplicity in mind and thus it uses only basic data structures
 available in \Mathematica. This allows to relatively easily port implemented
-functions to other scientific software systems.
+functions to other scientific software systems. Also, in contrast to most
+quantum computing packages available~\cite{qdensity,qucalc,quantum2}, \qi\ is
+not aimed to provide tool for simulating quantum algorithms and protocols. We
+rather focus on the analysis of quantum states used in those protocols and
+quantum channels, which are used to describe allowed physical operations. The
+main goal of presented package is to provide basic mathematical tools useful for
+studding quantum stats and quantum channels.
 
 This paper is organized as follows. In Section~\ref{sec:qi-intro} we review
 basic notion of quantum density matrices and quantum channels representing
@@ -148,7 +175,8 @@ allowed physical transformations of density matrices. Section~\ref{sec:over}
 presents an overview of functionality provided by \qi\ package and describes
 some operations used as building blocks in specialized functions.
 Sections~\ref{sec:states} and \ref{sec:channels} provide detailed description of
-functions implemented in~\qi. Finally Section~\ref{sec:comclude}.
+functions implemented in~\qi. Finally Section~\ref{sec:comclude} provides some
+concluding remarks.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
@@ -159,26 +187,57 @@ functions implemented in~\qi. Finally Section~\ref{sec:comclude}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Pure and mixed states}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\todo{troche o stanach i oepracjach}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Quantum channels}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Jamiolkowski isomorphism}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview of \qi}\label{sec:over}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\todo{troche o zalozeniach projektowych czyli dlaczego \qi\ jest inne niz pozostale pakiety}
+\todo{troche o zalozeniach projektowych czyli dlaczego \qi\ jest inne niz
+pozostale pakiety}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Design principles}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcounter{principle}
-\begin{list}{(P\Roman{principle})}{\usecounter{principle}}
-\item user know what she/he is doing -- function do not expect to get
-positive/unitary/\ldots\ matrix 
-\item only basic \Mathematica\ structures are
-used -- functions operator on plain \Mathematica\ lists and return lists 
-\item as simple as possible -- functions have minimum reasonable number of
-arguments
-\item only basic version are provided -- functions perform only simple
-operations, for example in order to get partial trace on few subsystems user
-needs to perform permutation and then apply partial trace 
-\item some data are
-used more often then other -- \qi\ predefines some commonly used matrices, for
-example matrix for \SWAP\ operation for some small dimensions.
+\begin{list}{\textbf{P\arabic{principle}}}{\usecounter{principle}}
+\item Functions are as simple as possible -- functions have minimum reasonable
+number of arguments and implement small pieces of functionality. For example in
+order to get partial trace on few subsystems user needs to perform permutation
+and then apply partial trace 
+\item User knows what she is doing -- functions implemented in \qi\ do not
+validate the input and user is expected to provide reasonable data.
+\item Only basic \Mathematica\ structures are used -- functions operator on
+plain \Mathematica\ lists and return lists.
+\item Some data are used more often then other -- \qi\ predefines some commonly
+used matrices, for example matrices for \SWAP\ operation and Pauli matrices for
+small dimensions.
 \end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Basic algebraic operations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Kronecker product}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Version 6 of \Mathematica\ introduced \code{KroneckerProduct} function
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -186,13 +245,26 @@ example matrix for \SWAP\ operation for some small dimensions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Probability distributions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{One-qubit states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Generalizations}
+\subsection{States in higher dimension}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cite{tilma02generalized}
+Parametrization of pure states in higher dimensions is provided according to
+\cite{tilma02generalized}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Special states}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Distance measures}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,9 +272,13 @@ example matrix for \SWAP\ operation for some small dimensions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Representation of quantum operations}
+\subsection{Representation of quantum operations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Random quantum operations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cite{Bruzda2009320}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Partial operations}
@@ -238,7 +314,7 @@ X=\left(
 \right)
 \end{equation}
 partial transposition with respect to second subsystems is obtained using
-\verb+PartialTransposeB[X, 2, 2]+ and it gives
+\code{PartialTransposeB[X, 2, 2]} and it gives
 \begin{equation}
 X^{T_B}=\left(
 \begin{array}{cccc}
@@ -251,6 +327,7 @@ X^{T_B}=\left(
 \end{equation}
 
 \todo{dodac druga wersje}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Partial trace}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -277,12 +354,25 @@ thus $\Phi_\tr$ is CP-TP map.
 \todo{dodac druga wersje}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Partial \SWAP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Partial transposition and partial trace are the most popular partial operations.
+
+\todo{dodac przyklad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concluding remarks}\label{sec:comclude}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Package \qi\ provide set of functions which aims to simplify the task of
 exploring the space of quantum states and understanding quantum operations.
-  
-  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We acknowledge the financial support by the Polish
+Ministry of Science and Higher Education under the grant number N519 012
+31/1957. 
+
 \bibliography{qi}
 \bibliographystyle{elsarticle-num}
 
