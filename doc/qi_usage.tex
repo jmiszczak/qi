@@ -1,293 +1,293 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,11pt]{article}
 \usepackage{amsmath,amssymb,graphicx}
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 (version 0.2.2)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
+\title{QI Package for \emph{Mathematica} 7.0 (version 0.2.3)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
 \small{Polish Academy of Sciences},\\ \small{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
 \begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
 packages for symbolic and numerical simulation of quantum computation presented package is focused 
 on geometrical aspects of quantum information theory.\end{abstract}
-\textbf{$ \text{ApplyKraus} $ } - ApplyKraus[ch,$\rho $] - applay channel ch, given as a list of Kraus operators, to the input state $\rho $.$  $
+\textbf{$ \text{ApplyKraus} $ }-- ApplyKraus[ch,$\rho $] - applay channel ch, given as a list of Kraus operators, to the input state $\rho $.$  $\\
 
-\textbf{$ \text{BaseMatrices} $ } - BaseMatrices[n] - canonical basis in n$\times $n-dimensional Hilbert-Schmidt space.$  $
+\textbf{$ \text{BaseMatrices} $ }-- BaseMatrices[n] returns list with canonical basis in n$\times $n-dimensional Hilbert-Schmidt space.$  $\\
 
-\textbf{$ \text{BaseVectors} $ } - BaseVectors[n] - canonical basis in n-dimensional Hilbert space$  $
+\textbf{$ \text{BaseVectors} $ }-- BaseVectors[n] returns list with canonical basis in n-dimensional Hilbert space.$  $\\
 
-\textbf{$ \text{BitflipChannel} $ } - BitflipChannel[2,p,$\rho $].$  $
+\textbf{$ \text{BitflipChannel} $ }-- BitflipChannel[2,p,$\rho $].$  $\\
 
-\textbf{$ \text{BitphaseflipChannel} $ } - BitphaseflipChannel[2,p,$\rho $].$  $
+\textbf{$ \text{BitphaseflipChannel} $ }-- BitphaseflipChannel[2,p,$\rho $].$  $\\
 
-\textbf{$ \text{BlochVector} $ } - BlochVector[A$\_$MatrixQ] - for square matrix - vector of coefficients obtained from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices$  $
+\textbf{$ \text{BlochVector} $ }-- BlochVector[A$\_$MatrixQ] - for square matrix - vector of coefficients obtained from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices$  $\\
 
-\textbf{$ \text{ChannelCondition} $ } - Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $
+\textbf{$ \text{ChannelCondition} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\
 
-\textbf{$ \text{ChannelToMatrix} $ } - ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[$\rho $] transforms input state according to the channel definition. For example for the Holevo-Werner channel one ca use ChannelToMatrix[HolevoWernerChannel[3,p,$\#$]$\&$,3] to obtain matrix representation of this channel acting on qutrits. See also: Superoperator.$  $
+\textbf{$ \text{ChannelToMatrix} $ }-- ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[$\rho $] transforms input state according to the channel definition. For example for the Holevo-Werner channel one ca use ChannelToMatrix[HolevoWernerChannel[3,p,$\#$]$\&$,3] to obtain matrix representation of this channel acting on qutrits. See also: Superoperator.$  $\\
 
-\textbf{$ \text{Circuit} $ } - Constructs quantum circuit from unitary gates.$  $
+\textbf{$ \text{Circuit} $ }-- Constructs quantum circuit from unitary gates.$  $\\
 
-\textbf{$ \text{CNot} $ } - Controlled not matrix for two qubits.$  $
+\textbf{$ \text{CNot} $ }-- Controlled not matrix for two qubits.$  $\\
 
-\textbf{$ \text{Commutator} $ } - Comutator of matrices A and B.$  $
+\textbf{$ \text{Commutator} $ }-- Commutator[A,B] returns the comutator of matrices A and B i.e. [A,B]=AB - BA.$  $\\
 
-\textbf{$ \text{ComplexToPoint} $ } - ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).$  $
+\textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).$  $\\
 
-\textbf{$ \text{DepolarizingChannel} $ } - DepolarizingChannel[n,p,$\rho $] performs an action of the completely depolarizing channel with paramaeter p acting on n-dimensional input state $\rho $. See also: QubitDepolarizingKraus, HolevoWernerChannel.$  $
+\textbf{$ \text{DepolarizingChannel} $ }-- DepolarizingChannel[n,p,$\rho $] performs an action of the completely depolarizing channel with paramaeter p acting on n-dimensional input state $\rho $. See also: QubitDepolarizingKraus, HolevoWernerChannel.$  $\\
 
-\textbf{$ \text{DynamicalMatrix} $ } - Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See alos: Superoperator, ChannelToMatrix.$  $
+\textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See alos: Superoperator, ChannelToMatrix.$  $\\
 
-\textbf{$ \text{ExpectationValue} $ } - ExpectationValue[$\rho $,A] = Tr[$\rho $.A].$  $
+\textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[$\rho $,A] = Tr[$\rho $.A].$  $\\
 
-\textbf{$ \text{ExtendKraus} $ } - ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $
+\textbf{$ \text{ExtendKraus} $ }-- ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $\\
 
-\textbf{$ \text{Fidelity} $ } - Fidelity[$\rho $,$\sigma $] returns quantum fidelity between states $\rho $ and $\sigma $.$  $
+\textbf{$ \text{Fidelity} $ }-- Fidelity[$\rho $,$\sigma $] returns quantum fidelity between states $\rho $ and $\sigma $ calculated as tr$\surd $($\surd \rho $ $\sigma \surd \rho $).$  $\\
 
-\textbf{$ \text{GellMannMatrices} $ } - List of Gell-Mann matrices. Use Map[MatrixForm[$\#$]$\&$,GellMannMatrices] to get this list in more readible form.$  $
+\textbf{$ \text{GellMannMatrices} $ }-- List of Gell-Mann matrices. Use Map[MatrixForm[$\#$]$\&$,GellMannMatrices] to get this list in more readible form.$  $\\
 
-\textbf{$ \text{GeneralizedPauliKraus} $ } - GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Exampl 5.8, p .126.$  $
+\textbf{$ \text{GeneralizedPauliKraus} $ }-- GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Exampl 5.8, p .126.$  $\\
 
-\textbf{$ \text{GeneralizedPauliMatrices} $ } - GeneralizedPauliMatrices[n] - list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, $\lambda $, Lambda1, Lambda2, Lambda3.$  $
+\textbf{$ \text{GeneralizedPauliMatrices} $ }-- GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, $\lambda $, Lambda1, Lambda2, Lambda3.$  $\\
 
-\textbf{$ \text{GinibreMatrix} $ } - GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $
+\textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\
 
-\textbf{$ H $ } - Hadamard gates for one qubit.$  $
+\textbf{$ H $ }-- Hadamard gates for one qubit.$  $\\
 
-\textbf{$ \text{HolevoWernerChannel} $ } - HolevoWernerChannel[n,p,$\rho $] performs an action of the Holeve-Werner channel (also known as transpose depolarizing channel) with paramaeter p acting on n-dimensional input state $\rho $. See also: DepolarizingChannel.$  $
+\textbf{$ \text{HolevoWernerChannel} $ }-- HolevoWernerChannel[n,p,$\rho $] performs an action of the Holeve-Werner channel (also known as transpose depolarizing channel) with paramaeter p acting on n-dimensional input state $\rho $. See also: DepolarizingChannel.$  $\\
 
-\textbf{$ \text{id} $ } - Identity matrix for one qubit.$  $
+\textbf{$ \text{id} $ }-- Identity matrix for one qubit.$  $\\
 
-\textbf{$ \text{IdentityChannel} $ } - IdentityChannel[n, $\rho $] - applay identity operation on n-dimensional density matrix $\rho $.$  $
+\textbf{$ \text{IdentityChannel} $ }-- IdentityChannel[n, $\rho $] - applay identity operation on n-dimensional density matrix $\rho $.$  $\\
 
-\textbf{$ \text{Jamiolkowski} $ } - Jamiolkowski[K] gives the image of the Jamiolkowski isomorfizm for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorfizm for the channel given as a function fun action on dim-dimensional space. See alos: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $
+\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorfizm for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorfizm for the channel given as a function fun action on dim-dimensional space. See alos: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\
 
-\textbf{$ \text{Ket} $ } - Ket[i,d] returns $|$i$\rangle $ in d-dimensinal Hilbert space.$  $
+\textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensinal Hilbert space.$  $\\
 
-\textbf{$ \text{Ketbra} $ } - Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ ascting on d-dimensional space.$  $
+\textbf{$ \text{Ketbra} $ }-- Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ ascting on d-dimensional space.$  $\\
 
-\textbf{$ \text{KetFromDigits} $ } - KetFromDigits[list,base] - returns ket vector labeled by string of digits represented in given base.$  $
+\textbf{$ \text{KetFromDigits} $ }-- KetFromDigits[list,base] - returns ket vector labeled by string of digits represented in given base.$  $\\
 
-\textbf{$ \text{KroneckerDeltaMatrix} $ } - KroneckerDeltaMatrix[i,j,d] returns d$\times $d matrix with 1 at position (i,j) and zeroes elsewhere.$  $
+\textbf{$ \text{KroneckerDeltaMatrix} $ }-- KroneckerDeltaMatrix[i,j,d] returns d$\times $d matrix with 1 at position (i,j) and zeroes elsewhere.$  $\\
 
-\textbf{$ \text{KroneckerSum} $ } - KroneckerSum[A,B] returns the Kronecker sum of A and B defined as A$\otimes $1+1$\otimes $B. Alternative syntax A$\oplus $B for KroneckerSum[A,B] is provided.$  $
+\textbf{$ \text{KroneckerSum} $ }-- KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A$\otimes $1+1$\otimes $B. Alternative syntax A$\oplus $B for KroneckerSum[A,B] is provided.$  $\\
 
-\textbf{$ \text{Lambda1} $ } - Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli $\sigma $x.$  $
+\textbf{$ \text{Lambda1} $ }-- Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli $\sigma $x.$  $\\
 
-\textbf{$ \text{Lambda2} $ } - Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to $\sigma $y.$  $
+\textbf{$ \text{Lambda2} $ }-- Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to $\sigma $y.$  $\\
 
-\textbf{$ \text{Lambda3} $ } - Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to $\sigma $z.$  $
+\textbf{$ \text{Lambda3} $ }-- Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to $\sigma $z.$  $\\
 
-\textbf{$ \text{Log0} $ } - Log0[x] is equal to Log[2,x] for x$>$0 and 1 for x=0.$  $
+\textbf{$ \text{Log0} $ }-- Log0[x] is equal to Log[2,x] for x$>$0 and 1 for x=0.$  $\\
 
-\textbf{$ \text{MatrixAbs} $ } - MatrixAbs[m] - absolute value for matrix m defined as MatrixSqrt[m.ConjugateTranspose[m]].$  $
+\textbf{$ \text{MatrixAbs} $ }-- MatrixAbs[M] returns absolute value for matrix M defined as MatrixSqrt[M.M$  ^{\dagger }\text{].} $\\
 
-\textbf{$ \text{MatrixElement} $ } - MatrixElement[n,$\nu $,m,$\mu $,div,M] - returns the matrix element of density matrix M indexed by two double indices n, $\nu $ and m, $\mu $ of the composite sytem of dimensions dim=dimA dimB.$  $
+\textbf{$ \text{MatrixElement} $ }-- MatrixElement[n,$\nu $,m,$\mu $,div,M] - returns the matrix element of density matrix M indexed by two double indices n, $\nu $ and m, $\mu $ of the composite sytem of dimensions dim=dimA dimB.$  $\\
 
-\textbf{$ \text{MatrixIm} $ } - Antyhermitian part of the matrix A - 1/2(A-ConjugateTranspose[A]).$  $
+\textbf{$ \text{MatrixIm} $ }-- Antyhermitian part of the matrix A i.e. $ \frac{1}{2} $(A-ConjugateTranspose[A]).$  $\\
 
-\textbf{$ \text{MatrixRe} $ } - Hermitian part of the matrix A - 1/2(A+ConjugateTranspose[A]).$  $
+\textbf{$ \text{MatrixRe} $ }-- Hermitian part of the matrix A i.e. $ \frac{1}{2} $(A+ConjugateTranspose[A]).$  $\\
 
-\textbf{$ \text{MatrixSqrt} $ } - MatrixSqrt[m] - square root for the matrix m.$  $
+\textbf{$ \text{MatrixSqrt} $ }-- MatrixSqrt[M] returns square root for the matrix M.$  $\\
 
-\textbf{$ \text{MaxEnt} $ } - MaxEnt[N] - maximally entangled state in N dimensional vector space. Note that N must be perfect square.$  $
+\textbf{$ \text{MaxEnt} $ }-- MaxEnt[N] - maximally entangled state in N dimensional vector space. Note that N must be perfect square.$  $\\
 
-\textbf{$ \text{MaxMix} $ } - MaxMix[n] gies maximally mixed state in n-dimensional space of density matrices.$  $
+\textbf{$ \text{MaxMix} $ }-- MaxMix[n] gies maximally mixed state in n-dimensional space of density matrices.$  $\\
 
-\textbf{$ \text{NumericalRangeBound} $ } - NumericalRangeBound[A$\_$?MatrixQ,step$\_$:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $
+\textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A$\_$?MatrixQ,step$\_$:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\
 
-\textbf{$ \text{PartialTraceA} $ } - PartialTraceA[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the m-demensional (first) subsystem.$  $
+\textbf{$ \text{PartialTraceA} $ }-- PartialTraceA[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the m-demensional (first) subsystem.$  $\\
 
-\textbf{$ \text{PartialTraceB} $ } - PartialTraceB[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the n-demensional (second) subsystem.$  $
+\textbf{$ \text{PartialTraceB} $ }-- PartialTraceB[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the n-demensional (second) subsystem.$  $\\
 
-\textbf{$ \text{PartialTraceGeneral} $ } - PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, acording to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See alos: PartialTraceA, PartialTraceB.$  $
+\textbf{$ \text{PartialTraceGeneral} $ }-- PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, acording to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See alos: PartialTraceA, PartialTraceB.$  $\\
 
-\textbf{$ \text{PartialTransposeA} $ } - PartialTransposeA[$\rho $,m,n] performs partial transposition on the m-dimensional (first) subsystem of the m$\times $n-state.$  $
+\textbf{$ \text{PartialTransposeA} $ }-- PartialTransposeA[$\rho $,m,n] performs partial transposition on the m-dimensional (first) subsystem of the m$\times $n-state.$  $\\
 
-\textbf{$ \text{PartialTransposeB} $ } - PartialTransposeB[$\rho $,m,n] performs partial transposition on the n-dimensional (second) subsystem of the m$\times $n-state.$  $
+\textbf{$ \text{PartialTransposeB} $ }-- PartialTransposeB[$\rho $,m,n] performs partial transposition on the n-dimensional (second) subsystem of the m$\times $n-state.$  $\\
 
-\textbf{$ \text{PartialTransposeGeneral} $ } - PartialTransposeGeneral[$\rho $,dim,sys] - Returns the partial transpose, acording to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA,dimB$\}$. $  $
+\textbf{$ \text{PartialTransposeGeneral} $ }-- PartialTransposeGeneral[$\rho $,dim,sys] - Returns the partial transpose, acording to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA,dimB$\}$. $  $\\
 
-\textbf{$ \text{PauliMatrices} $ } - List of Pauli matrices. Use Map[MatrixForm[$\#$]$\&$,PauliMatrices] to get this list in more readible form.$  $
+\textbf{$ \text{PauliMatrices} $ }-- Predefined list of Pauli matrices $\{$$ \sigma _x,\sigma _y,\sigma _z $$\}$. Use Map[MatrixForm[$\#$]$\&$,PauliMatrices] to get this list in more readible form.$  $\\
 
-\textbf{$ \text{PhaseflipChannel} $ } - PhaseflipChannel[2,p,$\rho $]$  $
+\textbf{$ \text{PhaseflipChannel} $ }-- PhaseflipChannel[2,p,$\rho $]$  $\\
 
-\textbf{$ \text{ProbablityDistribution} $ } - ProbablityDistribution[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: SymbolicVector.$  $
+\textbf{$ \text{ProbablityDistribution} $ }-- ProbablityDistribution[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: SymbolicVector.$  $\\
 
-\textbf{$ \text{ProbBures} $ } - ProbBures[$\lambda $] - Joint probablity distribution of eigenvalues $\lambda $ of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $
+\textbf{$ \text{ProbBures} $ }-- ProbBures[$\lambda $] - Joint probablity distribution of eigenvalues $\lambda $ of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $\\
 
-\textbf{$ \text{ProbBuresNorm} $ } - ProbBNorm[n] - Normalization factor used for calculating probablity distribution of eigenvalues of matrix of dimension N according to Bures distance.$  $
+\textbf{$ \text{ProbBuresNorm} $ }-- ProbBNorm[n] - Normalization factor used for calculating probablity distribution of eigenvalues of matrix of dimension N according to Bures distance.$  $\\
 
-\textbf{$ \text{ProbHS} $ } - ProbHS[$\{$$ x_1\text{,...}x_n $$\}$,] Probablity distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $
+\textbf{$ \text{ProbHS} $ }-- ProbHS[$\{$$ x_1\text{,...}x_n $$\}$,] Probablity distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $\\
 
-\textbf{$ \text{ProbHSNorm} $ } - Normalization factor used for calculating probablity distribution of eigenvalues of matrix of dimension N according to Hilbert-Schmidt distribution.$  $
+\textbf{$ \text{ProbHSNorm} $ }-- Normalization factor used for calculating probablity distribution of eigenvalues of matrix of dimension N according to Hilbert-Schmidt distribution.$  $\\
 
-\textbf{$ \text{ProdDiff2} $ } - ProdDiff2[$\{$$ x_1 $,...,$ x_n $$\}$] is equivalent to Det[VandermondeMatrix[$\{$$ x_1 $,...,$ x_n $$\}$]$ ]^2 $ and gives a discriminant of the polynomial with roots $\{$$ x_1 $,...,$ x_n $$\}$.$  $
+\textbf{$ \text{ProdDiff2} $ }-- ProdDiff2[$\{$$ x_1 $,...,$ x_n $$\}$] is equivalent to Det[VandermondeMatrix[$\{$$ x_1 $,...,$ x_n $$\}$]$ ]^2 $ and gives a discriminant of the polynomial with roots $\{$$ x_1 $,...,$ x_n $$\}$.$  $\\
 
-\textbf{$ \text{ProdSum} $ } - ProdSum[$\{$$ x_1 $,...,$ x_n $$\}$] gives $ \prod _{i<j}^nx_i+x_j. $
+\textbf{$ \text{ProdSum} $ }-- ProdSum[$\{$$ x_1 $,...,$ x_n $$\}$] gives $ \prod _{i<j}^nx_i+x_j. $\\
 
-\textbf{$ \text{ProductSuperoperator} $ } - ProductSuperoperator[m1,m2] computes product superoperator of superoperatos m1 and m2.$  $
+\textbf{$ \text{ProductSuperoperator} $ }-- ProductSuperoperator[m1,m2] computes product superoperator of superoperatos m1 and m2.$  $\\
 
-\textbf{$ \text{Proj} $ } - Proj[$\{$v1,...,v2$\}$] returns projectors for the vectors in the input list.$  $
+\textbf{$ \text{Proj} $ }-- Proj[$\{$$ v_1,v_2 $,...,$ v_n $$\}$] returns projectors for the vectors in the input list.$  $\\
 
-\textbf{$ \text{QFT} $ } - QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifices method used in calculation. Parameter method can be equal to $\texttt{"$ $Symbloic$\texttt{"}$, which is default, or $\texttt{"}$Numerical$\texttt{"}$. The second option makes this function much faster.} $
+\textbf{$ \text{QFT} $ }-- QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifices method used in calculation. Parameter method can be equal to $\texttt{"$ $Symbloic$\texttt{"}$, which is default, or $\texttt{"}$Numerical$\texttt{"}$. The second option makes this function much faster.} $\\
 
-\textbf{$ \text{qiAbout} $ } - Display short information about QI package.$  $
+\textbf{$ \text{qiAbout} $ }-- Display short information about QI package.$  $\\
 
-\textbf{$ \text{qiGenDoc} $ } - Generate documentation for QI package.$  $
+\textbf{$ \text{qiGenDoc} $ }-- Generate documentation for QI package.$  $\\
 
-\textbf{$ \text{qiHistory} $ } - Display history of modifications for QI package.$  $
+\textbf{$ \text{qiHistory} $ }-- Display history of modifications for QI package.$  $\\
 
-\textbf{$ \text{qiLastModification} $ } - qiLastModification$ \text{::} $usage$  $
+\textbf{$ \text{qiLastModification} $ }-- qiLastModification$ \text{::} $usage$  $\\
 
-\textbf{$ \text{qiVersion} $ } - Display version of QI package.$  $
+\textbf{$ \text{qiVersion} $ }-- Display version of QI package.$  $\\
 
-\textbf{$ \text{QuantumChannelEntropy} $ } - QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channe in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.$  $
+\textbf{$ \text{QuantumChannelEntropy} $ }-- QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channe in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.$  $\\
 
-\textbf{$ \text{QuantumEntropy} $ } - QuantumEntropy[m] - von Neuman entropy for the matrix m.$  $
+\textbf{$ \text{QuantumEntropy} $ }-- QuantumEntropy[m] - von Neuman entropy for the matrix m.$  $\\
 
-\textbf{$ \text{QubitBitflipKraus} $ } - Kraus operators for one qubit bit-flip channel.$  $
+\textbf{$ \text{QubitBitflipKraus} $ }-- Kraus operators for one qubit bit-flip channel.$  $\\
 
-\textbf{$ \text{QubitBitphaseflipKraus} $ } - Kraus operators for one qubit bit-phase-flip channel.$  $
+\textbf{$ \text{QubitBitphaseflipKraus} $ }-- Kraus operators for one qubit bit-phase-flip channel.$  $\\
 
-\textbf{$ \text{QubitBlochState} $ } - Parametrization of the one-qubit mixed state on the Bloch sphere.$  $
+\textbf{$ \text{QubitBlochState} $ }-- Parametrization of the one-qubit mixed state on the Bloch sphere.$  $\\
 
-\textbf{$ \text{QubitDaviesDynamicalMatrix} $ } - Returns dynamical matrix for Davies channel with b = $ \frac{a p}{1-p}. $
+\textbf{$ \text{QubitDaviesDynamicalMatrix} $ }-- Returns dynamical matrix for Davies channel with b = $ \frac{a p}{1-p}. $\\
 
-\textbf{$ \text{QubitDecayKraus} $ } - Kraus operators of the decay channel, also know as amplitude damping, for one qubit.$  $
+\textbf{$ \text{QubitDecayKraus} $ }-- Kraus operators of the decay channel, also know as amplitude damping, for one qubit.$  $\\
 
-\textbf{$ \text{QubitDepolarizingKraus} $ } - Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=0.$  $
+\textbf{$ \text{QubitDepolarizingKraus} $ }-- Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=0.$  $\\
 
-\textbf{$ \text{QubitDynamicalMatrix} $ } - Parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81$  $
+\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81$  $\\
 
-\textbf{$ \text{QubitGeneralState} $ } - QubitGeneralState[$\alpha $,$\beta $,$\gamma $,$\delta $,$\lambda $] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues $\lambda $ and 1-$\lambda $ rotated as U.diag($\lambda $,1-$\lambda $).$ U^{\dagger } $ with U defined by parameters $\alpha $,$\beta $,$\gamma $ and $\delta $.$  $
+\textbf{$ \text{QubitGeneralState} $ }-- QubitGeneralState[$\alpha $,$\beta $,$\gamma $,$\delta $,$\lambda $] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues $\lambda $ and 1-$\lambda $ rotated as U.diag($\lambda $,1-$\lambda $).$ U^{\dagger } $ with U defined by parameters $\alpha $,$\beta $,$\gamma $ and $\delta $.$  $\\
 
-\textbf{$ \text{QubitKet} $ } - QubitKet[$\alpha $,$\beta $] parametriation of the pure state (as a state vector) for one qubit as (Cos[$\alpha $] Exp[i$\beta $], Sin[$\alpha $]). This is equivalent to StateVector[$\{\alpha $,$\beta \}$]. See also: QubitPureState, StateVector.$  $
+\textbf{$ \text{QubitKet} $ }-- QubitKet[$\alpha $,$\beta $] parametriation of the pure state (as a state vector) for one qubit as (Cos[$\alpha $] Exp[i$\beta $], Sin[$\alpha $]). This is equivalent to StateVector[$\{\alpha $,$\beta \}$]. See also: QubitPureState, StateVector.$  $\\
 
-\textbf{$ \text{QubitPhaseflipKraus} $ } - Kraus operators for one qubit phase-flip channel.$  $
+\textbf{$ \text{QubitPhaseflipKraus} $ }-- Kraus operators for one qubit phase-flip channel.$  $\\
 
-\textbf{$ \text{QubitPhaseKraus} $ } - Kraus operators for one qubit phase damping channel.$  $
+\textbf{$ \text{QubitPhaseKraus} $ }-- Kraus operators for one qubit phase damping channel.$  $\\
 
-\textbf{$ \text{QubitPureState} $ } - QubitPureState[$\alpha $,$\beta $] - parametriation of the pure state as a density matrix for one qubit. This is just a alias for Proj[QubitKet[$\alpha $,$\beta $]]. See also: QubitKet.$  $
+\textbf{$ \text{QubitPureState} $ }-- QubitPureState[$\alpha $,$\beta $] - parametriation of the pure state as a density matrix for one qubit. This is just a alias for Proj[QubitKet[$\alpha $,$\beta $]]. See also: QubitKet.$  $\\
 
-\textbf{$ \text{QutritSpontaneousEmissionKraus} $ } - QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit epontaneous emission channel with parameters A1, A2, t $>$= 0, see $\backslash $nA. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $
+\textbf{$ \text{QutritSpontaneousEmissionKraus} $ }-- QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit epontaneous emission channel with parameters A1, A2, t $>$= 0, see $\backslash $nA. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $\\
 
-\textbf{$ \text{RandomDynamicalMatrix} $ } - RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equalt to 0.$  $
+\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equalt to 0.$  $\\
 
-\textbf{$ \text{RandomKet} $ } - RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche / Computer Physics Communications 179 (2008) 647$--$664.$  $
+\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche / Computer Physics Communications 179 (2008) 647$--$664.$  $\\
 
-\textbf{$ \text{RandomNormalMatrix} $ } - RandomNormalMatrix[d] - random normal matrix of dimension d.$  $
+\textbf{$ \text{RandomNormalMatrix} $ }-- RandomNormalMatrix[d] - random normal matrix of dimension d.$  $\\
 
-\textbf{$ \text{RandomProductKet} $ } - RandomProductKet[$\{$dim1,dim2,...,dimN$\}$] - random pure state (ket verctor) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.$  $
+\textbf{$ \text{RandomProductKet} $ }-- RandomProductKet[$\{$dim1,dim2,...,dimN$\}$] - random pure state (ket verctor) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.$  $\\
 
-\textbf{$ \text{RandomProductNumericalRange} $ } - RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $
+\textbf{$ \text{RandomProductNumericalRange} $ }-- RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $\\
 
-\textbf{$ \text{RandomSimplex} $ } - RandomSimplex[d] - d-dimesnional random simplex.$  $
+\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d] - d-dimesnional random simplex.$  $\\
 
-\textbf{$ \text{RandomSpecialUnitary} $ } - Random spacial unitary matrix. Thanks to R.D-D.$  $
+\textbf{$ \text{RandomSpecialUnitary} $ }-- Random spacial unitary matrix. Thanks to R.D-D.$  $\\
 
-\textbf{$ \text{RandomState} $ } - RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to Hilbert-Schmidt measure.$  $
+\textbf{$ \text{RandomState} $ }-- RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to Hilbert-Schmidt measure.$  $\\
 
-\textbf{$ \text{RandomUnitary} $ } - Random unitary matrix. Thanks to R.D-D.$  $
+\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to R.D-D.$  $\\
 
-\textbf{$ \text{Res} $ } - Res[m] is equvalent to Vec[Transpose[m]]. Reshaping maps matrix m into vector row by row.$  $
+\textbf{$ \text{Res} $ }-- Res[m] is equvalent to Vec[Transpose[m]]. Reshaping maps matrix m into vector row by row.$  $\\
 
-\textbf{$ \text{Reshuffle} $ } - Reshuffle[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices. If  the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: ReshuffleGeneral, Reshuffle2.$  $
+\textbf{$ \text{Reshuffle} $ }-- Reshuffle[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices. If  the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: ReshuffleGeneral, Reshuffle2.$  $\\
 
-\textbf{$ \text{Reshuffle2} $ } - Alternative definition of the reshuffling operation. Reshuffle2[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: ReshuffleGeneral, Reshuffle, BaseMatrices$  $
+\textbf{$ \text{Reshuffle2} $ }-- Alternative definition of the reshuffling operation. Reshuffle2[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be ommited. In this case one obtains a reshuffle in the basis contrtucted by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: ReshuffleGeneral, Reshuffle, BaseMatrices$  $\\
 
-\textbf{$ \text{ReshuffleGeneral} $ } - ReshuffleGeneral[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix.$  $
+\textbf{$ \text{ReshuffleGeneral} $ }-- ReshuffleGeneral[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix.$  $\\
 
-\textbf{$ \text{ReshuffleGeneral2} $ } - ReshuffleGeneral2[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.$  $
+\textbf{$ \text{ReshuffleGeneral2} $ }-- ReshuffleGeneral2[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.$  $\\
 
-\textbf{$ \text{ReshufflePermutation} $ } - ReshufflePermutation[dim1,dim2] produces permutation matrix equivalent to the resuffling operation on dim1$\times $dim2-dimensional system.$  $
+\textbf{$ \text{ReshufflePermutation} $ }-- ReshufflePermutation[dim1,dim2] produces permutation matrix equivalent to the resuffling operation on dim1$\times $dim2-dimensional system.$  $\\
 
-\textbf{$ S $ } - S[m] = QuantumEntropy[m].$  $
+\textbf{$ S $ }-- S[m] = QuantumEntropy[m].$  $\\
 
-\textbf{$ \text{SchmidtDecomposition} $ } - SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $
+\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $\\
 
-\textbf{$ \text{SpecialUnitary2} $ } - Euler parametrization of SU(2).$  $
+\textbf{$ \text{SpecialUnitary2} $ }-- Euler parametrization of SU(2).$  $\\
 
-\textbf{$ \text{StateFromBlochVector} $ } - StateFromBlochVector[vec$\_$] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)$  $
+\textbf{$ \text{StateFromBlochVector} $ }-- StateFromBlochVector[vec$\_$] - returns a matrix of apropriate dimension from bloch vector (coefficients threated as coefficients from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices)$  $\\
 
-\textbf{$ \text{StateVector} $ } - StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: ProbablityDistribution, SymbolicVector.$  $
+\textbf{$ \text{StateVector} $ }-- StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: ProbablityDistribution, SymbolicVector.$  $\\
 
-\textbf{$ \text{Subfidelity} $ } - Subfidelity[A,B] returns superfidelity between states A and B calculated as $  $tr$\rho $$ _1\rho _2 $+$\surd $2$\surd $(($  $tr$\rho $$ _2\rho _2\text{)-} $tr$\rho $$ _1\rho _2\rho _1\rho _2\text{).} $
+\textbf{$ \text{Subfidelity} $ }-- Subfidelity[A,B] returns subfidelity between states A and B calculated as $  $tr$\rho $$ _1\rho _2 $+$\surd $2$\surd $(($  $tr$\rho $$ _2\rho _2\text{)-} $tr$\rho $$ _1\rho _2\rho _1\rho _2\text{).} $\\
 
-\textbf{$ \text{Superfidelity} $ } - Superfidelity[A,B] calculates fuperfidelity between A and B defined as Tr[A.B] + Sqrt[1-Tr[A.A]]Sqrt[1-Tr[B.B]].$  $
+\textbf{$ \text{Superfidelity} $ }-- Superfidelity[A,B] calculates superfidelity between A and B defined as Tr[A.B] + Sqrt[1-Tr[A.A]]Sqrt[1-Tr[B.B]].$  $\\
 
-\textbf{$ \text{Superoperator} $ } - Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-deimensionla space. So Superoperator[DepolarizingChannel[2,p,$\#$]$\&$,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.$  $
+\textbf{$ \text{Superoperator} $ }-- Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-deimensionla space. So Superoperator[DepolarizingChannel[2,p,$\#$]$\&$,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.$  $\\
 
-\textbf{$ \text{Swap} $ } - Swap[n] returns permutation operator $ \sum _{i=0}^{n-1} \underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on $ n^2 $-dimensional space and exchanging two n-dimensional subsystems.$  $
+\textbf{$ \text{Swap} $ }-- Swap[n] returns permutation operator $ \sum _{i=0}^{n-1} \underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on $ n^2 $-dimensional space and exchanging two n-dimensional subsystems.$  $\\
 
-\textbf{$ \text{sx} $ } - Pauli matrix $ \sigma _x. $
+\textbf{$ \text{sx} $ }-- Pauli matrix $ \sigma _x. $\\
 
-\textbf{$ \text{sy} $ } - Pauli matrix $\sigma $y.$  $
+\textbf{$ \text{sy} $ }-- Pauli matrix $ \sigma _y. $\\
 
-\textbf{$ \text{SymbolicHermitianMatrix} $ } - SymbolicHermitianMatrix[sym,d] produces d$\times $d hermitian matrix.$  $
+\textbf{$ \text{SymbolicHermitianMatrix} $ }-- SymbolicHermitianMatrix[sym,d] produces d$\times $d hermitian matrix.$  $\\
 
-\textbf{$ \text{SymbolicMatrix} $ } - SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n$\times $n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporeted in LaTeX documents.$  $
+\textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n$\times $n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporeted in LaTeX documents.$  $\\
 
-\textbf{$ \text{SymbolicVector} $ } - SymbolicVector[a,m] is equavalent to Matrix[a,m,1] and it returns a vector with m elements a[i],i=1,...,m, j=1,...,n. This function is useful, for example, for generating lists of parameters.$  $
+\textbf{$ \text{SymbolicVector} $ }-- SymbolicVector[a,m] is equavalent to Matrix[a,m,1] and it returns a vector with m elements a[i],i=1,...,m, j=1,...,n. This function is useful, for example, for generating lists of parameters.$  $\\
 
-\textbf{$ \text{sz} $ } - Pauli matrix $\sigma $x.$  $
+\textbf{$ \text{sz} $ }-- Pauli matrix $ \sigma _z. $\\
 
-\textbf{$ \text{TraceDistance} $ } - TraceDistance[A,B] = 1/2tr$|$A-B$|$.$  $
+\textbf{$ \text{TraceDistance} $ }-- TraceDistance[A,B] returns trace distance between matrices A and B which is defined as $ \frac{1}{2} $tr$|$A-B$|$.$  $\\
 
-\textbf{$ \text{TransposeChannel} $ } - TransposeChannel[n, $\rho $] - applay transposition operation on n-dimensional density matrix $\rho $. This operations is not completely positive.$  $
+\textbf{$ \text{TransposeChannel} $ }-- TransposeChannel[n, $\rho $] - applay transposition operation on n-dimensional density matrix $\rho $. This operations is not completely positive.$  $\\
 
-\textbf{$ \text{Unitary2} $ } - Euler parametrization of U(2).$  $
+\textbf{$ \text{Unitary2} $ }-- Euler parametrization of U(2).$  $\\
 
-\textbf{$ \text{Unitary3} $ } - Euler parametrization of U(3)$  $
+\textbf{$ \text{Unitary3} $ }-- Euler parametrization of U(3)$  $\\
 
-\textbf{$ \text{Unitary4Canonical} $ } - Parametrization of non-local unitary marices for two qubits. See: arXiv:quant-ph/0011050v1.$  $
+\textbf{$ \text{Unitary4Canonical} $ }-- Parametrization of non-local unitary marices for two qubits. See: arXiv:quant-ph/0011050v1.$  $\\
 
-\textbf{$ \text{Unres} $ } - de-reshaping of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unvec, Res.$  $
+\textbf{$ \text{Unres} $ }-- de-reshaping of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unvec, Res.$  $\\
 
-\textbf{$ \text{Unvec} $ } - Unvec[v,c] - de-vectorization of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unres, Vec.$  $
+\textbf{$ \text{Unvec} $ }-- Unvec[v,c] - de-vectorization of the vector into the matrix with c colummns. If the second parameter is ommited then it is assumed that v can be mapped into square matrix. See also: Unres, Vec.$  $\\
 
-\textbf{$ \text{VandermondeMatrix} $ } - VandermondeMatrix[$\{$$ x_1\text{,...}x_n $$\}$] - Vandermonde matrix for variables ($ x_1 $,...,$ x_n\text{).} $
+\textbf{$ \text{VandermondeMatrix} $ }-- VandermondeMatrix[$\{$$ x_1\text{,...}x_n $$\}$] - Vandermonde matrix for variables ($ x_1 $,...,$ x_n\text{).} $\\
 
-\textbf{$ \text{Vec} $ } - Vec[m] - vectorization of the matrix m column by column. See also: Res.$  $
+\textbf{$ \text{Vec} $ }-- Vec[m] - vectorization of the matrix m column by column. See also: Res.$  $\\
 
-\textbf{$ \text{WernerState} $ } - WernerState[p,n] - Werner state with parameter p$\in $[0,1] for n$\times $n-dimensional system. This state is defined as p $ \frac{2}{n(n+1)}P_{\text{sym}} $ + (1-p) $ \frac{2}{n(n-1)}P_{\text{snty}} $, where $ P_{\text{sym}} $ and $ P_{\text{snty}} $ are projectors for symmetric and anty-symmetric subspace.$  $
+\textbf{$ \text{WernerState} $ }-- WernerState[p,n] - Werner state with parameter p$\in $[0,1] for n$\times $n-dimensional system. This state is defined as p $ \frac{2}{n(n+1)}P_{\text{sym}} $ + (1-p) $ \frac{2}{n(n-1)}P_{\text{snty}} $, where $ P_{\text{sym}} $ and $ P_{\text{snty}} $ are projectors for symmetric and anty-symmetric subspace.$  $\\
 
-\textbf{$ \text{WernerState4} $ } - Werner state for two qubits.$  $
+\textbf{$ \text{WernerState4} $ }-- Werner state for two qubits.$  $\\
 
-\textbf{$ \text{wh} $ } - Hadamard gate for one qubit.$  $
+\textbf{$ \text{wh} $ }-- Hadamard gate for one qubit.$  $\\
 
-\textbf{$ X $ } - Generalized Pauli matrix X.$  $
+\textbf{$ X $ }-- Generalized Pauli matrix X.$  $\\
 
-\textbf{$ Z $ } - Generalized Pauli matrix Z.$  $
+\textbf{$ Z $ }-- Generalized Pauli matrix Z.$  $\\
 
-\textbf{$ \delta  $ } - $\delta $[x] represents Dirac delta at x.$  $
+\textbf{$ \delta  $ }-- $\delta $[x] represents Dirac delta at x.$  $\\
 
-\textbf{$ \eta  $ } - $\eta $[x] = -x Log[2,x].$  $
+\textbf{$ \eta  $ }-- $\eta $[x] = -x Log[2,x].$  $\\
 
-\textbf{$ \text{$\eta $2} $ } - $\eta $2[x] = $\eta $[x]+$\eta $[1-x].$  $
+\textbf{$ \text{$\eta $2} $ }-- $\eta $2[x] = $\eta $[x]+$\eta $[1-x].$  $\\
 
-\textbf{$ \lambda  $ } - $\lambda $[i,n] is defined as GeneralizedPauliMatrices[n][[i]].$  $
+\textbf{$ \lambda  $ }-- $\lambda $[i,n] is defined as GeneralizedPauliMatrices[n][[i]].$  $\\
 
-\textbf{$ \text{$\lambda $1} $ } - Gell-Mann matrix $\lambda $1.$  $
+\textbf{$ \text{$\lambda $1} $ }-- Gell-Mann matrix $ \lambda _1. $\\
 
-\textbf{$ \text{$\lambda $2} $ } - Gell-Mann matrix $\lambda $2.$  $
+\textbf{$ \text{$\lambda $2} $ }-- Gell-Mann matrix $ \lambda _2. $\\
 
-\textbf{$ \text{$\lambda $3} $ } - Gell-Mann matrix $\lambda $3.$  $
+\textbf{$ \text{$\lambda $3} $ }-- Gell-Mann matrix $ \lambda _3. $\\
 
-\textbf{$ \text{$\lambda $4} $ } - Gell-Mann matrix $\lambda $4.$  $
+\textbf{$ \text{$\lambda $4} $ }-- Gell-Mann matrix $ \lambda _4. $\\
 
-\textbf{$ \text{$\lambda $5} $ } - Gell-Mann matrix $\lambda $5.$  $
+\textbf{$ \text{$\lambda $5} $ }-- Gell-Mann matrix $ \lambda _5. $\\
 
-\textbf{$ \text{$\lambda $6} $ } - Gell-Mann matrix $\lambda $6.$  $
+\textbf{$ \text{$\lambda $6} $ }-- Gell-Mann matrix $ \lambda _6. $\\
 
-\textbf{$ \text{$\lambda $7} $ } - Gell-Mann matrix $\lambda $7.$  $
+\textbf{$ \text{$\lambda $7} $ }-- Gell-Mann matrix $ \lambda _7. $\\
 
-\textbf{$ \text{$\lambda $8} $ } - Gell-Mann matrix $\lambda $8.$  $
+\textbf{$ \text{$\lambda $8} $ }-- Gell-Mann matrix $ \lambda _8. $\\
 
-\textbf{$ \text{$\sigma $x} $ } - Pauli matrix $ \sigma _x. $
+\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _x. $\\
 
-\textbf{$ \text{$\sigma $y} $ } - Pauli matrix $\sigma $y.$  $
+\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y. $\\
 
-\textbf{$ \text{$\sigma $z} $ } - Pauli matrix $\sigma $x.$  $
+\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z. $\\
 
 \end{document}

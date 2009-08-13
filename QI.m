@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,8 +11,8 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.2.2";
-qiLastModification = "4 August 2009";
+qiVersion = "0.2.3";
+qiLastModification = "13 August 2009";
 qiHistory = {"Initial version", 
 	"Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", 
 	"Added quantum channel parametrization for one qubit", 
@@ -20,7 +20,8 @@ qiHistory = {"Initial version",
 	"Changed default print output.", 
 	"Documentation generator added.",
 	"Changed QubitGeneralState function.",
-	"Added reshuffling permutation and product of superoperators."
+	"Added reshuffling permutation and product of superoperators.",
+	"Minor update in documentation"
 };
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
@@ -40,11 +41,11 @@ Print["Package QI version ", qiVersion, " (last modification: ", qiLastModificat
 (*Help messages*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
-KroneckerSum::usage = "KroneckerSum[A,B] returns the Kronecker sum of A and B defined as A\[CircleTimes]1+1\[CircleTimes]B. Alternative syntax A\[CirclePlus]B for KroneckerSum[A,B] is provided.";
+KroneckerSum::usage = "KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A\[CircleTimes]1+1\[CircleTimes]B. Alternative syntax A\[CirclePlus]B for KroneckerSum[A,B] is provided.";
 
 
 SymbolicMatrix::usage = "SymbolicMatrix[a,m,n] returns m\[Cross]n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n\[Cross]n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporeted in LaTeX documents.";
@@ -59,71 +60,71 @@ SymbolicHermitianMatrix::usage ="SymbolicHermitianMatrix[sym,d] produces d\[Cros
 ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Fidelity, trace distance etc.*)
 
 
-MatrixSqrt::usage= "MatrixSqrt[m] - square root for the matrix m.";
+MatrixSqrt::usage= "MatrixSqrt[M] returns square root for the matrix M.";
 
 
-MatrixAbs::usage= "MatrixAbs[m] - absolute value for matrix m defined as MatrixSqrt[m.ConjugateTranspose[m]].";
+MatrixAbs::usage= "MatrixAbs[M] returns absolute value for matrix M defined as MatrixSqrt[M.M\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)].";
 
 
-Fidelity::usage = "Fidelity[\[Rho],\[Sigma]] returns quantum fidelity between states \[Rho] and \[Sigma].";
+Fidelity::usage = "Fidelity[\[Rho],\[Sigma]] returns quantum fidelity between states \[Rho] and \[Sigma] calculated as tr\[Sqrt](\[Sqrt]\[Rho] \[Sigma]\[Sqrt]\[Rho]).";
 
 
-Superfidelity::usage = "Superfidelity[A,B] calculates fuperfidelity between A and B defined as Tr[A.B] + Sqrt[1-Tr[A.A]]Sqrt[1-Tr[B.B]]."; 
+Superfidelity::usage = "Superfidelity[A,B] calculates superfidelity between A and B defined as Tr[A.B] + Sqrt[1-Tr[A.A]]Sqrt[1-Tr[B.B]]."; 
 
 
-Subfidelity::usage = "Subfidelity[A,B] returns superfidelity between states A and B calculated as \!\(\*SubscriptBox[\"tr\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)+\[Sqrt]2\[Sqrt]((\!\(\*SubscriptBox[\"tr\[Rho]\", \"2\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\))-\!\(\*SubscriptBox[\"tr\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)).";
+Subfidelity::usage = "Subfidelity[A,B] returns subfidelity between states A and B calculated as \!\(\*SubscriptBox[\"tr\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)+\[Sqrt]2\[Sqrt]((\!\(\*SubscriptBox[\"tr\[Rho]\", \"2\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\))-\!\(\*SubscriptBox[\"tr\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)).";
 
 
-TraceDistance::usage = "TraceDistance[A,B] = 1/2tr|A-B|.";
+TraceDistance::usage = "TraceDistance[A,B] returns trace distance between matrices A and B which is defined as \!\(\*FractionBox[\"1\", \"2\"]\)tr|A-B|.";
 
 
-MatrixRe::usage = "Hermitian part of the matrix A - 1/2(A+ConjugateTranspose[A]).";
+MatrixRe::usage = "Hermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A+ConjugateTranspose[A]).";
 
 
-MatrixIm::usage = "Antyhermitian part of the matrix A - 1/2(A-ConjugateTranspose[A]).";
+MatrixIm::usage = "Antyhermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A-ConjugateTranspose[A]).";
 
 
 ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
 
 
-Commutator::usage = "Comutator of matrices A and B.";
+Commutator::usage = "Commutator[A,B] returns the comutator of matrices A and B i.e. [A,B]=AB - BA.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Commonly used matrices*)
 
 
 sx::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\).";
-sy::usage = "Pauli matrix \[Sigma]y.";
-sz::usage = "Pauli matrix \[Sigma]x.";
-\[Sigma]x::usage=sx::usage;
-\[Sigma]y::usage=sy::usage;
-\[Sigma]z::usage=sz::usage;
-id::usage  = "Identity matrix for one qubit.";
+sy::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\).";
+sz::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\).";
+\[Sigma]x::usage = sx::usage;
+\[Sigma]y::usage = sy::usage;
+\[Sigma]z::usage = sz::usage;
+id::usage = "Identity matrix for one qubit.";
 wh::usage = "Hadamard gate for one qubit.";
 
 
-\[Lambda]1::usage = "Gell-Mann matrix \[Lambda]1.";
-\[Lambda]2::usage = "Gell-Mann matrix \[Lambda]2.";
-\[Lambda]3::usage = "Gell-Mann matrix \[Lambda]3.";
-\[Lambda]4::usage = "Gell-Mann matrix \[Lambda]4.";
-\[Lambda]5::usage = "Gell-Mann matrix \[Lambda]5.";
-\[Lambda]6::usage = "Gell-Mann matrix \[Lambda]6.";
-\[Lambda]7::usage = "Gell-Mann matrix \[Lambda]7.";
-\[Lambda]8::usage = "Gell-Mann matrix \[Lambda]8.";
+\[Lambda]1::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\).";
+\[Lambda]2::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\).";
+\[Lambda]3::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\).";
+\[Lambda]4::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"4\"]\).";
+\[Lambda]5::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"5\"]\).";
+\[Lambda]6::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"6\"]\).";
+\[Lambda]7::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"7\"]\).";
+\[Lambda]8::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"8\"]\).";
 
 
-Proj::usage = "Proj[{v1,...,v2}] returns projectors for the vectors in the input list.";
+Proj::usage = "Proj[{\!\(\*SubscriptBox[\"v\", \"1\"]\),\!\(\*SubscriptBox[\"v\", \"2\"]\),...,\!\(\*SubscriptBox[\"v\", \"n\"]\)}] returns projectors for the vectors in the input list.";
 
 
-BaseVectors::usage = "BaseVectors[n] - canonical basis in n-dimensional Hilbert space";
+BaseVectors::usage = "BaseVectors[n] returns list with canonical basis in n-dimensional Hilbert space.";
 
 
-BaseMatrices::usage = "BaseMatrices[n] - canonical basis in n\[Cross]n-dimensional Hilbert-Schmidt space.";
+BaseMatrices::usage = "BaseMatrices[n] returns list with canonical basis in n\[Cross]n-dimensional Hilbert-Schmidt space.";
 
 
 KroneckerDeltaMatrix::usage = "KroneckerDeltaMatrix[i,j,d] returns d\[Cross]d matrix with 1 at position (i,j) and zeroes elsewhere.";
@@ -138,19 +139,19 @@ Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1
 Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z.";
 
 
-GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] - list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";
+GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";
 
 
 \[Lambda]::usage = "\[Lambda][i,n] is defined as GeneralizedPauliMatrices[n][[i]].";
 
 
-PauliMatrices::usage = "List of Pauli matrices. Use Map[MatrixForm[#]&,PauliMatrices] to get this list in more readible form.";
+PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)}. Use Map[MatrixForm[#]&,PauliMatrices] to get this list in more readible form.";
 
 
 GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,GellMannMatrices] to get this list in more readible form.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum gates*)
 
 
@@ -218,7 +219,7 @@ WernerState4::usage = "Werner state for two qubits.";
 SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -388,7 +389,7 @@ QubitPhaseflipKraus::usage = "Kraus operators for one qubit phase-flip channel."
 QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip channel.";
 
 
-QubitDynamicalMatrix::usage = "Parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81";
+QubitDynamicalMatrix::usage = "QubitDynamicalMatrix[\!\(\*SubscriptBox[\"\[Kappa]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"z\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"z\"]\)] returns parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81";
 
 
 QubitDaviesDynamicalMatrix::usage = "Returns dynamical matrix for Davies channel with b = \!\(\*FractionBox[
@@ -521,7 +522,7 @@ qiGenDoc[docFile_,dir_:"~/zksi-repo/qi/"]:=Block[{latexHeader,latexFooter,f,txt,
 ExportString["","TeX"];
 SetDirectory[dir];
 lista=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
-latexHeader="\\documentclass[a4paper,12pt]{article}
+latexHeader="\\documentclass[a4paper,11pt]{article}
 \\usepackage{amsmath,amssymb,graphicx}
 \\usepackage{fullpage}
 \\parindent=0pt
@@ -549,15 +550,15 @@ name = "$ " <> name <> " $ ";
 usage=ToString[TeXForm[DisplayForm[lista[[i,2]]]]];
 usage=StringReplace[usage,"\{"->"LEWY"];
 usage=StringReplace[usage,"\}"->"PRAWY"];
-txt="\\textbf{"<>name<>"}"<>" - "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
+txt="\\textbf{"<>name<>"}"<>"-- "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
 txt=StringReplace[txt,"LEWY"-> "\{"];
 txt=StringReplace[txt,"PRAWY"->"\}"];
 WriteString[f,txt];
-WriteString[f,"\n\n"];
+WriteString[f,"\\\\\n\n"];
 ];
 WriteString[f,latexFooter];
 Close[f];
-]
+];
 
 
 (* ::Subsection::Closed:: *)
@@ -846,7 +847,7 @@ SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx,svd,vals,snum=Min[d1,d2]},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 

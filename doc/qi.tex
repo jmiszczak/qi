@@ -1,6 +1,7 @@
 %
 % v. 0.2 - 11/08/2009 - Jarek - extended introductions and bibliography
 % v. 0.21 - 12/08/2009 - Jarek - preliminary sections
+% v. 0.22 - 13/08/2009 - Jarek - added in intro and sec. 2
 \documentclass[final,5p,times]{elsarticle}
 
 %% Use the option review to obtain double line spacing
@@ -42,7 +43,12 @@
 \newcommand{\tr}{\mathrm{tr}}
 \newcommand{\M}{\ensuremath{\mathbb{M}}}
 \newcommand{\qi}{QI}
-\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\HS}[1]{\ensuremath{\mathcal{#1}}} % Hilbert space
+\newcommand{\Cplx}{\ensuremath{\mathbb{C}}}
+\newcommand{\eg}{\emph{eg.}}
+\newcommand{\ie}{\emph{ie.}}
+\newcommand{\etal}{\emph{et al.}}
 
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
@@ -81,10 +87,10 @@
 %% \address[label2]{}
 
 \author{P.~Gawron}
-\author{J.~A.~Miszczak}
-\author{Z.~Pucha{\l}a\corref{cor1}}
-\ead{z.puchala@iitis.pl}
+\author{J.~A.~Miszczak\corref{cor1}}
+\ead{miszczak@iitis.pl}
 \cortext[cor1]{Corresponding Author}
+\author{Z.~Pucha{\l}a}
 \address{Institute of Theoretical and Applied Informatics, Polish Academy of 
 Sciences, Ba{\l}tycka 5, 44-100 Gliwice, Poland}
 
@@ -112,23 +118,6 @@ quantum states \sep quantum operations \sep partial operations
 
 \end{frontmatter}
 
-\newpage
-\noindent{\bf Program Summary}
-
-{\it Title of program:} \qi\\
-{\it Catalogue identifier:}\\
-{\it Program summary URL:} http://cpc.cs.qub.ac.uk/summaries\\
-{\it Program available from:} CPC Program Library, Queen's University of Belfast, N. Ireland\\
-{\it Operating systems:} Any which supports Mathematica; tested under Debian GNU/Linux 5.0 and Ubuntu Linux 9.04.\\
-{\it Programming language used:} Mathematica 7.0\\
-{\it Number of bytes in distributed program, including test code and 
-documentation: }\\
-{\it Distribution format:} tar.gz\\
-{\it Nature of Problem:} Analysis of quantum states and quantum channels, 
-distance measure for quantum states, quantum partial operations and quantum entropy.\\
-{\it Method of Solution:} A Mathematica package is provided implementing parametrization of quantum states and operations, calculation of quantum fidelity and other distance measures and using partial operations. Examples are enclosed in QiExamples.nb Mathematica notebook. \\
-
-\newpage
 \tableofcontents
 
 %% \linenumbers
@@ -178,14 +167,15 @@ Sections~\ref{sec:states} and \ref{sec:channels} provide detailed description of
 functions implemented in~\qi. Finally Section~\ref{sec:comclude} provides some
 concluding remarks.
 
-%% The Appendices part is started with the command \appendix;
-%% appendix sections are then done as normal sections
-%% \appendix
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Quantum states and operations}\label{sec:qi-intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+Let $\HS{H}$ be a~separable, complex Hilbert space used to described the system
+in question. In quantum information theory we deal mainly with
+finite-dimensional Hilbert spaces, so usually we have to are in situation where
+$\HS{H}=\Cplx^n$. State of the system is described by the density matrix, \ie\
+operator $\rho:\HS{H}\rightarrow\HS{H}$, which is positive ($\rho\geq0$) and
+normalized ($\tr{\rho}=1$). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pure and mixed states}
@@ -237,8 +227,100 @@ small dimensions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Kronecker product}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Version 6 of \Mathematica\ introduced \code{KroneckerProduct} function
+Version 6 of \Mathematica\ introduced \code{KroneckerProduct} function.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Comonly used matrices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\qi\ predefines set of commonly used matrices. Among avaible matrices one can
+find
+\begin{itemize}
+\item Pauli matrices
+\begin{equation}
+\left(
+\begin{array}{cc}
+ 0 & 1 \\
+ 1 & 0
+\end{array}
+\right),\left(
+\begin{array}{cc}
+ 0 & -i \\
+ i & 0
+\end{array}
+\right),\left(
+\begin{array}{cc}
+ 1 & 0 \\
+ 0 & -1
+\end{array}
+\right).
+\end{equation}
+
+\item Gell-Mann matrices
+\begin{eqnarray}\nonumber
+\left(
+\begin{array}{ccc}
+ 0 & 1 & 0 \\
+ 1 & 0 & 0 \\
+ 0 & 0 & 0
+\end{array}
+\right),&\left(
+\begin{array}{ccc}
+ 0 & -i & 0 \\
+ i & 0 & 0 \\
+ 0 & 0 & 0
+\end{array}
+\right),&\left(
+\begin{array}{ccc}
+ 1 & 0 & 0 \\
+ 0 & -1 & 0 \\
+ 0 & 0 & 0
+\end{array}
+\right),
+\\\nonumber
+\left(
+\begin{array}{ccc}
+ 0 & 0 & 1 \\
+ 0 & 0 & 0 \\
+ 1 & 0 & 0
+\end{array}
+\right),&\left(
+\begin{array}{ccc}
+ 0 & 0 & -i \\
+ 0 & 0 & 0 \\
+ i & 0 & 0
+\end{array}
+\right),&\left(
+\begin{array}{ccc}
+ 0 & 0 & 0 \\
+ 0 & 0 & 1 \\
+ 0 & 1 & 0
+\end{array}
+\right),
+\\
+\left(
+\begin{array}{ccc}
+ 0 & 0 & 0 \\
+ 0 & 0 & -i \\
+ 0 & i & 0
+\end{array}
+\right),&\left(
+\begin{array}{ccc}
+ \frac{1}{\sqrt{3}} & 0 & 0 \\
+ 0 & \frac{1}{\sqrt{3}} & 0 \\
+ 0 & 0 & -\frac{2}{\sqrt{3}}
+\end{array}
+\right).
+\end{eqnarray}
+\item Hadamard matrix 
+\begin{equation}
+\left(
+\begin{array}{cc}
+ \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+\end{array}
+\right)
+\end{equation}
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Quantum states in \qi}\label{sec:states}
@@ -247,6 +329,8 @@ Version 6 of \Mathematica\ introduced \code{KroneckerProduct} function
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Probability distributions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+State in quantum mechanics is a generalization of classical probability
+distribution.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{One-qubit states}
@@ -255,13 +339,20 @@ Version 6 of \Mathematica\ introduced \code{KroneckerProduct} function
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{States in higher dimension}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\qi\ provides function for cosntructing pure state in arbitrary dimension
+
 Parametrization of pure states in higher dimensions is provided according to
 \cite{tilma02generalized}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Special states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\begin{itemize}
+\item maximally entangled states
+\item maximally mixed states
+\item Werner states
+\item Isotropic states
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Distance measures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -283,8 +374,8 @@ Parametrization of pure states in higher dimensions is provided according to
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Partial operations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\qi\ implements partial operations using general method for constructing channels
-acting on subsystems. This method is based on formula
+\qi\ implements partial operations using general method for constructing
+channels acting on subsystems. This method is based on formula
 \begin{equation}\label{eqn:def-tensor}
 (\Phi\otimes\Id)(\rho) = 
 \left(\res^{-1}\left(M_\Phi\res\left(\rho^R\right)\right)\right)^R
@@ -298,6 +389,7 @@ where $\{\epsilon_i\}_i=1,\ldots,n^2$ is a canonical basis in $\M_n$. In the
 Eq.~\ref{eqn:def-tensor} operation $\Phi$ is applied to the first subsystem 
 only.
 
+\todo{to jest do przepisania}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Partial transposition}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
