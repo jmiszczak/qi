@@ -12,7 +12,7 @@ BeginPackage["QI`"];
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
 qiVersion = "0.2.3";
-qiLastModification = "13 August 2009";
+qiLastModification = "27 August 2009";
 qiHistory = {"Initial version", 
 	"Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", 
 	"Added quantum channel parametrization for one qubit", 
@@ -21,7 +21,8 @@ qiHistory = {"Initial version",
 	"Documentation generator added.",
 	"Changed QubitGeneralState function.",
 	"Added reshuffling permutation and product of superoperators.",
-	"Minor update in documentation"
+	"Minor update in documentation",
+	"Fixed Werner state and added IsotropicState"
 };
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
@@ -34,14 +35,14 @@ qiHistory::usage = "Display history of modifications for QI package.";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 
 
-(*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
+$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
 
 
 (* ::Section:: *)
 (*Help messages*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -60,7 +61,7 @@ SymbolicHermitianMatrix::usage ="SymbolicHermitianMatrix[sym,d] produces d\[Cros
 ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
 
@@ -94,7 +95,7 @@ ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
 Commutator::usage = "Commutator[A,B] returns the comutator of matrices A and B i.e. [A,B]=AB - BA.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
@@ -151,7 +152,7 @@ PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"
 GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,GellMannMatrices] to get this list in more readible form.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum gates*)
 
 
@@ -790,7 +791,7 @@ Clear[Circuit];
 Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Reverse[l]]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Spacial states*)
 
 
@@ -818,14 +819,14 @@ MaxMix[n_Integer]:=1/n IdentityMatrix[n];
 
 Clear[MaxEnt];
 MaxEnt[dim_]:=Block[{subDim=Sqrt[dim]},
-If[IntegerQ [subDim],1/Sqrt[subDim] Plus@@Table[Flatten[{Ket[i,subDim]}\[CircleTimes]Ket[i,subDim]],{i,0,subDim-1}]]
+If[IntegerQ[subDim],1/Sqrt[subDim] Plus@@Table[Flatten[{Ket[i,subDim]}\[CircleTimes]Ket[i,subDim]],{i,0,subDim-1}]]
 ];
 
 
 Clear[WernerState];
-WernerState[p_,dim_]:=Block[{subDim=\[Sqrt]dim,permut},
+WernerState[dim_,p_]:=Block[{subDim=Sqrt[dim],permut},
 If[IntegerQ[subDim],permut=Swap[subDim];
-p/(subDim (subDim+1))(IdentityMatrix[dim]+permut)+ p/(subDim (subDim-1)) (IdentityMatrix[dim]-permut)]
+ p/(subDim (subDim-1)) (IdentityMatrix[dim]-permut)+(1-p)/(subDim (subDim+1)) (IdentityMatrix[dim]+permut)]
 ];
 
 
