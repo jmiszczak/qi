@@ -11,8 +11,8 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.2.3";
-qiLastModification = "27 August 2009";
+qiVersion = "0.2.4";
+qiLastModification = "7 September 2009";
 qiHistory = {"Initial version", 
 	"Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", 
 	"Added quantum channel parametrization for one qubit", 
@@ -22,7 +22,8 @@ qiHistory = {"Initial version",
 	"Changed QubitGeneralState function.",
 	"Added reshuffling permutation and product of superoperators.",
 	"Minor update in documentation",
-	"Fixed Werner state and added IsotropicState"
+	"Fixed Werner state and added IsotropicState",
+	"Fixed \[Eta] function"
 };
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
@@ -35,7 +36,7 @@ qiHistory::usage = "Display history of modifications for QI package.";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 
 
-$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
+(*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
 
 
 (* ::Section:: *)
@@ -791,7 +792,7 @@ Clear[Circuit];
 Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Reverse[l]]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Spacial states*)
 
 
@@ -1150,7 +1151,7 @@ Clear[QutritSpontaneousEmissionKraus];
 QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1 t/2)],0},{0,0,Exp[-(A2 t/2)]}},{{0,Sqrt[1-Exp[-(A1 t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2 t)]]},{0,0,0},{0,0,0}}};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entropies*)
 
 
@@ -1160,7 +1161,7 @@ SetAttributes[Log0,Listable];
 
 Unprotect[\[Eta]];
 Clear[\[Eta]];
-\[Eta][x_]:= -x Log[x];
+\[Eta][x_]:= -x Log[2,x];
 SetAttributes[\[Eta],Protected];
 
 
@@ -1341,13 +1342,13 @@ Flatten[w,2]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bloch Representation*)
 
 
 Clear[BlochVector];
-BlochVector[A_MatrixQ]:=Block[{dim},
-dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[8])];
+BlochVector[A_]:=Block[{dim},
+dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[dim])];
 
 
 Clear[StateFromBlochVector];
