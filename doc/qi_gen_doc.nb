@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[      1710,         62]
-NotebookOptionsPosition[      1336,         44]
-NotebookOutlinePosition[      1695,         60]
-CellTagsIndexPosition[      1652,         57]
+NotebookDataLength[      1825,         64]
+NotebookOptionsPosition[      1452,         46]
+NotebookOutlinePosition[      1810,         62]
+CellTagsIndexPosition[      1767,         59]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,26 +26,28 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.2.2\"\>",
+  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.2.6\"\>",
     "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"4 August 2009\"\>", 
+   "\[InvisibleSpace]", "\<\"6 October 2009\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.2.2", " (last modification: ", "4 August 2009", 
+  "Package QI version ", "0.2.6", " (last modification: ", "6 October 2009", 
    ")."],
   Editable->False]], "Print",
- CellChangeTimes->{3.45861972228307*^9}]
+ CellChangeTimes->{3.45861972228307*^9, 3.463836715671585*^9, 
+  3.463836747282213*^9, 3.463837712194692*^9}]
 }, Open  ]],
 
 Cell[BoxData[
- RowBox[{"qiGenDoc", "[", "\"\<doc/qi_usage.tex\>\"", "]"}]], "Input",
+ RowBox[{"qiGenDoc", "[", "\"\<qi_usage.tex\>\"", "]"}]], "Input",
  CellChangeTimes->{{3.458619723771426*^9, 3.458619745123781*^9}, {
-  3.458619783234043*^9, 3.458619784345987*^9}}]
+  3.458619783234043*^9, 3.458619784345987*^9}, {3.463836748935452*^9, 
+  3.463836749395296*^9}}]
 },
 WindowSize->{640, 655},
-WindowMargins->{{128, Automatic}, {Automatic, 27}},
+WindowMargins->{{127, Automatic}, {Automatic, 8}},
 ShowSelection->True,
-FrontEndVersion->"7.0 for Linux x86 (32-bit) (November 10, 2008)",
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -61,12 +63,11 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 113, 2, 32, "Input"],
-Cell[683, 26, 435, 10, 24, "Print"]
+Cell[683, 26, 506, 11, 24, "Print"]
 }, Open  ]],
-Cell[1133, 39, 199, 3, 32, "Input"]
+Cell[1204, 40, 244, 4, 32, "Input"]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
