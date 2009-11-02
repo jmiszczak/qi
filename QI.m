@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -294,7 +294,7 @@ QubitBlochState::usage = "Parametrization of the one-qubit mixed state on the Bl
 QubitGeneralState::usage = "QubitGeneralState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -562,11 +562,12 @@ Close[f];
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
-x_ \[CircleTimes] y_ := KroneckerProduct[x,y];
+x_?MatrixQ \[CircleTimes] y_?MatrixQ := KroneckerProduct[x,y];
+x_?VectorQ \[CircleTimes] y_?VectorQ := Flatten[KroneckerProduct[x,y]];
 x_ \[CircleTimes] y_ \[CircleTimes] z_ := (x \[CircleTimes] y) \[CircleTimes] z;
 
 
