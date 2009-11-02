@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,8 +11,8 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.2.6";
-qiLastModification = "6 October 2009";
+qiVersion = "0.2.7";
+qiLastModification = "2 November 2009";
 qiHistory = {"Initial version", 
 	"Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", 
 	"Added quantum channel parametrization for one qubit", 
@@ -24,7 +24,8 @@ qiHistory = {"Initial version",
 	"Minor update in documentation",
 	"Fixed \[Eta] function",
 	"Fixed Werner state and added IsotropicState",
-	"Spelling improvements"
+	"Spelling improvements",
+	"ApplyUnitary added"
 };
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
@@ -154,7 +155,7 @@ PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"
 GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,GellMannMatrices] to get this list in more readable form.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum gates*)
 
 
@@ -293,7 +294,7 @@ QubitBlochState::usage = "Parametrization of the one-qubit mixed state on the Bl
 QubitGeneralState::usage = "QubitGeneralState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -325,6 +326,9 @@ GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus opera
 
 
 ApplyKraus::usage = "ApplyKraus[ch,\[Rho]] - apply channel ch, given as a list of Kraus operators, to the input state \[Rho].";
+
+
+ApplyUnitary::usage="ApplyUnitary[U,\[Rho]] - apply unitary u to the input state \[Rho].";
 
 
 Superoperator::usage = "Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,#]&,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.";
@@ -504,7 +508,7 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of appropriate dimension from Bloch vector (coefficients treated as coefficients from expansion on normed generalized Pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -996,7 +1000,7 @@ Clear[QubitGeneralState];
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -1034,6 +1038,10 @@ GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower
 
 Clear[ApplyKraus];
 ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]].\[Rho].(ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
+
+
+Clear[ApplyUnitary];
+ApplyUnitary[U_,\[Rho]_]:=U.\[Rho].U\[ConjugateTranspose];
 
 
 Clear[ChannelToMatrix];
