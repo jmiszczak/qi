@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,21 +11,23 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for analysis of quantum states *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl>  *)
 (* License: GPLv3 *)
-qiVersion = "0.2.7";
-qiLastModification = "2 November 2009";
-qiHistory = {"Initial version", 
-	"Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols.", 
-	"Added quantum channel parametrization for one qubit", 
-	"Added alternative reshuffling.",
-	"Changed default print output.", 
-	"Documentation generator added.",
-	"Changed QubitGeneralState function.",
-	"Added reshuffling permutation and product of superoperators.",
-	"Minor update in documentation",
-	"Fixed \[Eta] function",
-	"Fixed Werner state and added IsotropicState",
-	"Spelling improvements",
-	"ApplyUnitary added"
+qiVersion = "0.2.8";
+qiLastModification = "3 November 2009";
+qiHistory = {
+	{"0.1.0", "Initial version"}, 
+	{"0.1.1", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
+	{"0.1.2", "Added quantum channel parametrization for one qubit"}, 
+	{"0.1.3", "Added alternative reshuffling."},
+	{"0.1.4", "Changed default print output."}, 
+	{"0.2.0", "Documentation generator added."},
+	{"0.2.1", "Changed QubitGeneralState function."},
+	{"0.2.2", "Added reshuffling permutation and product of superoperators."},
+	{"0.2.3", "Minor update in documentation."},
+	{"0.2.4", "Fixed \[Eta] function."},
+	{"0.2.5", "Fixed Werner state and added IsotropicState."},
+	{"0.2.6", "Spelling improvements"},
+	{"0.2.7", "Improved \[CircleTimes] usage , added applyUnitary"},
+	{"0.2.8", "Fixed small problem with MaxEnt"}
 };
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
@@ -38,10 +40,10 @@ qiHistory::usage = "Display history of modifications for QI package.";
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 
 
-(*$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;*)
+$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
@@ -508,7 +510,7 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of appropriate dimension from Bloch vector (coefficients treated as coefficients from expansion on normed generalized Pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
@@ -792,7 +794,7 @@ Clear[Circuit];
 Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Reverse[l]]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Special states*)
 
 
@@ -820,7 +822,7 @@ MaxMix[n_Integer]:=1/n IdentityMatrix[n];
 
 Clear[MaxEnt];
 MaxEnt[dim_]:=Block[{subDim=Sqrt[dim]},
-If[IntegerQ[subDim],1/Sqrt[subDim] Plus@@Table[Flatten[{Ket[i,subDim]}\[CircleTimes]Ket[i,subDim]],{i,0,subDim-1}]]
+If[IntegerQ[subDim],1/Sqrt[subDim] Plus@@Table[Ket[i,subDim]\[CircleTimes]Ket[i,subDim],{i,0,subDim-1}]]
 ];
 
 
@@ -1001,7 +1003,7 @@ Clear[QubitGeneralState];
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -1167,7 +1169,7 @@ Clear[QutritSpontaneousEmissionKraus];
 QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1 t/2)],0},{0,0,Exp[-(A2 t/2)]}},{{0,Sqrt[1-Exp[-(A1 t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2 t)]]},{0,0,0},{0,0,0}}};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entropies*)
 
 
@@ -1205,7 +1207,7 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Distribution of eigenvalues*)
 
 
@@ -1223,7 +1225,7 @@ VandermondeMatrix[l_]:=Table[Table[l[[j]]^i,{i,0,Length[l]-1}],{j,1,Length[l]}];
 
 
 Clear[ProdSum];
-ProdSum[l_]:=Times@@Flatten[Table[Table[l[[i]]+l[[j]],{i,1,j-1}],{j,2,Length[l]}]];
+ProdSum[l_]:=Times@@\[AliasDelimiter][Table[Table[l[[i]]+l[[j]],{i,1,j-1}],{j,2,Length[l]}]];
 
 
 Clear[ProdDiff2];
@@ -1248,7 +1250,7 @@ Clear[ProbHS];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1331,7 +1333,7 @@ RandomState[d_]:=Block[{v},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Numerical range*)
 
 
