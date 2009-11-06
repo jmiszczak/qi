@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 (version 0.2.6)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
+\title{QI Package for \emph{Mathematica} 7.0 (version 0.3.0)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
 \small{Polish Academy of Sciences},\\ \small{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
 \begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
@@ -11,6 +11,8 @@ number of functions used in the analysis of quantum states. In contrast to many 
 packages for symbolic and numerical simulation of quantum computation presented package is focused 
 on geometrical aspects of quantum information theory.\end{abstract}
 \textbf{$ \text{ApplyKraus} $ }-- ApplyKraus[ch,$\rho $] - apply channel ch, given as a list of Kraus operators, to the input state $\rho $.$  $\\
+
+\textbf{$ \text{ApplyUnitary} $ }-- ApplyUnitary[U,$\rho $] - apply unitary u to the input state $\rho $.$  $\\
 
 \textbf{$ \text{BaseMatrices} $ }-- BaseMatrices[n] returns list with canonical basis in n$\times $n-dimensional Hilbert-Schmidt space.$  $\\
 
@@ -38,7 +40,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See alos: Superoperator, ChannelToMatrix.$  $\\
 
-\textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[$\rho $,A] = Tr[$\rho $.A].$  $\\
+\textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[$\rho $,A] is just a alias for Tr[$\rho $.A].$  $\\
 
 \textbf{$ \text{ExtendKraus} $ }-- ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $\\
 
@@ -52,11 +54,11 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\
 
-\textbf{$ H $ }-- Hadamard gates for one qubit.$  $\\
+\textbf{$ H $ }-- Hadamard gate for one qubit.$  $\\
 
 \textbf{$ \text{HolevoWernerChannel} $ }-- HolevoWernerChannel[n,p,$\rho $] performs an action of the Holeve-Werner channel (also known as transpose depolarizing channel) with parameter p acting on n-dimensional input state $\rho $. See also: DepolarizingChannel.$  $\\
 
-\textbf{$ \text{id} $ }-- Identity matrix for one qubit.$  $\\
+\textbf{$ \text{id} $ }-- Identity matrix for one qubit. See also: IdentityMatrix$  $\\
 
 \textbf{$ \text{IdentityChannel} $ }-- IdentityChannel[n, $\rho $] - apply identity operation on n-dimensional density matrix $\rho $.$  $\\
 
@@ -64,7 +66,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See alos: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\
 
-\textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensional Hilbert space.$  $\\
+\textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensional Hilbert space. See also: StateVector for a different parametrization.$  $\\
 
 \textbf{$ \text{Ketbra} $ }-- Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ acting on d-dimensional space.$  $\\
 
@@ -98,6 +100,8 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A$\_$?MatrixQ,step$\_$:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\
 
+\textbf{$ \text{OperatorSchmidtDecomposition} $ }-- OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1$\times $d2.$  $\\
+
 \textbf{$ \text{PartialTraceA} $ }-- PartialTraceA[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the m-demensional (first) subsystem.$  $\\
 
 \textbf{$ \text{PartialTraceB} $ }-- PartialTraceB[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the n-demensional (second) subsystem.$  $\\
@@ -114,7 +118,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{PhaseflipChannel} $ }-- PhaseflipChannel[2,p,$\rho $]$  $\\
 
-\textbf{$ \text{ProbablityDistribution} $ }-- ProbablityDistribution[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: SymbolicVector.$  $\\
+\textbf{$ \text{ProbablityDistribution} $ }-- ProbablityDistribution[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: StateVector.$  $\\
 
 \textbf{$ \text{ProbBures} $ }-- ProbBures[$\lambda $] - Joint probability distribution of eigenvalues $\lambda $ of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $\\
 
@@ -208,7 +212,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $\\
 
-\textbf{$ \text{SpecialUnitary2} $ }-- Euler parametrization of SU(2).$  $\\
+\textbf{$ \text{SpecialUnitary2} $ }-- SpecialUnitary2[$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of SU(2). This is equivalent to Unitary2[0,$\beta $,$\gamma $,$\delta $].$  $\\
 
 \textbf{$ \text{StateFromBlochVector} $ }-- StateFromBlochVector[vec$\_$] - returns a matrix of appropriate dimension from Bloch vector (coefficients treated as coefficients from expansion on normed generalized Pauli matrices, see function GeneralizedPauliMatrices)$  $\\
 
@@ -238,9 +242,9 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{TransposeChannel} $ }-- TransposeChannel[n, $\rho $] - apply transposition operation on n-dimensional density matrix $\rho $. This operations is not completely positive.$  $\\
 
-\textbf{$ \text{Unitary2} $ }-- Euler parametrization of U(2).$  $\\
+\textbf{$ \text{Unitary2} $ }-- Unitary2[$\alpha $,$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of U(2).$  $\\
 
-\textbf{$ \text{Unitary3} $ }-- Euler parametrization of U(3)$  $\\
+\textbf{$ \text{Unitary3} $ }-- Unitary3[$\alpha $,$\beta $,$\gamma $,$\tau $,a,b,c,ph] returns the Euler parametrization of U(3).$  $\\
 
 \textbf{$ \text{Unitary4Canonical} $ }-- Parametrization of non-local unitary matrices for two qubits. See: arXiv:quant-ph/0011050v1.$  $\\
 
@@ -254,7 +258,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{WernerState} $ }-- WernerState[d,p] - generalized Werner state d$\times $d-dimensional system with the mixing parameter p$\in $[0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p) MaxMix[d],. See also: MaxEnt, MaxMix..$  $\\
 
-\textbf{$ \text{wh} $ }-- Hadamard gate for one qubit.$  $\\
+\textbf{$ \text{wh} $ }-- Hadamard gate for one qubit. See also: QFT.$  $\\
 
 \textbf{$ X $ }-- Generalized Pauli matrix X.$  $\\
 
