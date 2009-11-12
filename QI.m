@@ -11,25 +11,26 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for the analysis of quantum states and operations *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl> *)
 (* License: GPLv3 *)
-qiVersion = "0.3.0";
-qiLastModification = "November 6, 2009";
+qiVersion = "0.3.1";
+qiLastModification = "November 12, 2009";
 qiHistory = {
-	{"0.1.0", "Initial version"}, 
-	{"0.1.1", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
-	{"0.1.2", "Added quantum channel parametrization for one qubit"}, 
-	{"0.1.3", "Added alternative reshuffling."},
-	{"0.1.4", "Changed default print output."}, 
-	{"0.2.0", "Documentation generator added."},
-	{"0.2.1", "Changed QubitGeneralState function."},
-	{"0.2.2", "Added reshuffling permutation and product of superoperators."},
-	{"0.2.3", "Minor update in documentation."},
-	{"0.2.4", "Fixed \[Eta] function."},
-	{"0.2.5", "Fixed Werner state and added IsotropicState."},
-	{"0.2.6", "Spelling improvements"},
-	{"0.2.7", "Improved \[CircleTimes] usage , added applyUnitary"},
-	{"0.2.8", "Fixed small problem with MaxEnt"},
-	{"0.2.9", "Some code cleanups, fixed SchmidtDecomposition"},
-	{"0.3.0", "Added OperatorSchmidtDecomposition"}
+	{"0.1.0", "", "Initial version"}, 
+	{"0.1.1", "", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
+	{"0.1.2", "", "Added quantum channel parametrization for one qubit"}, 
+	{"0.1.3", "", "Added alternative reshuffling."},
+	{"0.1.4", "", "Changed default print output."}, 
+	{"0.2.0", "", "Documentation generator added."},
+	{"0.2.1", "", "Changed QubitGeneralState function."},
+	{"0.2.2", "", "Added reshuffling permutation and product of superoperators."},
+	{"0.2.3", "", "Minor update in documentation."},
+	{"0.2.4", "", "Fixed \[Eta] function."},
+	{"0.2.5", "", "Fixed Werner state and added IsotropicState."},
+	{"0.2.6", "", "Spelling improvements."},
+	{"0.2.7", "", "Improved '\[CircleTimes]' usage, added applyUnitary."},
+	{"0.2.8", "", "Fixed small problem with MaxEnt."},
+	{"0.2.9", "", "Some code cleanups, fixed SchmidtDecomposition."},
+	{"0.3.0", "06.11.2009", "Added OperatorSchmidtDecomposition."},
+	{"0.3.1", "12.11.2009", "Added Concurrence4, fixed Cnot problem, some code cleanups."}
 };
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states. In contrast to many available 
@@ -45,7 +46,7 @@ Print["Package QI version ", qiVersion, " (last modification: ", qiLastModificat
 $PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -174,16 +175,16 @@ RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[LeftAngleBracket]j|\[Cir
 QFT::usage = "QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbloic', which is default, or 'Numerical'. The second option makes this function much faster.";
 
 
-CNot::usage = "Controlled not matrix for two qubits.";
+CNot::usage = "Controlled not matrix for two qubits. This is predefined constant.";
 
 
-H::usage = "Hadamard gate for one qubit.";
+H::usage = "Hadamard gate for one qubit. This is predefined constant. See also: QFT.";
 
 
-X::usage = "Generalized Pauli matrix X.";
+X::usage = "Generalized Pauli matrix X. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\)";
 
 
-Z::usage = "Generalized Pauli matrix Z.";
+Z::usage = "Generalized Pauli matrix Z. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)";
 
 
 Circuit::usage = "Constructs quantum circuit from unitary gates.";
@@ -375,6 +376,13 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
 
+(* ::Subsection:: *)
+(*Entanglement*)
+
+
+Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of the density matrix \[Rho] representing a state of two-qubit system.";
+
+
 (* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
@@ -515,7 +523,7 @@ BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coe
 StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of appropriate dimension from Bloch vector (coefficients treated as coefficients from expansion on normed generalized Pauli matrices, see function GeneralizedPauliMatrices)"
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -762,19 +770,25 @@ GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lam
 (*Quantum gates*)
 
 
+Unprotect[Swap];
 Clear[Swap];
 Swap[dim_]:=Plus@@Flatten[Table[KroneckerProduct[Ketbra[i,j,dim],Ketbra[j,i,dim]],{i,0,dim-1},{j,0,dim-1}],1];
+SetAttributes[Swap,Protected];
 
 
+Unprotect[QFT];
 Clear[QFT];
 QFT[n_,method_:"Symbolic"]:=Block[{\[Omega]},
 	If [method=="Numerical",\[Omega]=N[Exp[2 \[Pi] I/n]],\[Omega]=Exp[2 \[Pi] I/n]];
 	Table[\[Omega]^(i k) ,{i,1,n},{k,1,n}]
 ];
+SetAttributes[QFT,Protected];
 
 
+Unprotect[CNot];
 Clear[CNot];
-CNot=Ketbra[1,1,2]\[CircleTimes]sx+(IdentityMatrix[2]-Ketbra[1,1,2])\[CircleTimes]IdentityMatrix[2];
+CNot={{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,0,1,0}};
+SetAttributes[CNot, Protected];
 
 
 Unprotect[H];
@@ -851,7 +865,7 @@ If[IntegerQ[subDim],
 IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Schmidt decomposition*)
 
 
@@ -867,11 +881,14 @@ SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1,d2]},
 SetAttributes[SchmidtDecomposition,Protected];
 
 
+Unprotect[OperatorSchmidtDecomposition];
 Clear[OperatorSchmidtDecomposition];
 OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
 	mtx = Table[Tr[(BaseMatrices[d1][[i]]\[CircleTimes]BaseMatrices[d2][[j]]).op\[Transpose]],{i,1,d1*d1},{j,1,d2*d2}];
 	svd=SingularValueDecomposition[mtx];
-	vals=Select[Diagonal[svd[[2]]],#!=0&];Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}]
+	vals=Select[Diagonal[svd[[2]]],#!=0&];
+	snum=Length[vals];
+	Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}]
 ];
 SetAttributes[OperatorSchmidtDecomposition,Protected];
 
@@ -1092,7 +1109,7 @@ Clear[ExtendKraus];
 ExtendKraus[operators_,n_]:=Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
@@ -1136,6 +1153,19 @@ If[sys==1,
 		MatrixElement[m,\[Nu],n,\[Mu],dim,\[Rho]],{n,dim[[1]]},{m,dim[[1]]},{\[Nu],dim[[2]]},{\[Mu],dim[[2]]}
 	]]
 ](*endif*)
+
+
+(* ::Subsection:: *)
+(*Entanglement*)
+
+
+Unprotect[Concurrence4];
+Clear[Concurrence4];
+Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
+	evl=Eigenvalues[MatrixSqrt[sqrtM.(sy\[CircleTimes]sy).m\[Conjugate].(sy\[CircleTimes]sy).sqrtM]];
+	Max[0,Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]
+];
+SetAttributes[Concurrence4,Protected];
 
 
 (* ::Subsection::Closed:: *)
@@ -1283,6 +1313,10 @@ Unprotect[ProbHS];
 Clear[ProbHS];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 SetAttributes[ProbHS,Protected];
+
+
+
+
 
 
 (* ::Subsection::Closed:: *)

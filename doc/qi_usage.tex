@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 (version 0.3.0)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
+\title{QI Package for \emph{Mathematica} 7.0 (version 0.3.1)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
 \small{Polish Academy of Sciences},\\ \small{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
 \begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
@@ -30,11 +30,13 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{Circuit} $ }-- Constructs quantum circuit from unitary gates.$  $\\
 
-\textbf{$ \text{CNot} $ }-- Controlled not matrix for two qubits.$  $\\
+\textbf{$ \text{CNot} $ }-- Controlled not matrix for two qubits. This is predefined constant.$  $\\
 
 \textbf{$ \text{Commutator} $ }-- Commutator[A,B] returns the commutator of matrices A and B i.e. [A,B]=AB - BA.$  $\\
 
 \textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).$  $\\
+
+\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of the density matrix $\rho $ representing a state of two-qubit system.$  $\\
 
 \textbf{$ \text{DepolarizingChannel} $ }-- DepolarizingChannel[n,p,$\rho $] performs an action of the completely depolarizing channel with parameter p acting on n-dimensional input state $\rho $. See also: QubitDepolarizingKraus, HolevoWernerChannel.$  $\\
 
@@ -54,7 +56,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\
 
-\textbf{$ H $ }-- Hadamard gate for one qubit.$  $\\
+\textbf{$ H $ }-- Hadamard gate for one qubit. This is predefined constant. See also: QFT.$  $\\
 
 \textbf{$ \text{HolevoWernerChannel} $ }-- HolevoWernerChannel[n,p,$\rho $] performs an action of the Holeve-Werner channel (also known as transpose depolarizing channel) with parameter p acting on n-dimensional input state $\rho $. See also: DepolarizingChannel.$  $\\
 
@@ -260,9 +262,9 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{wh} $ }-- Hadamard gate for one qubit. See also: QFT.$  $\\
 
-\textbf{$ X $ }-- Generalized Pauli matrix X.$  $\\
+\textbf{$ X $ }-- Generalized Pauli matrix X. See also: $ \sigma _x $\\
 
-\textbf{$ Z $ }-- Generalized Pauli matrix Z.$  $\\
+\textbf{$ Z $ }-- Generalized Pauli matrix Z. See also: $ \sigma _z $\\
 
 \textbf{$ \delta  $ }-- $\delta $[x] represents Dirac delta at x.$  $\\
 
