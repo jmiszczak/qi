@@ -1,0 +1,280 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     10497,        271]
+NotebookOptionsPosition[      9893,        245]
+NotebookOutlinePosition[     10251,        261]
+CellTagsIndexPosition[     10208,        258]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "QI`"}]], "Input",
+ CellChangeTimes->{{3.467456788014708*^9, 3.467456789071139*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.3.2\"\>",
+    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"November 17, 2009\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package QI version ", "0.3.2", " (last modification: ", 
+   "November 17, 2009", ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.467456080637093*^9, 3.467456104335169*^9}, {
+   3.467456174802355*^9, 3.46745618796615*^9}, 3.467456230631059*^9, 
+   3.467456332055375*^9, {3.467456371147377*^9, 3.467456377848544*^9}, {
+   3.467456436008288*^9, 3.467456464323848*^9}, {3.46745665775587*^9, 
+   3.46745667968962*^9}, {3.467456731776623*^9, 3.467456789349774*^9}, 
+   3.46745761343082*^9, {3.467458045235658*^9, 3.467458072779933*^9}, 
+   3.467458177942374*^9, 3.467468038440025*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Open package files", "Subsubtitle",
+ CellChangeTimes->{{3.467457532064879*^9, 3.467457538016651*^9}, {
+  3.467457614364134*^9, 3.467457615776307*^9}}],
+
+Cell[BoxData[
+ RowBox[{"qiGenDoc", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.467458575519212*^9, 3.467458580962137*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"qif", "=", 
+   RowBox[{"OpenRead", "[", "\"\<~/zksi-repo/qi/QI.m\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"txt", "=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{"qif", ",", "String"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Close", "[", "qif", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.467453803988084*^9, 3.467453809637454*^9}, {
+   3.467457510044264*^9, 3.467457522214403*^9}, 3.467457620542316*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Find all names and generate LaTeX", "Subsubtitle",
+ CellChangeTimes->{{3.467457550309866*^9, 3.467457591255776*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ExportString", "[", 
+   RowBox[{"\"\<\>\"", ",", "\"\<TeX\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "=", 
+   RowBox[{
+   "OpenWrite", "[", 
+    "\"\</home/jam/zksi-repo/qi/doc/qi_functions_list.tex\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"print", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"latexList", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "txt", "]"}]}], ",", 
+    RowBox[{"i", "++"}], ",", " ", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"StringMatchQ", "[", 
+        RowBox[{
+         RowBox[{"ToString", "[", 
+          RowBox[{"txt", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+         "\"\<(*Help messages*)\>\""}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"print", "=", "True"}], ";"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"StringMatchQ", "[", 
+        RowBox[{
+         RowBox[{"ToString", "[", 
+          RowBox[{"txt", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+         "\"\<(*Private definitions*)\>\""}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"print", "=", "False"}], ";"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"txt", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"___", "~~", "\"\<::Subsection::\>\"", "~~", "___"}]}], 
+         "]"}], "&&", "print"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"secLine", "=", 
+         RowBox[{"txt", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"secLine", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"secLine", ",", 
+           RowBox[{
+           "\"\<(*\>\"", "\[Rule]", " ", "\"\<\\\\subsection{\>\""}]}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"secLine", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"secLine", ",", 
+           RowBox[{"\"\<*)\>\"", "\[Rule]", " ", "\"\<}\>\""}]}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"latexList", " ", "=", " ", 
+         RowBox[{
+         "latexList", " ", "<>", " ", "secLine", "  ", "<>", " ", 
+          "\"\<\\n\\n\>\""}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"txt", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"___", "~~", "\"\<::usage\>\"", "~~", "___"}]}], "]"}], "&&",
+         "print"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"line", "=", 
+         RowBox[{"txt", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"nameLength", "=", 
+         RowBox[{
+          RowBox[{"StringPosition", "[", 
+           RowBox[{"line", ",", "\"\<::usage\>\""}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"name", "=", 
+         RowBox[{"StringDrop", "[", 
+          RowBox[{"line", ",", 
+           RowBox[{"{", 
+            RowBox[{"nameLength", ",", 
+             RowBox[{"StringLength", "[", "line", "]"}]}], "}"}]}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"usage", "=", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"TeXForm", "[", 
+           RowBox[{"DisplayForm", "[", 
+            RowBox[{"ToExpression", "[", 
+             RowBox[{"Evaluate", "[", 
+              RowBox[{"name", "<>", "\"\<::usage\>\""}], "]"}], "]"}], "]"}], 
+           "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"name", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{
+           RowBox[{"ToString", "[", 
+            RowBox[{"FullForm", "[", "name", "]"}], "]"}], ",", 
+           RowBox[{"\"\<\\\\\\\\\>\"", "\[Rule]", "\"\<\\\\\>\""}]}], "]"}]}],
+         ";", "\[IndentingNewLine]", 
+        RowBox[{"name", "=", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"TeXForm", "[", 
+           RowBox[{"ToExpression", "[", "name", "]"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"res", "=", 
+         RowBox[{"QI`Private`qiFormatUsageMsg", "[", 
+          RowBox[{"name", ",", "usage"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"latexList", "=", 
+         RowBox[{
+         "latexList", "<>", "\"\<\\\\noindent\>\"", "<>", "res", "<>", 
+          "\"\<\\\\\\\\\\n\\n\>\""}]}], " ", ";"}]}], "\[IndentingNewLine]", 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"WriteString", "[", 
+   RowBox[{"f", ",", "latexList"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"WriteString", "[", 
+   RowBox[{"f", ",", "\"\<\\n\\n\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Close", "[", "f", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.467453967937893*^9, 3.46745399360704*^9}, {
+   3.467454025237529*^9, 3.467454038975367*^9}, {3.467454099750134*^9, 
+   3.467454128053389*^9}, {3.467454519163643*^9, 3.467454655910483*^9}, {
+   3.467454698215324*^9, 3.467454871038418*^9}, {3.467454932724339*^9, 
+   3.467454936617376*^9}, {3.467454975347693*^9, 3.467454980545123*^9}, {
+   3.467455185118931*^9, 3.467455283677856*^9}, {3.467455339983506*^9, 
+   3.467455585098316*^9}, {3.467455616845933*^9, 3.467455647538659*^9}, {
+   3.467455981822065*^9, 3.467456010364949*^9}, {3.467456047418553*^9, 
+   3.46745622755418*^9}, {3.467456268957061*^9, 3.467456463771543*^9}, {
+   3.467456613090222*^9, 3.467456679160106*^9}, {3.467456718815977*^9, 
+   3.467456875752125*^9}, {3.467456964505692*^9, 3.467456983300305*^9}, {
+   3.467457117461215*^9, 3.467457137206102*^9}, {3.467457181733683*^9, 
+   3.467457228128783*^9}, {3.467457259556487*^9, 3.467457416890814*^9}, {
+   3.467457453164301*^9, 3.467457495734156*^9}, {3.467457649049709*^9, 
+   3.467457714911088*^9}, {3.467458217478543*^9, 3.467458220541183*^9}, {
+   3.467458254560395*^9, 3.467458256796607*^9}, {3.46745837382516*^9, 
+   3.467458390043201*^9}, {3.467458525224146*^9, 3.467458525819368*^9}, {
+   3.467459098940034*^9, 3.467459103531343*^9}, {3.467459134414363*^9, 
+   3.467459145286401*^9}, {3.467459213525061*^9, 3.467459214620593*^9}, {
+   3.467459363813295*^9, 3.467459365941695*^9}, {3.467459536076513*^9, 
+   3.467459542136546*^9}, {3.467459594453256*^9, 3.467459599235772*^9}, {
+   3.467461490255414*^9, 3.467461545764373*^9}, {3.467461576996262*^9, 
+   3.467461579620679*^9}, {3.467461610843651*^9, 3.467461622294529*^9}, 
+   3.467462276642562*^9, {3.467462384989171*^9, 3.46746238949472*^9}, {
+   3.467462462007657*^9, 3.467462462366867*^9}, {3.467463494347555*^9, 
+   3.467463494520799*^9}, {3.467467986564137*^9, 3.467468014001318*^9}}]
+}, Open  ]]
+},
+WindowSize->{1280, 727},
+WindowMargins->{{0, Automatic}, {Automatic, 25}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 113, 2, 32, "Input"],
+Cell[683, 26, 874, 16, 24, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1594, 47, 156, 2, 32, "Subsubtitle"],
+Cell[1753, 51, 122, 2, 32, "Input"],
+Cell[1878, 55, 491, 12, 77, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2406, 72, 122, 1, 32, "Subsubtitle"],
+Cell[2531, 75, 7346, 167, 649, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

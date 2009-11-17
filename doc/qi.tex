@@ -2,6 +2,7 @@
 % v. 0.2 - 11/08/2009 - Jarek - extended introductions and bibliography
 % v. 0.21 - 12/08/2009 - Jarek - preliminary sections
 % v. 0.22 - 13/08/2009 - Jarek - added in intro and sec. 2
+% v. 0.3 - 17/11/2009 - Jarek - added an appenxid with a list of functions
 \documentclass[final,5p,times]{elsarticle}
 
 %% Use the option review to obtain double line spacing
@@ -28,7 +29,7 @@
 \usepackage{amssymb}
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
-
+\usepackage{amsmath,amssymb,graphicx}
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
@@ -79,7 +80,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Analysis of quantum states and operations with \qi\ package\\[6pt] \small{v. 0.21 (12 August 2009)}}
+\title{Analysis of quantum states and operations with \qi\ package\\[6pt] \small{v. 0.3 (November 17, 2009)}}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -180,7 +181,7 @@ normalized ($\tr{\rho}=1$).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pure and mixed states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\todo{troche o stanach i oepracjach}
+\todo{troche o stanach i operacjach}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -452,6 +453,8 @@ Partial transposition and partial trace are the most popular partial operations.
 
 \todo{dodac przyklad}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concluding remarks}\label{sec:comclude}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -464,6 +467,13 @@ exploring the space of quantum states and understanding quantum operations.
 We acknowledge the financial support by the Polish
 Ministry of Science and Higher Education under the grant number N519 012
 31/1957. 
+
+\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{List of provided functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{qi_functions_list}
 
 \bibliography{qi}
 \bibliographystyle{elsarticle-num}
