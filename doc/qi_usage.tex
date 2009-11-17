@@ -3,38 +3,40 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 (version 0.3.1)}\author{Jaros{\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\l}a\\ \small{The Institute of Theoretical and Applied Informatics}\\
-\small{Polish Academy of Sciences},\\ \small{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
+\title{QI Package for \emph{Mathematica} 7.0 (version 0.3.2)}\author{Jaros{\l}aw Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+{The Institute of Theoretical and Applied Informatics}\\
+{Polish Academy of Sciences},\\
+{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
 \begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
-number of functions used in the analysis of quantum states. In contrast to many available 
-packages for symbolic and numerical simulation of quantum computation presented package is focused 
-on geometrical aspects of quantum information theory.\end{abstract}
-\textbf{$ \text{ApplyKraus} $ }-- ApplyKraus[ch,$\rho $] - apply channel ch, given as a list of Kraus operators, to the input state $\rho $.$  $\\
+number of functions used in the analysis of quantum states and quantum operations. In contrast to 
+many available packages for symbolic and numerical simulation of quantum computation presented 
+package is focused on geometrical aspects of quantum information theory.\end{abstract}
+\textbf{$ \text{ApplyChannel} $ }-- ApplayChannel[f,$\rho $] - apply channel f, given as a pure function, to the input state $\rho $. See also: ApplyUnitary, ApplyKraus$  $\\
 
-\textbf{$ \text{ApplyUnitary} $ }-- ApplyUnitary[U,$\rho $] - apply unitary u to the input state $\rho $.$  $\\
+\textbf{$ \text{ApplyKraus} $ }-- ApplyKraus[ck,$\rho $] - apply channel ck, given as a list of Kraus operators, to the input state $\rho $.$  $\\
 
-\textbf{$ \text{BaseMatrices} $ }-- BaseMatrices[n] returns list with canonical basis in n$\times $n-dimensional Hilbert-Schmidt space.$  $\\
+\textbf{$ \text{ApplyUnitary} $ }-- ApplyUnitary[U,$\rho $] - apply unitary a unitary matrix U to the input state $\rho $. See also: ApplyKraus, ApplyChannel.$  $\\
 
-\textbf{$ \text{BaseVectors} $ }-- BaseVectors[n] returns list with canonical basis in n-dimensional Hilbert space.$  $\\
+\textbf{$ \text{BaseMatrices} $ }-- BaseMatrices[n] returns a list with the canonical basis in n$\times $n-dimensional Hilbert-Schmidt space $ \mathbb{M}_n $. See also: BaseVectors.$  $\\
+
+\textbf{$ \text{BaseVectors} $ }-- BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space $ \mathbb{C}^n $. See also: BaseMatrices.$  $\\
 
 \textbf{$ \text{BitflipChannel} $ }-- BitflipChannel[2,p,$\rho $].$  $\\
 
 \textbf{$ \text{BitphaseflipChannel} $ }-- BitphaseflipChannel[2,p,$\rho $].$  $\\
 
-\textbf{$ \text{BlochVector} $ }-- BlochVector[A$\_$MatrixQ] - for square matrix - vector of coefficients obtained from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices$  $\\
+\textbf{$ \text{BlochVector} $ }-- BlochVector[A] - for a square matrix A returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\
 
-\textbf{$ \text{ChannelCondition} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\
+\textbf{$ \text{ChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\
 
 \textbf{$ \text{ChannelToMatrix} $ }-- ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[$\rho $] transforms input state according to the channel definition. For example for the Holevo-Werner channel one ca use ChannelToMatrix[HolevoWernerChannel[3,p,$\#$]$\&$,3] to obtain matrix representation of this channel acting on qutrits. See also: Superoperator.$  $\\
 
-\textbf{$ \text{Circuit} $ }-- Constructs quantum circuit from unitary gates.$  $\\
+\textbf{$ \text{cnot} $ }-- Controlled not matrix for two qubits. This is predefined constant.$  $\\
 
-\textbf{$ \text{CNot} $ }-- Controlled not matrix for two qubits. This is predefined constant.$  $\\
+\textbf{$ \text{Commutator} $ }-- Commutator[A,B] returns the commutator of matrices A and B i.e. Commutator[A,B] = A.B - B.A.$  $\\
 
-\textbf{$ \text{Commutator} $ }-- Commutator[A,B] returns the commutator of matrices A and B i.e. [A,B]=AB - BA.$  $\\
-
-\textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).$  $\\
+\textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns a real and an imaginary parts of a complex number z as a pair of real numbers.$  $\\
 
 \textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of the density matrix $\rho $ representing a state of two-qubit system.$  $\\
 
@@ -42,11 +44,11 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See alos: Superoperator, ChannelToMatrix.$  $\\
 
-\textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[$\rho $,A] is just a alias for Tr[$\rho $.A].$  $\\
+\textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[$\rho $,A] = Tr[$\rho $.A].$  $\\
 
 \textbf{$ \text{ExtendKraus} $ }-- ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $\\
 
-\textbf{$ \text{Fidelity} $ }-- Fidelity[$\rho $,$\sigma $] returns quantum fidelity between states $\rho $ and $\sigma $ calculated as tr$\surd $($\surd \rho $ $\sigma \surd \rho $).$  $\\
+\textbf{$ \text{Fidelity} $ }-- Fidelity[$ \rho _1,\rho _2 $] returns the quantum fidelity between states $ \rho _1 $ and $ \rho _2 $ calculated using simplifide formula as ($\sum $$ \lambda _i)^2 $, where $ \lambda _i $ are the eigenvalues of $ \rho _1\rho _2. $\\
 
 \textbf{$ \text{GellMannMatrices} $ }-- List of Gell-Mann matrices. Use Map[MatrixForm[$\#$]$\&$,GellMannMatrices] to get this list in more readable form.$  $\\
 
@@ -56,11 +58,9 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\
 
-\textbf{$ H $ }-- Hadamard gate for one qubit. This is predefined constant. See also: QFT.$  $\\
-
 \textbf{$ \text{HolevoWernerChannel} $ }-- HolevoWernerChannel[n,p,$\rho $] performs an action of the Holeve-Werner channel (also known as transpose depolarizing channel) with parameter p acting on n-dimensional input state $\rho $. See also: DepolarizingChannel.$  $\\
 
-\textbf{$ \text{id} $ }-- Identity matrix for one qubit. See also: IdentityMatrix$  $\\
+\textbf{$ \text{id} $ }-- Identity matrix for one qubit. See also: IdentityMatrix. This is predefined constant.$  $\\
 
 \textbf{$ \text{IdentityChannel} $ }-- IdentityChannel[n, $\rho $] - apply identity operation on n-dimensional density matrix $\rho $.$  $\\
 
@@ -76,31 +76,31 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{KroneckerDeltaMatrix} $ }-- KroneckerDeltaMatrix[i,j,d] returns d$\times $d matrix with 1 at position (i,j) and zeros elsewhere.$  $\\
 
-\textbf{$ \text{KroneckerSum} $ }-- KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A$\otimes $1+1$\otimes $B. Alternative syntax A$\oplus $B for KroneckerSum[A,B] is provided.$  $\\
+\textbf{$ \text{KroneckerSum} $ }-- KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A$\otimes $1+1$\otimes $B. Alternative syntax A$\oplus $B for KroneckerSum[A,B] is also provided. See also: KroneckerProduct.$  $\\
 
-\textbf{$ \text{Lambda1} $ }-- Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli $\sigma $x.$  $\\
+\textbf{$ \text{Lambda1} $ }-- Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli $\sigma $x. See also: GeneralizedPauliMatrices.$  $\\
 
-\textbf{$ \text{Lambda2} $ }-- Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to $\sigma $y.$  $\\
+\textbf{$ \text{Lambda2} $ }-- Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to $\sigma $y. See also: GeneralizedPauliMatrices.$  $\\
 
-\textbf{$ \text{Lambda3} $ }-- Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to $\sigma $z.$  $\\
+\textbf{$ \text{Lambda3} $ }-- Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to $\sigma $z. See also: GeneralizedPauliMatrices.$  $\\
 
 \textbf{$ \text{Log0} $ }-- Log0[x] is equal to Log[2,x] for x$>$0 and 1 for x=0.$  $\\
 
-\textbf{$ \text{MatrixAbs} $ }-- MatrixAbs[M] returns absolute value for matrix M defined as MatrixSqrt[M.M$  ^{\dagger }\text{].} $\\
+\textbf{$ \text{MatrixAbs} $ }-- MatrixAbs[A] returns absolute value for matrix A defined as MatrixSqrt[A.A$  ^{\dagger } $]. See also: MatrixSqrt.$  $\\
 
 \textbf{$ \text{MatrixElement} $ }-- MatrixElement[n,$\nu $,m,$\mu $,div,M] - returns the matrix element of density matrix M indexed by two double indices n, $\nu $ and m, $\mu $ of the composite sytem of dimensions dim=dimA dimB.$  $\\
 
-\textbf{$ \text{MatrixIm} $ }-- Antyhermitian part of the matrix A i.e. $ \frac{1}{2} $(A-ConjugateTranspose[A]).$  $\\
+\textbf{$ \text{MatrixIm} $ }-- Antyhermitian part of the matrix A i.e. $ \frac{1}{2}\text{(A-A} ^{\dagger }\text{).} $\\
 
-\textbf{$ \text{MatrixRe} $ }-- Hermitian part of the matrix A i.e. $ \frac{1}{2} $(A+ConjugateTranspose[A]).$  $\\
+\textbf{$ \text{MatrixRe} $ }-- Hermitian part of the matrix A i.e. $ \frac{1}{2}\text{(A+A} ^{\dagger }\text{).} $\\
 
-\textbf{$ \text{MatrixSqrt} $ }-- MatrixSqrt[M] returns square root for the matrix M.$  $\\
+\textbf{$ \text{MatrixSqrt} $ }-- MatrixSqrt[A] returns square root for the matrix A.$  $\\
 
 \textbf{$ \text{MaxEnt} $ }-- MaxEnt[N] - maximally entangled state in N dimensional vector space. Note that N must be perfect square.$  $\\
 
 \textbf{$ \text{MaxMix} $ }-- MaxMix[n] gies maximally mixed state in n-dimensional space of density matrices.$  $\\
 
-\textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A$\_$?MatrixQ,step$\_$:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\
+\textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A$\_$,step$\_$:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\
 
 \textbf{$ \text{OperatorSchmidtDecomposition} $ }-- OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1$\times $d2.$  $\\
 
@@ -140,15 +140,17 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{QFT} $ }-- QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbloic', which is default, or 'Numerical'. The second option makes this function much faster.$  $\\
 
-\textbf{$ \text{qiAbout} $ }-- Display short information about QI package.$  $\\
+\textbf{$ \text{qiAbout} $ }-- Display short information about the QI package.$  $\\
 
-\textbf{$ \text{qiGenDoc} $ }-- Generate documentation for QI package. This function accepts up to two arguments - file name and output directory. By default the first one is set to 'qi$\_$usage.tex' and the second one to '$\sim $/zksi-repo/qi/doc'.$  $\\
+\textbf{$ \text{qiConstInfo} $ }-- qiConstInfo$ \text{::} $usage$  $\\
 
-\textbf{$ \text{qiHistory} $ }-- Display history of modifications for QI package.$  $\\
+\textbf{$ \text{qiGenDoc} $ }-- Generate documentation for the QI package. This function accepts up to two arguments - file name and output directory. By default the first one is set to 'qi$\_$usage.tex' and the second one to '$\sim $/zksi-repo/qi/doc'.$  $\\
+
+\textbf{$ \text{qiHistory} $ }-- Display the history of modifications for the QI package.$  $\\
 
 \textbf{$ \text{qiLastModification} $ }-- qiLastModification$ \text{::} $usage$  $\\
 
-\textbf{$ \text{qiVersion} $ }-- Display version of QI package.$  $\\
+\textbf{$ \text{qiVersion} $ }-- Display version of the QI package.$  $\\
 
 \textbf{$ \text{QuantumChannelEntropy} $ }-- QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channel in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.$  $\\
 
@@ -210,13 +212,13 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{ReshufflePermutation} $ }-- ReshufflePermutation[dim1,dim2] produces permutation matrix equivalent to the reshuffling operation on dim1$\times $dim2-dimensional system.$  $\\
 
-\textbf{$ S $ }-- S[m] = QuantumEntropy[m].$  $\\
-
-\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $\\
+\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the $\vdots $tor vec in d1$\times $d2-dimensional Hilbert space.$  $\\
 
 \textbf{$ \text{SpecialUnitary2} $ }-- SpecialUnitary2[$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of SU(2). This is equivalent to Unitary2[0,$\beta $,$\gamma $,$\delta $].$  $\\
 
-\textbf{$ \text{StateFromBlochVector} $ }-- StateFromBlochVector[vec$\_$] - returns a matrix of appropriate dimension from Bloch vector (coefficients treated as coefficients from expansion on normed generalized Pauli matrices, see function GeneralizedPauliMatrices)$  $\\
+\textbf{$ \text{SquareMatrixQ} $ }-- SquareMatrixQ[A] returns True only if A is a square matrix, and gives False otherwise.$  $\\
+
+\textbf{$ \text{StateFromBlochVector} $ }-- StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\
 
 \textbf{$ \text{StateVector} $ }-- StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: ProbablityDistribution, SymbolicVector.$  $\\
 
@@ -228,19 +230,19 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{Swap} $ }-- Swap[n] returns permutation operator $ \sum _{i=0}^{n-1} \underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on $ n^2 $-dimensional space and exchanging two n-dimensional subsystems.$  $\\
 
-\textbf{$ \text{sx} $ }-- Pauli matrix $ \sigma _x. $\\
+\textbf{$ \text{sx} $ }-- Pauli matrix $ \sigma _x $. This is predefined constant.$  $\\
 
-\textbf{$ \text{sy} $ }-- Pauli matrix $ \sigma _y. $\\
+\textbf{$ \text{sy} $ }-- Pauli matrix $ \sigma _y $. This is predefined constant.$  $\\
 
-\textbf{$ \text{SymbolicHermitianMatrix} $ }-- SymbolicHermitianMatrix[sym,d] produces d$\times $d hermitian matrix.$  $\\
+\textbf{$ \text{SymbolicHermitianMatrix} $ }-- SymbolicHermitianMatrix[sym,n] produces a n$\times $n Hermitian matrix. See also: SymbolicMatrix, SymbolicVector.$  $\\
 
 \textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n$\times $n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.$  $\\
 
-\textbf{$ \text{SymbolicVector} $ }-- SymbolicVector[a,m] is equivalent to Matrix[a,m,1] and it returns a vector with m elements a[i],i=1,...,m, j=1,...,n. This function is useful, for example, for generating lists of parameters.$  $\\
+\textbf{$ \text{SymbolicVector} $ }-- SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and it returns a vector with m elements a[i],i=1,...,n. This function is useful, for example, for generating lists of parameters.$  $\\
 
-\textbf{$ \text{sz} $ }-- Pauli matrix $ \sigma _z. $\\
+\textbf{$ \text{sz} $ }-- Pauli matrix $ \sigma _z $. This is predefined constant.$  $\\
 
-\textbf{$ \text{TraceDistance} $ }-- TraceDistance[A,B] returns trace distance between matrices A and B which is defined as $ \frac{1}{2} $tr$|$A-B$|$.$  $\\
+\textbf{$ \text{TraceDistance} $ }-- TraceDistance[A,B] returns the trace distance between matrices A and B which is defined as $ \frac{1}{2} $tr$|$A-B$|$.$  $\\
 
 \textbf{$ \text{TransposeChannel} $ }-- TransposeChannel[n, $\rho $] - apply transposition operation on n-dimensional density matrix $\rho $. This operations is not completely positive.$  $\\
 
@@ -260,7 +262,7 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \text{WernerState} $ }-- WernerState[d,p] - generalized Werner state d$\times $d-dimensional system with the mixing parameter p$\in $[0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p) MaxMix[d],. See also: MaxEnt, MaxMix..$  $\\
 
-\textbf{$ \text{wh} $ }-- Hadamard gate for one qubit. See also: QFT.$  $\\
+\textbf{$ \text{wh} $ }-- Hadamard gate for one qubit. See also: QFT. This is predefined constant.$  $\\
 
 \textbf{$ X $ }-- Generalized Pauli matrix X. See also: $ \sigma _x $\\
 
@@ -274,26 +276,26 @@ on geometrical aspects of quantum information theory.\end{abstract}
 
 \textbf{$ \lambda  $ }-- $\lambda $[i,n] is defined as GeneralizedPauliMatrices[n][[i]].$  $\\
 
-\textbf{$ \text{$\lambda $1} $ }-- Gell-Mann matrix $ \lambda _1. $\\
+\textbf{$ \text{$\lambda $1} $ }-- Gell-Mann matrix $ \lambda _1 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $2} $ }-- Gell-Mann matrix $ \lambda _2. $\\
+\textbf{$ \text{$\lambda $2} $ }-- Gell-Mann matrix $ \lambda _2 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $3} $ }-- Gell-Mann matrix $ \lambda _3. $\\
+\textbf{$ \text{$\lambda $3} $ }-- Gell-Mann matrix $ \lambda _3 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $4} $ }-- Gell-Mann matrix $ \lambda _4. $\\
+\textbf{$ \text{$\lambda $4} $ }-- Gell-Mann matrix $ \lambda _4 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $5} $ }-- Gell-Mann matrix $ \lambda _5. $\\
+\textbf{$ \text{$\lambda $5} $ }-- Gell-Mann matrix $ \lambda _5 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $6} $ }-- Gell-Mann matrix $ \lambda _6. $\\
+\textbf{$ \text{$\lambda $6} $ }-- Gell-Mann matrix $ \lambda _6 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $7} $ }-- Gell-Mann matrix $ \lambda _7. $\\
+\textbf{$ \text{$\lambda $7} $ }-- Gell-Mann matrix $ \lambda _7 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\lambda $8} $ }-- Gell-Mann matrix $ \lambda _8. $\\
+\textbf{$ \text{$\lambda $8} $ }-- Gell-Mann matrix $ \lambda _8 $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _x. $\\
+\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _x $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y. $\\
+\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y $. This is predefined constant.$  $\\
 
-\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z. $\\
+\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z $. This is predefined constant.$  $\\
 
 \end{document}

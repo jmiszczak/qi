@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -11,39 +11,44 @@ BeginPackage["QI`"];
 (* Description: Mathematica package for the analysis of quantum states and operations *)
 (* Authors: Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iiti.pl>, Zbigniew Puchala <z.puchala@iitis.pl> *)
 (* License: GPLv3 *)
-qiVersion = "0.3.1";
-qiLastModification = "November 12, 2009";
+qiVersion = "0.3.2";
+qiLastModification = "November 17, 2009";
 qiHistory = {
-	{"0.1.0", "", "Initial version"}, 
-	{"0.1.1", "", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
-	{"0.1.2", "", "Added quantum channel parametrization for one qubit"}, 
-	{"0.1.3", "", "Added alternative reshuffling."},
+	{"0.1.0", "05/06/2009", "Initial version"}, 
+	{"0.1.1", "09/06/2009", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
+	{"0.1.2", "18/06/2009", "Added quantum channel parametrization for one qubit."}, 
+	{"0.1.3", "03/07/2009", "Added alternative reshuffling."},
 	{"0.1.4", "", "Changed default print output."}, 
-	{"0.2.0", "", "Documentation generator added."},
+	{"0.2.0", "09/07/2009", "Documentation generator added."},
 	{"0.2.1", "", "Changed QubitGeneralState function."},
-	{"0.2.2", "", "Added reshuffling permutation and product of superoperators."},
-	{"0.2.3", "", "Minor update in documentation."},
-	{"0.2.4", "", "Fixed \[Eta] function."},
-	{"0.2.5", "", "Fixed Werner state and added IsotropicState."},
-	{"0.2.6", "", "Spelling improvements."},
-	{"0.2.7", "", "Improved '\[CircleTimes]' usage, added applyUnitary."},
-	{"0.2.8", "", "Fixed small problem with MaxEnt."},
+	{"0.2.2", "04/08/2009", "Added reshuffling permutation and product of superoperators."},
+	{"0.2.3", "13/08/2009", "Minor update in documentation."},
+	{"0.2.4", "14/09/2009", "Fixed \[Eta] function."},
+	{"0.2.5", "27/08/2009", "Fixed Werner state and added IsotropicState."},
+	{"0.2.6", "06/10/2009", "Spelling improvements."},
+	{"0.2.7", "02/11/2009", "Improved '\[CircleTimes]' usage, added applyUnitary."},
+	{"0.2.8", "03/22.1009", "Fixed small problem with MaxEnt."},
 	{"0.2.9", "", "Some code cleanups, fixed SchmidtDecomposition."},
-	{"0.3.0", "06.11.2009", "Added OperatorSchmidtDecomposition."},
-	{"0.3.1", "12.11.2009", "Added Concurrence4, fixed Cnot problem, some code cleanups."}
+	{"0.3.0", "06/11/2009", "Added OperatorSchmidtDecomposition."},
+	{"0.3.1", "12/11/2009", "Added Concurrence4, fixed Cnot problem, some code cleanups."},
+	{"0.3.2", "17/11/2009", "Documentation improvements, SquareMatrixQ predicate."}
 };
+
 qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
-number of functions used in the analysis of quantum states. In contrast to many available 
-packages for symbolic and numerical simulation of quantum computation presented package is focused 
-on geometrical aspects of quantum information theory.";
-qiGenDoc::usage = "Generate documentation for QI package. This function accepts up to two arguments - file name and output directory. By default the first one is set to 'qi_usage.tex' and the second one to '~/zksi-repo/qi/doc'.";
-qiAbout::usage = "Display short information about QI package.";
-qiVersion::usage = "Display version of QI package.";
-qiHistory::usage = "Display history of modifications for QI package.";
+number of functions used in the analysis of quantum states and quantum operations. In contrast to 
+many available packages for symbolic and numerical simulation of quantum computation presented 
+package is focused on geometrical aspects of quantum information theory.";
+qiGenDoc::usage = "Generate documentation for the QI package. This function accepts up to two arguments - file name and output directory. By default the first one is set to 'qi_usage.tex' and the second one to '~/zksi-repo/qi/doc'.";
+qiAbout::usage = "Display short information about the QI package.";
+qiVersion::usage = "Display version of the QI package.";
+qiHistory::usage = "Display the history of modifications for the QI package.";
+qiConstInfo = " This is predefined constant.";
+
+
 Print["Package QI version ", qiVersion, " (last modification: ", qiLastModification, ")."];
 
 
-$PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
+$PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
 (* ::Section:: *)
@@ -54,32 +59,47 @@ $PrePrint = If[MatrixQ[#], MatrixForm[#], #]&;
 (*Kronecker sum and product, symbolic matrix*)
 
 
-KroneckerSum::usage = "KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A\[CircleTimes]1+1\[CircleTimes]B. Alternative syntax A\[CirclePlus]B for KroneckerSum[A,B] is provided.";
+KroneckerSum::usage = "KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A\[CircleTimes]1+1\[CircleTimes]B. Alternative syntax A\[CirclePlus]B for KroneckerSum[A,B] is also provided. See also: KroneckerProduct.";
+
+
+SquareMatrixQ::usage = "SquareMatrixQ[A] returns True only if A is a square matrix, and gives False otherwise.";
 
 
 SymbolicMatrix::usage = "SymbolicMatrix[a,m,n] returns m\[Cross]n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n\[Cross]n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.";
 
 
-SymbolicVector::usage = "SymbolicVector[a,m] is equivalent to Matrix[a,m,1] and it returns a vector with m elements a[i],i=1,...,m, j=1,...,n. This function is useful, for example, for generating lists of parameters.";
+SymbolicVector::usage = "SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and it returns a vector with m elements a[i],i=1,...,n. This function is useful, for example, for generating lists of parameters.";
 
 
-SymbolicHermitianMatrix::usage ="SymbolicHermitianMatrix[sym,d] produces d\[Cross]d hermitian matrix.";
+SymbolicHermitianMatrix::usage = "SymbolicHermitianMatrix[sym,n] produces a n\[Cross]n Hermitian matrix. See also: SymbolicMatrix, SymbolicVector.";
 
 
-ComplexToPoint::usage = "ComplexToPoint[z] returns real and imaginary parts of a complex number z as a pair of real numbers (point on real plane)).";
+ComplexToPoint::usage = "ComplexToPoint[z] returns a real and an imaginary parts of a complex number z as a pair of real numbers.";
+
+
+MatrixSqrt::usage= "MatrixSqrt[A] returns square root for the matrix A.";
+
+
+MatrixAbs::usage= "MatrixAbs[A] returns absolute value for matrix A defined as MatrixSqrt[A.A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)]. See also: MatrixSqrt.";
+
+
+MatrixRe::usage = "Hermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A+A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)).";
+
+
+MatrixIm::usage = "Antyhermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A-A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)).";
+
+
+ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
+
+
+Commutator::usage = "Commutator[A,B] returns the commutator of matrices A and B i.e. Commutator[A,B] = A.B - B.A.";
 
 
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
 
-MatrixSqrt::usage= "MatrixSqrt[M] returns square root for the matrix M.";
-
-
-MatrixAbs::usage= "MatrixAbs[M] returns absolute value for matrix M defined as MatrixSqrt[M.M\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)].";
-
-
-Fidelity::usage = "Fidelity[\[Rho],\[Sigma]] returns quantum fidelity between states \[Rho] and \[Sigma] calculated as tr\[Sqrt](\[Sqrt]\[Rho] \[Sigma]\[Sqrt]\[Rho]).";
+Fidelity::usage = "Fidelity[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] returns the quantum fidelity between states \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\) calculated using simplifide formula as (\[Sum]\!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\)\!\(\*SuperscriptBox[\")\", \"2\"]\), where \!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\) are the eigenvalues of \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\).";
 
 
 Superfidelity::usage = "Superfidelity[A,B] calculates superfidelity between A and B defined as Tr[A.B] + Sqrt[1-Tr[A.A]]Sqrt[1-Tr[B.B]]."; 
@@ -88,64 +108,52 @@ Superfidelity::usage = "Superfidelity[A,B] calculates superfidelity between A an
 Subfidelity::usage = "Subfidelity[A,B] returns subfidelity between states A and B calculated as \!\(\*SubscriptBox[\"tr\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)+\[Sqrt]2\[Sqrt]((\!\(\*SubscriptBox[\"tr\[Rho]\", \"2\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\))-\!\(\*SubscriptBox[\"tr\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)).";
 
 
-TraceDistance::usage = "TraceDistance[A,B] returns trace distance between matrices A and B which is defined as \!\(\*FractionBox[\"1\", \"2\"]\)tr|A-B|.";
-
-
-MatrixRe::usage = "Hermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A+ConjugateTranspose[A]).";
-
-
-MatrixIm::usage = "Antyhermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A-ConjugateTranspose[A]).";
-
-
-ExpectationValue::usage = "ExpectationValue[\[Rho],A] is just a alias for Tr[\[Rho].A].";
-
-
-Commutator::usage = "Commutator[A,B] returns the commutator of matrices A and B i.e. [A,B]=AB - BA.";
+TraceDistance::usage = "TraceDistance[A,B] returns the trace distance between matrices A and B which is defined as \!\(\*FractionBox[\"1\", \"2\"]\)tr|A-B|.";
 
 
 (* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
-sx::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\).";
-sy::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\).";
-sz::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\).";
+sx::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\)." <> qiConstInfo;
+sy::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\)." <> qiConstInfo;
+sz::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)." <> qiConstInfo;
 \[Sigma]x::usage = sx::usage;
 \[Sigma]y::usage = sy::usage;
 \[Sigma]z::usage = sz::usage;
-id::usage = "Identity matrix for one qubit. See also: IdentityMatrix";
-wh::usage = "Hadamard gate for one qubit. See also: QFT.";
+id::usage = "Identity matrix for one qubit. See also: IdentityMatrix." <> qiConstInfo;
+wh::usage = "Hadamard gate for one qubit. See also: QFT." <> qiConstInfo;
 
 
-\[Lambda]1::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\).";
-\[Lambda]2::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\).";
-\[Lambda]3::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\).";
-\[Lambda]4::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"4\"]\).";
-\[Lambda]5::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"5\"]\).";
-\[Lambda]6::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"6\"]\).";
-\[Lambda]7::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"7\"]\).";
-\[Lambda]8::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"8\"]\).";
+\[Lambda]1::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\)." <> qiConstInfo;
+\[Lambda]2::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\)." <> qiConstInfo;
+\[Lambda]3::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\)." <> qiConstInfo;
+\[Lambda]4::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"4\"]\)." <> qiConstInfo;
+\[Lambda]5::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"5\"]\)." <> qiConstInfo;
+\[Lambda]6::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"6\"]\)." <> qiConstInfo;
+\[Lambda]7::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"7\"]\)." <> qiConstInfo;
+\[Lambda]8::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"8\"]\)." <> qiConstInfo;
 
 
 Proj::usage = "Proj[{\!\(\*SubscriptBox[\"v\", \"1\"]\),\!\(\*SubscriptBox[\"v\", \"2\"]\),...,\!\(\*SubscriptBox[\"v\", \"n\"]\)}] returns projectors for the vectors in the input list.";
 
 
-BaseVectors::usage = "BaseVectors[n] returns list with canonical basis in n-dimensional Hilbert space.";
+BaseVectors::usage = "BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space \!\(\*SuperscriptBox[\"\[DoubleStruckCapitalC]\", \"n\"]\). See also: BaseMatrices.";
 
 
-BaseMatrices::usage = "BaseMatrices[n] returns list with canonical basis in n\[Cross]n-dimensional Hilbert-Schmidt space.";
+BaseMatrices::usage = "BaseMatrices[n] returns a list with the canonical basis in n\[Cross]n-dimensional Hilbert-Schmidt space \!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", \"n\"]\). See also: BaseVectors.";
 
 
 KroneckerDeltaMatrix::usage = "KroneckerDeltaMatrix[i,j,d] returns d\[Cross]d matrix with 1 at position (i,j) and zeros elsewhere.";
 
 
-Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x.";
+Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x. See also: GeneralizedPauliMatrices.";
 
 
-Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to \[Sigma]y.";
+Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to \[Sigma]y. See also: GeneralizedPauliMatrices.";
 
 
-Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z.";
+Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z. See also: GeneralizedPauliMatrices.";
 
 
 GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";
@@ -175,19 +183,13 @@ RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[LeftAngleBracket]j|\[Cir
 QFT::usage = "QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbloic', which is default, or 'Numerical'. The second option makes this function much faster.";
 
 
-CNot::usage = "Controlled not matrix for two qubits. This is predefined constant.";
-
-
-H::usage = "Hadamard gate for one qubit. This is predefined constant. See also: QFT.";
+cnot::usage = "Controlled not matrix for two qubits."<>qiConstInfo ;
 
 
 X::usage = "Generalized Pauli matrix X. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\)";
 
 
 Z::usage = "Generalized Pauli matrix Z. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)";
-
-
-Circuit::usage = "Constructs quantum circuit from unitary gates.";
 
 
 (* ::Subsection::Closed:: *)
@@ -219,7 +221,7 @@ IsotropicState::usage = "IsotropicState[d,p] - isotropic state of dimensions d\[
 (*Schmidt decomposition*)
 
 
-SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
+SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the \[AliasDelimiter]tor vec in d1\[Cross]d2-dimensional Hilbert space.";
 
 
 OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1\[Cross]d2.";
@@ -333,10 +335,13 @@ ChannelToMatrix::usage = "ChannelToMatrix[E,d] returns matrix representation of 
 GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Example 5.8, p. 126.";
 
 
-ApplyKraus::usage = "ApplyKraus[ch,\[Rho]] - apply channel ch, given as a list of Kraus operators, to the input state \[Rho].";
+ApplyKraus::usage = "ApplyKraus[ck,\[Rho]] - apply channel ck, given as a list of Kraus operators, to the input state \[Rho].";
 
 
-ApplyUnitary::usage="ApplyUnitary[U,\[Rho]] - apply unitary u to the input state \[Rho].";
+ApplyUnitary::usage = "ApplyUnitary[U,\[Rho]] - apply unitary a unitary matrix U to the input state \[Rho]. See also: ApplyKraus, ApplyChannel.";
+
+
+ApplyChannel::usage = "ApplayChannel[f,\[Rho]] - apply channel f, given as a pure function, to the input state \[Rho]. See also: ApplyUnitary, ApplyKraus"
 
 
 Superoperator::usage = "Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,#]&,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.";
@@ -348,7 +353,7 @@ DynamicalMatrix::usage = "Dynamical matrix of quantum channel given as a list of
 Jamiolkowski::usage = "Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See alos: Superoperator, ChannelToMatrix, DynamicalMatrix.";
 
 
-ChannelCondition::usage = "Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.";
+ChannelQ::usage = "Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.";
 
 
 ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.";
@@ -376,7 +381,7 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entanglement*)
 
 
@@ -437,9 +442,6 @@ Log0::usage = "Log0[x] is equal to Log[2,x] for x>0 and 1 for x=0.";
 QuantumEntropy::usage = "QuantumEntropy[m] - von Neuman entropy for the matrix m.";
 
 
-S::usage = "S[m] = QuantumEntropy[m].";
-
-
 QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channel in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.";
 
 
@@ -472,7 +474,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},] Probability distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: \"Indicator\"";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -506,21 +508,21 @@ RandomUnitary::usage = "Random unitary matrix. Thanks to R.D-D.";
 RandomState::usage = "RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to Hilbert-Schmidt measure.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Numerical range*)
 
 
-NumericalRangeBound::usage = "NumericalRangeBound[A_?MatrixQ,step_:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.";
+NumericalRangeBound::usage = "NumericalRangeBound[A_,step_:0.01] - bound of numerical range of matrix A calculated with given step. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.";
 
 
 (* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
-BlochVector::usage = "BlochVector[A_MatrixQ] - for square matrix - vector of coefficients obtained from expansion on normed generalized pauli matrices, see function GeneralizedPauliMatrices"
+BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of appropriate dimension from Bloch vector (coefficients treated as coefficients from expansion on normed generalized Pauli matrices, see function GeneralizedPauliMatrices)"
+StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
 (* ::Section:: *)
@@ -530,7 +532,7 @@ StateFromBlochVector::usage = "StateFromBlochVector[vec_] - returns a matrix of 
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Misc*)
 
 
@@ -544,8 +546,10 @@ latexHeader="\\documentclass[a4paper,10pt]{scrartcl}
 \\parindent=0pt
 \\begin{document}
 \\title{QI Package for \\emph{Mathematica} 7.0 (version " <> qiVersion <> ")}" <>
-"\\author{Jaros{\\l}aw Miszczak, Piotr Gawron, Zbigniew Pucha{\\l}a\\\\ \\small{The Institute of Theoretical and Applied Informatics}\\\\
-\\small{Polish Academy of Sciences},\\\\ \\small{Ba{\\l}tycka 5, 44-100 Gliwice, Poland}}
+"\\author{Jaros{\\l}aw Miszczak \\quad Piotr Gawron \\quad Zbigniew Pucha{\\l}a\\\\
+{The Institute of Theoretical and Applied Informatics}\\\\
+{Polish Academy of Sciences},\\\\
+{Ba{\\l}tycka 5, 44-100 Gliwice, Poland}}
 \\maketitle
 \\begin{abstract}"
 <> qiAbout <>
@@ -556,24 +560,22 @@ f=OpenWrite[docFile];
 WriteString[f,latexHeader];
 For[i=1,i<= Length[lista],i++,
 name=ToString[TeXForm[lista[[i,1]]]];
-(*
-name=StringReplace[name,RegularExpression["\\\\text{(.*?)}"]->"$1"];
-name=StringReplace[name,RegularExpression["^\\\\delta"]->"$\\delta$"];
-name=StringReplace[name,RegularExpression["^\\\\lambda"]->"$\\lambda$"];
-name=StringReplace[name,RegularExpression["^\\\\eta"]->"$\\eta$"];
-*)
-name = "$ " <> name <> " $ ";
 usage=ToString[TeXForm[DisplayForm[lista[[i,2]]]]];
-usage=StringReplace[usage,"\{"->"LEWY"];
-usage=StringReplace[usage,"\}"->"PRAWY"];
-txt="\\textbf{"<>name<>"}"<>"-- "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
-txt=StringReplace[txt,"LEWY"-> "\{"];
-txt=StringReplace[txt,"PRAWY"->"\}"];
+txt = qiFormatUsageMsg[name, usage];
 WriteString[f,txt];
 WriteString[f,"\\\\\n\n"];
 ];
 WriteString[f,latexFooter];
 Close[f];
+];
+
+qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=inMsg,txt},
+	usage=StringReplace[usage,"\{"->"LEWY"];
+	usage=StringReplace[usage,"\}"->"PRAWY"];
+	txt="\\textbf{"<>name<>"}"<>"-- "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
+	txt=StringReplace[txt,"LEWY"-> "\{"];
+	txt=StringReplace[txt,"PRAWY"->"\}"];
+	txt
 ];
 
 
@@ -586,28 +588,43 @@ x_?VectorQ \[CircleTimes] y_?VectorQ := Flatten[KroneckerProduct[x,y]];
 x_ \[CircleTimes] y_ \[CircleTimes] z_ := (x \[CircleTimes] y) \[CircleTimes] z;
 
 
+Unprotect[KroneckerSum];
 Clear[KroneckerSum];
-KroneckerSum[A_,B_]:=Block[{dim=Length[A]},
+KroneckerSum[A_?SquareMatrixQ,B_?SquareMatrixQ]:=Block[{dim=Length[A]},
 	KroneckerProduct[A,IdentityMatrix[dim]]+KroneckerProduct[IdentityMatrix[dim],B]
 ];
+SetAttributes[KroneckerSum,Protected];
 
 
 x_ \[CirclePlus] y_ := KroneckerSum[x,y];
 x_ \[CirclePlus] y_ \[CirclePlus] z_ := (x \[CirclePlus] y) \[CirclePlus] z;
 
 
-Clear[SymbolicMatrix];
-SymbolicMatrix[sym_,d1_,d2_:0]:= Which[
-	d2==0,Table[Subscript[sym, i,j],{i,1,d1},{j,1,d1}],
-	d2==1,Table[Subscript[sym, i],{i,1,d1}],
-	True,Table[Subscript[sym, i,j],{i,1,d1},{j,1,d2}] 
+Unprotect[SquareMatrixQ];
+Clear[SquareMatrixQ];
+SquareMatrixQ[A_]:= Block[{dims=Dimensions[A]},
+	(Length[dims]==2 )&&(dims[[1]]==dims[[2]])
 ];
+SetAttributes[SquareMatrixQ,Protected];
 
 
+Unprotect[SymbolicMatrix];
+Clear[SymbolicMatrix];
+SymbolicMatrix[sym_,d1_,d2_:0] := Which[
+	d2==0, Table[Subscript[sym, i,j], {i,1,d1},{j,1,d1}],
+	d2==1, Table[Subscript[sym, i], {i,1,d1}],
+	True, Table[Subscript[sym, i,j], {i,1,d1},{j,1,d2}] 
+];
+SetAttributes[SymbolicMatrix,Protected];
+
+
+Unprotect[SymbolicVector];
 Clear[SymbolicVector];
 SymbolicVector[sym_,d1_]:= SymbolicMatrix[sym,d1,1];
+SetAttributes[SymbolicVector,Protected];
 
 
+Unprotect[SymbolicHermitianMatrix];
 Clear[SymbolicHermitianMatrix];
 SymbolicHermitianMatrix[sym_,d_]:=Block[{mtx},
 	mtx=Table[0,{d},{d}];
@@ -616,55 +633,78 @@ SymbolicHermitianMatrix[sym_,d_]:=Block[{mtx},
 	Table[mtx[[i,i]]=Subscript[sym, i,i],{i,1,d}];
 	mtx
 ];
+SetAttributes[SymbolicHermitianMatrix,Protected];
 
 
+Unprotect[ComplexToPoint];
 Clear[ComplexToPoint];
 ComplexToPoint[z_]:={Re[z],Im[z]};
 SetAttributes[ComplexToPoint,Listable];
+SetAttributes[ComplexToPoint,Protected];
+
+
+Unprotect[MatrixRe];
+Clear[MatrixRe];
+MatrixRe[A_?SquareMatrixQ]:=(A+A\[ConjugateTranspose])/2;
+SetAttributes[MatrixRe,Protected];
+
+
+Unprotect[MatrixIm];
+Clear[MatrixIm];
+MatrixIm[A_?SquareMatrixQ]:=(A-A\[ConjugateTranspose])/2;
+SetAttributes[MatrixIm,Protected];
+
+
+Unprotect[ExpectationValue];
+Clear[ExpectationValue];
+ExpectationValue[\[Rho]_?SquareMatrixQ,A_?SquareMatrixQ]:=Tr[\[Rho].A];
+SetAttributes[ExpectationValue,Protected];
+
+
+Unprotect[Commutator];
+Clear[Commutator];
+Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
+SetAttributes[Commutator,Protected];
 
 
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
 
+Unprotect[MatrixSqrt];
 Clear[MatrixSqrt];
-MatrixSqrt[m_]:=MatrixPower[m,1/2];
+MatrixSqrt[m_?SquareMatrixQ]:=MatrixPower[m,1/2];
+SetAttributes[MatrixSqrt,Protected];
 
 
+Unprotect[MatrixAbs];
 Clear[MatrixAbs];
-MatrixAbs[a_]:=MatrixSqrt[a.(a\[ConjugateTranspose])];
+MatrixAbs[a_?SquareMatrixQ]:=MatrixSqrt[a.(a\[ConjugateTranspose])];
+SetAttributes[MatrixAbs,Protected];
 
 
+Unprotect[Fidelity];
 Clear[Fidelity];
-Fidelity[a_,b_]:=(Plus@@(Sqrt[Eigenvalues[a.b]]))^2;
+Fidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=(Plus@@(Sqrt[Eigenvalues[a.b]]))^2;
+SetAttributes[Fidelity,Protected];
 
 
+Unprotect[Superfidelity];
 Clear[Superfidelity];
-Superfidelity[a_,b_]:=Tr[a.b]+Sqrt[(1-Tr[a.a])]*Sqrt[(1-Tr[b.b])];
+Superfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Tr[a.b]+Sqrt[(1-Tr[a.a])]*Sqrt[(1-Tr[b.b])];
+SetAttributes[Superfidelity,Protected];
 
 
+Unprotect[Subfidelity];
 Clear[Subfidelity];
-Subfidelity[a_,b_]:=Block[{prod = a.b},Tr[prod] +\[Sqrt]2\[Sqrt](Tr[prod]^2-Tr[prod.prod])];
+Subfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Block[{prod = a.b}, Tr[prod] +Sqrt[2]Sqrt[(Tr[prod]*Tr[prod]-Tr[prod.prod])]];
+SetAttributes[Subfidelity,Protected];
 
 
+Unprotect[TraceDistance];
 Clear[TraceDistance];
-TraceDistance[a_,b_]:=1/2*Tr[MatrixAbs[a-b]];
-
-
-Clear[MatrixRe];
-MatrixRe[A_?MatrixQ]:=(A+A\[ConjugateTranspose])/2;
-
-
-Clear[MatrixIm];
-MatrixIm[A_?MatrixQ]:=(A-A\[ConjugateTranspose])/2;
-
-
-Clear[ExpectationValue];
-ExpectationValue[\[Rho]_,A_]:=Tr[\[Rho].A];
-
-
-Clear[Commutator];
-Commutator[A_,B_]:=A.B-B.A;
+TraceDistance[a_?SquareMatrixQ,b_?SquareMatrixQ]:=1/2*Tr[MatrixAbs[a-b]];
+SetAttributes[TraceDistance,Protected];
 
 
 (* ::Subsection::Closed:: *)
@@ -791,12 +831,6 @@ CNot={{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,0,1,0}};
 SetAttributes[CNot, Protected];
 
 
-Unprotect[H];
-Clear[H];
-H = Sqrt[1/2]{{1,1},{1,-1}};
-SetAttributes[H,Protected];
-
-
 Unprotect[X];
 Clear[X];
 X[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
@@ -809,10 +843,6 @@ Z[d_]:=DiagonalMatrix[Table[Exp[2\[Pi] I j/d],{j,0,d-1}]];
 SetAttributes[Z,Protected];
 
 
-Clear[Circuit];
-Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Reverse[l]]];
-
-
 (* ::Subsection::Closed:: *)
 (*Special states*)
 
@@ -820,9 +850,11 @@ Circuit[s__]:=Block[{l},l=List[s];Fold[Dot,IdentityMatrix[Length[l[[1]]]],Revers
 Clear[Ket];
 Ket[label_,dim_]:=Block[{vec},
 	If[label<dim,
-	vec =Table[0,{dim}];
-	vec[[label+1]]=1;
-	vec
+		vec =Table[0,{dim}];
+		vec[[label+1]]=1;
+		vec,
+		(* else *)
+		Null
 	]
 ];
 
@@ -865,7 +897,7 @@ If[IntegerQ[subDim],
 IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
 
 
@@ -1073,75 +1105,111 @@ Clear[GeneralizedPauliKraus];
 GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower[X[d],i].MatrixPower[Z[d],j])\[ConjugateTranspose],{i,0,d-1},{j,0,d-1}],1];
 
 
+Unprotect[ApplyKraus];
 Clear[ApplyKraus];
 ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]].\[Rho].(ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
+SetAttributes[ApplyKraus,Protected];
 
 
+Unprotect[ApplyUnitary];
 Clear[ApplyUnitary];
 ApplyUnitary[U_,\[Rho]_]:=U.\[Rho].U\[ConjugateTranspose];
+SetAttributes[ApplyUnitary,Protected];
 
 
+Unprotect[ApplyChannel];
+ApplyChannel[f_,\[Rho]_] := Map[f,\[Rho],{0}];
+Clear[ApplyChannel];
+SetAttributes[ApplyChannel,Protected];
+
+
+Unprotect[ChannelToMatrix];
 Clear[ChannelToMatrix];
-ChannelToMatrix[fun_,dim_]:=
-Table[Tr[(fun[BaseMatrices[dim][[i]]])\[ConjugateTranspose].BaseMatrices[dim][[j]]],{i,1,dim^2},{j,1,dim^2}];
+ChannelToMatrix[fun_,dim_] := Table[
+	Tr[(fun[BaseMatrices[dim][[i]]])\[ConjugateTranspose].BaseMatrices[dim][[j]]],{i,1,dim^2},{j,1,dim^2}
+];
+SetAttributes[ChannelToMatrix,Protected];
 
 
+Unprotect[Superoperator];
 Clear[Superoperator];
-Superoperator[ch_List]:=Sum[ch[[i]]\[CircleTimes]ch[[i]]\[Conjugate],{i,1,Length[ch]}];
-Superoperator[fun_,dim_]:=ChannelToMatrix[fun,dim];
+Superoperator[ch_List] := Sum[ch[[i]]\[CircleTimes]ch[[i]]\[Conjugate],{i,1,Length[ch]}];
+Superoperator[fun_,dim_] := ChannelToMatrix[fun,dim];
+SetAttributes[Superoperator,Protected];
 
 
+Unprotect[DynamicalMatrix];
 Clear[DynamicalMatrix];
-DynamicalMatrix[ch_List]:=Reshuffle[Superoperator[ch]];
-DynamicalMatrix[fun_Function,dim_Integer]:=Reshuffle[Superoperator[fun,dim]];
+DynamicalMatrix[ch_List] := Reshuffle[Superoperator[ch]];
+DynamicalMatrix[fun_Function,dim_Integer] := Reshuffle[Superoperator[fun,dim]];
+SetAttributes[DynamicalMatrix,Protected];
 
 
+Unprotect[Jamiolkowski];
 Clear[Jamiolkowski];
-Jamiolkowski[ch_List]:=1/Length[ch[[1]]] DynamicalMatrix[ch];
-Jamiolkowski[fun_Function,dim_Integer]:=1/dim DynamicalMatrix[fun,dim];
+Jamiolkowski[ch_List] := 1/Length[ch[[1]]] DynamicalMatrix[ch];
+Jamiolkowski[fun_Function,dim_Integer] := 1/dim DynamicalMatrix[fun,dim];
+SetAttributes[Jamiolkowski,Protected];
 
 
-Clear[ChannelCondition];
-ChannelCondition[operators_]:=Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}];
+Unprotect[ChannelQ];
+Clear[ChannelQ];
+ChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == Iden;
+SetAttributes[ChannelQ,Protected];
 
 
+Unprotect[ExtendKraus];
 Clear[ExtendKraus];
-ExtendKraus[operators_,n_]:=Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
+ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
+SetAttributes[ExtendKraus,Protected];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
+Unprotect[PartialTransposeA];
 Clear[PartialTransposeA];
-PartialTransposeA[\[Rho]_,m_,n_]:=Reshuffle[Unres[(Swap[m]\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho]]]]];
+PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m]\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho]]]]];
+SetAttributes[PartialTransposeA,Protected];
 
 
+Unprotect[PartialTransposeB];
 Clear[PartialTransposeB];
-PartialTransposeB[\[Rho]_,m_,n_]:=Reshuffle[Unres[(IdentityMatrix[m m]\[CircleTimes]Swap[n]).Res[Reshuffle[\[Rho]]]]];
+PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m m]\[CircleTimes]Swap[n]).Res[Reshuffle[\[Rho]]]]];
+SetAttributes[PartialTransposeB,Protected];
 
 
+Unprotect[PartialTraceA];
 Clear[PartialTraceA];
 PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[m]Tr[#]&,m];
 	Unres[((trMtx\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho],m,n]])[[1;;n n]]]
 ];
+SetAttributes[PartialTraceA,Protected];
 
 
+Unprotect[PartialTraceB];
 Clear[PartialTraceB];
-PartialTraceB[\[Rho]_,m_,n_]:=Block[{trMtx},
+PartialTraceB[\[Rho]_,m_,n_] := Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[n]Tr[#]&,n];
 	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[Reshuffle[\[Rho],m,n]]]\[Transpose][[1]]]
 ];
+SetAttributes[PartialTraceB,Protected]
 
 
+Unprotect[PartialTraceGeneral];
 Clear[PartialTraceGeneral];
-PartialTraceGeneral[\[Rho]_,dim_,sys_]:=Block[{n,m},
-If[sys==1,Table[Sum[MatrixElement[m,\[Mu],m,\[Nu],dim,\[Rho]],{m,dim[[1]]}],{\[Mu],dim[[2]]},{\[Nu],dim[[2]]}],
-	Table[Sum[MatrixElement[n,\[Mu],m,\[Mu],dim,\[Rho]],{\[Mu],dim[[2]]}],{n,dim[[1]]},{m,dim[[1]]}]]
+PartialTraceGeneral[\[Rho]_,dim_,sys_] := Block[{n,m},
+	If[sys==1,
+		Table[Sum[MatrixElement[m,\[Mu],m,\[Nu],dim,\[Rho]],{m,dim[[1]]}],{\[Mu],dim[[2]]},{\[Nu],dim[[2]]}],
+		(* else *)
+		Table[Sum[MatrixElement[n,\[Mu],m,\[Mu],dim,\[Rho]],{\[Mu],dim[[2]]}],{n,dim[[1]]},{m,dim[[1]]}]]
 ];
+SetAttributes[PartialTraceGeneral,Protected];
 
 
+Unprotect[PartialTransposeGeneral];
 Clear[PartialTransposeGeneral];
 PartialTransposeGeneral[\[Rho]_,dim_,sys_]:=
 If[sys==1,
@@ -1152,10 +1220,11 @@ If[sys==1,
 	ArrayFlatten[Table[
 		MatrixElement[m,\[Nu],n,\[Mu],dim,\[Rho]],{n,dim[[1]]},{m,dim[[1]]},{\[Nu],dim[[2]]},{\[Mu],dim[[2]]}
 	]]
-](*endif*)
+];(*endif*)
+SetAttributes[PartialTransposeGeneral,Protected];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entanglement*)
 
 
@@ -1245,12 +1314,6 @@ QuantumEntropy[m_]:=Block[{eigvals,qe},eigvals=Chop[Eigenvalues[m]];
 SetAttributes[QuantumEntropy,Protected];
 
 
-Unprotect[S];
-Clear[S];
-S[m_]:=QuantumEntropy[m];
-SetAttributes[S,Protected];
-
-
 Unprotect[QuantumChannelEntropy];
 Clear[QuantumChannelEntropy];
 QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
@@ -1264,9 +1327,9 @@ SetAttributes[QuantumChannelEntropy,Protected];
 
 Unprotect[\[Delta]];
 Clear[\[Delta]];
-\[Delta][a_,type_:"Dirac"]=Switch[type,
-	"Dirac",DiracDelta[a],
-	"Indicator",DiscreteDelta[a]
+\[Delta][a_,type_:"Dirac"] = Switch[type,
+	"Dirac", DiracDelta[a],
+	"Indicator", DiscreteDelta[a]
 ]; 
 SetAttributes[\[Delta],Protected];
 
@@ -1313,6 +1376,24 @@ Unprotect[ProbHS];
 Clear[ProbHS];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 SetAttributes[ProbHS,Protected];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1468,17 +1549,17 @@ StateFromBlochVector[vec_]:=Block[{dim},
 	If[IntegerQ[Sqrt[Length[vec]+1]],
 		dim= Sqrt[Length[vec]+1];
 		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
-		Print["StateFromBlochVector: given vector is not a Bloch vector of any dimension"];
+		Message["StateFromBlochVector: given vector is not a Bloch vector of any dimension"];
 	]
 ];
 SetAttributes[StateFromBlochVector,Protected];
 
 
+End[];
+
+
 (* ::Section::Closed:: *)
 (*Package footer*)
-
-
-End[];
 
 
 EndPackage[];
