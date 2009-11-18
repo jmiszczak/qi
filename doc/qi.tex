@@ -3,6 +3,7 @@
 % v. 0.21 - 12/08/2009 - Jarek - preliminary sections
 % v. 0.22 - 13/08/2009 - Jarek - added in intro and sec. 2
 % v. 0.3 - 17/11/2009 - Jarek - added an appenxid with a list of functions
+% v. 0.31 - 18/11/2009 - Jarek - sections on states and operations
 \documentclass[final,5p,times]{elsarticle}
 
 %% Use the option review to obtain double line spacing
@@ -35,6 +36,9 @@
 %% for the whole article with \linenumbers.
 %% \usepackage{lineno}
 
+\usepackage{dsfont}
+\newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\langle#1|}}
 \newcommand{\Mathematica}{\emph{Mathematica}}
 \newcommand{\wek}{\mathbf{vec}}
 \newcommand{\res}{\mathbf{res}}
@@ -50,9 +54,55 @@
 \newcommand{\eg}{\emph{eg.}}
 \newcommand{\ie}{\emph{ie.}}
 \newcommand{\etal}{\emph{et al.}}
+\newcommand{\Prob}[1]{\ensuremath{\mathrm{P}(#1)}}
+\newcommand{\Observ}[1]{\ensuremath{#1}}
+\newcommand{\Spectrum}[1]{\ensuremath{\sigma(#1)}}
+\newcommand{\Spec}[1]{\Spectrum{#1}}
+\newcommand{\ketbra}[2]{\ensuremath{\ket{#1}\bra{#2}}}
+\newcommand{\proj}[1]{\ensuremath{\ketbra{#1}{#1}}}
+\newcommand{\Proj}[1]{\proj{#1}}
+\newcommand{\iner}[2]{\braket{#1}{#2}}
+\newcommand{\Iner}[2]{\iner{#1}{#2}}
+\newcommand{\braket}[2]{\ensuremath{\langle#1|#2\rangle}}
+%\newcommand{\tr}[2][]{{\ensuremath{\mathrm{tr}_{#1}\left[#2\right]}}}
+\newcommand{\Tr}[2][]{\ensuremath{\tr_{#1}{#2}}}
+%\newcommand{\id}{\ensuremath{\mathbb{I}}}
+\newcommand{\id}{\mathds{1}}
+
+\newcommand{\Space}[1]{\mathcal{#1}}
+\newcommand{\SetOfStates}[1]{\ensuremath{\mathcal{S}(#1)}}
+\newcommand{\States}[1]{\SetOfStates{#1}}
+% matematical symbols
+\newcommand{\Real}{\ensuremath{\mathds{R}}}
+\newcommand{\N}{\ensuremath{\mathds{N}}}
+\newcommand{\Z}{\ensuremath{\mathds{Z}}}
+\newcommand{\set}[2]{\ensuremath{\left\{#1|#2\right\}}}
+\newcommand{\re}[1]{\ensuremath{\mathrm{Re}\left(#1\right)}}
+\newcommand{\im}[1]{\ensuremath{\mathrm{Im}\left(#1\right)}}
+\newcommand{\Group}[2]{\ensuremath{(#1,#2)}}
+\newcommand{\ord}[2]{\mathrm{ord}_#2(#1)}
+
+\newcommand{\Var}[1]{\ensuremath{\mathrm{Var}(#1)}}
+
+\newcommand{\halmos}{\newline\vspace{3mm}\hfill $\Box$}
+\newcommand{\proof}{\noindent {\it Proof.\ }}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{observation}{Observation}
+\newtheorem{task}{Task}
+\newtheorem{problem}{Problem}
+\newtheorem{remark}{Remark}
+\newtheorem{hypo}{Hypothesis}
+
 
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
+
+%\renewcommand{\Re}{\mathrm{Re}}
+%\renewcommand{\todo}[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \journal{Computer Physics Communications}
 
@@ -80,7 +130,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Analysis of quantum states and operations with \qi\ package\\[6pt] \small{v. 0.3 (November 17, 2009)}}
+\title{Package \qi\ for the analysis of quantum and operations in \Mathematica\\[6pt] \small{v. 0.3 (November 17, 2009)}}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -96,12 +146,11 @@
 Sciences, Ba{\l}tycka 5, 44-100 Gliwice, Poland}
 
 \begin{abstract}
-We present a package of functions for \Mathematica\ computer algebra system, 
-which implements number of functions used in the analysis of quantum states.
-
-In contrast to many available packages for symbolic and numerical simulation of
-quantum computation presented package is focused on geometrical aspects of 
-quantum information theory.
+QI is a package of functions for Mathematica computer algebra system, \ which
+implements number of functions used in the analysis of quantum states and \
+quantum operations. In contrast to many available packages for symbolic and
+numerical simulation of \ quantum computation presented package is focused on
+geometrical aspects of quantum information \ theory.
 
 \end{abstract}
 
@@ -181,18 +230,209 @@ normalized ($\tr{\rho}=1$).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pure and mixed states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\todo{troche o stanach i operacjach}
+Let $\HS{H}$ be a~separable, complex Hilbert space\index{Hilbert space} used
+to described the system in question. We use Dirac notation
+\cite{dirac58principles} for inner product in $\HS{H}$
+\begin{equation}
+  \Iner{\psi}{\phi},
+\label{eqn:dirac-iner}
+\end{equation}
+where $\ket{\psi},\ket{\phi}\in\HS{H}$ and $\bra{\phi} = \ket{\phi}^\star$ 
+is a~complex conjugate of $\ket{\phi}$. Symbol $\ket{\psi}\bra{\phi}$ denotes
+the operator of rank one (\ie\ a projection operator) which acts on a vector
+$\ket{\alpha}\in\HS{H}$ as
+\begin{equation}
+\left(\ket{\psi}\bra{\phi}\right)\ket{\alpha} = \Iner{\phi}{\alpha}\ket{\psi}.
+\label{eqn:dirac-proj}
+\end{equation}
+
+In quantum information theory we deal mainly with finite-dimensional Hilbert
+spaces.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Observables}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The term \emph{observable}\index{observable} is used to describe a physical
+quantity of a system which can be observed and measured. Observables are
+quantum mechanical analogous of the \emph{random variables}\index{random
+variable} from classical mechanics.
+
+In quantum mechanics observables are described by self-adjoint operators,
+\ie\ linear functions $X:\HS{H}\mapsto\HS{H}$ such that
+\begin{equation}
+\Iner{X\psi}{\phi}=\Iner{\psi}{X^\star\phi},
+\label{eqn:selfadj}
+\end{equation}
+for any $\ket{\phi},\ket{\psi}\in\HS{H}$. An important property of self-adjoint
+operators is expressed by the following theorem.
+
+\begin{theorem}[Spectral decomposition]
+Every self-adjoint operator $\Observ{A}$ can be decomposed according to the
+formula
+\begin{equation}
+\Observ{A} = \sum_{\lambda_i\in\Spec{\Observ{A}}} \lambda_i\proj{x_i}
+\end{equation}
+with $\sum_i\Proj{x_i}=\Id$, where $\ket{x_i}$ are the eigenvectors of
+$\Observ{A}$ with corresponding eigenvalues $\lambda_i$.
+\end{theorem}
+Here $\sigma(A)$ denotes the spectrum of the operator $A$. The mapping
+$\mu:\lambda_i\mapsto \Proj{x_i}$ is called \emph{spectral
+measure} \cite{mlak}.\index{spectral measure}
+
+Spectral decomposition can be used to define functions on the space of
+self-adjoint operators. If $f:\Real\mapsto\Cplx$ is any function, one can define
+$f(\Observ{A})$ as
+\begin{equation}
+ f(A) = \sum_{\lambda_i\in\Spec{\Observ{A}}} f(\lambda_i)\proj{x_i}.
+\end{equation}
+For example, if we take $A=NOT$, we have
+\begin{equation}
+ NOT =  +1\left(\begin{array}{cc}
+ 		\frac{1}{2} & \frac{1}{2}\\
+ 		\frac{1}{2} & \frac{1}{2}
+        \end{array}\right)
+		-1 \left(\begin{array}{cc}
+                          \frac{1}{2} & -\frac{1}{2}\\
+                          -\frac{1}{2} & \frac{1}{2}
+                         \end{array}\right),
+\end{equation}
+and square root of $NOT$ can be easily calculated as
+\begin{equation}
+ \sqrt{NOT} = \sqrt{+1}\left(\begin{array}{cc}
+ 		\frac{1}{2} & \frac{1}{2}\\
+ 		\frac{1}{2} & \frac{1}{2}
+        \end{array}\right)
+		+\sqrt{-1} \left(\begin{array}{cc}
+                          \frac{1}{2} & -\frac{1}{2}\\
+                          -\frac{1}{2} & \frac{1}{2}
+                         \end{array}\right).
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{States}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In quantum mechanics the state of the system is described by the density matrix,
+\ie\ Hermitian operator $\rho:\HS{H}\rightarrow\HS{H}$, which is
+\begin{equation}
+ \rho\geq0\ \ \mathrm{(positive)}
+\end{equation}
+and
+\begin{equation}
+ \tr{\rho}=1\ \ \mathrm{(normalized)}.
+\end{equation}
+Density matrix in the analogue of the classical \emph{probability
+distribution}. \index{probability distribution}
+
+The set of states $\SetOfStates{\mathcal{H}}$ is a~convex set and thus every
+$\rho\in\SetOfStates{\mathcal{H}}$ can be represented as a~convex combination
+\begin{equation}
+\rho=\sum_{i}p_i\sigma_i,
+\end{equation}
+with $\sigma_i\in\SetOfStates{\mathcal{H}},\ \sum_{i}p_i=1$. 
+
+If the operator $\rho$ additionally fulfils the condition
+\begin{equation}
+ \rho^2 = \rho
+\end{equation}
+\ie\ $\rho$ is a~projection operator, the state described by $\rho$ is
+said to be \emph{pure}.\index{pure state} In this case density operator posesses
+only one eigenvector $\ket{\alpha}$, which can be used to describe the state.
+Therefore, in the case of pure states, we can write
+\begin{equation}
+  \rho = \proj{\alpha}.
+\end{equation}
+
+In particular, if $\HS{H}=\Cplx^2$ we say that $\ket{\psi}\in\HS{H}$ describes
+the state of a qubit. In this case
+\begin{equation}
+ \ket{\psi} = \alpha \ket{0} + \beta \ket{1},
+\end{equation}
+where $\alpha^2+\beta^2=1$ and $\ket{0}, \ket{1}\in \Cplx^2$ form a base
+$\Cplx^2$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Unitary evolution}\label{sec:math-unit-evol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Let us assume that the described system is isolated during the time of
+evolution. If initially the system is in a pure state $\ket{\psi}$, then the
+evolution of the system is given by some unitary operator $U$. The action of the
+operator $U$ on the initial state is given by a formula
+\begin{equation}
+ \ket{\psi} \mapsto U \ket{\psi}.
+\end{equation}
+If the initial state of the system is mixed and given by the density matrix
+$\rho$, then the final state is given by
+\begin{equation}\label{eqn:evol-mixed}
+ \rho \mapsto U\rho U^\dagger.
+\end{equation}
+
+However, in many situations it is impossible to avoid the interaction of the
+systems with an environment.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Quantum channels}
+\subsection{Quantum processes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The most general form of the evolution of a quantum system is given in terms of
+quantum channels. In this paper we consider quantum channels which are 
+Completely Positive Trace Preserving (CP-TP) maps. 
 
+In order an map $\Phi$ to be a CP-TP map it has to fulfill set of the following
+conditions:
+\begin{enumerate}
+\item It has to preserve trace, positivity and hermiticity, \ie\
+  \begin{equation}
+	  \Tr{\Phi(\rho)}=1, \Phi(\rho)\geq0\ \mathrm{and\ } \Phi(\rho)=\Phi(\rho)^\dagger.
+  \end{equation}
+\item It has to be linear
+  \begin{equation}
+	  \Phi\left(\sum_i p_i\rho_i \right)=\sum_i p_i \Phi\left(\rho_i \right).
+  \end{equation}
+\item Finally it has to be \emph{completely positive}, \ie\ for $\rho^{(n)} \geq
+  0$ we require that
+  \begin{eqnarray}
+	   (\Phi\otimes\id_n) \rho^{(n)} \geq 0,\ n\in N,
+  \end{eqnarray}
+  where $\rho^{(n)}$ is an element of an appropriate space of 
+  states.
+\end{enumerate}
+These conditions are required for $\Phi$ to preserve the set of quantum states.
 
+In the most general case quantum evolution is described by a superoperator
+$\Phi$, acting on $\mathcal{M}_{N}$, which can be expressed in Kraus form
+\cite{BZ06, hayashi}
+\begin{equation}
+\Phi(\rho)=\sum_k E_k^{\phantom{\dagger}} \rho E_k^\dagger,
+\end{equation}
+where $\sum_k E_k^\dagger E_k^{\phantom{\dagger}}=\id$.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Jamiolkowski isomorphism}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Alternatively quantum operations an be represented by a \emph{superoperator
+matrix} $M_\Phi$. The superoperator matrix is a~representation of linear
+operator in the canonical basis. The following formula allows to transform set
+of Kraus operators $\{E_k\}$ into superoperator matrix $M_\Phi$~\cite[Ch.
+10]{BZ06}
+\begin{equation} \label{r:Mphi}
+	M_\Phi=\sum_{k=1}^{N^2} E_k \otimes E^\ast_k, 
+\end{equation}
+where $N = \dim(E_k)$ and `$\ast$' denotes element-wise complex conjugation.
+
+The dynamical matrix for the operations $\Phi$ is defined as $D_\Phi=M_\Phi^R$,
+where `${}^R$' denotes a \emph{reshuffling} operation~\cite{BZ06}. The dynamical matrix
+for the trace preserving operation acting on $N$-dimensional system is
+an~$N^2\times N^2$ positive defined matrix with trace~$N$. We can introduce
+natural correspondence between such matrices and density matrices on $N^2$ by
+normalizing $D_\Phi$. Such a correspondence is known as \emph{Jamio{\l}kowski
+isomorphism}~\cite{jamiolkowski72linear, zyczkowski04duality}.
+
+Let $\Phi$ be a~completely positive trace preserving map acting on density
+matrices. We define Jamio\l{}kowski matrix of $\Phi$ as
+\begin{equation} \label{r:jam}
+ \rho_\Phi = \frac{1}{N}D_\Phi. 
+\end{equation}
+
+Jamio\l{}kowski matrix has the same mathematical properties as a quantum state
+\ie{} it is a semi-definite positive matrix with trace equal to one. It is
+sometimes referred to as \emph{Jamio\l{}kowski state matrix}.
 
 
 
@@ -453,6 +693,9 @@ Partial transposition and partial trace are the most popular partial operations.
 
 \todo{dodac przyklad}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}\label{sec:examples}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

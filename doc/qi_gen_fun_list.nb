@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     10497,        271]
-NotebookOptionsPosition[      9893,        245]
-NotebookOutlinePosition[     10251,        261]
-CellTagsIndexPosition[     10208,        258]
+NotebookDataLength[     10851,        277]
+NotebookOptionsPosition[     10246,        251]
+NotebookOutlinePosition[     10604,        267]
+CellTagsIndexPosition[     10561,        264]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,13 +26,13 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.3.2\"\>",
+  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.3.3\"\>",
     "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"November 17, 2009\"\>", 
+   "\[InvisibleSpace]", "\<\"November 18, 2009\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.3.2", " (last modification: ", 
-   "November 17, 2009", ")."],
+  "Package QI version ", "0.3.3", " (last modification: ", 
+   "November 18, 2009", ")."],
   Editable->False]], "Print",
  CellChangeTimes->{{3.467456080637093*^9, 3.467456104335169*^9}, {
    3.467456174802355*^9, 3.46745618796615*^9}, 3.467456230631059*^9, 
@@ -40,7 +40,9 @@ Cell[BoxData[
    3.467456436008288*^9, 3.467456464323848*^9}, {3.46745665775587*^9, 
    3.46745667968962*^9}, {3.467456731776623*^9, 3.467456789349774*^9}, 
    3.46745761343082*^9, {3.467458045235658*^9, 3.467458072779933*^9}, 
-   3.467458177942374*^9, 3.467468038440025*^9}]
+   3.467458177942374*^9, 3.467468038440025*^9, 3.467545003645597*^9, 
+   3.467554282371089*^9, 3.467557508407943*^9, {3.4675601991435*^9, 
+   3.467560215271614*^9}, 3.467562918529836*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -50,8 +52,9 @@ Cell["Open package files", "Subsubtitle",
   3.467457614364134*^9, 3.467457615776307*^9}}],
 
 Cell[BoxData[
- RowBox[{"qiGenDoc", "[", "]"}]], "Input",
- CellChangeTimes->{{3.467458575519212*^9, 3.467458580962137*^9}}],
+ RowBox[{"QI`Private`qiGenDoc", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.467458575519212*^9, 3.467458580962137*^9}, {
+  3.467545007762589*^9, 3.467545012268602*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -204,8 +207,9 @@ Cell[BoxData[{
         RowBox[{"latexList", "=", 
          RowBox[{
          "latexList", "<>", "\"\<\\\\noindent\>\"", "<>", "res", "<>", 
-          "\"\<\\\\\\\\\\n\\n\>\""}]}], " ", ";"}]}], "\[IndentingNewLine]", 
-      "]"}]}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+          "\"\<\\\\\\\\[6pt]\\n\\n\>\""}]}], " ", ";"}]}], 
+      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"WriteString", "[", 
    RowBox[{"f", ",", "latexList"}], "]"}], ";"}], "\n", 
@@ -240,10 +244,12 @@ Cell[BoxData[{
    3.467461579620679*^9}, {3.467461610843651*^9, 3.467461622294529*^9}, 
    3.467462276642562*^9, {3.467462384989171*^9, 3.46746238949472*^9}, {
    3.467462462007657*^9, 3.467462462366867*^9}, {3.467463494347555*^9, 
-   3.467463494520799*^9}, {3.467467986564137*^9, 3.467468014001318*^9}}]
+   3.467463494520799*^9}, {3.467467986564137*^9, 3.467468014001318*^9}, {
+   3.467560158122543*^9, 3.467560184298255*^9}, {3.467560242755241*^9, 
+   3.467560280721349*^9}, {3.46756294786577*^9, 3.467562977081845*^9}}]
 }, Open  ]]
 },
-WindowSize->{1280, 727},
+WindowSize->{1278, 723},
 WindowMargins->{{0, Automatic}, {Automatic, 25}},
 ShowSelection->True,
 FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
@@ -262,16 +268,16 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 113, 2, 32, "Input"],
-Cell[683, 26, 874, 16, 24, "Print"]
+Cell[683, 26, 1014, 18, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1594, 47, 156, 2, 32, "Subsubtitle"],
-Cell[1753, 51, 122, 2, 32, "Input"],
-Cell[1878, 55, 491, 12, 77, "Input"]
+Cell[1734, 49, 156, 2, 32, "Subsubtitle"],
+Cell[1893, 53, 182, 3, 32, "Input"],
+Cell[2078, 58, 491, 12, 77, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2406, 72, 122, 1, 32, "Subsubtitle"],
-Cell[2531, 75, 7346, 167, 649, "Input"]
+Cell[2606, 75, 122, 1, 32, "Subsubtitle"],
+Cell[2731, 78, 7499, 170, 649, "Input"]
 }, Open  ]]
 }
 ]
