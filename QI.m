@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -59,11 +59,11 @@ Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`P
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -103,7 +103,7 @@ ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
 Commutator::usage = "Commutator[A,B] returns the commutator of matrices A and B i.e. Commutator[A,B] = A.B - B.A.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
 
@@ -119,7 +119,7 @@ Subfidelity::usage = "Subfidelity[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*
 TraceDistance::usage = "TraceDistance[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] returns the trace distance between matrices \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\), which is defined as \!\(\*FractionBox[\"1\", \"2\"]\)tr|\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)-\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)|.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
@@ -534,7 +534,7 @@ StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of app
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Misc*)
 
 
@@ -1419,6 +1419,8 @@ SetAttributes[ProbHS,Protected];
 
 
 
+
+
 (* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
@@ -1551,7 +1553,7 @@ Flatten[w,2]
 SetAttributes[NumericalRangeBound,Protected];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bloch Representation*)
 
 
@@ -1568,9 +1570,11 @@ StateFromBlochVector[vec_]:=Block[{dim},
 	If[IntegerQ[Sqrt[Length[vec]+1]],
 		dim= Sqrt[Length[vec]+1];
 		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
-		Message["StateFromBlochVector: given vector is not a Bloch vector of any dimension"];
+		Message[StateFromBlochVector::argerr, vec];
+		Beep[];
 	]
 ];
+StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
 SetAttributes[StateFromBlochVector,Protected];
 
 
