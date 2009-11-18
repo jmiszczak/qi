@@ -118,7 +118,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{PauliMatrices} $ }-- Predefined list of Pauli matrices $\{$$ \sigma _x,\sigma _y,\sigma _z $$\}$. Use Map[MatrixForm[$\#$]$\&$,PauliMatrices] to get this list in more readible form.$  $\\
 
-\textbf{$ \text{ProbablityDistribution} $ }-- ProbablityDistribution[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: StateVector.$  $\\
+\textbf{$ \text{ProbablityVector} $ }-- ProbablityVector[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: StateVector.$  $\\
 
 \textbf{$ \text{ProbBures} $ }-- ProbBures[$\lambda $] - Joint probability distribution of eigenvalues $\lambda $ of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $\\
 
@@ -212,7 +212,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{StateFromBlochVector} $ }-- StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\
 
-\textbf{$ \text{StateVector} $ }-- StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: ProbablityDistribution, SymbolicVector.$  $\\
+\textbf{$ \text{StateVector} $ }-- StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: ProbablityVector, SymbolicVector.$  $\\
 
 \textbf{$ \text{Subfidelity} $ }-- Subfidelity[$ \rho _1,\rho _2 $] returns subfidelity between states $ \rho _1 $ and $ \rho _2 $ See: J.A. Miszczak et al., Quantum Information $\&$ Computation, Vol.9 No.1$\&$2 (2009).$  $\\
 

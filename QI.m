@@ -59,7 +59,7 @@ Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`P
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -283,12 +283,12 @@ Unitary3::usage = "Unitary3[\[Alpha],\[Beta],\[Gamma],\[Tau],a,b,c,ph] returns t
 Unitary4Canonical::usage = "Parametrization of non-local unitary matrices for two qubits. See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 
 
-ProbablityDistribution::usage = "ProbablityDistribution[{\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)}] returns probability vectors of dimension n+1 parametrize with {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)}. See also: StateVector.";
+ProbablityVector::usage = "ProbablityVector[{\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)}] returns probability vectors of dimension n+1 parametrize with {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)}. See also: StateVector.";
 
 
 StateVector::usage = "StateVector[{\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\),\!\(\*SubscriptBox[\"\[Phi]\", 
 RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\", 
-RowBox[{\"2\", \" \", \"n\"}]]\)}] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)} and phases {\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)}. See also: ProbablityDistribution, SymbolicVector.";
+RowBox[{\"2\", \" \", \"n\"}]]\)}] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)} and phases {\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)}. See also: ProbablityVector, SymbolicVector.";
 
 
 (* ::Subsection:: *)
@@ -534,7 +534,7 @@ StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of app
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Misc*)
 
 
@@ -1015,33 +1015,43 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 (*Parametrizations*)
 
 
+Unprotect[Unitary2];
 Clear[Unitary2];
 Unitary2[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_]:=
 Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}}.DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
+SetAttributes[Unitary2,Protected];
 
 
+Unprotect[SpecialUnitary2];
 Clear[SpecialUnitary2];
 SpecialUnitary2[\[Beta]_,\[Gamma]_,\[Delta]_]:=Unitary2[0,\[Beta],\[Gamma],\[Delta]];
+SetAttributes[SpecialUnitary2,Protected];
 
 
+Unprotect[Unitary3];
 Clear[Unitary3];
 Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*\[Lambda]2*be].
 	MatrixExp[I*\[Lambda]3*ga].MatrixExp[I*\[Lambda]5*th].MatrixExp[I*\[Lambda]3*a].
 	MatrixExp[I*\[Lambda]2*b].MatrixExp[I*\[Lambda]3*c].MatrixExp[I*\[Lambda]8*ph];
+SetAttributes[Unitary3,Protected];
 
 
+Unprotect[Unitary4Canonical];
 Clear[Unitary4Canonical];
 Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I a1 KroneckerProduct[\[Sigma]x,\[Sigma]x]+a2 I KroneckerProduct[\[Sigma]y,\[Sigma]y]+a3 I KroneckerProduct[\[Sigma]z,\[Sigma]z]];
+SetAttributes[Unitary4Canonical,Protected];
 
 
-Clear[ProbablityDistribution];
-ProbablityDistribution[l_]:=Block[{ll,N},
+Clear[ProbablityVector];
+ProbablityVector[l_]:=Block[{ll,N},
 	N=Length[l]+2;
 	ll=Prepend[l,\[Pi]/2];
 	Table[Sin[ll[[i-1]]]^2*Product[Cos[ll[[j-1]]]^2,{j,i+1,N}],{i,2,N}]
 ];
+SetAttributes[ProbablityVector,Protected];
 
 
+Unprotect[StateVector];
 Clear[StateVector];
 StateVector[l_]:=Block[{pr,ph,N},
 	N=Length[l]/2;
@@ -1049,6 +1059,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 	ph=Prepend[Exp[I*l[[N+1;;2*N]]],1];
 	FullSimplify[Sqrt[pr]*ph, Assumptions -> Table[0<l[[i]]<\[Pi]/2,{i,1,N}]]
 ];
+SetAttributes[StateVector,Protected];
 
 
 (* ::Subsection::Closed:: *)
@@ -1421,6 +1432,8 @@ SetAttributes[ProbHS,Protected];
 
 
 
+
+
 (* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
@@ -1553,7 +1566,7 @@ Flatten[w,2]
 SetAttributes[NumericalRangeBound,Protected];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
