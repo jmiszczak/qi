@@ -32,6 +32,8 @@
 
 \noindent\textbf{$ \text{Subfidelity} $ }-- Subfidelity[$ \rho _1,\rho _2 $] returns subfidelity between states $ \rho _1 $ and $ \rho _2 $ See: J.A. Miszczak et al., Quantum Information $\&$ Computation, Vol.9 No.1$\&$2 (2009).$  $\\[6pt]
 
+\noindent\textbf{$ \text{TraceNorm} $ }-- TraceNorm[A] = $\sum $$ \sigma _i $, where $ \sigma _i $ are the singular values of A. See also: TraceDistance.$  $\\[6pt]
+
 \noindent\textbf{$ \text{TraceDistance} $ }-- TraceDistance[$ \rho _1,\rho _2 $] returns the trace distance between matrices $ \rho _1 $ and $ \rho _2 $, which is defined as $ \frac{1}{2} $tr$|$$ \rho _1-\rho _2\text{$|$.} $\\[6pt]
 
 \subsection{Commonly used matrices}
@@ -42,11 +44,11 @@
 
 \noindent\textbf{$ \text{sz} $ }-- Pauli matrix $ \sigma _z. $\\[6pt]
 
-\noindent\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _y $. This is alternative notation for sx.$  $\\[6pt]
+\noindent\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _y $. This is an alternative notation for sx.$  $\\[6pt]
 
-\noindent\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y $. This is alternative notation for sy.$  $\\[6pt]
+\noindent\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y $. This is an alternative notation for sy.$  $\\[6pt]
 
-\noindent\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z $. This is alternative notation for sz.$  $\\[6pt]
+\noindent\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z $. This is an alternative notation for sz.$  $\\[6pt]
 
 \noindent\textbf{$ \text{id} $ }-- Identity matrix for one qubit. See also: IdentityMatrix.$  $\\[6pt]
 
@@ -194,11 +196,11 @@
 
 \noindent\textbf{$ \text{Superoperator} $ }-- Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,$\#$]$\&$,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.$  $\\[6pt]
 
-\noindent\textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See alos: Superoperator, ChannelToMatrix.$  $\\[6pt]
+\noindent\textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See also: Superoperator, ChannelToMatrix.$  $\\[6pt]
 
-\noindent\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See alos: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\[6pt]
+\noindent\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See also: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\[6pt]
 
-\noindent\textbf{$ \text{ChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\[6pt]
+\noindent\textbf{$ \text{TPChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\[6pt]
 
 \noindent\textbf{$ \text{ExtendKraus} $ }-- ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $\\[6pt]
 
@@ -212,7 +214,7 @@
 
 \noindent\textbf{$ \text{PartialTraceB} $ }-- PartialTraceB[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the n-dimensional (second) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.$  $\\[6pt]
 
-\noindent\textbf{$ \text{PartialTraceGeneral} $ }-- PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See alos: PartialTraceA, PartialTraceB.$  $\\[6pt]
+\noindent\textbf{$ \text{PartialTraceGeneral} $ }-- PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See also: PartialTraceA, PartialTraceB.$  $\\[6pt]
 
 \noindent\textbf{$ \text{PartialTransposeGeneral} $ }-- PartialTransposeGeneral[$\rho $,dim,sys] - Returns the partial transpose, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA,dimB$\}$. $  $\\[6pt]
 
@@ -220,13 +222,15 @@
 
 \noindent\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of a density matrix $\rho $ representing a state of two-qubit system.$  $\\[6pt]
 
+\noindent\textbf{$ \text{Negativity} $ }-- Negativity[$\rho $,m,n] returns the sum of negative eigenvalues of the density matrix $\rho \in $$ \mathbb{M}_{m\times n} $ after their partial transposition with respect to the first subsystem.$  $\\[6pt]
+
 \subsection{One-qubit quantum channels}
 
 \noindent\textbf{$ \text{QubitBitflipChannel} $ }-- BitflipChannel[p,$\rho $] applies bif-flip channel to the input state $\rho $. See also: QubitBitflipKraus.$  $\\[6pt]
 
-\noindent\textbf{$ \text{QubitPhaseflipChannel} $ }-- QubitPhaseflipChannel[p,$\rho $] applies phase-flip channel to the input state $\rho $. See alos: QubitPhaseflipKraus.$  $\\[6pt]
+\noindent\textbf{$ \text{QubitPhaseflipChannel} $ }-- QubitPhaseflipChannel[p,$\rho $] applies phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\[6pt]
 
-\noindent\textbf{$ \text{QubitBitphaseflipChannel} $ }-- QubitBitphaseflipChannel[p,$\rho $] applies bif-phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\[6pt]
+\noindent\textbf{$ \text{QubitBitphaseflipChannel} $ }-- QubitBitphaseflipChannel[p,$\rho $] applies bit-phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\[6pt]
 
 \noindent\textbf{$ \text{QubitDepolarizingKraus} $ }-- Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=0.$  $\\[6pt]
 
@@ -240,7 +244,7 @@
 
 \noindent\textbf{$ \text{QubitBitphaseflipKraus} $ }-- Kraus operators for one qubit bit-phase-flip channel.$  $\\[6pt]
 
-\noindent\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81$  $\\[6pt]
+\noindent\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).$  $\\[6pt]
 
 \noindent\textbf{$ \text{QubitDaviesDynamicalMatrix} $ }-- Returns dynamical matrix for Davies channel with b = $ \frac{a p}{1-p}. $\\[6pt]
 
@@ -282,21 +286,21 @@
 
 \noindent\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d] - d-dimensional random simplex.$  $\\[6pt]
 
-\noindent\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche / Computer Physics Communications 179 (2008) 647-664.$  $\\[6pt]
+\noindent\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\[6pt]
 
 \noindent\textbf{$ \text{RandomProductKet} $ }-- RandomProductKet[$\{$dim1,dim2,...,dimN$\}$] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.$  $\\[6pt]
 
 \noindent\textbf{$ \text{RandomNormalMatrix} $ }-- RandomNormalMatrix[d] - random normal matrix of dimension d.$  $\\[6pt]
 
-\noindent\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equalt to 0.$  $\\[6pt]
+\noindent\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equal to 0. Thanks to Wojtek Bruzda.$  $\\[6pt]
 
 \noindent\textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\[6pt]
 
 \noindent\textbf{$ \text{RandomProductNumericalRange} $ }-- RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $\\[6pt]
 
-\noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to R.D-D.$  $\\[6pt]
+\noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[6pt]
 
-\noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to R.D-D.$  $\\[6pt]
+\noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[6pt]
 
 \noindent\textbf{$ \text{RandomState} $ }-- RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to the Hilbert-Schmidt measure.$  $\\[6pt]
 
