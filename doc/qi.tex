@@ -1,41 +1,31 @@
-%
 % v. 0.2 - 11/08/2009 - Jarek - extended introductions and bibliography
 % v. 0.21 - 12/08/2009 - Jarek - preliminary sections
 % v. 0.22 - 13/08/2009 - Jarek - added in intro and sec. 2
-% v. 0.3 - 17/11/2009 - Jarek - added an appenxid with a list of functions
+% v. 0.3 - 17/11/2009 - Jarek - added an appendix with a list of functions
 % v. 0.31 - 18/11/2009 - Jarek - sections on states and operations
-\documentclass[final,3p,times]{elsarticle}
+% v. 0.32 - 19/11/2009 - Jarek - improved abstact, applied CPC template 
+\documentclass{elsart}
 
-%% Use the option review to obtain double line spacing
-%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+%% This list environment is used for the references in the
+%% Program Summary
+%%
+\newcounter{bla}
+\newenvironment{refnummer}{%
+\list{[\arabic{bla}]}%
+{\usecounter{bla}%
+ \setlength{\itemindent}{0pt}%
+ \setlength{\topsep}{0pt}%
+ \setlength{\itemsep}{0pt}%
+ \setlength{\labelsep}{2pt}%
+ \setlength{\listparindent}{0pt}%
+ \settowidth{\labelwidth}{[9]}%
+ \setlength{\leftmargin}{\labelwidth}%
+ \addtolength{\leftmargin}{\labelsep}%
+ \setlength{\rightmargin}{0pt}}}
+ {\endlist}
 
-%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
-%% for a journal layout:
-%% \documentclass[final,1p,times]{elsarticle}
-%% \documentclass[final,1p,times,twocolumn]{elsarticle}
-%% \documentclass[final,3p,times]{elsarticle}
-%% \documentclass[final,3p,times,twocolumn]{elsarticle}
-%% \documentclass[final,5p,times]{elsarticle}
-%% \documentclass[final,5p,times,twocolumn]{elsarticle}
-
-%% if you use PostScript figures in your article
-%% use the graphics package for simple commands
-%% \usepackage{graphics}
-%% or use the graphicx package for more complicated commands
-%% \usepackage{graphicx}
-%% or use the epsfig package if you prefer to use the old commands
-%% \usepackage{epsfig}
-
-%% The amssymb package provides various useful mathematical symbols
-\usepackage{amssymb}
-%% The amsthm package provides extended theorem environments
-%% \usepackage{amsthm}
-\usepackage{amsmath,amssymb,graphicx}
-%% The lineno packages adds line numbers. Start line numbering with
-%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
-%% for the whole article with \linenumbers.
-%% \usepackage{lineno}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb}
 \usepackage{dsfont}
 \newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
 \newcommand{\bra}[1]{\ensuremath{\langle#1|}}
@@ -53,7 +43,7 @@
 \newcommand{\Cplx}{\ensuremath{\mathbb{C}}}
 \newcommand{\eg}{\emph{eg.}}
 \newcommand{\ie}{\emph{ie.}}
-\newcommand{\etal}{\emph{et al.}}
+%\newcommand{\etal}{\emph{et al.}}
 \newcommand{\Prob}[1]{\ensuremath{\mathrm{P}(#1)}}
 \newcommand{\Observ}[1]{\ensuremath{#1}}
 \newcommand{\Spectrum}[1]{\ensuremath{\sigma(#1)}}
@@ -64,15 +54,11 @@
 \newcommand{\iner}[2]{\braket{#1}{#2}}
 \newcommand{\Iner}[2]{\iner{#1}{#2}}
 \newcommand{\braket}[2]{\ensuremath{\langle#1|#2\rangle}}
-%\newcommand{\tr}[2][]{{\ensuremath{\mathrm{tr}_{#1}\left[#2\right]}}}
 \newcommand{\Tr}[2][]{\ensuremath{\tr_{#1}{#2}}}
-%\newcommand{\id}{\ensuremath{\mathbb{I}}}
 \newcommand{\id}{\mathds{1}}
-
 \newcommand{\Space}[1]{\mathcal{#1}}
 \newcommand{\SetOfStates}[1]{\ensuremath{\mathcal{S}(#1)}}
 \newcommand{\States}[1]{\SetOfStates{#1}}
-% matematical symbols
 \newcommand{\Real}{\ensuremath{\mathds{R}}}
 \newcommand{\N}{\ensuremath{\mathds{N}}}
 \newcommand{\Z}{\ensuremath{\mathds{Z}}}
@@ -81,27 +67,13 @@
 \newcommand{\im}[1]{\ensuremath{\mathrm{Im}\left(#1\right)}}
 \newcommand{\Group}[2]{\ensuremath{(#1,#2)}}
 \newcommand{\ord}[2]{\mathrm{ord}_#2(#1)}
-
 \newcommand{\Var}[1]{\ensuremath{\mathrm{Var}(#1)}}
-
 \newcommand{\halmos}{\newline\vspace{3mm}\hfill $\Box$}
 \newcommand{\proof}{\noindent {\it Proof.\ }}
-
 \newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{definition}{Definition}
-\newtheorem{observation}{Observation}
-\newtheorem{task}{Task}
-\newtheorem{problem}{Problem}
-\newtheorem{remark}{Remark}
-\newtheorem{hypo}{Hypothesis}
-
 
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
-
-%\renewcommand{\Re}{\mathrm{Re}}
-%\renewcommand{\todo}[1]{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \journal{Computer Physics Communications}
@@ -130,45 +102,122 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Package \qi\ for the analysis of quantum and operations in \Mathematica\\[6pt] \small{v. 0.3 (November 17, 2009)}}
+\title{\qi: A package for the analysis of quantum states and operations in
+\Mathematica}
 
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{}
-%% \address[label1]{}
-%% \address[label2]{}
+\date{19/11/2009 (v. 0.32)}
 
-\author{P.~Gawron}
-\author{J.~A.~Miszczak\corref{cor1}}
-\ead{miszczak@iitis.pl}
-\cortext[cor1]{Corresponding Author}
+\author{J.~A.~Miszczak\thanksref{author}},
+\author{P.~Gawron},
 \author{Z.~Pucha{\l}a}
+
+\thanks[author]{Corresponding author}
+
 \address{Institute of Theoretical and Applied Informatics, Polish Academy of 
 Sciences, Ba{\l}tycka 5, 44-100 Gliwice, Poland}
 
 \begin{abstract}
-QI is a package of functions for Mathematica computer algebra system, \ which
-implements number of functions used in the analysis of quantum states and \
-quantum operations. In contrast to many available packages for symbolic and
-numerical simulation of \ quantum computation presented package is focused on
-geometrical aspects of quantum information \ theory.
+QI is a package of functions for the \Mathematica\ computer algebra system,
+which provides a framework for the analysis of quantum states and quantum
+operations. In contrast to many available packages for symbolic and numerical
+simulation of quantum computation presented package is focused on geometrical
+aspects of quantum information theory. In particular \qi provides
+parametrization of quantum states and selected families of quantum operation,
+function for constructing composite quantum operations and methods for the
+generation and analysis of random quantum operations. Also basic structures are
+provided including the construction of ket vectors, basic unitary gates, random
+states and unitaries, distance measures between quantum states and the selected
+methods for the analysis of separability in quantum systems.
 
-\end{abstract}
+\begin{flushleft}
+  %Insert your suggested PACS number here
+%quantum information, symbolic computation (computer algebra) 
+PACS: 03.67.-a; 02.70.Wz.
+\end{flushleft}
 
 \begin{keyword}
-%% keywords here, in the form: keyword \sep keyword
-quantum states \sep quantum operations \sep partial operations
-%% PACS codes here, in the form: \PACS code \sep code
-%quantum information, symbolic computation (computer algebra) 
-\PACS 03.67.-a \sep 02.70.Wz
-
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
-
+  % Please give some freely chosen keywords that we can use in a
+  % cumulative keyword index.
+Quantum states; Quantum operations; Partial operations.
 \end{keyword}
+\end{abstract}
 
 \end{frontmatter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\bf PROGRAM SUMMARY}
+  %Delete as appropriate.
 
-\tableofcontents
+\begin{small}
+\noindent
+{\em Manuscript Title:} \qi: A package for the analysis of quantum states and operations in
+\Mathematica\\
+{\em Authors:} J.A.~Miszczak, P.~Gawron, Z.~Pucha{\l}a \\
+{\em Program Title:} QI \\
+{\em Journal Reference:}                                      \\
+  %Leave blank, supplied by Elsevier.
+{\em Catalogue identifier:}                                   \\
+  %Leave blank, supplied by Elsevier.
+{\em Licensing provisions:} GPLv3 \\
+{\em Programming language:} Mathematica 7\\
+{\em Computer:} Any computer supporting Mathematica 7\\
+  %Computer(s) for which program has been designed.
+{\em Operating system:} Any operating system supporing Mathematica 7, \eg\ GNU/Linux, Microsoft Windows XP\\
+  %Operating system(s) for which program has been designed.
+{\em RAM:} bytes                                              \\
+  %RAM in bytes required to execute program with typical data.
+{\em Number of processors used:}                              \\
+  %If more than one processor.
+{\em Supplementary material:}                                 \\
+  % Fill in if necessary, otherwise leave out.
+{\em Keywords:} quantum states, quantum operations, partial operations  \\
+  % Please give some freely chosen keywords that we can use in a
+  % cumulative keyword index.
+{\em PACS:} 03.67.-a, 02.70.Wz.\\
+  % see http://www.aip.org/pacs/pacs.html
+{\em Classification:} 4.15 \\
+  %Classify using CPC Program Library Subject Index, see (
+  % http://cpc.cs.qub.ac.uk/subjectIndex/SUBJECT_index.html)
+  %e.g. 4.4 Feynman diagrams, 5 Computer Algebra.
+{\em External routines/libraries:}                                      \\
+  % Fill in if necessary, otherwise leave out.
+{\em Subprograms used:}                                       \\
+  %Fill in if necessary, otherwise leave out.
+
+{\em Nature of problem:}\\
+  %Describe the nature of the problem here.
+  Construction of composed quantum operations, analysis of quantum states and
+  operations.
+   \\
+{\em Solution method:}\\
+  %Describe the method solution here.
+  A package of functions for \Mathematica\ computer algebra system.
+   \\
+{\em Restrictions:}\\
+  %Describe any restrictions on the complexity of the problem here.
+   \\
+{\em Unusual features:}\\
+  %Describe any unusual features of the program/problem here.
+   \\
+{\em Additional comments:}\\
+  %Provide any additional comments here.
+   \\
+{\em Running time:}\\
+  %Give an indication of the typical running time here.
+   \\
+
+\end{small}
+
+\newpage
+
+% In program descriptions the main text of the paper is listed under
+% the heading LONG WRITE-UP.
+
+\hspace{1pc}
+{\bf LONG WRITE-UP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\tableofcontents
 
 %% \linenumbers
 
@@ -400,7 +449,7 @@ These conditions are required for $\Phi$ to preserve the set of quantum states.
 
 In the most general case quantum evolution is described by a superoperator
 $\Phi$, acting on $\mathcal{M}_{N}$, which can be expressed in Kraus form
-\cite{BZ06, hayashi}
+\cite{BZ06,hayashi}
 \begin{equation}
 \Phi(\rho)=\sum_k E_k^{\phantom{\dagger}} \rho E_k^\dagger,
 \end{equation}
@@ -422,7 +471,7 @@ for the trace preserving operation acting on $N$-dimensional system is
 an~$N^2\times N^2$ positive defined matrix with trace~$N$. We can introduce
 natural correspondence between such matrices and density matrices on $N^2$ by
 normalizing $D_\Phi$. Such a correspondence is known as \emph{Jamio{\l}kowski
-isomorphism}~\cite{jamiolkowski72linear, zyczkowski04duality}.
+isomorphism}~\cite{jamiolkowski72linear,zyczkowski04duality}.
 
 Let $\Phi$ be a~completely positive trace preserving map acting on density
 matrices. We define Jamio\l{}kowski matrix of $\Phi$ as
@@ -479,86 +528,88 @@ find
 \item Pauli matrices
 \begin{equation}
 \left(
-\begin{array}{cc}
+\begin{smallmatrix}
  0 & 1 \\
  1 & 0
-\end{array}
+\end{smallmatrix}
 \right),\left(
-\begin{array}{cc}
+\begin{smallmatrix}
  0 & -i \\
  i & 0
-\end{array}
+\end{smallmatrix}
 \right),\left(
-\begin{array}{cc}
+\begin{smallmatrix}
  1 & 0 \\
  0 & -1
-\end{array}
+\end{smallmatrix}
 \right).
 \end{equation}
 
 \item Gell-Mann matrices
-\begin{eqnarray}\nonumber
+\begin{equation}
 \left(
-\begin{array}{ccc}
+\begin{smallmatrix}
  0 & 1 & 0 \\
  1 & 0 & 0 \\
  0 & 0 & 0
-\end{array}
-\right),&\left(
-\begin{array}{ccc}
+\end{smallmatrix}
+\right),\left(
+\begin{smallmatrix}
  0 & -i & 0 \\
  i & 0 & 0 \\
  0 & 0 & 0
-\end{array}
-\right),&\left(
-\begin{array}{ccc}
+\end{smallmatrix}
+\right),
+\left(
+\begin{smallmatrix}
  1 & 0 & 0 \\
  0 & -1 & 0 \\
  0 & 0 & 0
-\end{array}
+\end{smallmatrix}
 \right),
-\\\nonumber
 \left(
-\begin{array}{ccc}
+\begin{smallmatrix}
  0 & 0 & 1 \\
  0 & 0 & 0 \\
  1 & 0 & 0
-\end{array}
-\right),&\left(
-\begin{array}{ccc}
+\end{smallmatrix}
+\right),
+\left(
+\begin{smallmatrix}
  0 & 0 & -i \\
  0 & 0 & 0 \\
  i & 0 & 0
-\end{array}
-\right),&\left(
-\begin{array}{ccc}
+\end{smallmatrix}
+\right),
+\left(
+\begin{smallmatrix}
  0 & 0 & 0 \\
  0 & 0 & 1 \\
  0 & 1 & 0
-\end{array}
+\end{smallmatrix}
 \right),
-\\
 \left(
-\begin{array}{ccc}
+\begin{smallmatrix}
  0 & 0 & 0 \\
  0 & 0 & -i \\
  0 & i & 0
-\end{array}
-\right),&\left(
-\begin{array}{ccc}
- \frac{1}{\sqrt{3}} & 0 & 0 \\
- 0 & \frac{1}{\sqrt{3}} & 0 \\
- 0 & 0 & -\frac{2}{\sqrt{3}}
-\end{array}
+\end{smallmatrix}
+\right),
+\frac{1}{\sqrt{3}}\left(
+\begin{smallmatrix}
+ 1 & 0 & 0 \\
+ 0 & 1 & 0 \\
+ 0 & 0 & -2
+\end{smallmatrix}
 \right).
-\end{eqnarray}
+\end{equation}
 \item Hadamard matrix 
 \begin{equation}
 \left(
-\begin{array}{cc}
+\begin{smallmatrix}
  \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
  \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
-\end{array}
+\end{smallmatrix}
 \right)
 \end{equation}
 \end{itemize}
@@ -594,6 +645,8 @@ Parametrization of pure states in higher dimensions is provided according to
 \item Werner states
 \item Isotropic states
 \end{itemize}
+
+\todo{zapoznac sie ze stanami horodeckich z bound entanglement}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Distance measures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -707,9 +760,9 @@ exploring the space of quantum states and understanding quantum operations.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We acknowledge the financial support by the Polish
-Ministry of Science and Higher Education under the grant number N519 012
-31/1957. 
+We acknowledge the financial support by the Polish Ministry of Science and
+Higher Education under the grant number ............................. and Polish
+Research Network LFPPI. 
 
 \appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
