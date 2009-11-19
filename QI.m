@@ -127,7 +127,7 @@ MatrixRe::usage = "Hermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", 
 MatrixIm::usage = "Antyhermitian part of the matrix A i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A-A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)).";
 
 
-ExpectationValue::usage = "ExpectationValue[\[Rho],A] = Tr[\[Rho].A].";
+ExpectationValue::usage = "ExpectationValue[s,A] - accepts a state vector or a density matrix as a first argument and calculates the expectation value for the measurement of A in the state s.";
 
 
 Commutator::usage = "Commutator[A,B] returns the commutator of matrices A and B i.e. Commutator[A,B] = A.B - B.A.";
@@ -670,7 +670,14 @@ MatrixRe[A_?SquareMatrixQ]:=(A+A\[ConjugateTranspose])/2;
 MatrixIm[A_?SquareMatrixQ]:=(A-A\[ConjugateTranspose])/2;
 
 
-ExpectationValue[\[Rho]_?SquareMatrixQ,A_?SquareMatrixQ]:=Tr[\[Rho].A];
+ExpectationValue[\[Rho]_,A_?SquareMatrixQ]:= If[SquareMatrixQ[\[Rho]], 
+	Tr[\[Rho].A], 
+	If[VectorQ[\[Rho]],
+		Tr[Proj[\[Rho]].A],
+		Message[ExpectationValue::argerr]
+	]
+];
+ExpectationValue::argerr = "First argument should be a vector of a square matrix.";
 
 
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
@@ -1156,7 +1163,7 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Distribution of eigenvalues*)
 
 
