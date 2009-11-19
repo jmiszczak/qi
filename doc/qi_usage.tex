@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 (version 0.3.3)}\author{Jaros{\l}aw Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.4)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -24,8 +24,6 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{BlochVector} $ }-- BlochVector[A] - for a square matrix A returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\
 
-\textbf{$ \text{ChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\
-
 \textbf{$ \text{ChannelToMatrix} $ }-- ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[$\rho $] transforms input state according to the channel definition.$  $\\
 
 \textbf{$ \text{cnot} $ }-- Controlled not matrix for two qubits.$  $\\
@@ -38,7 +36,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{DepolarizingChannel} $ }-- DepolarizingChannel[n,p,$\rho $] - apply the completely depolarizing channel with parameter p acting to a n-dimensional input state $\rho $. See also: QubitDepolarizingKraus, HolevoWernerChannel.$  $\\
 
-\textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See alos: Superoperator, ChannelToMatrix.$  $\\
+\textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See also: Superoperator, ChannelToMatrix.$  $\\
 
 \textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[$\rho $,A] = Tr[$\rho $.A].$  $\\
 
@@ -66,7 +64,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{IsotropicState} $ }-- IsotropicState[d,p] - isotropic state of dimensions d$\times $d with a parameter p$\in $[0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p)/($ d^2 $-1)(I-Proj[MaxEnt[d]]]). This family of states is invariant for the operation of the form U$\otimes $$ U^*. $\\
 
-\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See alos: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\
+\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See also: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\
 
 \textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensional Hilbert space. See also: StateVector for a different parametrization.$  $\\
 
@@ -100,6 +98,8 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{MaxMix} $ }-- MaxMix[n] - the maximally mixed state in a n-dimensional space of density matrices.$  $\\
 
+\textbf{$ \text{Negativity} $ }-- Negativity[$\rho $,m,n] returns the sum of negative eigenvalues of the density matrix $\rho \in $$ \mathbb{M}_{m\times n} $ after their partial transposition with respect to the first subsystem.$  $\\
+
 \textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A,dx] - bound of numerical range of matrix A calculated with given step dx. Default value of dx is 0.01. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\
 
 \textbf{$ \text{OperatorSchmidtDecomposition} $ }-- OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1$\times $d2.$  $\\
@@ -108,7 +108,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{PartialTraceB} $ }-- PartialTraceB[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the n-dimensional (second) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.$  $\\
 
-\textbf{$ \text{PartialTraceGeneral} $ }-- PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See alos: PartialTraceA, PartialTraceB.$  $\\
+\textbf{$ \text{PartialTraceGeneral} $ }-- PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See also: PartialTraceA, PartialTraceB.$  $\\
 
 \textbf{$ \text{PartialTransposeA} $ }-- PartialTransposeA[$\rho $,m,n] performs partial transposition on the m-dimensional (first) subsystem of the m$\times $n-state.$  $\\
 
@@ -146,7 +146,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{QubitBitflipKraus} $ }-- Kraus operators for one qubit bit-flip channel.$  $\\
 
-\textbf{$ \text{QubitBitphaseflipChannel} $ }-- QubitBitphaseflipChannel[p,$\rho $] applies bif-phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\
+\textbf{$ \text{QubitBitphaseflipChannel} $ }-- QubitBitphaseflipChannel[p,$\rho $] applies bit-phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\
 
 \textbf{$ \text{QubitBitphaseflipKraus} $ }-- Kraus operators for one qubit bit-phase-flip channel.$  $\\
 
@@ -158,13 +158,13 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{QubitDepolarizingKraus} $ }-- Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=0.$  $\\
 
-\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: BZ Chapter 10, formula 10.81$  $\\
+\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).$  $\\
 
 \textbf{$ \text{QubitGeneralState} $ }-- QubitGeneralState[$\alpha $,$\beta $,$\gamma $,$\delta $,$\lambda $] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues $\lambda $ and 1-$\lambda $ rotated as U.diag($\lambda $,1-$\lambda $).$ U^{\dagger } $ with U defined by parameters $\alpha $,$\beta $,$\gamma $ and $\delta $.$  $\\
 
 \textbf{$ \text{QubitKet} $ }-- QubitKet[$\alpha $,$\beta $] parametrization of the pure state (as a state vector) for one qubit as (Cos[$\alpha $] Exp[i$\beta $], Sin[$\alpha $]). This is equivalent to StateVector[$\{\alpha $,$\beta \}$]. See also: QubitPureState, StateVector.$  $\\
 
-\textbf{$ \text{QubitPhaseflipChannel} $ }-- QubitPhaseflipChannel[p,$\rho $] applies phase-flip channel to the input state $\rho $. See alos: QubitPhaseflipKraus.$  $\\
+\textbf{$ \text{QubitPhaseflipChannel} $ }-- QubitPhaseflipChannel[p,$\rho $] applies phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\
 
 \textbf{$ \text{QubitPhaseflipKraus} $ }-- Kraus operators for one qubit phase-flip channel.$  $\\
 
@@ -174,9 +174,9 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{QutritSpontaneousEmissionKraus} $ }-- QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit spontaneous emission channel with parameters A1, A2, t $>$= 0. See: A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $\\
 
-\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equalt to 0.$  $\\
+\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equal to 0. Thanks to Wojtek Bruzda.$  $\\
 
-\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche / Computer Physics Communications 179 (2008) 647-664.$  $\\
+\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\
 
 \textbf{$ \text{RandomNormalMatrix} $ }-- RandomNormalMatrix[d] - random normal matrix of dimension d.$  $\\
 
@@ -186,11 +186,11 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d] - d-dimensional random simplex.$  $\\
 
-\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to R.D-D.$  $\\
+\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\
 
 \textbf{$ \text{RandomState} $ }-- RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to the Hilbert-Schmidt measure.$  $\\
 
-\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to R.D-D.$  $\\
+\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\
 
 \textbf{$ \text{Res} $ }-- Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A into a vector row by row.$  $\\
 
@@ -234,7 +234,11 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{sz} $ }-- Pauli matrix $ \sigma _z. $\\
 
+\textbf{$ \text{TPChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\
+
 \textbf{$ \text{TraceDistance} $ }-- TraceDistance[$ \rho _1,\rho _2 $] returns the trace distance between matrices $ \rho _1 $ and $ \rho _2 $, which is defined as $ \frac{1}{2} $tr$|$$ \rho _1-\rho _2\text{$|$.} $\\
+
+\textbf{$ \text{TraceNorm} $ }-- TraceNorm[A] = $\sum $$ \sigma _i $, where $ \sigma _i $ are the singular values of A. See also: TraceDistance.$  $\\
 
 \textbf{$ \text{TransposeChannel} $ }-- TransposeChannel[n,$\rho $] - apply the transposition operation to a n-dimensional density matrix $\rho $. Note that this operations is not completely positive.$  $\\
 
@@ -280,10 +284,10 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{$\lambda $8} $ }-- Gell-Mann matrix $ \lambda _8. $\\
 
-\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _y $. This is alternative notation for sx.$  $\\
+\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _y $. This is an alternative notation for sx.$  $\\
 
-\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y $. This is alternative notation for sy.$  $\\
+\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y $. This is an alternative notation for sy.$  $\\
 
-\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z $. This is alternative notation for sz.$  $\\
+\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z $. This is an alternative notation for sz.$  $\\
 
 \end{document}
