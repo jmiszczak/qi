@@ -89,7 +89,7 @@ Clear@@QI`Private`qiNames;
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -513,7 +513,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},] Probability distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: \"Indicator\"";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -544,7 +544,7 @@ RandomSpecialUnitary::usage = "Random special unitary matrix. Thanks to Rafal De
 RandomUnitary::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
 
 
-RandomState::usage = "RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to the Hilbert-Schmidt measure.";
+RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be \"HS\" (default value) or \"Bures\". \"HS\" gives uniform distribution with respect to the Hilbert-Schmidt measure. \"Bures\" gives random state distributed according to Bures measure.";
 
 
 (* ::Subsection::Closed:: *)
@@ -618,7 +618,7 @@ qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -858,7 +858,7 @@ SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1,d2]},
 
 
 OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
-	mtx=Reshuffle[op,d1,d2];
+		
 	svd=SingularValueDecomposition[mtx];
 	vals=Select[Diagonal[svd[[2]]],#!=0&];
 	snum=Length[vals];
@@ -1196,7 +1196,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1262,11 +1262,22 @@ RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u,e,phi0,psi0,chi0},
 RandomUnitary[d_]:=Exp[I*RandomReal[2*\[Pi]]]*RandomSpecialUnitary[d];
 
 
-RandomState[d_]:=Block[{v},
-	v=RandomReal[NormalDistribution[0,1],d d] + I RandomReal[NormalDistribution[0,1],d d];
-	v=v/Norm[v,2];
-	PartialTraceGeneral[Proj[v],{d,d},2]
+RandomState[d_,dist_:"HS"]:=Block[{v},
+	Switch[dist,
+		"HS",
+			v=Flatten[GinibreMatrix[d^2,1]];
+			v=v/Norm[v,2];
+			PartialTraceGeneral[Proj[v],{d,d},2]//Chop,
+		"Bures",
+			A=GinibreMatrix[d,d];
+			U=RandomUnitary[d];
+			(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose]/Tr[(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose]] //Chop,
+		_, 
+			Message[RandomState::argerr,dist]
+	]
+
 ];
+RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
 (* ::Subsection::Closed:: *)
