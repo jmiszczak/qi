@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.4)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.6)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -120,11 +120,11 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{ProbablityVector} $ }-- ProbablityVector[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: StateVector.$  $\\
 
-\textbf{$ \text{ProbBures} $ }-- ProbBures[$\lambda $] - Joint probability distribution of eigenvalues $\lambda $ of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $\\
+\textbf{$ \text{ProbBures} $ }-- ProbBures[$\{$$ x_1\text{,...}x_n $$\}$,$\delta $] - Joint probability distribution of eigenvalues $\lambda $ = $\{$$ x_1\text{,...}x_n $$\}$of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: ''Indicator''$  $\\
 
 \textbf{$ \text{ProbBuresNorm} $ }-- ProbBNorm[n] - Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Bures distance.$  $\\
 
-\textbf{$ \text{ProbHS} $ }-- ProbHS[$\{$$ x_1\text{,...}x_n $$\}$,] Probability distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: $\texttt{"$ $Indicator$\texttt{"}$} $\\
+\textbf{$ \text{ProbHS} $ }-- ProbHS[$\{$$ x_1\text{,...}x_n $$\}$,$\delta $] Probability distribution of eigenvalues $\lambda $ = $\{$$ x_1\text{,...}x_n $$\}$ of a matrix according to Hilbert-Schmidt distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: ''Indicator''$  $\\
 
 \textbf{$ \text{ProbHSNorm} $ }-- Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Hilbert-Schmidt distribution.$  $\\
 
@@ -188,7 +188,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\
 
-\textbf{$ \text{RandomState} $ }-- RandomState[d] - random density matrix of dimension d. This gives uniform distribution with respect to the Hilbert-Schmidt measure.$  $\\
+\textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.$  $\\
 
 \textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\
 
@@ -204,7 +204,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{ReshufflePermutation} $ }-- ReshufflePermutation[dim1,dim2] - permutation matrix equivalent to the reshuffling operation on dim1$\times $dim2-dimensional system. See also: Reshuffling.$  $\\
 
-\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $\\
+\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.$  $\\
 
 \textbf{$ \text{SpecialUnitary2} $ }-- SpecialUnitary2[$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of SU(2). This is equivalent to Unitary2[0,$\beta $,$\gamma $,$\delta $].$  $\\
 
@@ -256,11 +256,13 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{Vec} $ }-- Vec[A] - vectorization of the matrix A column by column. See also: Res.$  $\\
 
+\textbf{$ \text{VectorSchmidtDecomposition} $ }-- VectorSchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $\\
+
 \textbf{$ \text{WernerState} $ }-- WernerState[d,p] - generalized Werner state d$\times $d-dimensional system with the mixing parameter p$\in $[0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p) MaxMix[d],. See also: MaxEnt, MaxMix..$  $\\
 
 \textbf{$ \text{wh} $ }-- Hadamard gate for one qubit. See also: QFT.$  $\\
 
-\textbf{$ \delta  $ }-- $\delta $[x] represents Dirac delta at x.$  $\\
+\textbf{$ \delta  $ }-- $\delta $[a] is equivalent to $\delta $[x,''Dirac''] and it represents Dirac delta at x. If the second argument is ''Indicator'', $\delta $[x,''Indicator''] is equivalent to DiscreteDelta[x].$  $\\
 
 \textbf{$ \eta  $ }-- $\eta $[x] = -x Log[2,x].$  $\\
 

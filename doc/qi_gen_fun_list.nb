@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     10851,        277]
-NotebookOptionsPosition[     10246,        251]
-NotebookOutlinePosition[     10604,        267]
-CellTagsIndexPosition[     10561,        264]
+NotebookDataLength[     13025,        326]
+NotebookOptionsPosition[     12419,        300]
+NotebookOutlinePosition[     12777,        316]
+CellTagsIndexPosition[     12734,        313]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,13 +26,13 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.3.3\"\>",
+  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.3.6\"\>",
     "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"November 18, 2009\"\>", 
+   "\[InvisibleSpace]", "\<\"November 24, 2009\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.3.3", " (last modification: ", 
-   "November 18, 2009", ")."],
+  "Package QI version ", "0.3.6", " (last modification: ", 
+   "November 24, 2009", ")."],
   Editable->False]], "Print",
  CellChangeTimes->{{3.467456080637093*^9, 3.467456104335169*^9}, {
    3.467456174802355*^9, 3.46745618796615*^9}, 3.467456230631059*^9, 
@@ -42,7 +42,7 @@ Cell[BoxData[
    3.46745761343082*^9, {3.467458045235658*^9, 3.467458072779933*^9}, 
    3.467458177942374*^9, 3.467468038440025*^9, 3.467545003645597*^9, 
    3.467554282371089*^9, 3.467557508407943*^9, {3.4675601991435*^9, 
-   3.467560215271614*^9}, 3.467562918529836*^9}]
+   3.467560215271614*^9}, 3.467562918529836*^9, 3.468054659864513*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -79,7 +79,44 @@ Cell["Find all names and generate LaTeX", "Subsubtitle",
 Cell[BoxData[{
  RowBox[{
   RowBox[{"ExportString", "[", 
-   RowBox[{"\"\<\>\"", ",", "\"\<TeX\>\""}], "]"}], 
+   RowBox[{"\"\<\>\"", ",", "\"\<TeX\>\""}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lista", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{"ToExpression", "[", 
+        RowBox[{"Evaluate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<::usage\>\""}], "]"}], 
+        "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", 
+        RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "]"}]}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"latexHeader", "=", 
+   RowBox[{
+   "\"\<\\\\documentclass[a4paper,10pt]{scrartcl}\n\
+\\\\usepackage{amsmath,amssymb,graphicx}\n\\\\usepackage{fullpage}\n\
+\\\\parindent=0pt\n\\\\begin{document}\n\\\\title{QI Package for \
+\\\\emph{Mathematica} 7.0 \\\\\\\\(version \>\"", " ", "<>", " ", 
+    "QI`Private`qiVersion", " ", "<>", " ", "\"\<)}\>\"", " ", "<>", "\n", 
+    "\"\<\\\\author{Jaros{\\\\l}aw Adam Miszczak \\\\quad Piotr Gawron \
+\\\\quad Zbigniew Pucha{\\\\l}a\\\\\\\\\n{The Institute of Theoretical and \
+Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
+{Ba{\\\\l}tycka 5, 44-100 Gliwice, Poland}}\n\\\\maketitle\n\
+\\\\begin{abstract}\>\"", "<>", " ", "QI`Private`qiAbout", " ", "<>", "\n", 
+    "\"\<\\\\end{abstract}\n\>\""}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"latexFooter", " ", "=", " ", "\"\<\\\\end{document}\>\""}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"f", "=", 
@@ -87,6 +124,11 @@ Cell[BoxData[{
    "OpenWrite", "[", 
     "\"\</home/jam/zksi-repo/qi/doc/qi_functions_list.tex\>\"", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"WriteString", "[", 
+    RowBox[{"f", ",", "latexHeader"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"print", "=", "False"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -140,8 +182,7 @@ Cell[BoxData[{
         RowBox[{"secLine", "=", 
          RowBox[{"StringReplace", "[", 
           RowBox[{"secLine", ",", 
-           RowBox[{
-           "\"\<(*\>\"", "\[Rule]", " ", "\"\<\\\\subsection{\>\""}]}], 
+           RowBox[{"\"\<(*\>\"", "\[Rule]", " ", "\"\<\\\\section{\>\""}]}], 
           "]"}]}], ";", "\[IndentingNewLine]", 
         RowBox[{"secLine", "=", 
          RowBox[{"StringReplace", "[", 
@@ -207,16 +248,20 @@ Cell[BoxData[{
         RowBox[{"latexList", "=", 
          RowBox[{
          "latexList", "<>", "\"\<\\\\noindent\>\"", "<>", "res", "<>", 
-          "\"\<\\\\\\\\[6pt]\\n\\n\>\""}]}], " ", ";"}]}], 
-      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+          "\"\<\\\\\\\\[8pt]\\n\>\""}]}], " ", ";"}]}], "\[IndentingNewLine]",
+       "]"}]}]}], "\[IndentingNewLine]", "]"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"WriteString", "[", 
    RowBox[{"f", ",", "latexList"}], "]"}], ";"}], "\n", 
  RowBox[{
+  RowBox[{
+   RowBox[{"WriteString", "[", 
+    RowBox[{"f", ",", "\"\<\\n\\n\>\""}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{"WriteString", "[", 
-   RowBox[{"f", ",", "\"\<\\n\\n\>\""}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
+   RowBox[{"f", ",", "latexFooter"}], "]"}], ";"}], "\n", 
  RowBox[{
   RowBox[{"Close", "[", "f", "]"}], ";"}]}], "Input",
  CellChangeTimes->{{3.467453967937893*^9, 3.46745399360704*^9}, {
@@ -246,7 +291,11 @@ Cell[BoxData[{
    3.467462462007657*^9, 3.467462462366867*^9}, {3.467463494347555*^9, 
    3.467463494520799*^9}, {3.467467986564137*^9, 3.467468014001318*^9}, {
    3.467560158122543*^9, 3.467560184298255*^9}, {3.467560242755241*^9, 
-   3.467560280721349*^9}, {3.46756294786577*^9, 3.467562977081845*^9}}]
+   3.467560280721349*^9}, {3.46756294786577*^9, 3.467562977081845*^9}, {
+   3.46805461387615*^9, 3.46805465414053*^9}, {3.468054684812618*^9, 
+   3.468054685083076*^9}, {3.468055307119654*^9, 3.468055310343351*^9}, {
+   3.468055357335032*^9, 3.46805536396158*^9}, {3.468055610892601*^9, 
+   3.468055616259871*^9}, {3.46805566536913*^9, 3.468055699291945*^9}}]
 }, Open  ]]
 },
 WindowSize->{1278, 723},
@@ -268,16 +317,16 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 113, 2, 32, "Input"],
-Cell[683, 26, 1014, 18, 24, "Print"]
+Cell[683, 26, 1036, 18, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1734, 49, 156, 2, 32, "Subsubtitle"],
-Cell[1893, 53, 182, 3, 32, "Input"],
-Cell[2078, 58, 491, 12, 77, "Input"]
+Cell[1756, 49, 156, 2, 32, "Subsubtitle"],
+Cell[1915, 53, 182, 3, 32, "Input"],
+Cell[2100, 58, 491, 12, 77, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2606, 75, 122, 1, 32, "Subsubtitle"],
-Cell[2731, 78, 7499, 170, 649, "Input"]
+Cell[2628, 75, 122, 1, 32, "Subsubtitle"],
+Cell[2753, 78, 9650, 219, 1089, "Input"]
 }, Open  ]]
 }
 ]

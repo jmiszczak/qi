@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.4";
+qiVersion = "0.3.6";
 
 
-qiLastModification = "November 19, 2009";
+qiLastModification = "November 24, 2009";
 
 
 qiHistory = {
@@ -48,7 +48,9 @@ qiHistory = {
 	{"0.3.1", "12/11/2009", "Added Concurrence4, fixed Cnot problem, some code cleanups."},
 	{"0.3.2", "17/11/2009", "Documentation improvements, SquareMatrixQ predicate."},
 	{"0.3.3", "18/11/2009", "All qi* functions and constants moved to the QI`Private context, added list of QI`* names."},
-	{"0.3.4", "19/11/2009", "Added Negativity, fixed SchmidtDecomposition."}
+	{"0.3.4", "19/11/2009", "Added Negativity, fixed SchmidtDecomposition."},
+	{"0.3.5", "21/11/2009", "SchmidtDecomposition now accepts vectos as well as matrices."},
+	{"0.3.6", "24/11/2009", "Minor update in qiNames."}
 };
 
 
@@ -61,10 +63,10 @@ package is focused on geometrical aspects of quantum information theory.";
 qiGenDoc::usage = "Generate documentation for the QI package. This function accepts up to two arguments - file name and output directory. By default the first one is set to 'qi_usage.tex' and the second one to '~/zksi-repo/qi/doc'.";
 
 
-qiAbout::usage = "Display short information about the QI package.";
+qiAbout::usage = "Display a short information about the QI package.";
 
 
-qiVersion::usage = "Display version of the QI package.";
+qiVersion::usage = "Display the version of the QI package.";
 
 
 qiHistory::usage = "Display the history of modifications for the QI package.";
@@ -73,7 +75,7 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 qiConstInfo = ""(*" This is predefined constant."*);
 
 
-qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesDynamicalMatrix","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomDynamicalMatrix","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z"};
+qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesDynamicalMatrix","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomDynamicalMatrix","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z"};
 
 
 End[]; (* End of `Private` context *)
@@ -89,7 +91,7 @@ Clear@@QI`Private`qiNames;
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
@@ -257,10 +259,13 @@ IsotropicState::usage = "IsotropicState[d,p] - isotropic state of dimensions d\[
 (*Schmidt decomposition*)
 
 
-SchmidtDecomposition::usage = "SchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
+VectorSchmidtDecomposition::usage = "VectorSchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
 
 
 OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1\[Cross]d2.";
+
+
+SchmidtDecomposition::usage = "SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.";
 
 
 (* ::Subsection::Closed:: *)
@@ -488,7 +493,7 @@ QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy o
 (*Distribution of eigenvalues*)
 
 
-\[Delta]::usage = "\[Delta][x] represents Dirac delta at x.";
+\[Delta]::usage = "\[Delta][a] is equivalent to \[Delta][x,''Dirac''] and it represents Dirac delta at x. If the second argument is ''Indicator'', \[Delta][x,''Indicator''] is equivalent to DiscreteDelta[x].";
 
 
 VandermondeMatrix::usage = "VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}] - Vandermonde matrix for variables (\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)).";
@@ -504,16 +509,16 @@ ProdDiff2::usage = "ProdDiff2[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*Subs
 ProbBuresNorm::usage = "ProbBNorm[n] - Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Bures distance.";
 
 
-ProbBures::usage = "ProbBures[\[Lambda]] - Joint probability distribution of eigenvalues \[Lambda] of a matrix according to Bures distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: \"Indicator\"";
+ProbBures::usage = "ProbBures[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] - Joint probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}of a matrix according to Bures distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
 ProbHSNorm::usage = "Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Hilbert-Schmidt distribution.";
 
 
-ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},] Probability distribution of eigenvalues of matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: \"Indicator\"";
+ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -544,7 +549,7 @@ RandomSpecialUnitary::usage = "Random special unitary matrix. Thanks to Rafal De
 RandomUnitary::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
 
 
-RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be \"HS\" (default value) or \"Bures\". \"HS\" gives uniform distribution with respect to the Hilbert-Schmidt measure. \"Bures\" gives random state distributed according to Bures measure.";
+RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.";
 
 
 (* ::Subsection::Closed:: *)
@@ -618,7 +623,7 @@ qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -848,22 +853,40 @@ IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 (*Schmidt decomposition*)
 
 
-SchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1,d2]},
-	mtx = Partition[vec,d2];
-	svd=SingularValueDecomposition[mtx];
-	vals=Select[Diagonal[svd[[2]]],#!=0&];
-	snum=Length[vals];
-	Table[{vals[[i]],svd[[1]].BaseVectors[d1][[i]],svd[[3]]\[Conjugate].BaseVectors[d2][[i]]},{i,1,snum}]
+VectorSchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1,d2]},
+	If[VectorQ[vec],
+		mtx = Partition[vec,d2];
+		svd=SingularValueDecomposition[mtx];
+		vals=Select[Diagonal[svd[[2]]],#!=0&];
+		snum=Length[vals];
+		Table[{vals[[i]],svd[[1]].BaseVectors[d1][[i]],svd[[3]]\[Conjugate].BaseVectors[d2][[i]]},{i,1,snum}],
+		(*else*)
+		Message[VectorSchmidtDecomposition::argerr,vec];
+	]
 ];
+VectorSchmidtDecomposition::argerr = "First argument should be a vector.";
 
 
 OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
-		
-	svd=SingularValueDecomposition[mtx];
-	vals=Select[Diagonal[svd[[2]]],#!=0&];
-	snum=Length[vals];
-	Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}]
+	If[VectorQ[vec],
+		mtx=ReshuffleGeneral[op,d1,d1,d2,d2];
+		svd=SingularValueDecomposition[mtx];
+		vals=Select[Diagonal[svd[[2]]],#!=0&];
+		snum=Length[vals];
+		Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}],
+		(*else*)
+		Message[OperatorSchmidtDecomposition::argerr]
+	]
 ];
+OperatorSchmidtDecomposition::argerr = "First argument should be a matrix.";
+
+
+SchmidtDecomposition[e_,d1_,d2_]:=Which[
+	MatrixQ[e], OperatorSchmidtDecomposition[e,d1,d2],
+	VectorQ[e], VectorSchmidtDecomposition[e,d1,d2],
+	True, Message[SchmidtDecomposition::argerr]
+];
+SchmidtDecomposition::argerr = "First argument should be a vector or a matrix.";
 
 
 (* ::Subsection::Closed:: *)
@@ -1196,7 +1219,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
