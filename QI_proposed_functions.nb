@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[      1703,         57]
-NotebookOptionsPosition[      1435,         43]
-NotebookOutlinePosition[      1794,         59]
-CellTagsIndexPosition[      1751,         56]
+NotebookDataLength[      3093,         94]
+NotebookOptionsPosition[      2713,         77]
+NotebookOutlinePosition[      3072,         93]
+CellTagsIndexPosition[      3029,         90]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -39,12 +39,46 @@ Cell[BoxData[
  CellChangeTimes->{{3.468083010847151*^9, 3.46808303944051*^9}, {
   3.468083080716199*^9, 3.468083128150219*^9}, {3.468083180314456*^9, 
   3.468083268601671*^9}, {3.46808331257411*^9, 3.468083318448881*^9}, {
-  3.468083511633033*^9, 3.468083534449963*^9}}]
+  3.468083511633033*^9, 3.468083534449963*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"RandomSimplexDirichlet", "::", "usage"}], " ", "=", 
+   "\"\<RandomSimplexDirichlet[d,\[Alpha]] generate an a point on a \
+d-dimensionla simplex according to the Dirichlet distibution with a \
+aparameter \[Alpha].\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.468316269349083*^9, 3.46831631675718*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SwapChannel", "=", 
+   RowBox[{"Function", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "\[Rho]"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"Swap", "[", 
+       RowBox[{"Sqrt", "[", "n", "]"}], "]"}], ".", "\[Rho]", ".", 
+      RowBox[{"Swap", "[", 
+       RowBox[{"Sqrt", "[", "n", "]"}], "]"}]}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.468315716915124*^9, 3.468315778565805*^9}, {
+   3.46831616125991*^9, 3.4683161724153833`*^9}, 3.4683163231068287`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"SwapChannel", "::", "usage"}], " ", "=", " ", 
+   "\"\<SwapChannel[n,\[Rho]] acts on the input state \[Rho] as \
+Swap.\[Rho].Swap. Here n is the dimension of the state \[Rho] and it should \
+be a perfect square.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.4683161188420486`*^9, 3.468316121374927*^9}, {
+  3.468316154769199*^9, 3.46831625647819*^9}}]
 },
 WindowSize->{640, 655},
-WindowMargins->{{Automatic, 318}, {Automatic, 55}},
+WindowMargins->{{107, Automatic}, {Automatic, 36}},
 ShowSelection->True,
-FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -58,7 +92,10 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[545, 20, 886, 21, 99, "Input"]
+Cell[545, 20, 886, 21, 99, "Input"],
+Cell[1434, 43, 350, 7, 99, "Input"],
+Cell[1787, 52, 520, 13, 32, "Input"],
+Cell[2310, 67, 399, 8, 99, "Input"]
 }
 ]
 *)
