@@ -50,7 +50,8 @@ qiHistory = {
 	{"0.3.3", "18/11/2009", "All qi* functions and constants moved to the QI`Private context, added list of QI`* names."},
 	{"0.3.4", "19/11/2009", "Added Negativity, fixed SchmidtDecomposition."},
 	{"0.3.5", "21/11/2009", "SchmidtDecomposition now accepts vectos as well as matrices."},
-	{"0.3.6", "24/11/2009", "Minor update in qiNames."}
+	{"0.3.6", "24/11/2009", "Minor update in qiNames."},
+	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."}
 };
 
 
@@ -569,7 +570,7 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -849,7 +850,7 @@ If[IntegerQ[subDim],
 IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Schmidt decomposition*)
 
 
@@ -868,7 +869,7 @@ VectorSchmidtDecomposition::argerr = "First argument should be a vector.";
 
 
 OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
-	If[VectorQ[vec],
+	If[MatrixQ[op],
 		mtx=ReshuffleGeneral[op,d1,d1,d2,d2];
 		svd=SingularValueDecomposition[mtx];
 		vals=Select[Diagonal[svd[[2]]],#!=0&];
