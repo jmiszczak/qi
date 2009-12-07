@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     13025,        326]
-NotebookOptionsPosition[     12419,        300]
-NotebookOutlinePosition[     12777,        316]
-CellTagsIndexPosition[     12734,        313]
+NotebookDataLength[     13114,        328]
+NotebookOptionsPosition[     12509,        302]
+NotebookOutlinePosition[     12866,        318]
+CellTagsIndexPosition[     12823,        315]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -52,9 +52,11 @@ Cell["Open package files", "Subsubtitle",
   3.467457614364134*^9, 3.467457615776307*^9}}],
 
 Cell[BoxData[
- RowBox[{"QI`Private`qiGenDoc", "[", "]"}]], "Input",
+ RowBox[{"QI`Private`qiGenDoc", "[", "\"\<qi_functions_list_alfa.tex\>\"", 
+  "]"}]], "Input",
  CellChangeTimes->{{3.467458575519212*^9, 3.467458580962137*^9}, {
-  3.467545007762589*^9, 3.467545012268602*^9}}],
+  3.467545007762589*^9, 3.467545012268602*^9}, {3.469163440421468*^9, 
+  3.469163466912177*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -298,8 +300,8 @@ Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
    3.468055616259871*^9}, {3.46805566536913*^9, 3.468055699291945*^9}}]
 }, Open  ]]
 },
-WindowSize->{1278, 723},
-WindowMargins->{{0, Automatic}, {Automatic, 25}},
+WindowSize->{1272, 723},
+WindowMargins->{{0, Automatic}, {Automatic, 3}},
 ShowSelection->True,
 FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
@@ -321,12 +323,12 @@ Cell[683, 26, 1036, 18, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[1756, 49, 156, 2, 32, "Subsubtitle"],
-Cell[1915, 53, 182, 3, 32, "Input"],
-Cell[2100, 58, 491, 12, 77, "Input"]
+Cell[1915, 53, 272, 5, 32, "Input"],
+Cell[2190, 60, 491, 12, 77, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2628, 75, 122, 1, 32, "Subsubtitle"],
-Cell[2753, 78, 9650, 219, 1089, "Input"]
+Cell[2718, 77, 122, 1, 32, "Subsubtitle"],
+Cell[2843, 80, 9650, 219, 1089, "Input"]
 }, Open  ]]
 }
 ]

@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.6";
+qiVersion = "0.3.7";
 
 
-qiLastModification = "November 24, 2009";
+qiLastModification = "December 4, 2009";
 
 
 qiHistory = {
