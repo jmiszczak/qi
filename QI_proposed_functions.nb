@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     12852,        373]
-NotebookOptionsPosition[     11609,        328]
-NotebookOutlinePosition[     11966,        344]
-CellTagsIndexPosition[     11923,        341]
+NotebookDataLength[     14924,        436]
+NotebookOptionsPosition[     13560,        388]
+NotebookOutlinePosition[     13918,        404]
+CellTagsIndexPosition[     13875,        401]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -323,13 +323,73 @@ Cell[BoxData[
    RowBox[{"PerfectSquareQ", "::", "usage"}], " ", "=", " ", 
    "\"\<PerfectSquareQ[n] returns True if Sqrt[n] is an integer number. \
 Othverwise it returns False.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.46918734859159*^9, 3.469187382999312*^9}}]
+ CellChangeTimes->{{3.46918734859159*^9, 3.469187382999312*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ZeroMatrix", "[", 
+    RowBox[{"m_", ",", "n_"}], "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"{", "m", "}"}], ",", 
+     RowBox[{"{", "n", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ZeroMatrix", "::", "usage"}], " ", "=", " ", 
+   "\"\<ZeroMatrix[m,n] returns an m\[Cross]n matrix filled with \
+zeros.\>\""}], ";"}]}], "Input",
+ CellChangeTimes->{{3.46952274118254*^9, 3.469522793784339*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Swap2", "[", 
+    RowBox[{"m_", ",", "n_"}], "]"}], ":=", 
+   RowBox[{"Sum", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Unvec", "[", 
+       RowBox[{
+        RowBox[{"UnitVector", "[", 
+         RowBox[{
+          RowBox[{"m", " ", "n"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"i", "-", "1"}], ")"}], " ", "n"}], "+", " ", "j"}]}], 
+         "]"}], ",", "n"}], "]"}], "\[CircleTimes]", 
+      RowBox[{
+       RowBox[{"Unvec", "[", 
+        RowBox[{
+         RowBox[{"UnitVector", "[", 
+          RowBox[{
+           RowBox[{"m", " ", "n"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"i", "-", "1"}], ")"}], " ", "n"}], "+", " ", "j"}]}], 
+          "]"}], ",", "n"}], "]"}], "\[Transpose]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "m"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Swap2", "::", "usage"}], " ", "=", " ", 
+   "\"\<Swap2[m,n] returns swap operations on m\[Cross]n-dimensional system, \
+which can be used to represent a resuffling operation. See: Horn, Johnson, \
+Topics in Matrix Analysis, Chapter 4.3. See also: Resuffle.\>\""}], " ", 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.469524324205984*^9, 3.469524430204637*^9}}]
 }, Open  ]]
 },
-WindowSize->{1280, 750},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{1278, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 25}},
 ShowSelection->True,
-FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -348,17 +408,17 @@ Cell[567, 22, 113, 2, 32, "Input"],
 Cell[683, 26, 489, 11, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1209, 42, 99, 1, 73, "Section"],
+Cell[1209, 42, 99, 1, 72, "Section"],
 Cell[1311, 45, 886, 21, 99, "Input"],
 Cell[2200, 68, 350, 7, 55, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2587, 80, 100, 1, 73, "Section"],
+Cell[2587, 80, 100, 1, 72, "Section"],
 Cell[2690, 83, 520, 13, 32, "Input"],
 Cell[3213, 98, 399, 8, 55, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3649, 111, 99, 1, 73, "Section"],
+Cell[3649, 111, 99, 1, 72, "Section"],
 Cell[3751, 114, 963, 25, 99, "Input"],
 Cell[4717, 141, 355, 7, 32, "Input"],
 Cell[5075, 150, 751, 19, 99, "Input"],
@@ -371,9 +431,12 @@ Cell[9138, 256, 1357, 37, 165, "Input"],
 Cell[10498, 295, 372, 7, 83, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[10907, 307, 89, 1, 73, "Section"],
+Cell[10907, 307, 89, 1, 72, "Section"],
 Cell[10999, 310, 302, 7, 32, "Input"],
-Cell[11304, 319, 289, 6, 32, "Input"]
+Cell[11304, 319, 289, 6, 32, "Input"],
+Cell[11596, 327, 512, 14, 55, "Input"],
+Cell[12111, 343, 1028, 32, 32, "Input"],
+Cell[13142, 377, 402, 8, 77, "Input"]
 }, Open  ]]
 }
 ]
