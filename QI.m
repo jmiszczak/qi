@@ -872,7 +872,11 @@ OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1
 	If[MatrixQ[op],
 		mtx=ReshuffleGeneral[op,d1,d1,d2,d2];
 		svd=SingularValueDecomposition[mtx];
-		vals=Select[Diagonal[svd[[2]]],#!=0&];
+		If[NumericQ[svd[[2,1]]],
+			vals=Select[Diagonal[svd[[2]]],#!=0&],
+			vals=Diagonal[svd[[2]]]
+		];
+		
 		snum=Length[vals];
 		Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}],
 		(*else*)
