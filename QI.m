@@ -1224,7 +1224,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1290,7 +1290,7 @@ RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u,e,phi0,psi0,chi0},
 RandomUnitary[d_]:=Exp[I*RandomReal[2*\[Pi]]]*RandomSpecialUnitary[d];
 
 
-RandomState[d_,dist_:"HS"]:=Block[{v},
+RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 	Switch[dist,
 		"HS",
 			v=Flatten[GinibreMatrix[d^2,1]];
