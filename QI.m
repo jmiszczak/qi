@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.7";
+qiVersion = "0.3.8";
 
 
-qiLastModification = "December 4, 2009";
+qiLastModification = "January 4, 2010";
 
 
 qiHistory = {
@@ -51,7 +51,8 @@ qiHistory = {
 	{"0.3.4", "19/11/2009", "Added Negativity, fixed SchmidtDecomposition."},
 	{"0.3.5", "21/11/2009", "SchmidtDecomposition now accepts vectos as well as matrices."},
 	{"0.3.6", "24/11/2009", "Minor update in qiNames."},
-	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."}
+	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."},
+	{"0.3.8", "04/01/2010", "Added local vars in RandomState"}
 };
 
 
