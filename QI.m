@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.8";
+qiVersion = "0.3.9";
 
 
-qiLastModification = "January 4, 2010";
+qiLastModification = "January 6, 2010";
 
 
 qiHistory = {
@@ -52,7 +52,8 @@ qiHistory = {
 	{"0.3.5", "21/11/2009", "SchmidtDecomposition now accepts vectos as well as matrices."},
 	{"0.3.6", "24/11/2009", "Minor update in qiNames."},
 	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."},
-	{"0.3.8", "04/01/2010", "Added local vars in RandomState"}
+	{"0.3.8", "04/01/2010", "Added local vars in RandomState"},
+	{"0.3.9", "06/01/2010", "Added error message in Ket"}
 };
 
 
@@ -804,7 +805,7 @@ GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
 GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi] I j/d],{j,0,d-1}]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Special states*)
 
 
@@ -814,9 +815,10 @@ Ket[label_,dim_]:=Block[{vec},
 		vec[[label+1]]=1;
 		vec,
 		(* else *)
-		Null
+		Message[Ket::argerr,label,dim];
 	]
 ];
+Ket::argerr = "Requested index `1` not smaller than dimension of vector: `2`.";
 
 
 Ketbra[i_,j_,dim_]:=KroneckerProduct[Ket[i,dim],Ket[j,dim]];
@@ -963,7 +965,7 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Parametrizations*)
 
 
@@ -997,7 +999,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit states*)
 
 
@@ -1013,7 +1015,7 @@ QubitBlochState[a_,b_,c_]:=1/2id + a sx + b sy + c sz;
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -1073,7 +1075,7 @@ TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]]
 ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
@@ -1115,7 +1117,7 @@ If[sys==1,
 ];(*endif*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entanglement*)
 
 
@@ -1128,7 +1130,7 @@ Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTransposeA[\[Rho],m,n]],#>0&];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -1161,14 +1163,14 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 QubitDaviesDynamicalMatrix[a_,b_,c_]:={{a,0,0,c},{0,b,0,0},{0,0,a,0},{c,0,0,1-b}};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qutrit channels*)
 
 
 QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1 t/2)],0},{0,0,Exp[-(A2 t/2)]}},{{0,Sqrt[1-Exp[-(A1 t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2 t)]]},{0,0,0},{0,0,0}}};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entropy*)
 
 
@@ -1192,11 +1194,11 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Distribution of eigenvalues*)
 
 
-\[Delta][a_,type_:"Dirac"] = Switch[type,
+\[Delta][a_,type_:"Dirac"] := Switch[type,
 	"Dirac", DiracDelta[a],
 	"Indicator", DiscreteDelta[a]
 ]; 
@@ -1225,7 +1227,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -1309,7 +1311,7 @@ RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Numerical range*)
 
 
@@ -1335,7 +1337,7 @@ Flatten[w,2]
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bloch Representation*)
 
 
