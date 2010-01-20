@@ -22,7 +22,7 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.9";
+qiVersion = "0.3.10";
 
 
 qiLastModification = "January 6, 2010";
@@ -53,7 +53,8 @@ qiHistory = {
 	{"0.3.6", "24/11/2009", "Minor update in qiNames."},
 	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."},
 	{"0.3.8", "04/01/2010", "Added local vars in RandomState"},
-	{"0.3.9", "06/01/2010", "Added error message in Ket"}
+	{"0.3.9", "06/01/2010", "Added error message in Ket"},
+	{"0.3.10", "19/01/2010", "Improved Davies map"}
 };
 
 
@@ -94,7 +95,7 @@ Clear@@QI`Private`qiNames;
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -427,7 +428,7 @@ Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenval
 RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -461,9 +462,7 @@ QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip ch
 QubitDynamicalMatrix::usage = "QubitDynamicalMatrix[\!\(\*SubscriptBox[\"\[Kappa]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"z\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"z\"]\)] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).";
 
 
-QubitDaviesDynamicalMatrix::usage = "Returns dynamical matrix for Davies channel with b = \!\(\*FractionBox[
-RowBox[{\"a\", \" \", \"p\"}], 
-RowBox[{\"1\", \"-\", \"p\"}]]\).";
+QubitDaviesDynamicalMatrix::usage = "QubitDaviesDynamicalMatrix[a,c,p] returns a dynamical matrix for one-qubit Davies channel with parameters a and c and stationary state (p,1-p).";
 
 
 (* ::Subsection::Closed:: *)
@@ -1160,7 +1159,7 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 }
 
 
-QubitDaviesDynamicalMatrix[a_,b_,c_]:={{a,0,0,c},{0,b,0,0},{0,0,a,0},{c,0,0,1-b}};
+QubitDaviesDynamicalMatrix[a_,c_,p_]:={{1 - a,0,0,(a p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a p)/(1-p)}};
 
 
 (* ::Subsection:: *)
