@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.10";
+qiVersion = "0.3.11";
 
 
-qiLastModification = "January 6, 2010";
+qiLastModification = "January 26, 2010";
 
 
 qiHistory = {
@@ -54,7 +54,8 @@ qiHistory = {
 	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."},
 	{"0.3.8", "04/01/2010", "Added local vars in RandomState"},
 	{"0.3.9", "06/01/2010", "Added error message in Ket"},
-	{"0.3.10", "19/01/2010", "Improved Davies map"}
+	{"0.3.10", "19/01/2010", "Improved Davies map"},
+	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"}
 };
 
 
@@ -79,7 +80,7 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 qiConstInfo = ""(*" This is predefined constant."*);
 
 
-qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesDynamicalMatrix","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomDynamicalMatrix","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z"};
+qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesDynamicalMatrix","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z"};
 
 
 End[]; (* End of `Private` context *)
@@ -428,7 +429,7 @@ Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenval
 RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -524,7 +525,7 @@ ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBo
 (*Random states and operations*)
 
 
-RandomSimplex::usage = "RandomSimplex[d] - d-dimensional random simplex.";
+RandomSimplex::usage = "RandomSimplex[d,\[Alpha]] generates a point on a d-dimensional simplex according to the Dirichlet distibution with parameter \[Alpha].\n RandomSimplex[d] uses the algorithm from the book 'Luc Devroye, Non-Uniform Random Variate Generation, Chapter 11, p. 568' and gives the flat distribution.";
 
 
 RandomKet::usage = "RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
@@ -552,6 +553,25 @@ RandomUnitary::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzan
 
 
 RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.";
+
+
+(* ::Subsection::Closed:: *)
+(*Random vectors*)
+
+
+RandomComplexUnitVector::usage = "RandomComplexUnitVector[n] returns a normalized, n-dimensional vector of complex numbers.";
+
+
+RandomRealUnitVector::usage = "RandomRealUnitVector[n] returns a normalized, n-dimensional vector of real numbers";
+
+
+RandomUnitVector::usage = "RandomUnitVector[n] returns a normalized, n-dimensional vector of complex numbers. If the second argument is set to 'Real', thef unction will output a vector over \!\(\*SuperscriptBox[\"\[DoubleStruckCapitalR]\", \"n\"]\). See also: RandomKet.";
+
+
+RandomEntangledUnitVector::usage = "RandomEntangledUnitVector[n] returns a maximally entangled unit vector on the n-dimensional vector space.";
+
+
+RandomUnitVectorSchmidt::usage = "RandomUnitVectorSchmidt[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal \[Sqrt]n and n has to be a perfect square.";
 
 
 (* ::Subsection::Closed:: *)
@@ -804,7 +824,7 @@ GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
 GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi] I j/d],{j,0,d-1}]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Special states*)
 
 
@@ -852,7 +872,7 @@ If[IntegerQ[subDim],
 IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
 
 
@@ -964,7 +984,7 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
 
@@ -998,7 +1018,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit states*)
 
 
@@ -1014,7 +1034,7 @@ QubitBlochState[a_,b_,c_]:=1/2id + a sx + b sy + c sz;
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -1074,7 +1094,7 @@ TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]]
 ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
@@ -1116,7 +1136,7 @@ If[sys==1,
 ];(*endif*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entanglement*)
 
 
@@ -1129,7 +1149,7 @@ Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTransposeA[\[Rho],m,n]],#>0&];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -1162,14 +1182,14 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 QubitDaviesDynamicalMatrix[a_,c_,p_]:={{1 - a,0,0,(a p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a p)/(1-p)}};
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qutrit channels*)
 
 
 QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1 t/2)],0},{0,0,Exp[-(A2 t/2)]}},{{0,Sqrt[1-Exp[-(A1 t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2 t)]]},{0,0,0},{0,0,0}}};
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entropy*)
 
 
@@ -1193,7 +1213,7 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Distribution of eigenvalues*)
 
 
@@ -1226,13 +1246,19 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
-RandomSimplex[n_]:=Block[{r,r1,r2},
-	r=Sort[Table[RandomReal[{0,1}],{i,1,n-1}]];
+RandomSimplex[d_]:=Block[{r,r1,r2},
+	r=Sort[Table[RandomReal[{0,1}],{i,1,d-1}]];
 	r1=Append[r,1];r2=Prepend[r,0];r1-r2
+];
+
+
+RandomSimplex[d_,\[Alpha]_]:=Block[{gammaSample},
+	gammaSample=RandomReal[GammaDistribution[\[Alpha],1],d];
+	gammaSample/Plus@@gammaSample
 ];
 
 
@@ -1311,6 +1337,50 @@ RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure
 
 
 (* ::Subsection:: *)
+(*Random vectors*)
+
+
+RandomComplexUnitVector[n_Integer]:=Block[{rv},
+	rv=RandomReal[NormalDistribution[0,1],{n}]+I RandomReal[NormalDistribution[0,1],{n}];
+	rv/Norm[rv]
+];
+
+
+RandomRealUnitVector[n_Integer]:=Block[{rv},
+	rv = RandomReal[NormalDistribution[0,1],{n}];
+	rv/Norm[rv]
+];
+
+
+RandomUnitVector[n_Integer,type_:"Complex"] :=Switch[type,
+	"Complex", RandomComplexUnitVector[n],
+	"Real", RandomRealUnitVector[n],
+	_, RandomComplexUnitVector[n]
+];
+
+
+RandomEntangledUnitVector[n_Integer]:=Block[{u1,u2,d=Sqrt[n]},
+	u1=RandomSpecialUnitary[d];
+	u2=RandomSpecialUnitary[d];
+	Plus@@Table[(u1[[i]])\[CircleTimes](u2[[i]]),{i,1,d}]/Sqrt[d]
+];
+
+
+RandomUnitVectorSchmidt[n_,r_]:=Block[{u1,u2,d,v},
+	d=Sqrt[n];
+	If[IntegerQ[d],
+		u1=RandomSpecialUnitary[d];
+		u2=RandomSpecialUnitary[d];
+		v=Plus@@Table[(u1[[i]])\[CircleTimes](u2[[i]]),{i,1,r}];
+		v/Norm[v],
+		(* else *)
+		Message[RandomUnitVectorSchmidt::argerr,n]
+	]
+];
+RandomUnitVectorSchmidt::argerr = "`1` is not a perfect square!";
+
+
+(* ::Subsection::Closed:: *)
 (*Numerical range*)
 
 
@@ -1336,7 +1406,7 @@ Flatten[w,2]
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
@@ -1359,7 +1429,7 @@ StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any d
 End[];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package footer*)
 
 

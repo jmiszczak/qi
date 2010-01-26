@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     14924,        436]
-NotebookOptionsPosition[     13560,        388]
-NotebookOutlinePosition[     13918,        404]
-CellTagsIndexPosition[     13875,        401]
+NotebookDataLength[      5715,        185]
+NotebookOptionsPosition[      4972,        155]
+NotebookOutlinePosition[      5329,        171]
+CellTagsIndexPosition[      5286,        168]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -40,46 +40,9 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Random simplex", "Section",
- CellChangeTimes->{{3.469253605467267*^9, 3.469253612043628*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomSimplexDirichlet", "[", 
-    RowBox[{"d_", ",", "\[Alpha]_"}], "]"}], ":=", 
-   RowBox[{"Block", "[", 
-    RowBox[{
-     RowBox[{"{", "gammaSample", "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"gammaSample", "=", 
-       RowBox[{"RandomReal", "[", 
-        RowBox[{
-         RowBox[{"GammaDistribution", "[", 
-          RowBox[{"\[Alpha]", ",", "1"}], "]"}], ",", "d"}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"gammaSample", "/", 
-       RowBox[{"Plus", "@@", "gammaSample"}]}]}]}], "\[IndentingNewLine]", 
-    "]"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.468083010847151*^9, 3.46808303944051*^9}, {
-  3.468083080716199*^9, 3.468083128150219*^9}, {3.468083180314456*^9, 
-  3.468083268601671*^9}, {3.46808331257411*^9, 3.468083318448881*^9}, {
-  3.468083511633033*^9, 3.468083534449963*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomSimplexDirichlet", "::", "usage"}], " ", "=", 
-   "\"\<RandomSimplexDirichlet[d,\[Alpha]] generate an a point on a \
-d-dimensionla simplex according to the Dirichlet distibution with a \
-aparameter \[Alpha].\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.468316269349083*^9, 3.46831631675718*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Exter channeels", "Section",
- CellChangeTimes->{{3.469253618781881*^9, 3.469253621390029*^9}}],
+Cell["Extra channels", "Section",
+ CellChangeTimes->{{3.469253618781881*^9, 3.469253621390029*^9}, {
+  3.473482829184316*^9, 3.473482838601782*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -105,202 +68,6 @@ Swap.\[Rho].Swap. Here n is the dimension of the state \[Rho] and it should \
 be a perfect square.\>\""}], ";"}]], "Input",
  CellChangeTimes->{{3.4683161188420486`*^9, 3.468316121374927*^9}, {
   3.468316154769199*^9, 3.46831625647819*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Random vectors", "Section",
- CellChangeTimes->{{3.469188083918191*^9, 3.469188086173028*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomComplexUnitVector", "[", "n_", "]"}], ":=", 
-   RowBox[{"Block", "[", 
-    RowBox[{
-     RowBox[{"{", "rv", "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"rv", "=", 
-       RowBox[{
-        RowBox[{"RandomReal", "[", 
-         RowBox[{
-          RowBox[{"NormalDistribution", "[", 
-           RowBox[{"0", ",", "1"}], "]"}], ",", 
-          RowBox[{"{", "n", "}"}]}], "]"}], "+", 
-        RowBox[{"\[ImaginaryI]", " ", 
-         RowBox[{"RandomReal", "[", 
-          RowBox[{
-           RowBox[{"NormalDistribution", "[", 
-            RowBox[{"0", ",", "1"}], "]"}], ",", 
-           RowBox[{"{", "n", "}"}]}], "]"}]}]}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"rv", "/", 
-       RowBox[{"Norm", "[", "rv", "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}],
-   ";"}]], "Input",
- CellChangeTimes->{{3.469185494408252*^9, 3.469185704414926*^9}, {
-  3.469188059202779*^9, 3.469188060096509*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomComplexUnitVector", "::", "usage"}], " ", "=", " ", 
-   "\"\<RandomComplexUnitVector[n] returns a normalized vector over \
-\[DoubleStruckCapitalC] of dimension n.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.469185860363919*^9, 3.469185917309483*^9}, {
-  3.469188066311206*^9, 3.469188069077851*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomRealUnitVector", "[", "n_", "]"}], ":=", 
-   RowBox[{"Block", "[", 
-    RowBox[{
-     RowBox[{"{", "rv", "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"rv", " ", "=", " ", 
-       RowBox[{"RandomReal", "[", 
-        RowBox[{
-         RowBox[{"NormalDistribution", "[", 
-          RowBox[{"0", ",", "1"}], "]"}], ",", 
-         RowBox[{"{", "n", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"rv", "/", 
-       RowBox[{"Norm", "[", "rv", "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}],
-   ";"}]], "Input",
- CellChangeTimes->{{3.469185641683834*^9, 3.469185643549795*^9}, {
-  3.469185708637924*^9, 3.469185721530155*^9}, {3.469186082862796*^9, 
-  3.469186083330446*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomRealUnitVector", "::", "usage"}], " ", "=", " ", 
-   "\"\<RandomRealUnitVector[n] returns a normalized vector over \
-\[DoubleStruckCapitalR] of dimension n.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.469185888370125*^9, 3.46918592020721*^9}, {
-  3.469186088256734*^9, 3.469186088721316*^9}, {3.469188096996373*^9, 
-  3.469188097838429*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomUnitVector", "[", 
-    RowBox[{"n_", ",", 
-     RowBox[{"type_:", "\"\<Complex\>\""}]}], "]"}], " ", ":=", 
-   RowBox[{"Switch", "[", 
-    RowBox[{"type", ",", "\[IndentingNewLine]", "\"\<Complex\>\"", ",", " ", 
-     RowBox[{"RandomComplexUnitVector", "[", "n", "]"}], ",", 
-     "\[IndentingNewLine]", "\"\<Real\>\"", ",", " ", 
-     RowBox[{"RandomRealUnitVector", "[", "n", "]"}], ",", 
-     "\[IndentingNewLine]", "_", ",", " ", 
-     RowBox[{"RandomComplexUnitVector", "[", "n", "]"}]}], 
-    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.469186092366123*^9, 3.46918610579243*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomUnitVector", "::", "usage"}], " ", "=", " ", 
-   "\"\<RandomUnitVector[n] returns a normalized vector over \
-\[DoubleStruckCapitalC] (by default) of dimension n. If the second argument \
-is set to 'Real', thef unction will output a vector over \
-\!\(\*SuperscriptBox[\(\[DoubleStruckCapitalR]\), \(n\)]\). See also: \
-RandomKet.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.469185934525636*^9, 3.469185938730205*^9}, {
-  3.469186000177777*^9, 3.469186058355776*^9}, {3.469188104025447*^9, 
-  3.469188105270743*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomEntangledUnitVector", "[", "n_", "]"}], ":=", 
-   RowBox[{"Block", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"u1", ",", "u2", ",", 
-       RowBox[{"d", "=", 
-        RowBox[{"Sqrt", "[", "n", "]"}]}]}], "}"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"u1", "=", 
-       RowBox[{"RandomSpecialUnitary", "[", "d", "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"u2", "=", 
-       RowBox[{"RandomSpecialUnitary", "[", "d", "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"Plus", "@@", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"u1", "[", 
-             RowBox[{"[", "i", "]"}], "]"}], ")"}], "\[CircleTimes]", 
-           RowBox[{"(", 
-            RowBox[{"u2", "[", 
-             RowBox[{"[", "i", "]"}], "]"}], ")"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "1", ",", "d"}], "}"}]}], "]"}]}], "/", 
-       RowBox[{"Sqrt", "[", "d", "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.469186612818729*^9, 3.469186688740267*^9}, {
-   3.469186794945336*^9, 3.469186976486296*^9}, 3.469187088611484*^9, {
-   3.469187121373624*^9, 3.469187130834011*^9}, {3.469204600058943*^9, 
-   3.469204602675616*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomEntangledUnitVector", "::", "usage"}], " ", "=", " ", 
-   "\"\<RandomEntangledUnitVector[n] returns a maximally entangled unit \
-vector on the n-dimensional vector space.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.469187093731294*^9, 3.46918716953251*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomUnitVectorSchmit", "[", 
-    RowBox[{"n_", ",", "r_"}], "]"}], ":=", 
-   RowBox[{"Block", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"u1", ",", "u2", ",", "d", ",", "v"}], "}"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"d", "=", 
-       RowBox[{"Sqrt", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"u1", "=", 
-       RowBox[{"RandomSpecialUnitary", "[", "d", "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"u2", "=", 
-       RowBox[{"RandomSpecialUnitary", "[", "d", "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"v", "=", 
-       RowBox[{"Plus", "@@", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"u1", "[", 
-             RowBox[{"[", "i", "]"}], "]"}], ")"}], "\[CircleTimes]", 
-           RowBox[{"(", 
-            RowBox[{"u2", "[", 
-             RowBox[{"[", "i", "]"}], "]"}], ")"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "1", ",", "r"}], "}"}]}], "]"}]}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"v", "/", 
-       RowBox[{"Norm", "[", "v", "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.469257686631734*^9, 3.469257741498373*^9}, {
-  3.469257851262541*^9, 3.469257906799822*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomUnitVectorSchmit", "::", "usage"}], "=", 
-   "\"\<RandomUnitVectorSchmit[n,r] returns a unit vector on n-dimensional \
-space with a Schmidt rank r. Note that r has to smaller or equal \[Sqrt]n and \
-n has to be a perfect square.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.469257746530013*^9, 3.469257856378604*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -387,9 +154,9 @@ Topics in Matrix Analysis, Chapter 4.3. See also: Resuffle.\>\""}], " ",
 }, Open  ]]
 },
 WindowSize->{1278, 750},
-WindowMargins->{{0, Automatic}, {Automatic, 25}},
+WindowMargins->{{1, Automatic}, {2, Automatic}},
 ShowSelection->True,
-FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -408,35 +175,17 @@ Cell[567, 22, 113, 2, 32, "Input"],
 Cell[683, 26, 489, 11, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1209, 42, 99, 1, 72, "Section"],
-Cell[1311, 45, 886, 21, 99, "Input"],
-Cell[2200, 68, 350, 7, 55, "Input"]
+Cell[1209, 42, 148, 2, 73, "Section"],
+Cell[1360, 46, 520, 13, 32, "Input"],
+Cell[1883, 61, 399, 8, 55, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2587, 80, 100, 1, 72, "Section"],
-Cell[2690, 83, 520, 13, 32, "Input"],
-Cell[3213, 98, 399, 8, 55, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3649, 111, 99, 1, 72, "Section"],
-Cell[3751, 114, 963, 25, 99, "Input"],
-Cell[4717, 141, 355, 7, 32, "Input"],
-Cell[5075, 150, 751, 19, 99, "Input"],
-Cell[5829, 171, 397, 8, 32, "Input"],
-Cell[6229, 181, 665, 14, 121, "Input"],
-Cell[6897, 197, 570, 11, 77, "Input"],
-Cell[7470, 210, 1349, 36, 121, "Input"],
-Cell[8822, 248, 313, 6, 32, "Input"],
-Cell[9138, 256, 1357, 37, 165, "Input"],
-Cell[10498, 295, 372, 7, 83, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[10907, 307, 89, 1, 72, "Section"],
-Cell[10999, 310, 302, 7, 32, "Input"],
-Cell[11304, 319, 289, 6, 32, "Input"],
-Cell[11596, 327, 512, 14, 55, "Input"],
-Cell[12111, 343, 1028, 32, 32, "Input"],
-Cell[13142, 377, 402, 8, 77, "Input"]
+Cell[2319, 74, 89, 1, 73, "Section"],
+Cell[2411, 77, 302, 7, 32, "Input"],
+Cell[2716, 86, 289, 6, 32, "Input"],
+Cell[3008, 94, 512, 14, 55, "Input"],
+Cell[3523, 110, 1028, 32, 32, "Input"],
+Cell[4554, 144, 402, 8, 77, "Input"]
 }, Open  ]]
 }
 ]

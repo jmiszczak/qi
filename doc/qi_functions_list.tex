@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.7)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.11)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -150,7 +150,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{QubitPhaseflipKraus} $ }-- Kraus operators for one qubit phase-flip channel.$  $\\[8pt]
 \noindent\textbf{$ \text{QubitBitphaseflipKraus} $ }-- Kraus operators for one qubit bit-phase-flip channel.$  $\\[8pt]
 \noindent\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).$  $\\[8pt]
-\noindent\textbf{$ \text{QubitDaviesDynamicalMatrix} $ }-- Returns dynamical matrix for Davies channel with b = $ \frac{a p}{1-p}. $\\[8pt]
+\noindent\textbf{$ \text{QubitDaviesDynamicalMatrix} $ }-- QubitDaviesDynamicalMatrix[a,c,p] returns a dynamical matrix for one-qubit Davies channel with parameters a and c and stationary state (p,1-p).$  $\\[8pt]
 \section{One-qutrit channels}
 
 \noindent\textbf{$ \text{QutritSpontaneousEmissionKraus} $ }-- QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit spontaneous emission channel with parameters A1, A2, t $>$= 0. See: A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $\\[8pt]
@@ -173,7 +173,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{ProbHS} $ }-- ProbHS[$\{$$ x_1\text{,...}x_n $$\}$,$\delta $] Probability distribution of eigenvalues $\lambda $ = $\{$$ x_1\text{,...}x_n $$\}$ of a matrix according to Hilbert-Schmidt distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: ''Indicator''$  $\\[8pt]
 \section{Random states and operations}
 
-\noindent\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d] - d-dimensional random simplex.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d,$\alpha $] generates a point on a d-dimensional simplex according to the Dirichlet distibution with parameter $\alpha $.$\backslash $n RandomSimplex[d] uses the algorithm from the book 'Luc Devroye, Non-Uniform Random Variate Generation, Chapter 11, p. 568' and gives the flat distribution.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomProductKet} $ }-- RandomProductKet[$\{$dim1,dim2,...,dimN$\}$] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomNormalMatrix} $ }-- RandomNormalMatrix[d] - random normal matrix of dimension d.$  $\\[8pt]
@@ -183,6 +183,13 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.$  $\\[8pt]
+\section{Random vectors}
+
+\noindent\textbf{$ \text{RandomComplexUnitVector} $ }-- RandomComplexUnitVector[n] returns a normalized, n-dimensional vector of complex numbers.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomRealUnitVector} $ }-- RandomRealUnitVector[n] returns a normalized, n-dimensional vector of real numbers$  $\\[8pt]
+\noindent\textbf{$ \text{RandomUnitVector} $ }-- RandomUnitVector[n] returns a normalized, n-dimensional vector of complex numbers. If the second argument is set to 'Real', thef unction will output a vector over $ \mathbb{R}^n $. See also: RandomKet.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomEntangledUnitVector} $ }-- RandomEntangledUnitVector[n] returns a maximally entangled unit vector on the n-dimensional vector space.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomUnitVectorSchmidt} $ }-- RandomUnitVectorSchmidt[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal $\surd $n and n has to be a perfect square.$  $\\[8pt]
 \section{Numerical range}
 
 \noindent\textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A,dx] - bound of numerical range of matrix A calculated with given step dx. Default value of dx is 0.01. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\[8pt]

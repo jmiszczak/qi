@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.7)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.11)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -152,7 +152,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{QubitBlochState} $ }-- QubitBlochState[$\rho $] - a parametrization of the one-qubit mixed state on the Bloch sphere.$  $\\
 
-\textbf{$ \text{QubitDaviesDynamicalMatrix} $ }-- Returns dynamical matrix for Davies channel with b = $ \frac{a p}{1-p}. $\\
+\textbf{$ \text{QubitDaviesDynamicalMatrix} $ }-- QubitDaviesDynamicalMatrix[a,c,p] returns a dynamical matrix for one-qubit Davies channel with parameters a and c and stationary state (p,1-p).$  $\\
 
 \textbf{$ \text{QubitDecayKraus} $ }-- Kraus operators of the decay channel, also know as amplitude damping, for one qubit.$  $\\
 
@@ -174,7 +174,11 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{QutritSpontaneousEmissionKraus} $ }-- QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit spontaneous emission channel with parameters A1, A2, t $>$= 0. See: A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $\\
 
+\textbf{$ \text{RandomComplexUnitVector} $ }-- RandomComplexUnitVector[n] returns a normalized, n-dimensional vector of complex numbers.$  $\\
+
 \textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equal to 0. Thanks to Wojtek Bruzda.$  $\\
+
+\textbf{$ \text{RandomEntangledUnitVector} $ }-- RandomEntangledUnitVector[n] returns a maximally entangled unit vector on the n-dimensional vector space.$  $\\
 
 \textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\
 
@@ -184,13 +188,21 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{RandomProductNumericalRange} $ }-- RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $\\
 
-\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d] - d-dimensional random simplex.$  $\\
+\textbf{$ \text{RandomRealUnitVector} $ }-- RandomRealUnitVector[n] returns a normalized, n-dimensional vector of real numbers$  $\\
+
+\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d,$\alpha $] generates a point on a d-dimensional simplex according to the Dirichlet distibution with parameter $\alpha $.$\backslash $n RandomSimplex[d] uses the algorithm from the book 'Luc Devroye, Non-Uniform Random Variate Generation, Chapter 11, p. 568' and gives the flat distribution.$  $\\
 
 \textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\
 
 \textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.$  $\\
 
 \textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\
+
+\textbf{$ \text{RandomUnitVector} $ }-- RandomUnitVector[n] returns a normalized, n-dimensional vector of complex numbers. If the second argument is set to 'Real', thef unction will output a vector over $ \mathbb{R}^n $. See also: RandomKet.$  $\\
+
+\textbf{$ \text{RandomUnitVectorSchmidt} $ }-- RandomUnitVectorSchmidt[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal $\surd $n and n has to be a perfect square.$  $\\
+
+\textbf{$ \text{RandomUnitVectorSchmit} $ }-- RandomUnitVectorSchmit[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal $\surd $n and n has to be a perfect square.$  $\\
 
 \textbf{$ \text{Res} $ }-- Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A into a vector row by row.$  $\\
 

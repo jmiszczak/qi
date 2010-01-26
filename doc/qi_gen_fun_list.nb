@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     13114,        328]
-NotebookOptionsPosition[     12509,        302]
-NotebookOutlinePosition[     12866,        318]
-CellTagsIndexPosition[     12823,        315]
+NotebookDataLength[     13187,        330]
+NotebookOptionsPosition[     12581,        304]
+NotebookOutlinePosition[     12939,        320]
+CellTagsIndexPosition[     12896,        317]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,13 +26,14 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Package QI version \"\>", "\[InvisibleSpace]", "\<\"0.3.6\"\>",
-    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"November 24, 2009\"\>", 
+  RowBox[{"\<\"Package QI version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.3.11\"\>", 
+   "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"January 26, 2010\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.3.6", " (last modification: ", 
-   "November 24, 2009", ")."],
+  "Package QI version ", "0.3.11", " (last modification: ", 
+   "January 26, 2010", ")."],
   Editable->False]], "Print",
  CellChangeTimes->{{3.467456080637093*^9, 3.467456104335169*^9}, {
    3.467456174802355*^9, 3.46745618796615*^9}, 3.467456230631059*^9, 
@@ -42,7 +43,8 @@ Cell[BoxData[
    3.46745761343082*^9, {3.467458045235658*^9, 3.467458072779933*^9}, 
    3.467458177942374*^9, 3.467468038440025*^9, 3.467545003645597*^9, 
    3.467554282371089*^9, 3.467557508407943*^9, {3.4675601991435*^9, 
-   3.467560215271614*^9}, 3.467562918529836*^9, 3.468054659864513*^9}]
+   3.467560215271614*^9}, 3.467562918529836*^9, 3.468054659864513*^9, 
+   3.473483451029093*^9, 3.47348378520222*^9, 3.47348444217245*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -301,7 +303,7 @@ Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
 }, Open  ]]
 },
 WindowSize->{1272, 723},
-WindowMargins->{{0, Automatic}, {Automatic, 3}},
+WindowMargins->{{1, Automatic}, {29, Automatic}},
 ShowSelection->True,
 FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
@@ -319,16 +321,16 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 113, 2, 32, "Input"],
-Cell[683, 26, 1036, 18, 24, "Print"]
+Cell[683, 26, 1108, 20, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1756, 49, 156, 2, 32, "Subsubtitle"],
-Cell[1915, 53, 272, 5, 32, "Input"],
-Cell[2190, 60, 491, 12, 77, "Input"]
+Cell[1828, 51, 156, 2, 32, "Subsubtitle"],
+Cell[1987, 55, 272, 5, 32, "Input"],
+Cell[2262, 62, 491, 12, 77, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2718, 77, 122, 1, 32, "Subsubtitle"],
-Cell[2843, 80, 9650, 219, 1089, "Input"]
+Cell[2790, 79, 122, 1, 32, "Subsubtitle"],
+Cell[2915, 82, 9650, 219, 1089, "Input"]
 }, Open  ]]
 }
 ]
