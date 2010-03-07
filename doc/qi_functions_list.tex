@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.11)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.12)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -16,7 +16,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \noindent\textbf{$ \text{KroneckerSum} $ }-- KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A$\otimes $1+1$\otimes $B. Alternative syntax A$\oplus $B for KroneckerSum[A,B] is also provided. See also: KroneckerProduct.$  $\\[8pt]
 \noindent\textbf{$ \text{SquareMatrixQ} $ }-- SquareMatrixQ[A] returns True only if A is a square matrix, and gives False otherwise.$  $\\[8pt]
-\noindent\textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n$\times $n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.$  $\\[8pt]
+\noindent\textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the third argument is ommited this function returns square m$\times $m matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.$  $\\[8pt]
 \noindent\textbf{$ \text{SymbolicVector} $ }-- SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and it returns a vector with m elements a[i],i=1,...,n.$  $\\[8pt]
 \noindent\textbf{$ \text{SymbolicHermitianMatrix} $ }-- SymbolicHermitianMatrix[sym,n] produces a n$\times $n Hermitian matrix. See also: SymbolicMatrix, SymbolicVector.$  $\\[8pt]
 \noindent\textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns a real and an imaginary parts of a complex number z as a pair of real numbers.$  $\\[8pt]
@@ -64,7 +64,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{GellMannMatrices} $ }-- List of Gell-Mann matrices. Use Map[MatrixForm[$\#$]$\&$,GellMannMatrices] to get this list in more readable form.$  $\\[8pt]
 \section{Quantum gates}
 
-\noindent\textbf{$ \text{Swap} $ }-- Swap[n] returns permutation operator $ \underset{i=0}{\overset{n-1}{ \sum }}\underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on $ n^2 $-dimensional space and exchanging two n-dimensional subsystems.$  $\\[8pt]
+\noindent\textbf{$ \text{Swap} $ }-- Swap[d] returns permutation operator $ \underset{i=0}{\overset{n-1}{ \sum }}\underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on d-dimensional, d=$ n^2 $ space and exchanging two $\surd $d-dimensional subsystems.$  $\\[8pt]
 \noindent\textbf{$ \text{QFT} $ }-- QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbolic', which is default, or 'Numerical'. The second option makes this function much faster.$  $\\[8pt]
 \noindent\textbf{$ \text{cnot} $ }-- Controlled not matrix for two qubits.$  $\\[8pt]
 \noindent\textbf{$ \text{GeneralizedPauliX} $ }-- Generalized Pauli matrix X. See also: $ \sigma _x $\\[8pt]

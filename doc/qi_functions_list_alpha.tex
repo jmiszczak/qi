@@ -1,18 +1,18 @@
 \documentclass[a4paper,10pt]{scrartcl}
-\usepackage{amsmath,amssymb,graphicx}
-\usepackage{fullpage}
-\parindent=0pt
-\begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.11)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
-{The Institute of Theoretical and Applied Informatics}\\
-{Polish Academy of Sciences},\\
-{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
-\maketitle
-\begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
+	\usepackage{amsmath,amssymb,graphicx}
+	\usepackage{fullpage}
+	\parindent=0pt
+	\begin{document}
+	\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.12)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+	{The Institute of Theoretical and Applied Informatics}\\
+	{Polish Academy of Sciences},\\
+	{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
+	\maketitle
+	\begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states and quantum operations. In contrast to 
 many available packages for symbolic and numerical simulation of quantum computation presented 
 package is focused on geometrical aspects of quantum information theory.\end{abstract}
-\textbf{$ \text{ApplyChannel} $ }-- ApplayChannel[f,$\rho $] - apply channel f, given as a pure function, to the input state $\rho $. See also: ApplyUnitary, ApplyKraus.$  $\\
+	\textbf{$ \text{ApplyChannel} $ }-- ApplayChannel[f,$\rho $] - apply channel f, given as a pure function, to the input state $\rho $. See also: ApplyUnitary, ApplyKraus.$  $\\
 
 \textbf{$ \text{ApplyKraus} $ }-- ApplyKraus[ck,$\rho $] - apply channel ck, given as a list of Kraus operators, to the input state $\rho $. See also: ApplyUnitary, ApplyChannel.$  $\\
 
@@ -202,8 +202,6 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{RandomUnitVectorSchmidt} $ }-- RandomUnitVectorSchmidt[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal $\surd $n and n has to be a perfect square.$  $\\
 
-\textbf{$ \text{RandomUnitVectorSchmit} $ }-- RandomUnitVectorSchmit[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal $\surd $n and n has to be a perfect square.$  $\\
-
 \textbf{$ \text{Res} $ }-- Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A into a vector row by row.$  $\\
 
 \textbf{$ \text{Reshuffle} $ }-- Reshuffle[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices. If  the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: ReshuffleGeneral, Reshuffle2.$  $\\
@@ -232,7 +230,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{Superoperator} $ }-- Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,$\#$]$\&$,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.$  $\\
 
-\textbf{$ \text{Swap} $ }-- Swap[n] returns permutation operator $ \underset{i=0}{\overset{n-1}{ \sum }}\underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on $ n^2 $-dimensional space and exchanging two n-dimensional subsystems.$  $\\
+\textbf{$ \text{Swap} $ }-- Swap[d] returns permutation operator $ \underset{i=0}{\overset{n-1}{ \sum }}\underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on d-dimensional, d=$ n^2 $ space and exchanging two $\surd $d-dimensional subsystems.$  $\\
 
 \textbf{$ \text{sx} $ }-- Pauli matrix $ \sigma _y. $\\
 
@@ -240,7 +238,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{SymbolicHermitianMatrix} $ }-- SymbolicHermitianMatrix[sym,n] produces a n$\times $n Hermitian matrix. See also: SymbolicMatrix, SymbolicVector.$  $\\
 
-\textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n$\times $n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.$  $\\
+\textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the third argument is ommited this function returns square m$\times $m matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.$  $\\
 
 \textbf{$ \text{SymbolicVector} $ }-- SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and it returns a vector with m elements a[i],i=1,...,n.$  $\\
 

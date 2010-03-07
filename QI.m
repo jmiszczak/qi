@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.11";
+qiVersion = "0.3.12";
 
 
-qiLastModification = "January 26, 2010";
+qiLastModification = "March 4, 2010";
 
 
 qiHistory = {
@@ -55,7 +55,8 @@ qiHistory = {
 	{"0.3.8", "04/01/2010", "Added local vars in RandomState"},
 	{"0.3.9", "06/01/2010", "Added error message in Ket"},
 	{"0.3.10", "19/01/2010", "Improved Davies map"},
-	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"}
+	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"},
+	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"}
 };
 
 
@@ -110,7 +111,7 @@ KroneckerSum::usage = "KroneckerSum[A,B] returns the Kronecker sum of matrices A
 SquareMatrixQ::usage = "SquareMatrixQ[A] returns True only if A is a square matrix, and gives False otherwise.";
 
 
-SymbolicMatrix::usage = "SymbolicMatrix[a,m,n] returns m\[Cross]n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the second argument is ommited this function returns square n\[Cross]n matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.";
+SymbolicMatrix::usage = "SymbolicMatrix[a,m,n] returns m\[Cross]n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the third argument is ommited this function returns square m\[Cross]m matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.";
 
 
 SymbolicVector::usage = "SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and it returns a vector with m elements a[i],i=1,...,n.";
@@ -220,7 +221,7 @@ GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,Ge
 (*Quantum gates*)
 
 
-Swap::usage="Swap[n] returns permutation operator \!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"i\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)\!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"j\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[LeftAngleBracket]j|\[CircleTimes]|j\[RightAngleBracket]\[LeftAngleBracket]i\[VerticalSeparator] acting on \!\(\*SuperscriptBox[\"n\", \"2\"]\)-dimensional space and exchanging two n-dimensional subsystems.";
+Swap::usage="Swap[d] returns permutation operator \!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"i\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)\!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"j\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[LeftAngleBracket]j|\[CircleTimes]|j\[RightAngleBracket]\[LeftAngleBracket]i\[VerticalSeparator] acting on d-dimensional, d=\!\(\*SuperscriptBox[\"n\", \"2\"]\) space and exchanging two \[Sqrt]d-dimensional subsystems.";
 
 
 QFT::usage = "QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbolic', which is default, or 'Numerical'. The second option makes this function much faster.";
@@ -598,41 +599,43 @@ StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of app
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Miscellaneous functions*)
 
 
-qiGenDoc[docFile_:"qi_usage.tex",dir_:"~/zksi-repo/qi/doc"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,lista},
-ExportString["","TeX"];
-SetDirectory[dir];
-lista=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
-latexHeader="\\documentclass[a4paper,10pt]{scrartcl}
-\\usepackage{amsmath,amssymb,graphicx}
-\\usepackage{fullpage}
-\\parindent=0pt
-\\begin{document}
-\\title{QI Package for \\emph{Mathematica} 7.0 \\\\(version " <> QI`Private`qiVersion <> ")}" <>
-"\\author{Jaros{\\l}aw Adam Miszczak \\quad Piotr Gawron \\quad Zbigniew Pucha{\\l}a\\\\
-{The Institute of Theoretical and Applied Informatics}\\\\
-{Polish Academy of Sciences},\\\\
-{Ba{\\l}tycka 5, 44-100 Gliwice, Poland}}
-\\maketitle
-\\begin{abstract}"
-<> QI`Private`qiAbout <>
-"\\end{abstract}
-";
-latexFooter = "\\end{document}";
-f=OpenWrite[docFile];
-WriteString[f,latexHeader];
-For[i=1,i<= Length[lista],i++,
-name=ToString[TeXForm[lista[[i,1]]]];
-usage=ToString[TeXForm[DisplayForm[lista[[i,2]]]]];
-txt = QI`Private`qiFormatUsageMsg[name, usage];
-WriteString[f,txt];
-WriteString[f,"\\\\\n\n"];
-];
-WriteString[f,latexFooter];
-Close[f];
+qiGenDoc[docFile_:"qi_functions_list_alpha.tex",dir_:"~/zksi-repo/qi/doc"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,lista},
+	ExportString["","TeX"];
+	SetDirectory[dir];
+
+	lista=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
+	latexHeader="\\documentclass[a4paper,10pt]{scrartcl}
+	\\usepackage{amsmath,amssymb,graphicx}
+	\\usepackage{fullpage}
+	\\parindent=0pt
+	\\begin{document}
+	\\title{QI Package for \\emph{Mathematica} 7.0 \\\\(version " <> QI`Private`qiVersion <> ")}" <>
+	"\\author{Jaros{\\l}aw Adam Miszczak \\quad Piotr Gawron \\quad Zbigniew Pucha{\\l}a\\\\
+	{The Institute of Theoretical and Applied Informatics}\\\\
+	{Polish Academy of Sciences},\\\\
+	{Ba{\\l}tycka 5, 44-100 Gliwice, Poland}}
+	\\maketitle
+	\\begin{abstract}"
+	<> QI`Private`qiAbout <>
+	"\\end{abstract}
+	";
+
+	latexFooter = "\\end{document}";
+	f=OpenWrite[docFile];
+	WriteString[f,latexHeader];
+	For[i=1,i<= Length[lista],i++,
+		name=ToString[TeXForm[lista[[i,1]]]];
+		usage=ToString[TeXForm[DisplayForm[lista[[i,2]]]]];
+		txt = QI`Private`qiFormatUsageMsg[name, usage];
+		WriteString[f,txt];
+		WriteString[f,"\\\\\n\n"];
+	];
+	WriteString[f,latexFooter];
+	Close[f];
 ];
 
 qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=inMsg,txt},
@@ -645,7 +648,7 @@ qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -675,7 +678,7 @@ SymbolicMatrix[sym_,d1_,d2_:0] := Which[
 ];
 
 
-SymbolicVector[sym_,d1_]:= SymbolicMatrix[sym,d1,1];
+SymbolicVector[sym_,d1_]:= \[AliasDelimiter][sym,d1,1];
 
 
 SymbolicHermitianMatrix[sym_,d_]:=Block[{mtx},
@@ -806,7 +809,7 @@ GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lam
 (*Quantum gates*)
 
 
-Swap[dim_]:=Plus@@Flatten[Table[KroneckerProduct[Ketbra[i,j,dim],Ketbra[j,i,dim]],{i,0,dim-1},{j,0,dim-1}],1];
+Swap[dim_]:=Plus@@Flatten[Table[KroneckerProduct[Ketbra[i,j,Sqrt[dim]],Ketbra[j,i,Sqrt[dim]]],{i,0,Sqrt[dim]-1},{j,0,Sqrt[dim]-1}],1];
 
 
 QFT[n_,method_:"Symbolic"]:=Block[{\[Omega]},
@@ -1094,14 +1097,14 @@ TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]]
 ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
-PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m]\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho]]]]];
+PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m m]\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho]]]]];
 
 
-PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m m]\[CircleTimes]Swap[n]).Res[Reshuffle[\[Rho]]]]];
+PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m m]\[CircleTimes]Swap[n n]).Res[Reshuffle[\[Rho]]]]];
 
 
 PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
@@ -1246,7 +1249,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -1336,7 +1339,7 @@ RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random vectors*)
 
 

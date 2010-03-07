@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     13187,        330]
-NotebookOptionsPosition[     12581,        304]
-NotebookOutlinePosition[     12939,        320]
-CellTagsIndexPosition[     12896,        317]
+NotebookDataLength[     23294,        572]
+NotebookOptionsPosition[     22603,        543]
+NotebookOutlinePosition[     22961,        559]
+CellTagsIndexPosition[     22918,        556]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -27,13 +27,13 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Package QI version \"\>", 
-   "\[InvisibleSpace]", "\<\"0.3.11\"\>", 
+   "\[InvisibleSpace]", "\<\"0.3.12\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"January 26, 2010\"\>", 
+   "\[InvisibleSpace]", "\<\"March 4, 2010\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.3.11", " (last modification: ", 
-   "January 26, 2010", ")."],
+  "Package QI version ", "0.3.12", " (last modification: ", "March 4, 2010", 
+   ")."],
   Editable->False]], "Print",
  CellChangeTimes->{{3.467456080637093*^9, 3.467456104335169*^9}, {
    3.467456174802355*^9, 3.46745618796615*^9}, 3.467456230631059*^9, 
@@ -44,41 +44,37 @@ Cell[BoxData[
    3.467458177942374*^9, 3.467468038440025*^9, 3.467545003645597*^9, 
    3.467554282371089*^9, 3.467557508407943*^9, {3.4675601991435*^9, 
    3.467560215271614*^9}, 3.467562918529836*^9, 3.468054659864513*^9, 
-   3.473483451029093*^9, 3.47348378520222*^9, 3.47348444217245*^9}]
+   3.473483451029093*^9, 3.47348378520222*^9, 3.47348444217245*^9, 
+   3.476676412545881*^9, 3.476678798662126*^9, 3.47667888786354*^9, 
+   3.476682135856394*^9, 3.476683385961015*^9, 3.476683733729436*^9, 
+   3.476684094329714*^9, 3.47668420935671*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Open package files", "Subsubtitle",
- CellChangeTimes->{{3.467457532064879*^9, 3.467457538016651*^9}, {
-  3.467457614364134*^9, 3.467457615776307*^9}}],
+Cell["\<\
+Generate alphabetical function list stored in ~/zksi - \
+repo/qi/doc/qi_functions _list _alpha.tex\
+\>", "Subsubtitle",
+ CellChangeTimes->{{3.47668367675871*^9, 3.476683678750844*^9}}],
 
 Cell[BoxData[
- RowBox[{"QI`Private`qiGenDoc", "[", "\"\<qi_functions_list_alfa.tex\>\"", 
-  "]"}]], "Input",
+ RowBox[{
+  RowBox[{"QI`Private`qiGenDoc", "[", "]"}], " ", ";"}]], "Input",
  CellChangeTimes->{{3.467458575519212*^9, 3.467458580962137*^9}, {
   3.467545007762589*^9, 3.467545012268602*^9}, {3.469163440421468*^9, 
-  3.469163466912177*^9}}],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"qif", "=", 
-   RowBox[{"OpenRead", "[", "\"\<~/zksi-repo/qi/QI.m\>\"", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"txt", "=", 
-   RowBox[{"ReadList", "[", 
-    RowBox[{"qif", ",", "String"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Close", "[", "qif", "]"}], ";"}]}], "Input",
- CellChangeTimes->{{3.467453803988084*^9, 3.467453809637454*^9}, {
-   3.467457510044264*^9, 3.467457522214403*^9}, 3.467457620542316*^9}]
+  3.469163466912177*^9}, {3.476678727511828*^9, 3.476678728580169*^9}, {
+  3.476683625443527*^9, 3.476683667935618*^9}, {3.476683727226977*^9, 
+  3.476683728506851*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Find all names and generate LaTeX", "Subsubtitle",
- CellChangeTimes->{{3.467457550309866*^9, 3.467457591255776*^9}}],
+Cell["\<\
+Generate functions list sorted by section and stored in ~/zksi - \
+repo/qi/doc/qi_functions _list .tex\
+\>", "Subsubtitle",
+ CellChangeTimes->{{3.47668367675871*^9, 3.476683705330853*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -125,9 +121,8 @@ Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
  RowBox[{
   RowBox[{"f", "=", 
    RowBox[{
-   "OpenWrite", "[", 
-    "\"\</home/jam/zksi-repo/qi/doc/qi_functions_list.tex\>\"", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
+   "OpenWrite", "[", "\"\<~/zksi-repo/qi/doc/qi_functions_list.tex\>\"", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"WriteString", "[", 
@@ -136,7 +131,21 @@ Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
  RowBox[{
   RowBox[{"print", "=", "False"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"latexList", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"latexList", "=", "\"\<\>\""}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"qif", "=", 
+   RowBox[{"OpenRead", "[", "\"\<~/zksi-repo/qi/QI.m\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"txt", "=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{"qif", ",", "String"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Close", "[", "qif", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"For", "[", 
    RowBox[{
@@ -299,11 +308,241 @@ Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
    3.46805461387615*^9, 3.46805465414053*^9}, {3.468054684812618*^9, 
    3.468054685083076*^9}, {3.468055307119654*^9, 3.468055310343351*^9}, {
    3.468055357335032*^9, 3.46805536396158*^9}, {3.468055610892601*^9, 
-   3.468055616259871*^9}, {3.46805566536913*^9, 3.468055699291945*^9}}]
+   3.468055616259871*^9}, {3.46805566536913*^9, 3.468055699291945*^9}, {
+   3.476679130690496*^9, 3.476679133002148*^9}, {3.476683715983344*^9, 
+   3.476683717072577*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Generate functions list sorted by section, without ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"L", 
+     StyleBox[
+      AdjustmentBox["A",
+       BoxBaselineShift->-0.4,
+       BoxMargins->{{-0.5, -0.3}, {0, 0}}],
+      FontSize->Smaller], "T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]]],
+ " header and stored in ~/zksi - repo/qi/doc/qi_functions.tex"
+}], "Subsubtitle",
+ CellChangeTimes->{{3.47668367675871*^9, 3.476683705330853*^9}, {
+  3.476684132749478*^9, 3.476684159275196*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ExportString", "[", 
+   RowBox[{"\"\<\>\"", ",", "\"\<TeX\>\""}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lista", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{"ToExpression", "[", 
+        RowBox[{"Evaluate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<::usage\>\""}], "]"}], 
+        "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", 
+        RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}], "]"}]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "=", 
+    RowBox[{
+    "OpenWrite", "[", "\"\<~/zksi-repo/qi/doc/qi_functions.tex\>\"", "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"print", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"latexList", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"qif", "=", 
+   RowBox[{"OpenRead", "[", "\"\<~/zksi-repo/qi/QI.m\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"txt", "=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{"qif", ",", "String"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Close", "[", "qif", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "txt", "]"}]}], ",", 
+    RowBox[{"i", "++"}], ",", " ", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"StringMatchQ", "[", 
+        RowBox[{
+         RowBox[{"ToString", "[", 
+          RowBox[{"txt", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+         "\"\<(*Help messages*)\>\""}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"print", "=", "True"}], ";"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"StringMatchQ", "[", 
+        RowBox[{
+         RowBox[{"ToString", "[", 
+          RowBox[{"txt", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+         "\"\<(*Private definitions*)\>\""}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"print", "=", "False"}], ";"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"txt", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"___", "~~", "\"\<::Subsection::\>\"", "~~", "___"}]}], 
+         "]"}], "&&", "print"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"secLine", "=", 
+         RowBox[{"txt", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"secLine", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"secLine", ",", 
+           RowBox[{"\"\<(*\>\"", "\[Rule]", " ", "\"\<\\\\section{\>\""}]}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"secLine", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"secLine", ",", 
+           RowBox[{"\"\<*)\>\"", "\[Rule]", " ", "\"\<}\>\""}]}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"latexList", " ", "=", " ", 
+         RowBox[{
+         "latexList", " ", "<>", " ", "secLine", "  ", "<>", " ", 
+          "\"\<\\n\\n\>\""}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"txt", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"___", "~~", "\"\<::usage\>\"", "~~", "___"}]}], "]"}], "&&",
+         "print"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"line", "=", 
+         RowBox[{"txt", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"nameLength", "=", 
+         RowBox[{
+          RowBox[{"StringPosition", "[", 
+           RowBox[{"line", ",", "\"\<::usage\>\""}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"name", "=", 
+         RowBox[{"StringDrop", "[", 
+          RowBox[{"line", ",", 
+           RowBox[{"{", 
+            RowBox[{"nameLength", ",", 
+             RowBox[{"StringLength", "[", "line", "]"}]}], "}"}]}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"usage", "=", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"TeXForm", "[", 
+           RowBox[{"DisplayForm", "[", 
+            RowBox[{"ToExpression", "[", 
+             RowBox[{"Evaluate", "[", 
+              RowBox[{"name", "<>", "\"\<::usage\>\""}], "]"}], "]"}], "]"}], 
+           "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"name", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{
+           RowBox[{"ToString", "[", 
+            RowBox[{"FullForm", "[", "name", "]"}], "]"}], ",", 
+           RowBox[{"\"\<\\\\\\\\\>\"", "\[Rule]", "\"\<\\\\\>\""}]}], "]"}]}],
+         ";", "\[IndentingNewLine]", 
+        RowBox[{"name", "=", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"TeXForm", "[", 
+           RowBox[{"ToExpression", "[", "name", "]"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"res", "=", 
+         RowBox[{"QI`Private`qiFormatUsageMsg", "[", 
+          RowBox[{"name", ",", "usage"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"latexList", "=", 
+         RowBox[{
+         "latexList", "<>", "\"\<\\\\noindent\>\"", "<>", "res", "<>", 
+          "\"\<\\\\\\\\[8pt]\\n\>\""}]}], " ", ";"}]}], "\[IndentingNewLine]",
+       "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"WriteString", "[", 
+   RowBox[{"f", ",", "latexList"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Close", "[", "f", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.467453967937893*^9, 3.46745399360704*^9}, {
+   3.467454025237529*^9, 3.467454038975367*^9}, {3.467454099750134*^9, 
+   3.467454128053389*^9}, {3.467454519163643*^9, 3.467454655910483*^9}, {
+   3.467454698215324*^9, 3.467454871038418*^9}, {3.467454932724339*^9, 
+   3.467454936617376*^9}, {3.467454975347693*^9, 3.467454980545123*^9}, {
+   3.467455185118931*^9, 3.467455283677856*^9}, {3.467455339983506*^9, 
+   3.467455585098316*^9}, {3.467455616845933*^9, 3.467455647538659*^9}, {
+   3.467455981822065*^9, 3.467456010364949*^9}, {3.467456047418553*^9, 
+   3.46745622755418*^9}, {3.467456268957061*^9, 3.467456463771543*^9}, {
+   3.467456613090222*^9, 3.467456679160106*^9}, {3.467456718815977*^9, 
+   3.467456875752125*^9}, {3.467456964505692*^9, 3.467456983300305*^9}, {
+   3.467457117461215*^9, 3.467457137206102*^9}, {3.467457181733683*^9, 
+   3.467457228128783*^9}, {3.467457259556487*^9, 3.467457416890814*^9}, {
+   3.467457453164301*^9, 3.467457495734156*^9}, {3.467457649049709*^9, 
+   3.467457714911088*^9}, {3.467458217478543*^9, 3.467458220541183*^9}, {
+   3.467458254560395*^9, 3.467458256796607*^9}, {3.46745837382516*^9, 
+   3.467458390043201*^9}, {3.467458525224146*^9, 3.467458525819368*^9}, {
+   3.467459098940034*^9, 3.467459103531343*^9}, {3.467459134414363*^9, 
+   3.467459145286401*^9}, {3.467459213525061*^9, 3.467459214620593*^9}, {
+   3.467459363813295*^9, 3.467459365941695*^9}, {3.467459536076513*^9, 
+   3.467459542136546*^9}, {3.467459594453256*^9, 3.467459599235772*^9}, {
+   3.467461490255414*^9, 3.467461545764373*^9}, {3.467461576996262*^9, 
+   3.467461579620679*^9}, {3.467461610843651*^9, 3.467461622294529*^9}, 
+   3.467462276642562*^9, {3.467462384989171*^9, 3.46746238949472*^9}, {
+   3.467462462007657*^9, 3.467462462366867*^9}, {3.467463494347555*^9, 
+   3.467463494520799*^9}, {3.467467986564137*^9, 3.467468014001318*^9}, {
+   3.467560158122543*^9, 3.467560184298255*^9}, {3.467560242755241*^9, 
+   3.467560280721349*^9}, {3.46756294786577*^9, 3.467562977081845*^9}, {
+   3.46805461387615*^9, 3.46805465414053*^9}, {3.468054684812618*^9, 
+   3.468054685083076*^9}, {3.468055307119654*^9, 3.468055310343351*^9}, {
+   3.468055357335032*^9, 3.46805536396158*^9}, {3.468055610892601*^9, 
+   3.468055616259871*^9}, {3.46805566536913*^9, 3.468055699291945*^9}, {
+   3.476679130690496*^9, 3.476679133002148*^9}, {3.476683715983344*^9, 
+   3.476683717072577*^9}, {3.476684164404009*^9, 3.476684200324097*^9}}]
 }, Open  ]]
 },
-WindowSize->{1272, 723},
-WindowMargins->{{1, Automatic}, {29, Automatic}},
+WindowSize->{1280, 749},
+WindowMargins->{{5, Automatic}, {Automatic, -2}},
 ShowSelection->True,
 FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
@@ -321,16 +560,19 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 113, 2, 32, "Input"],
-Cell[683, 26, 1108, 20, 24, "Print"]
+Cell[683, 26, 1288, 23, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1828, 51, 156, 2, 32, "Subsubtitle"],
-Cell[1987, 55, 272, 5, 32, "Input"],
-Cell[2262, 62, 491, 12, 77, "Input"]
+Cell[2008, 54, 194, 4, 32, "Subsubtitle"],
+Cell[2205, 60, 398, 7, 32, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2790, 79, 122, 1, 32, "Subsubtitle"],
-Cell[2915, 82, 9650, 219, 1089, "Input"]
+Cell[2640, 72, 198, 4, 32, "Subsubtitle"],
+Cell[2841, 78, 10171, 234, 1199, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13049, 317, 624, 18, 35, "Subsubtitle"],
+Cell[13676, 337, 8911, 203, 759, "Input"]
 }, Open  ]]
 }
 ]
