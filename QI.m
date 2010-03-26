@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.12";
+qiVersion = "0.3.13";
 
 
-qiLastModification = "March 4, 2010";
+qiLastModification = "March 26, 2010";
 
 
 qiHistory = {
@@ -56,11 +56,12 @@ qiHistory = {
 	{"0.3.9", "06/01/2010", "Added error message in Ket"},
 	{"0.3.10", "19/01/2010", "Improved Davies map"},
 	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"},
-	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"}
+	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"},
+	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"}
 };
 
 
-qiAbout ="QI is a package of functions for Mathematica computer algebra system, which implements 
+qiAbout = "QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states and quantum operations. In contrast to 
 many available packages for symbolic and numerical simulation of quantum computation presented 
 package is focused on geometrical aspects of quantum information theory.";
@@ -713,6 +714,8 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
 
 
+
+
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
@@ -987,7 +990,7 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Parametrizations*)
 
 
@@ -1015,7 +1018,7 @@ ProbablityVector[l_]:=Block[{ll,N},
 
 StateVector[l_]:=Block[{pr,ph,N},
 	N=Length[l]/2;
-	pr=ProbablityDistribution[l[[1;;N]]];
+	pr=ProbablityVector[l[[1;;N]]];
 	ph=Prepend[Exp[I*l[[N+1;;2*N]]],1];
 	FullSimplify[Sqrt[pr]*ph, Assumptions -> Table[0<l[[i]]<\[Pi]/2,{i,1,N}]]
 ];
