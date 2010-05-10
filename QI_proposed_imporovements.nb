@@ -1,0 +1,148 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      3986,        139]
+NotebookOptionsPosition[      3444,        115]
+NotebookOutlinePosition[      3781,        130]
+CellTagsIndexPosition[      3738,        127]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Specification of the dimension", "Section",
+ CellChangeTimes->{{3.468315856740797*^9, 3.468315874367415*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Proj", "[", 
+   RowBox[{"MaxEnt", "[", "4", "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"acts", " ", "on", " ", "4", " ", "dimensional", " ", "space"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.4683158756070747`*^9, 3.468315926414418*^9}, {
+  3.468315995738475*^9, 3.4683160055161877`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      FractionBox["1", "2"], "0", "0", 
+      FractionBox["1", "2"]},
+     {"0", "0", "0", "0"},
+     {"0", "0", "0", "0"},
+     {
+      FractionBox["1", "2"], "0", "0", 
+      FractionBox["1", "2"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.468315881245543*^9, 3.468315915118576*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Swap", "[", "2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "also", " ", "acts", " ", "on", " ", "4", " ", "dimensional", " ", 
+    "space"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.468315884863433*^9, 3.468315898077732*^9}, {
+  3.46831592840856*^9, 3.4683159408874207`*^9}, {3.468315993878788*^9, 
+  3.468316000546707*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0", "0", "0"},
+     {"0", "0", "1", "0"},
+     {"0", "1", "0", "0"},
+     {"0", "0", "0", "1"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.4683158882268248`*^9, 3.468315898310173*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Proposed solution:",
+  FontWeight->"Bold"],
+ " functions acting on n\[Cross]n dimensionla systems should accepts ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "2"], TraditionalForm]], "None",
+  FormatType->"TraditionalForm"],
+ " as an input (as in ",
+ "Proj[MaxEnt[4]] )",
+ "."
+}], "Subsubtitle",
+ CellChangeTimes->{{3.469187428847795*^9, 3.469187493405251*^9}}]
+},
+WindowSize->{640, 746},
+WindowMargins->{{189, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 115, 1, 73, "Section"],
+Cell[CellGroupData[{
+Cell[707, 27, 344, 8, 32, "Input"],
+Cell[1054, 37, 823, 24, 94, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1914, 66, 374, 9, 32, "Input"],
+Cell[2291, 77, 727, 20, 76, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[3045, 101, 395, 12, 57, "Subsubtitle"]
+}
+]
+*)
+
+(* End of internal cache information *)
