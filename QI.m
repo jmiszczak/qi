@@ -22,7 +22,7 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.13";
+qiVersion = "0.3.14";
 
 
 qiLastModification = "March 26, 2010";
@@ -57,7 +57,8 @@ qiHistory = {
 	{"0.3.10", "19/01/2010", "Improved Davies map"},
 	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"},
 	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"},
-	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"}
+	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"},
+	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"}
 };
 
 
@@ -420,7 +421,7 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entanglement*)
 
 
@@ -712,6 +713,8 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 
 
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
+
+
 
 
 
@@ -1142,13 +1145,13 @@ If[sys==1,
 ];(*endif*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entanglement*)
 
 
 Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 	evl=Eigenvalues[MatrixSqrt[sqrtM.(sy\[CircleTimes]sy).m\[Conjugate].(sy\[CircleTimes]sy).sqrtM]];
-	Max[0,Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]
+	Max[0,Chop[Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]]
 ];
 
 
