@@ -25,7 +25,7 @@ qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 qiVersion = "0.3.14";
 
 
-qiLastModification = "March 26, 2010";
+qiLastModification = "May 25, 2010";
 
 
 qiHistory = {
@@ -425,7 +425,7 @@ PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Retu
 (*Entanglement*)
 
 
-Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of a density matrix \[Rho] representing a state of two-qubit system.";
+Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of a density matrix \[Rho] representing a state of two-qubit system. This function uses Chop to provide numerical results.";
 
 
 Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
@@ -713,6 +713,8 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 
 
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
+
+
 
 
 
