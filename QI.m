@@ -25,7 +25,7 @@ qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 qiVersion = "0.3.15";
 
 
-qiLastModification = "May 25, 2010";
+qiLastModification = "June 7, 2010";
 
 
 qiHistory = {
@@ -717,6 +717,8 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 
 
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
+
+
 
 
 
