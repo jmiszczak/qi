@@ -22,7 +22,7 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.14";
+qiVersion = "0.3.15";
 
 
 qiLastModification = "May 25, 2010";
@@ -58,7 +58,8 @@ qiHistory = {
 	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"},
 	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"},
 	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"},
-	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"}
+	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"},
+	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added"}
 };
 
 
@@ -524,7 +525,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -547,6 +548,9 @@ GinibreMatrix::usage = "GinibreMatrix[m,n] returns complex matrix of dimension m
 
 
 RandomProductNumericalRange::usage = "RandomLocalNumericalRange[M,{dim1,dim2,...,dimN},n] returns n points from the product numerical range of the matrix M with respect to division specified as {dim1,dim2,...,dimN}. Note that dim1\[Cross]dim2\[Cross]...\[Cross]dimN must be equal to the dimension of matrix M.";
+
+
+RandomMaximallyEntangledNumericalRange::usage = "RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]\[Cross]Sqrt[dim[M]].";
 
 
 RandomSpecialUnitary::usage = "Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
@@ -1257,7 +1261,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1309,6 +1313,12 @@ RandomProductNumericalRange[A_,sys_,noPoints_:1]:=Block[{prod},
 ];
 
 
+RandomMaximallyEntangledNumericalRange[A_,noPoints_]:=Block[{ent,dim},
+	dim=Dimensions[A][[1]];
+	Table[ent=RandomEntangledUnitVector[dim];ent\[Conjugate].A.ent,{noPoints}]
+];
+
+
 RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u,e,phi0,psi0,chi0},
     Do[psi[r,s]=2*Pi*Random[];,{r,1,d-1},{s,r+1,d}];
 	Do[chi[r,s]=0;,{r,2,d-1},{s,r+1,d}];
@@ -1347,7 +1357,7 @@ RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random vectors*)
 
 
@@ -1391,7 +1401,7 @@ RandomUnitVectorSchmidt[n_,r_]:=Block[{u1,u2,d,v},
 RandomUnitVectorSchmidt::argerr = "`1` is not a perfect square!";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Numerical range*)
 
 
