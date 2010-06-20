@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.p
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.15";
+qiVersion = "0.3.16";
 
 
-qiLastModification = "June 7, 2010";
+qiLastModification = "June 20, 2010";
 
 
 qiHistory = {
@@ -59,7 +59,8 @@ qiHistory = {
 	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"},
 	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"},
 	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"},
-	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added"}
+	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added"},
+	{"0.3.16", "20/06/2010", "Alternative version of Ketbra fucntion."
 };
 
 
@@ -239,14 +240,14 @@ GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\*Subscrip
 GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Special states*)
 
 
 Ket::usage = "Ket[i,d] returns |i\[RightAngleBracket] in d-dimensional Hilbert space. See also: StateVector for a different parametrization.";
 
 
-Ketbra::usage = "Ketbra[i,j,d] returns \[VerticalSeparator]i\[RightAngleBracket]\[LeftAngleBracket]j\[VerticalSeparator] acting on d-dimensional space. See also: Proj.";
+Ketbra::usage = "This function can be used in two ways. Ketbra[i,j,d] returns \[VerticalSeparator]i\[RightAngleBracket]\[LeftAngleBracket]j\[VerticalSeparator] acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns {v1}\[ConjugateTranspose]\[CircleTimes]{v2}.";
 
 
 KetFromDigits::usage = "KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.";
@@ -727,6 +728,8 @@ Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensio
 
 
 
+
+
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
@@ -819,7 +822,7 @@ PauliMatrices = {sx,sy,sz};
 GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lambda]6,\[Lambda]7,\[Lambda]8};
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum gates*)
 
 
@@ -841,7 +844,7 @@ GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
 GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi] I j/d],{j,0,d-1}]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Special states*)
 
 
@@ -858,6 +861,7 @@ Ket::argerr = "Requested index `1` not smaller than dimension of vector: `2`.";
 
 
 Ketbra[i_,j_,dim_]:=KroneckerProduct[Ket[i,dim],Ket[j,dim]];
+Ketbra[v1_?VectorQ,v2_?VectorQ]:={v1}\[ConjugateTranspose]\[CircleTimes]{v2};
 
 
 KetFromDigits[l_,b_:2]:=Ket[FromDigits[l,b],b^Length[l]];
