@@ -60,7 +60,7 @@ qiHistory = {
 	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"},
 	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"},
 	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added"},
-	{"0.3.16", "20/06/2010", "Alternative version of Ketbra fucntion."
+	{"0.3.16", "20/06/2010", "Alternative version of Ketbra fucntion."}
 };
 
 
@@ -99,6 +99,8 @@ Clear@@QI`Private`qiNames;
 
 
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
+
+
 
 
 (* ::Section:: *)
@@ -718,6 +720,8 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 
 
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
+
+
 
 
 
