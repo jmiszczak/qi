@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.13)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.16)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -72,7 +72,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \section{Special states}
 
 \noindent\textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensional Hilbert space. See also: StateVector for a different parametrization.$  $\\[8pt]
-\noindent\textbf{$ \text{Ketbra} $ }-- Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ acting on d-dimensional space. See also: Proj.$  $\\[8pt]
+\noindent\textbf{$ \text{Ketbra} $ }-- This function can be used in two ways. Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the apropritae operator for vectors v1 and v2..$  $\\[8pt]
 \noindent\textbf{$ \text{KetFromDigits} $ }-- KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.$  $\\[8pt]
 \noindent\textbf{$ \text{MaxMix} $ }-- MaxMix[n] - the maximally mixed state in a n-dimensional space of density matrices.$  $\\[8pt]
 \noindent\textbf{$ \text{MaxEnt} $ }-- MaxEnt[n] - maximally entangled state in n dimensional vector space. Note that n must be perfect square.$  $\\[8pt]
@@ -136,7 +136,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{PartialTransposeGeneral} $ }-- PartialTransposeGeneral[$\rho $,dim,sys] - Returns the partial transpose, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA,dimB$\}$. $  $\\[8pt]
 \section{Entanglement}
 
-\noindent\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of a density matrix $\rho $ representing a state of two-qubit system.$  $\\[8pt]
+\noindent\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of a density matrix $\rho $ representing a state of two-qubit system. This function uses Chop to provide numerical results.$  $\\[8pt]
 \noindent\textbf{$ \text{Negativity} $ }-- Negativity[$\rho $,m,n] returns the sum of negative eigenvalues of the density matrix $\rho \in $$ \mathbb{M}_{m\times n} $ after their partial transposition with respect to the first subsystem.$  $\\[8pt]
 \section{One-qubit quantum channels}
 
@@ -180,6 +180,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equal to 0. Thanks to Wojtek Bruzda.$  $\\[8pt]
 \noindent\textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomProductNumericalRange} $ }-- RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomMaximallyEntangledNumericalRange} $ }-- RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]$\times $Sqrt[dim[M]].$  $\\[8pt]
 \noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.$  $\\[8pt]

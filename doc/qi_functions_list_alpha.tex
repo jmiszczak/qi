@@ -3,7 +3,7 @@
 	\usepackage{fullpage}
 	\parindent=0pt
 	\begin{document}
-	\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.13)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+	\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.16)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 	{The Institute of Theoretical and Applied Informatics}\\
 	{Polish Academy of Sciences},\\
 	{Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -32,7 +32,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns a real and an imaginary parts of a complex number z as a pair of real numbers.$  $\\
 
-\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of a density matrix $\rho $ representing a state of two-qubit system.$  $\\
+\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of a density matrix $\rho $ representing a state of two-qubit system. This function uses Chop to provide numerical results.$  $\\
 
 \textbf{$ \text{DepolarizingChannel} $ }-- DepolarizingChannel[n,p,$\rho $] - apply the completely depolarizing channel with parameter p acting to a n-dimensional input state $\rho $. See also: QubitDepolarizingKraus, HolevoWernerChannel.$  $\\
 
@@ -68,7 +68,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 
 \textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensional Hilbert space. See also: StateVector for a different parametrization.$  $\\
 
-\textbf{$ \text{Ketbra} $ }-- Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ acting on d-dimensional space. See also: Proj.$  $\\
+\textbf{$ \text{Ketbra} $ }-- This function can be used in two ways. Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the apropritae operator for vectors v1 and v2..$  $\\
 
 \textbf{$ \text{KetFromDigits} $ }-- KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.$  $\\
 
@@ -181,6 +181,8 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \textbf{$ \text{RandomEntangledUnitVector} $ }-- RandomEntangledUnitVector[n] returns a maximally entangled unit vector on the n-dimensional vector space.$  $\\
 
 \textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\
+
+\textbf{$ \text{RandomMaximallyEntangledNumericalRange} $ }-- RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]$\times $Sqrt[dim[M]].$  $\\
 
 \textbf{$ \text{RandomNormalMatrix} $ }-- RandomNormalMatrix[d] - random normal matrix of dimension d.$  $\\
 
