@@ -16,16 +16,16 @@ BeginPackage["QI`"];
 Begin["`Private`"]; (* Start `Private` context *)
 
 
-qiAuthors = "Jaroslaw Miszczak <miszczak@iitis.pl>, Piotr Gawron <gawron@iitis.pl>, Zbigniew Puchala <z.puchala@iitis.pl>";
+qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
 
 
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.16";
+qiVersion = "0.3.17";
 
 
-qiLastModification = "June 20, 2010";
+qiLastModification = "July 11, 2010";
 
 
 qiHistory = {
@@ -60,7 +60,8 @@ qiHistory = {
 	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"},
 	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"},
 	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added"},
-	{"0.3.16", "20/06/2010", "Alternative version of Ketbra fucntion."}
+	{"0.3.16", "20/06/2010", "Alternative version of Ketbra fucntion."},
+	{"0.3.17", "11/07/2010", "Name changed for Davies map"}
 };
 
 
@@ -85,7 +86,7 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 qiConstInfo = ""(*" This is predefined constant."*);
 
 
-qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesDynamicalMatrix","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z"};
+qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z"};
 
 
 End[]; (* End of `Private` context *)
@@ -436,7 +437,7 @@ Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenval
 RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -470,7 +471,7 @@ QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip ch
 QubitDynamicalMatrix::usage = "QubitDynamicalMatrix[\!\(\*SubscriptBox[\"\[Kappa]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"z\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"z\"]\)] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).";
 
 
-QubitDaviesDynamicalMatrix::usage = "QubitDaviesDynamicalMatrix[a,c,p] returns a dynamical matrix for one-qubit Davies channel with parameters a and c and stationary state (p,1-p).";
+QubitDaviesSuperoperator::usage = "QubitDaviesSuperoperator[a,c,p] returns a superoperator matrix for one-qubit Davies channel with parameters a and c and the stationary state (p,1-p).";
 
 
 (* ::Subsection::Closed:: *)
@@ -720,6 +721,8 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 
 
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
+
+
 
 
 
@@ -1176,7 +1179,7 @@ Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTransposeA[\[Rho],m,n]],#>0&];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit quantum channels*)
 
 
@@ -1206,7 +1209,7 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 }
 
 
-QubitDaviesDynamicalMatrix[a_,c_,p_]:={{1 - a,0,0,(a p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a p)/(1-p)}};
+QubitDaviesSuperoperator[a_,c_,p_]:={{1 - a,0,0,(a p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a p)/(1-p)}};
 
 
 (* ::Subsection::Closed:: *)
