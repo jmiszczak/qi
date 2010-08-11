@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     23595,        577]
-NotebookOptionsPosition[     22904,        548]
-NotebookOutlinePosition[     23262,        564]
-CellTagsIndexPosition[     23219,        561]
+NotebookDataLength[     23669,        578]
+NotebookOptionsPosition[     22978,        549]
+NotebookOutlinePosition[     23336,        565]
+CellTagsIndexPosition[     23293,        562]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -27,13 +27,13 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Package QI version \"\>", 
-   "\[InvisibleSpace]", "\<\"0.3.13\"\>", 
+   "\[InvisibleSpace]", "\<\"0.3.18\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"March 26, 2010\"\>", 
+   "\[InvisibleSpace]", "\<\"August 11, 2010\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.3.13", " (last modification: ", "March 26, 2010", 
-   ")."],
+  "Package QI version ", "0.3.18", " (last modification: ", "August 11, 2010",
+    ")."],
   Editable->False]], "Print",
  CellChangeTimes->{{3.467456080637093*^9, 3.467456104335169*^9}, {
    3.467456174802355*^9, 3.46745618796615*^9}, 3.467456230631059*^9, 
@@ -48,7 +48,8 @@ Cell[BoxData[
    3.476676412545881*^9, 3.476678798662126*^9, 3.47667888786354*^9, 
    3.476682135856394*^9, 3.476683385961015*^9, 3.476683733729436*^9, 
    3.476684094329714*^9, 3.47668420935671*^9, 3.476935504853579*^9, 
-   3.478576922153599*^9}]
+   3.478576922153599*^9, {3.490534302871826*^9, 3.490534306530995*^9}, 
+   3.490534574404022*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -546,8 +547,8 @@ Cell[BoxData[{
    3.476936356852243*^9}}]
 }, Closed]]
 },
-WindowSize->{1272, 725},
-WindowMargins->{{0, Automatic}, {Automatic, 25}},
+WindowSize->{1272, 720},
+WindowMargins->{{0, Automatic}, {Automatic, 24}},
 ShowSelection->True,
 FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
@@ -565,19 +566,19 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 113, 2, 32, "Input"],
-Cell[683, 26, 1338, 24, 24, "Print"]
+Cell[683, 26, 1412, 25, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2058, 55, 194, 4, 32, "Subsubtitle"],
-Cell[2255, 61, 398, 7, 32, "Input"]
+Cell[2132, 56, 194, 4, 32, "Subsubtitle"],
+Cell[2329, 62, 398, 7, 32, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2690, 73, 198, 4, 32, "Subsubtitle"],
-Cell[2891, 79, 10171, 234, 1199, "Input"]
+Cell[2764, 74, 198, 4, 32, "Subsubtitle"],
+Cell[2965, 80, 10171, 234, 1199, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[13099, 318, 624, 18, 35, "Subsubtitle"],
-Cell[13726, 338, 9162, 207, 759, "Input"]
+Cell[13173, 319, 624, 18, 35, "Subsubtitle"],
+Cell[13800, 339, 9162, 207, 759, "Input"]
 }, Closed]]
 }
 ]

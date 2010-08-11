@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.17";
+qiVersion = "0.3.18";
 
 
-qiLastModification = "July 11, 2010";
+qiLastModification = "August 11, 2010";
 
 
 qiHistory = {
@@ -51,17 +51,18 @@ qiHistory = {
 	{"0.3.4", "19/11/2009", "Added Negativity, fixed SchmidtDecomposition."},
 	{"0.3.5", "21/11/2009", "SchmidtDecomposition now accepts vectos as well as matrices."},
 	{"0.3.6", "24/11/2009", "Minor update in qiNames."},
-	{"0.3.7", "04/12/2009", "Operator Sch. Dec. fixed."},
-	{"0.3.8", "04/01/2010", "Added local vars in RandomState"},
-	{"0.3.9", "06/01/2010", "Added error message in Ket"},
-	{"0.3.10", "19/01/2010", "Improved Davies map"},
-	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors"},
-	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate"},
-	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization"},
-	{"0.3.14", "25/05/2010", "Fixed numerical bug Concurrence4 - Chop function added"},
-	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added"},
-	{"0.3.16", "20/06/2010", "Alternative version of Ketbra fucntion."},
-	{"0.3.17", "11/07/2010", "Name changed for Davies map"}
+	{"0.3.7", "04/12/2009", "OperatorSchmidtDecomposition fixed."},
+	{"0.3.8", "04/01/2010", "Added local vars in RandomState."},
+	{"0.3.9", "06/01/2010", "Added error message in Ket."},
+	{"0.3.10", "19/01/2010", "Improved Davies map."},
+	{"0.3.11", "26/01/2010", "Improved simplex generation algorithm, added some function for random vectors."},
+	{"0.3.12", "04/03/2010", "Changed parameter in Swap gate."},
+	{"0.3.13", "26/03/2010", "Fixed bug with state parametrization."},
+	{"0.3.14", "25/05/2010", "Fixed numerical bug in Concurrence4 - Chop function added."},
+	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added."},
+	{"0.3.16", "20/06/2010", "Alternative version of Ketbra function."},
+	{"0.3.17", "11/07/2010", "Name changed for Davies map."},
+	{"0.3.18", "11/08/2010", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."}
 };
 
 
@@ -102,13 +103,11 @@ Clear@@QI`Private`qiNames;
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-
-
 (* ::Section:: *)
 (*Help messages*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -318,7 +317,7 @@ ReshufflePermutation::usage = "ReshufflePermutation[dim1,dim2] - permutation mat
 ProductSuperoperator::usage = "ProductSuperoperator[\[CapitalPsi],\[CapitalPhi]] computes a product superoperator of superoperatos \[CapitalPsi] and \[CapitalPhi].";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Parametrizations*)
 
 
@@ -688,7 +687,7 @@ SymbolicMatrix[sym_,d1_,d2_:0] := Which[
 ];
 
 
-SymbolicVector[sym_,d1_]:= \[AliasDelimiter][sym,d1,1];
+SymbolicVector[sym_,d1_]:= SymbolicMatrix[sym,d1,1];
 
 
 SymbolicHermitianMatrix[sym_,d_]:=Block[{mtx},
@@ -1064,7 +1063,7 @@ QubitBlochState[a_,b_,c_]:=1/2id + a sx + b sy + c sz;
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -1089,7 +1088,7 @@ QubitBitphaseflipChannel=Function[{dim,p,\[Rho]},p id.\[Rho]+(1-p)sy.\[Rho].sy\[
 HolevoWernerChannel=Function[{dim,p,\[Rho]},( p \[Rho]\[Transpose]+ (1-p)Tr[\[Rho]]MaxMix[dim])];
 
 
-GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower[X[d],i].MatrixPower[Z[d],j])\[ConjugateTranspose],{i,0,d-1},{j,0,d-1}],1];
+GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower[GeneralizedPauliX[d],i].MatrixPower[GeneralizedPauliZ[d],j])\[ConjugateTranspose],{i,0,d-1},{j,0,d-1}],1];
 
 
 ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]].\[Rho].(ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
