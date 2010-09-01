@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[      5715,        185]
-NotebookOptionsPosition[      4972,        155]
-NotebookOutlinePosition[      5329,        171]
-CellTagsIndexPosition[      5286,        168]
+NotebookDataLength[      7457,        240]
+NotebookOptionsPosition[      6487,        203]
+NotebookOutlinePosition[      6845,        219]
+CellTagsIndexPosition[      6802,        216]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -151,10 +151,58 @@ which can be used to represent a resuffling operation. See: Horn, Johnson, \
 Topics in Matrix Analysis, Chapter 4.3. See also: Resuffle.\>\""}], " ", 
   ";"}]], "Input",
  CellChangeTimes->{{3.469524324205984*^9, 3.469524430204637*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Some special matrices", "Section",
+ CellChangeTimes->{{3.492325375815046*^9, 3.49232538152289*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"UpperShiftMatrix", "[", "dim_", "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"i", "<", "j"}], "&&", 
+        RowBox[{
+         RowBox[{"j", "-", "i"}], "==", "1"}]}], ",", "1", ",", "0"}], "]"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "dim"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "1", ",", "dim"}], "}"}]}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"UpperShiftMatrix", "::", "usage"}], " ", "=", " ", 
+   "\"\<UpperShiftMatrix[d] returns d-dimensional upper shift matrix. See \
+also: LowerShiftMatrix.\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"LowerShiftMatrix", "[", "dim_", "]"}], ":=", 
+   RowBox[{"Transpose", "[", 
+    RowBox[{"UpperShiftMatrix", "[", "dim", "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"LowerShiftMatrix", "::", "usage"}], " ", "=", " ", 
+   "\"\<LowerShiftMatrix[d] returns d-dimensional lower shift matrix. See \
+also: UpperShiftMatrix.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.492238888507966*^9, 3.492238941205357*^9}, {
+  3.492238978736907*^9, 3.492238983025103*^9}, {3.492239293987774*^9, 
+  3.492239325127221*^9}, {3.492262232557039*^9, 3.492262341821364*^9}}]
 }, Open  ]]
 },
-WindowSize->{1278, 750},
-WindowMargins->{{1, Automatic}, {2, Automatic}},
+WindowSize->{1272, 722},
+WindowMargins->{{0, Automatic}, {Automatic, 25}},
 ShowSelection->True,
 FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
 StyleDefinitions->"Default.nb"
@@ -186,6 +234,13 @@ Cell[2716, 86, 289, 6, 32, "Input"],
 Cell[3008, 94, 512, 14, 55, "Input"],
 Cell[3523, 110, 1028, 32, 32, "Input"],
 Cell[4554, 144, 402, 8, 77, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4993, 157, 105, 1, 73, "Section"],
+Cell[5101, 160, 506, 16, 32, "Input"],
+Cell[5610, 178, 223, 5, 32, "Input"],
+Cell[5836, 185, 199, 5, 32, "Input"],
+Cell[6038, 192, 433, 8, 32, "Input"]
 }, Open  ]]
 }
 ]
