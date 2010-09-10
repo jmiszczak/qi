@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[      7457,        240]
-NotebookOptionsPosition[      6487,        203]
-NotebookOutlinePosition[      6845,        219]
-CellTagsIndexPosition[      6802,        216]
+NotebookDataLength[      9673,        296]
+NotebookOptionsPosition[      8623,        257]
+NotebookOutlinePosition[      8981,        273]
+CellTagsIndexPosition[      8938,        270]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -180,25 +180,79 @@ Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"UpperShiftMatrix", "::", "usage"}], " ", "=", " ", 
-   "\"\<UpperShiftMatrix[d] returns d-dimensional upper shift matrix. See \
-also: LowerShiftMatrix.\>\""}], ";"}]], "Input"],
+   "\"\<UpperShiftMatrix[d] returns d-dimensional upper shift matrix. Use \
+transposition to get the lower variant.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.493102573965386*^9, 3.493102583682753*^9}}],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"LowerShiftMatrix", "[", "dim_", "]"}], ":=", 
-   RowBox[{"Transpose", "[", 
-    RowBox[{"UpperShiftMatrix", "[", "dim", "]"}], "]"}]}], ";"}]], "Input"],
+   RowBox[{"UpperTriangularOnes", "[", 
+    RowBox[{"rn_", ",", "dim_"}], "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"i", "<", "j"}], "&&", 
+        RowBox[{
+         RowBox[{"j", "-", "i"}], "<", 
+         RowBox[{"rn", "+", "1"}]}]}], ",", "1", ",", "0"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "dim"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "1", ",", "dim"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.491920508678783*^9, 3.491920676871269*^9}, {
+  3.491920728391565*^9, 3.491920779715392*^9}, {3.491920909323614*^9, 
+  3.491920939656573*^9}, {3.492233925647266*^9, 3.492233926119847*^9}, {
+  3.492510821624262*^9, 3.492510833279652*^9}}],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"LowerShiftMatrix", "::", "usage"}], " ", "=", " ", 
-   "\"\<LowerShiftMatrix[d] returns d-dimensional lower shift matrix. See \
-also: UpperShiftMatrix.\>\""}], ";"}]], "Input",
- CellChangeTimes->{{3.492238888507966*^9, 3.492238941205357*^9}, {
-  3.492238978736907*^9, 3.492238983025103*^9}, {3.492239293987774*^9, 
-  3.492239325127221*^9}, {3.492262232557039*^9, 3.492262341821364*^9}}]
+   RowBox[{"UpperTriangularOnes", "::", "usage"}], " ", "=", " ", 
+   "\"\<UpperTriangularOnes[k,dim] returns not normal matirx of dimension dim \
+with 1<k<dim-1 bands of ones over the diagonal. Use transposition to get the \
+lower variant.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.491920941981067*^9, 3.491921026687718*^9}, {
+  3.491926828604947*^9, 3.491926851937152*^9}, {3.492233928570533*^9, 
+  3.49223393081383*^9}, {3.492510836314239*^9, 3.492510837489093*^9}, {
+  3.493102588547499*^9, 3.493102588759562*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"UpperBandOnes", "[", 
+    RowBox[{"bandNo_", ",", "dim_"}], "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"i", "<", "j"}], "&&", 
+        RowBox[{
+         RowBox[{"j", "-", "i"}], "==", "bandNo"}]}], ",", "1", ",", "0"}], 
+      "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "dim"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "1", ",", "dim"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.492510654286324*^9, 3.492510681453099*^9}, {
+  3.492510865316011*^9, 3.492510888022591*^9}, {3.492510926010661*^9, 
+  3.492510928426154*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"UpperBandOnes", "::", "usage"}], " ", "=", " ", 
+   "\"\<UpperBandOnes[k,dim] returns not normal matirx of dimension dim with \
+bands at position k of ones over the diagonal. Use transposition to get the \
+lower variant.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.491920941981067*^9, 3.491921026687718*^9}, {
+  3.491926828604947*^9, 3.491926851937152*^9}, {3.492233928570533*^9, 
+  3.49223393081383*^9}, {3.492510836314239*^9, 3.492510837489093*^9}, {
+  3.492511010593064*^9, 3.492511040943304*^9}, {3.493102590425008*^9, 
+  3.493102590599251*^9}}]
 }, Open  ]]
 },
 WindowSize->{1272, 722},
@@ -223,12 +277,12 @@ Cell[567, 22, 113, 2, 32, "Input"],
 Cell[683, 26, 489, 11, 24, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1209, 42, 148, 2, 73, "Section"],
+Cell[1209, 42, 148, 2, 69, "Section"],
 Cell[1360, 46, 520, 13, 32, "Input"],
 Cell[1883, 61, 399, 8, 55, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2319, 74, 89, 1, 73, "Section"],
+Cell[2319, 74, 89, 1, 69, "Section"],
 Cell[2411, 77, 302, 7, 32, "Input"],
 Cell[2716, 86, 289, 6, 32, "Input"],
 Cell[3008, 94, 512, 14, 55, "Input"],
@@ -236,11 +290,13 @@ Cell[3523, 110, 1028, 32, 32, "Input"],
 Cell[4554, 144, 402, 8, 77, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4993, 157, 105, 1, 73, "Section"],
+Cell[4993, 157, 105, 1, 69, "Section"],
 Cell[5101, 160, 506, 16, 32, "Input"],
-Cell[5610, 178, 223, 5, 32, "Input"],
-Cell[5836, 185, 199, 5, 32, "Input"],
-Cell[6038, 192, 433, 8, 32, "Input"]
+Cell[5610, 178, 305, 6, 32, "Input"],
+Cell[5918, 186, 819, 21, 32, "Input"],
+Cell[6740, 209, 558, 10, 77, "Input"],
+Cell[7301, 221, 704, 20, 32, "Input"],
+Cell[8008, 243, 599, 11, 77, "Input"]
 }, Open  ]]
 }
 ]
