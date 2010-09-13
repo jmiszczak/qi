@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.18";
+qiVersion = "0.3.19";
 
 
-qiLastModification = "August 11, 2010";
+qiLastModification = "Septemeber 13, 2010";
 
 
 qiHistory = {
@@ -62,7 +62,8 @@ qiHistory = {
 	{"0.3.15", "07/06/2010", "RandomMaximallyEntangledNumericalRange added."},
 	{"0.3.16", "20/06/2010", "Alternative version of Ketbra function."},
 	{"0.3.17", "11/07/2010", "Name changed for Davies map."},
-	{"0.3.18", "11/08/2010", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."}
+	{"0.3.18", "11/08/2010", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
+	{"0.3.19", "13/09/2010", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."}
 };
 
 
@@ -357,7 +358,7 @@ QubitBlochState::usage = "QubitBlochState[\[Rho]] - a parametrization of the one
 QubitGeneralState::usage = "QubitGeneralState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -403,7 +404,7 @@ TPChannelQ::usage = "Performs some checks on Kraus operators. Use this if you wa
 ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
@@ -449,7 +450,7 @@ QubitPhaseflipChannel::usage  = "QubitPhaseflipChannel[p,\[Rho]] applies phase-f
 QubitBitphaseflipChannel::usage  = "QubitBitphaseflipChannel[p,\[Rho]] applies bit-phase-flip channel to the input state \[Rho]. See also: QubitPhaseflipKraus.";
 
 
-QubitDepolarizingKraus::usage = "Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=0.";
+QubitDepolarizingKraus::usage = "Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=1.";
 
 
 QubitDecayKraus::usage = "Kraus operators of the decay channel, also know as amplitude damping, for one qubit.";
@@ -1047,7 +1048,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit states*)
 
 
@@ -1182,22 +1183,22 @@ Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTransposeA[\[Rho],m,n
 (*One-qubit quantum channels*)
 
 
-QubitDepolarizingKraus[p_]:={\[Sqrt]((3 p +1)/4)id,\[Sqrt]((1-p)/4)sx,\[Sqrt]((1-p)/4)sy,\[Sqrt]((1-p)/4)sz};
+QubitDepolarizingKraus[p_]:={\[Sqrt](1-3p/4)*id,\[Sqrt](p/4)*sx,\[Sqrt](p/4)*sy,\[Sqrt](p/4)*sz};
 
 
-QubitDecayKraus[p_]:={ {{1,0},{0,\[Sqrt]p}} , {{0,\[Sqrt](1-p)},{0,0}} };
+QubitDecayKraus[p_]:={ {{1,0},{0,\[Sqrt](1-p)}} , {{0,\[Sqrt]p},{0,0}} };
 
 
 QubitPhaseKraus[p_]:={ {{1,0},{0,\[Sqrt](1-p)}} , {{0,0},{0,\[Sqrt]p}} };
 
 
-QubitBitflipKraus[p_]:={ \[Sqrt]p id,\[Sqrt](1-p) sx};
+QubitBitflipKraus[p_]:={ \[Sqrt](1-p)*id,\[Sqrt]p*sx};
 
 
-QubitPhaseflipKraus[p_]:={\[Sqrt]p id,\[Sqrt](1-p) sz};
+QubitPhaseflipKraus[p_]:={\[Sqrt](1-p)*id,\[Sqrt]p*sz};
 
 
-QubitBitphaseflipKraus[p_]:={\[Sqrt]p id,\[Sqrt](1-p) sy};
+QubitBitphaseflipKraus[p_]:={\[Sqrt](1-p)*id,\[Sqrt]p*sy};
 
 
 QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
