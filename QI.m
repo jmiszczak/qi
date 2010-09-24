@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -108,7 +108,7 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 (*Help messages*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -243,7 +243,7 @@ GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\*Subscrip
 GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Special states*)
 
 
@@ -318,7 +318,7 @@ ReshufflePermutation::usage = "ReshufflePermutation[dim1,dim2] - permutation mat
 ProductSuperoperator::usage = "ProductSuperoperator[\[CapitalPsi],\[CapitalPhi]] computes a product superoperator of superoperatos \[CapitalPsi] and \[CapitalPhi].";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
 
@@ -358,7 +358,7 @@ QubitBlochState::usage = "QubitBlochState[\[Rho]] - a parametrization of the one
 QubitGeneralState::usage = "QubitGeneralState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -404,7 +404,7 @@ TPChannelQ::usage = "Performs some checks on Kraus operators. Use this if you wa
 ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
@@ -426,7 +426,7 @@ PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entanglement*)
 
 
@@ -437,7 +437,7 @@ Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenval
 RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -529,7 +529,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -602,14 +602,14 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Miscellaneous functions*)
 
 
@@ -658,7 +658,7 @@ qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -831,7 +831,7 @@ PauliMatrices = {sx,sy,sz};
 GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lambda]6,\[Lambda]7,\[Lambda]8};
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum gates*)
 
 
@@ -853,7 +853,7 @@ GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
 GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi] I j/d],{j,0,d-1}]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Special states*)
 
 
@@ -1014,7 +1014,7 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
 
@@ -1048,7 +1048,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit states*)
 
 
@@ -1064,7 +1064,7 @@ QubitBlochState[a_,b_,c_]:=1/2id + a sx + b sy + c sz;
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -1124,7 +1124,7 @@ TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]]
 ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
@@ -1166,7 +1166,7 @@ If[sys==1,
 ];(*endif*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Entanglement*)
 
 
@@ -1179,7 +1179,7 @@ Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTransposeA[\[Rho],m,n]],#>0&];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
 
@@ -1276,7 +1276,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -1372,7 +1372,7 @@ RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random vectors*)
 
 
@@ -1416,7 +1416,7 @@ RandomUnitVectorSchmidt[n_,r_]:=Block[{u1,u2,d,v},
 RandomUnitVectorSchmidt::argerr = "`1` is not a perfect square!";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Numerical range*)
 
 
@@ -1465,7 +1465,7 @@ StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any d
 End[];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package footer*)
 
 
