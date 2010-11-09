@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.21";
+qiVersion = "0.3.22";
 
 
-qiLastModification = "October 8, 2010";
+qiLastModification = "October 9, 2010";
 
 
 qiHistory = {
@@ -65,7 +65,8 @@ qiHistory = {
 	{"0.3.18", "11/08/2010", "Jarek", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
 	{"0.3.19", "13/09/2010", "Piotr", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."},
 	{"0.3.20", "04/10/2010", "Jarek", "Fixed inconsistency in QubitDepolarizingKraus and DepolarizingChannel."},
-	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."}
+	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."},
+	{"0.3.22", "09/10/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition"}
 };
 
 
@@ -534,7 +535,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -565,7 +566,10 @@ RandomMaximallyEntangledNumericalRange::usage = "RandomMaximallyEntangledNumeric
 RandomSpecialUnitary::usage = "Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
 
 
-RandomUnitary::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
+RandomUnitaryEuler::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
+
+
+RandomUnitary::usage = "Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604";
 
 
 RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.";
@@ -1292,7 +1296,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1367,7 +1371,17 @@ RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u,e,phi0,psi0,chi0},
 ];
 
 
-RandomUnitary[d_]:=Exp[I*RandomReal[2*\[Pi]]]*RandomSpecialUnitary[d];
+RandomUnitaryEuler[d_]:=Exp[I*RandomReal[2*\[Pi]]]*RandomSpecialUnitary[d];
+
+
+RandomUnitary[dim_]:=Module[{z,q,r,d,ph},
+	z=GinibreMatrix[dim,dim];
+	{q,r}=QRDecomposition[z];
+	d=Diagonal[r];
+	ph=d/Abs[d];
+	q=q.DiagonalMatrix[ph];
+	q
+]
 
 
 RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
