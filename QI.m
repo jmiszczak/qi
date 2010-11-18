@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.23";
+qiVersion = "0.3.25";
 
 
-qiLastModification = "November 9, 2010";
+qiLastModification = "November 18, 2010";
 
 
 qiHistory = {
@@ -69,6 +69,7 @@ qiHistory = {
 	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition."},
 	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."}
 	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."}
+	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."}
 };
 
 
@@ -93,7 +94,7 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 qiConstInfo = ""(*" This is predefined constant."*);
 
 
-qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitaryEuler","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","ReshufflePermutation2","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z","SuperoperatorToKraus"};
+qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitaryEuler","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleBase","ReshuffleBase2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","ReshufflePermutation2","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z","SuperoperatorToKraus"};
 
 
 End[]; (* End of `Private` context *)
@@ -286,7 +287,7 @@ OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,d1,d2] -
 SchmidtDecomposition::usage = "SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -302,10 +303,16 @@ Res::usage = "Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A
 Unres::usage = "Unres[v,c] - de-reshaping of the vector into a matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into a square matrix. See also: Unvec, Res.";
 
 
-Reshuffle::usage = "Reshuffle[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If  the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: ReshuffleGeneral, Reshuffle2.";
+Reshuffle::usage = "Reshuffle[\[Rho],method] for square matrix of dimensions \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, returns reshuffled matrix, available methods: \"Fast\" (default) and \"BaseMatrices\" (slow). Use ReshuffleGeneral for matrices with dimensions different then \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer. See also: ReshuffleGeneral, ReshuffleBase, Reshuffle2.";
 
 
-Reshuffle2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: ReshuffleGeneral, Reshuffle, BaseMatrices";
+Reshuffle2::usage = "Reshuffle2[\[Rho],method] for square matrix of dimensions \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, returns reshuffled matrix given by alternative definition of the reshuffling operation, available methods: \"Fast\" (default) and \"BaseMatrices\" (slow). Use ReshuffleGeneral2 for matrices with dimensions different then \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer. See also: ReshuffleGeneral2, ReshuffleBase2, Reshuffle.";
+
+
+ReshuffleBase::usage = "ReshuffleBase[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If  the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: Reshuffle, ReshuffleGeneral, Reshuffle2.";
+
+
+ReshuffleBase2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: Reshuffle2, ReshuffleGeneral, Reshuffle, BaseMatrices";
 
 
 ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix.";
@@ -366,7 +373,7 @@ QubitBlochState::usage = "QubitBlochState[\[Rho]] - a parametrization of the one
 QubitGeneralState::usage = "QubitGeneralState[\[Alpha],\[Beta],\[Gamma],\[Delta],\[Lambda]] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues \[Lambda] and 1-\[Lambda] rotated as U.diag(\[Lambda],1-\[Lambda]).\!\(\*SuperscriptBox[\"U\", \"\[Dagger]\"]\) with U defined by parameters \[Alpha],\[Beta],\[Gamma] and \[Delta].";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -540,7 +547,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -626,7 +633,7 @@ StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of app
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Miscellaneous functions*)
 
 
@@ -919,7 +926,7 @@ If[IntegerQ[subDim],
 IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Schmidt decomposition*)
 
 
@@ -963,7 +970,7 @@ SchmidtDecomposition[e_,d1_,d2_]:=Which[
 SchmidtDecomposition::argerr = "First argument should be a vector or a matrix.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -985,7 +992,35 @@ Unres[v_List,cols_:0]:=Which[
 ];
 
 
-Reshuffle[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
+Reshuffle[\[Rho]_,method_:"Fast"]:=Block[{dim},
+dim = Sqrt[Length[\[Rho]]];
+If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+Switch[
+	method,		
+		"BaseMatrices", ReshuffleBase[\[Rho]],
+		_, ReshuffleGeneral[\[Rho], dim,dim,dim,dim]
+],	
+Message[Reshuffle::argerr]
+]
+]
+Reshuffle::argerr = "Reshuffle works only for square matrices of dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, for other dimensions use ReshuffleGeneral";
+
+
+Reshuffle2[\[Rho]_,method_:"Fast"]:=Block[{dim},
+dim = Sqrt[Length[\[Rho]]];
+If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+Switch[
+	method,		
+		"BaseMatrices", ReshuffleBase2[\[Rho]],
+		_, ReshuffleGeneral2[\[Rho], dim,dim,dim,dim]
+],	
+Message[Reshuffle2::argerr]
+]
+]
+Reshuffle2::argerr = "Reshuffle works only for square matrices of dimensions \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, for other shapes use ReshuffleGeneral2";
+
+
+ReshuffleBase[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
 	If[dim1==0||dim2==0,
 		dim=Length[\[Rho]];
 		base1=BaseMatrices[Sqrt[dim]];
@@ -998,7 +1033,7 @@ Reshuffle[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
 ];
 
 
-Reshuffle2[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
+ReshuffleBase2[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
 	If[dim1==0||dim2==0,
 		dim=Length[\[Rho]];
 		base1=BaseMatrices[Sqrt[dim]];
@@ -1155,7 +1190,7 @@ ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[Kroneck
 SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
@@ -1167,13 +1202,13 @@ PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m m]\[Circle
 
 PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[m]Tr[#]&,m];
-	Unres[((trMtx\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho],m,n]])[[1;;n n]]]
+	Unres[((trMtx\[CircleTimes]IdentityMatrix[n n]).Res[ReshuffleGeneral[\[Rho],m,m,n,n]])[[1;;n n]]]
 ];
 
 
 PartialTraceB[\[Rho]_,m_,n_] := Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[n]Tr[#]&,n];
-	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[Reshuffle[\[Rho],m,n]]]\[Transpose][[1]]]
+	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[ReshuffleGeneral[\[Rho],m,m,n,n]]]\[Transpose][[1]]]
 ];
 
 
@@ -1307,7 +1342,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1420,7 +1455,7 @@ RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random vectors*)
 
 
