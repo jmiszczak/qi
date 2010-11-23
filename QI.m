@@ -67,8 +67,8 @@ qiHistory = {
 	{"0.3.20", "04/10/2010", "Jarek", "Fixed inconsistency in QubitDepolarizingKraus and DepolarizingChannel."},
 	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."},
 	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition."},
-	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."}
-	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."}
+	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."},
+	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."},
 	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."}
 };
 
