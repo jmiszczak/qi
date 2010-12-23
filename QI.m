@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -22,28 +22,28 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.25";
+qiVersion = "0.3.26";
 
 
-qiLastModification = "November 18, 2010";
+qiLastModification = "December 22, 2010";
 
 
 qiHistory = {
-	{"0.1.0", "05/06/2009", "", "Initial version"}, 
-	{"0.1.1", "09/06/2009", "", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
-	{"0.1.2", "18/06/2009", "", "Added quantum channel parametrization for one qubit."}, 
-	{"0.1.3", "03/07/2009", "", "Added alternative reshuffling."},
-	{"0.1.4", "", "", "Changed default print output."}, 
-	{"0.2.0", "09/07/2009", "Jarek and Zbyszke", "Documentation generator added."},
-	{"0.2.1", "", "", "Changed QubitGeneralState function."},
-	{"0.2.2", "04/08/2009", "", "Added reshuffling permutation and product of superoperators."},
+	{"0.1.0", "05/06/2009", "Jarek", "Initial version"}, 
+	{"0.1.1", "09/06/2009", "Zbyszek", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
+	{"0.1.2", "18/06/2009", "Gawron", "Added quantum channel parametrization for one qubit."}, 
+	{"0.1.3", "03/07/2009", "Zbyszek", "Added alternative reshuffling."},
+	{"0.1.4", "", "Jarek", "Changed default print output."}, 
+	{"0.2.0", "09/07/2009", "Jarek and Zbyszek", "Documentation generator added."},
+	{"0.2.1", "", "Jarek and Garwon", "Changed QubitGeneralState function."},
+	{"0.2.2", "04/08/2009", "Zbyszek", "Added reshuffling permutation and product of superoperators."},
 	{"0.2.3", "13/08/2009", "Jarek", "Minor update in documentation."},
 	{"0.2.4", "14/09/2009", "Jarek and Zbyszek", "Fixed \[Eta] function."},
 	{"0.2.5", "27/08/2009", "", "Fixed Werner state and added IsotropicState."},
 	{"0.2.6", "06/10/2009", "Jarek", "Spelling improvements."},
-	{"0.2.7", "02/11/2009", "Jarek", "Improved '\[CircleTimes]' usage, added applyUnitary."},
+	{"0.2.7", "02/11/2009", "Jarek", "Improved '\[CircleTimes]' usage, added ApplyUnitary."},
 	{"0.2.8", "03/22.1009", "", "Fixed small problem with MaxEnt."},
-	{"0.2.9", "", "", "Some code cleanups, fixed SchmidtDecomposition."},
+	{"0.2.9", "", "Jarek", "Some code cleanups, fixed SchmidtDecomposition."},
 	{"0.3.0", "06/11/2009", "", "Added OperatorSchmidtDecomposition."},
 	{"0.3.1", "12/11/2009", "", "Added Concurrence4, fixed Cnot problem, some code cleanups."},
 	{"0.3.2", "17/11/2009", "Jarek", "Documentation improvements, SquareMatrixQ predicate."},
@@ -63,13 +63,14 @@ qiHistory = {
 	{"0.3.16", "20/06/2010", "", "Alternative version of Ketbra function."},
 	{"0.3.17", "11/07/2010", "Jarek", "Name changed for Davies map."},
 	{"0.3.18", "11/08/2010", "Jarek", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
-	{"0.3.19", "13/09/2010", "Piotr", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."},
+	{"0.3.19", "13/09/2010", "Gawron", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."},
 	{"0.3.20", "04/10/2010", "Jarek", "Fixed inconsistency in QubitDepolarizingKraus and DepolarizingChannel."},
 	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."},
 	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition."},
 	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."},
 	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."},
-	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."}
+	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."},
+	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."}
 };
 
 
@@ -94,7 +95,7 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 qiConstInfo = ""(*" This is predefined constant."*);
 
 
-qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitaryEuler","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleBase","ReshuffleBase2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","ReshufflePermutation2","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z","SuperoperatorToKraus"};
+qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitaryEuler","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleBase","ReshuffleBase2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","ReshufflePermutation2","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z","SuperoperatorToKraus","UpperTriangularOnes","UpperBandOnes"};
 
 
 End[]; (* End of `Private` context *)
@@ -110,7 +111,7 @@ Clear@@QI`Private`qiNames;
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Help messages*)
 
 
@@ -230,6 +231,12 @@ PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"
 GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,GellMannMatrices] to get this list in more readable form.";
 
 
+UpperTriangularOnes::usage = "UpperTriangularOnes[k,dim] returns not normal matirx of dimension dim with 1<k<dim-1 bands of ones over the diagonal.";
+
+
+UpperBandOnes::usage = "UpperBandOnes[k,dim] returns not normal matirx of dimension dim with bands at position k of ones over the diagonal.";
+
+
 (* ::Subsection::Closed:: *)
 (*Quantum gates*)
 
@@ -287,7 +294,7 @@ OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,d1,d2] -
 SchmidtDecomposition::usage = "SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -547,7 +554,7 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -626,14 +633,14 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Miscellaneous functions*)
 
 
@@ -855,6 +862,12 @@ PauliMatrices = {sx,sy,sz};
 GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lambda]6,\[Lambda]7,\[Lambda]8};
 
 
+UpperTriangularOnes[rn_,dim_]:=Table[If[i<j&&j-i<rn+1,1,0],{i,1,dim},{j,1,dim}];
+
+
+UpperBandOnes[bandNo_,dim_]:=Table[If[i<j&&j-i==bandNo,1,0],{i,1,dim},{j,1,dim}];
+
+
 (* ::Subsection::Closed:: *)
 (*Quantum gates*)
 
@@ -926,7 +939,7 @@ If[IntegerQ[subDim],
 IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
 
 
@@ -970,7 +983,7 @@ SchmidtDecomposition[e_,d1_,d2_]:=Which[
 SchmidtDecomposition::argerr = "First argument should be a vector or a matrix.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -1127,7 +1140,7 @@ QubitBlochState[a_,b_,c_]:=1/2id + a sx + b sy + c sz;
 QubitGeneralState[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_,\[Lambda]_]:=Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]].DiagonalMatrix[{\[Lambda],1-\[Lambda]}].Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]]\[ConjugateTranspose];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -1190,7 +1203,7 @@ ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[Kroneck
 SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
@@ -1342,7 +1355,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -1455,7 +1468,7 @@ RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random vectors*)
 
 
