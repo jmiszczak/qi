@@ -22,10 +22,10 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.26";
+qiVersion = "0.3.27";
 
 
-qiLastModification = "December 22, 2010";
+qiLastModification = "February 14, 2010";
 
 
 qiHistory = {
@@ -70,7 +70,8 @@ qiHistory = {
 	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."},
 	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."},
 	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."},
-	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."}
+	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."},
+	{"0.3.27", "14/02/2011", "Jarek", "Removed PartialTrace from the RandomState function and added induced measures."}
 };
 
 
@@ -594,7 +595,7 @@ RandomUnitaryQR::usage = "Random unitary matrix using QR decomposition. F. Mezza
 RandomUnitary::usage = "Random unitary matrix. This function can be used as RandomUnitary[dim,\"QR\"] (default and faster) or RandomUnitary[dim,\"Euler\"] (slower) the first argument is the dimensions and the second argument specifies the generation method. See also RandomUnitaryEuler and RandomUnitaryQR.";
 
 
-RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.";
+RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures'' or an integer K. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure. If dist is given as an integer K, the state is generated with respect to induced measure with an ancilla system od dimension K.";
 
 
 (* ::Subsection::Closed:: *)
@@ -633,7 +634,7 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
@@ -1355,7 +1356,7 @@ ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
 ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -1446,26 +1447,32 @@ RandomUnitaryQR[dim_]:=Module[{z,q,r,d,ph},
 RandomUnitary[dim_,method_:"QR"]:=Switch[
 	method,		
 		"Euler", RandomUnitaryEuler[dim],
-		_,RandomUnitaryQR[dim]
+		_, RandomUnitaryQR[dim]
 ];
 
 
-RandomState[d_,dist_:"HS"]:=Block[{v,A,U},
+RandomState[d_,dist_:"HS"]:=Block[{A,U},
 	Switch[dist,
 		"HS",
-			v=Flatten[GinibreMatrix[d^2,1]];
-			v=v/Norm[v,2];
-			PartialTraceGeneral[Proj[v],{d,d},2]//Chop,
+			A=GinibreMatrix[d,d];
+			A=(A.ConjugateTranspose[A]);
+			A=Chop[A/Tr[A]],
 		"Bures",
 			A=GinibreMatrix[d,d];
 			U=RandomUnitary[d];
-			(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose]/Tr[(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose]] //Chop,
+			A=(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose];
+			Chop[A]\[ConjugateTranspose]/Tr[A],		
 		_, 
-			Message[RandomState::argerr,dist]
+			If[IntegerQ[dist] && dist >=d,
+				A=GinibreMatrix[d,dist];
+				A=(A.ConjugateTranspose[A]);
+				A=Chop[A/Tr[A]],
+				Message[RandomState::argerr,dist]
+			]
 	]
 
 ];
-RandomState::argerr = "The second argument should be \"HS\" or \"Bures\", mesure \"`1`\" not implemented yet.";
+RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an integer K>2, mesure \"`1`\" not implemented yet.";
 
 
 (* ::Subsection::Closed:: *)
