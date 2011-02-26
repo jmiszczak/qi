@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.19)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.27)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -62,6 +62,8 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \lambda  $ }-- $\lambda $[i,n] is defined as GeneralizedPauliMatrices[n][[i]].$  $\\[8pt]
 \noindent\textbf{$ \text{PauliMatrices} $ }-- Predefined list of Pauli matrices $\{$$ \sigma _x,\sigma _y,\sigma _z $$\}$. Use Map[MatrixForm[$\#$]$\&$,PauliMatrices] to get this list in more readible form.$  $\\[8pt]
 \noindent\textbf{$ \text{GellMannMatrices} $ }-- List of Gell-Mann matrices. Use Map[MatrixForm[$\#$]$\&$,GellMannMatrices] to get this list in more readable form.$  $\\[8pt]
+\noindent\textbf{$ \text{UpperTriangularOnes} $ }-- UpperTriangularOnes[k,dim] returns not normal matirx of dimension dim with 1$<$k$<$dim-1 bands of ones over the diagonal.$  $\\[8pt]
+\noindent\textbf{$ \text{UpperBandOnes} $ }-- UpperBandOnes[k,dim] returns not normal matirx of dimension dim with bands at position k of ones over the diagonal.$  $\\[8pt]
 \section{Quantum gates}
 
 \noindent\textbf{$ \text{Swap} $ }-- Swap[d] returns permutation operator $ \underset{i=0}{\overset{n-1}{ \sum }}\underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on d-dimensional, d=$ n^2 $ space and exchanging two $\surd $d-dimensional subsystems.$  $\\[8pt]
@@ -89,12 +91,15 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{Unvec} $ }-- Unvec[v,c] - de-vectorization of the vector into the matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into square matrix. See also: Unres, Vec.$  $\\[8pt]
 \noindent\textbf{$ \text{Res} $ }-- Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A into a vector row by row.$  $\\[8pt]
 \noindent\textbf{$ \text{Unres} $ }-- Unres[v,c] - de-reshaping of the vector into a matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into a square matrix. See also: Unvec, Res.$  $\\[8pt]
-\noindent\textbf{$ \text{Reshuffle} $ }-- Reshuffle[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices. If  the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: ReshuffleGeneral, Reshuffle2.$  $\\[8pt]
-\noindent\textbf{$ \text{Reshuffle2} $ }-- Alternative definition of the reshuffling operation. Reshuffle2[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: ReshuffleGeneral, Reshuffle, BaseMatrices$  $\\[8pt]
+\noindent\textbf{$ \text{Reshuffle} $ }-- Reshuffle[$\rho $,method] for square matrix of dimensions $ d^2\times d^2 $, where d is an Integer, returns reshuffled matrix, available methods: $\texttt{"$ $Fast$\texttt{"}$ (default) and $\texttt{"}$BaseMatrices$\texttt{"}$ (slow). Use ReshuffleGeneral for matrices with dimensions different then }d^2\times d^2 $, where d is an Integer. See also: ReshuffleGeneral, ReshuffleBase, Reshuffle2.$  $\\[8pt]
+\noindent\textbf{$ \text{Reshuffle2} $ }-- Reshuffle2[$\rho $,method] for square matrix of dimensions $ d^2\times d^2 $, where d is an Integer, returns reshuffled matrix given by alternative definition of the reshuffling operation, available methods: $\texttt{"$ $Fast$\texttt{"}$ (default) and $\texttt{"}$BaseMatrices$\texttt{"}$ (slow). Use ReshuffleGeneral2 for matrices with dimensions different then }d^2\times d^2 $, where d is an Integer. See also: ReshuffleGeneral2, ReshuffleBase2, Reshuffle.$  $\\[8pt]
+\noindent\textbf{$ \text{ReshuffleBase} $ }-- ReshuffleBase[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices. If  the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: Reshuffle, ReshuffleGeneral, Reshuffle2.$  $\\[8pt]
+\noindent\textbf{$ \text{ReshuffleBase2} $ }-- Alternative definition of the reshuffling operation. Reshuffle2[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: Reshuffle2, ReshuffleGeneral, Reshuffle, BaseMatrices$  $\\[8pt]
 \noindent\textbf{$ \text{ReshuffleGeneral} $ }-- ReshuffleGeneral[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix.$  $\\[8pt]
 \noindent\textbf{$ \text{ReshuffleGeneral2} $ }-- ReshuffleGeneral2[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.$  $\\[8pt]
 \noindent\textbf{$ \text{MatrixElement} $ }-- MatrixElement[n,$\nu $,m,$\mu $,dim,A] - returns the matrix element of a matrix A indexed by two double indices n, $\nu $ and m, $\mu $ of the composite sytem of dimensions dim=dim1*dim2.$  $\\[8pt]
-\noindent\textbf{$ \text{ReshufflePermutation} $ }-- ReshufflePermutation[dim1,dim2] - permutation matrix equivalent to the reshuffling operation on dim1$\times $dim2-dimensional system. See also: Reshuffling.$  $\\[8pt]
+\noindent\textbf{$ \text{ReshufflePermutation} $ }-- ReshufflePermutation[dim1,dim2] - permutation matrix equivalent to the reshuffling operation on dim1$\times $dim2-dimensional system. See also: Reshuffle.$  $\\[8pt]
+\noindent\textbf{$ \text{ReshufflePermutation2} $ }-- ReshufflePermutation2[dim1,dim2] - permutation matrix equivalent to the alternative reshuffling operation on dim1$\times $dim2-dimensional system. See also: Reshuffle.$  $\\[8pt]
 \noindent\textbf{$ \text{ProductSuperoperator} $ }-- ProductSuperoperator[$\Psi $,$\Phi $] computes a product superoperator of superoperatos $\Psi $ and $\Phi $.$  $\\[8pt]
 \section{Parametrizations}
 
@@ -126,6 +131,7 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See also: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\[8pt]
 \noindent\textbf{$ \text{TPChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\[8pt]
 \noindent\textbf{$ \text{ExtendKraus} $ }-- ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $\\[8pt]
+\noindent\textbf{$ \text{SuperoperatorToKraus} $ }-- Finds Kraus operators for a given super operator$  $\\[8pt]
 \section{Partial trace and transposition}
 
 \noindent\textbf{$ \text{PartialTransposeA} $ }-- PartialTransposeA[$\rho $,m,n] performs partial transposition on the m-dimensional (first) subsystem of the m$\times $n-state.$  $\\[8pt]
@@ -182,8 +188,10 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{RandomProductNumericalRange} $ }-- RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $\\[8pt]
 \noindent\textbf{$ \text{RandomMaximallyEntangledNumericalRange} $ }-- RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]$\times $Sqrt[dim[M]].$  $\\[8pt]
 \noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures''. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomUnitaryEuler} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomUnitaryQR} $ }-- Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604$  $\\[8pt]
+\noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. This function can be used as RandomUnitary[dim,$\texttt{"$ $QR$\texttt{"}$] (default and faster) or RandomUnitary[dim,$\texttt{"}$Euler$\texttt{"}$] (slower) the first argument is the dimensions and the second argument specifies the generation method. See also RandomUnitaryEuler and RandomUnitaryQR.} $\\[8pt]
+\noindent\textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures'' or an integer K. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure. If dist is given as an integer K, the state is generated with respect to induced measure with an ancilla system od dimension K.$  $\\[8pt]
 \section{Random vectors}
 
 \noindent\textbf{$ \text{RandomComplexUnitVector} $ }-- RandomComplexUnitVector[n] returns a normalized, n-dimensional vector of complex numbers.$  $\\[8pt]
