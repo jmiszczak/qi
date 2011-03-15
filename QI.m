@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -25,7 +25,7 @@ qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 qiVersion = "0.3.27";
 
 
-qiLastModification = "February 14, 2010";
+qiLastModification = "February 14, 2011";
 
 
 qiHistory = {
