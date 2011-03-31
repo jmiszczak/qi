@@ -72,7 +72,8 @@ qiHistory = {
 	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."},
 	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."},
 	{"0.3.27", "14/02/2011", "Jarek", "Removed PartialTrace from the RandomState function and added induced measures."},
-	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."}
+	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."},
+	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."}
 };
 
 
@@ -96,18 +97,19 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 
 qiConstInfo = ""(*" This is predefined constant."*);
 
-
+(*
 qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitaryEuler","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleBase","ReshuffleBase2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","ReshufflePermutation2","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z","SuperoperatorToKraus","UpperTriangularOnes","UpperBandOnes","GateFidelity"};
-
+*)
 
 End[]; (* End of `Private` context *)
 
 
 Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
 
-
-Unprotect@@QI`Private`qiNames;
-Clear@@QI`Private`qiNames;
+Unprotect@@Names["QI`*"]
+Clear@@Names["QI`*"]
+(*Unprotect@@QI`Private`qiNames;
+Clear@@QI`Private`qiNames;*)
 
 
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
@@ -587,16 +589,10 @@ RandomProductNumericalRange::usage = "RandomLocalNumericalRange[M,{dim1,dim2,...
 RandomMaximallyEntangledNumericalRange::usage = "RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]\[Cross]Sqrt[dim[M]].";
 
 
-RandomSpecialUnitary::usage = "Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
+RandomSpecialUnitary::usage = "Random special unitary matrix. See RandomUnitary";
 
 
-RandomUnitaryEuler::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
-
-
-RandomUnitaryQR::usage = "Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604";
-
-
-RandomUnitary::usage = "Random unitary matrix. This function can be used as RandomUnitary[dim,\"QR\"] (default and faster) or RandomUnitary[dim,\"Euler\"] (slower) the first argument is the dimensions and the second argument specifies the generation method. See also RandomUnitaryEuler and RandomUnitaryQR.";
+RandomUnitary::usage = "Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604";
 
 
 RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures'' or an integer K. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure. If dist is given as an integer K, the state is generated with respect to induced measure with an ancilla system od dimension K.";
@@ -642,18 +638,18 @@ StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of app
 (*Private definitions*)
 
 
-Begin["`Private`"];
+Begin["`QI`Private`"];
 
 
 (* ::Subsection::Closed:: *)
 (*Miscellaneous functions*)
 
 
-qiGenDoc[docFile_:"qi_functions_list_alpha.tex",dir_:"~/zksi-repo/qi/doc"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,lista},
+qiGenDoc[docFile_:"qi_functions_list_alpha.tex",dir_:"~/zksi-repo/qi/doc"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,functionsList},
 	ExportString["","TeX"];
 	SetDirectory[dir];
 
-	lista=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
+	functionsList=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
 	latexHeader="\\documentclass[a4paper,10pt]{scrartcl}
 	\\usepackage{amsmath,amssymb,graphicx}
 	\\usepackage{fullpage}
@@ -673,9 +669,9 @@ qiGenDoc[docFile_:"qi_functions_list_alpha.tex",dir_:"~/zksi-repo/qi/doc"]:=Bloc
 	latexFooter = "\\end{document}";
 	f=OpenWrite[docFile];
 	WriteString[f,latexHeader];
-	For[i=1,i<= Length[lista],i++,
-		name=ToString[TeXForm[lista[[i,1]]]];
-		usage=ToString[TeXForm[DisplayForm[lista[[i,2]]]]];
+	For[i=1,i<= Length[functionsList],i++,
+		name=ToString[TeXForm[functionsList[[i,1]]]];
+		usage=ToString[TeXForm[DisplayForm[functionsList[[i,2]]]]];
 		txt = QI`Private`qiFormatUsageMsg[name, usage];
 		WriteString[f,txt];
 		WriteString[f,"\\\\\n\n"];
@@ -685,11 +681,11 @@ qiGenDoc[docFile_:"qi_functions_list_alpha.tex",dir_:"~/zksi-repo/qi/doc"]:=Bloc
 ];
 
 qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=inMsg,txt},
-	usage=StringReplace[usage,"\{"->"LEWY"];
-	usage=StringReplace[usage,"\}"->"PRAWY"];
+	usage=StringReplace[usage,"\{"->"LEFTCURLY"];
+	usage=StringReplace[usage,"\}"->"RIGHTCURLY"];
 	txt="\\textbf{"<>name<>"}"<>"-- "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
-	txt=StringReplace[txt,"LEWY"-> "\{"];
-	txt=StringReplace[txt,"PRAWY"->"\}"];
+	txt=StringReplace[txt,"LEFTCURLY"-> "\{"];
+	txt=StringReplace[txt,"RIGHTCURLY"->"\}"];
 	txt
 ];
 
@@ -891,7 +887,7 @@ Swap[dim_]:=Plus@@Flatten[Table[KroneckerProduct[Ketbra[i,j,Sqrt[dim]],Ketbra[j,
 
 QFT[n_,method_:"Symbolic"]:=Block[{\[Omega]},
 	If [method=="Numerical",\[Omega]=N[Exp[2 \[Pi] I/n]],\[Omega]=Exp[2 \[Pi] I/n]];
-	Table[\[Omega]^(i k) ,{i,1,n},{k,1,n}]
+	Table[\[Omega]^(i*k) ,{i,1,n},{k,1,n}]
 ];
 
 
@@ -901,7 +897,7 @@ cnot = {{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,0,1,0}};
 GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
 
 
-GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi] I j/d],{j,0,d-1}]];
+GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi]*I*j/d],{j,0,d-1}]];
 
 
 (* ::Subsection::Closed:: *)
@@ -927,7 +923,7 @@ Ketbra[v1_?VectorQ,v2_?VectorQ]:={v1}\[ConjugateTranspose]\[CircleTimes]{v2};
 KetFromDigits[l_,b_:2]:=Ket[FromDigits[l,b],b^Length[l]];
 
 
-MaxMix[n_Integer]:=1/n IdentityMatrix[n];
+MaxMix[n_Integer]:=(1/n)*IdentityMatrix[n];
 
 
 MaxEnt[dim_]:=Block[{subDim=Sqrt[dim]},
@@ -937,7 +933,7 @@ MaxEnt[dim_]:=Block[{subDim=Sqrt[dim]},
 
 WernerState[dim_,p_]:=Block[{subDim=Sqrt[dim]},
 If[IntegerQ[subDim],
-	p Proj[MaxEnt[dim]] + (1-p) MaxMix[dim],
+	p Proj[MaxEnt[dim]] + (1-p)*MaxMix[dim],
 	Message[WernerState::argerr,dim];
 ]
 ];
@@ -1142,7 +1138,7 @@ StateVector[l_]:=Block[{pr,ph,N},
 (*One-qubit states*)
 
 
-QubitKet[\[Alpha]_,\[Beta]_]:={Cos[\[Alpha]], Exp[I \[Beta]] Sin[\[Alpha]]};
+QubitKet[\[Alpha]_,\[Beta]_]:={Cos[\[Alpha]], Exp[I*\[Beta]]*Sin[\[Alpha]]};
 
 
 QubitPureState[\[Alpha]_,\[Beta]_]:=Proj[QubitKet[\[Alpha],\[Beta]]];
@@ -1221,10 +1217,10 @@ SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]
 (*Partial trace and transposition*)
 
 
-PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m m]\[CircleTimes]IdentityMatrix[n n]).Res[Reshuffle[\[Rho]]]]];
+PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m*m]\[CircleTimes]IdentityMatrix[n*n]).Res[Reshuffle[\[Rho]]]]];
 
 
-PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m m]\[CircleTimes]Swap[n n]).Res[Reshuffle[\[Rho]]]]];
+PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m*m]\[CircleTimes]Swap[n*n]).Res[Reshuffle[\[Rho]]]]];
 
 
 PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
@@ -1426,43 +1422,17 @@ RandomMaximallyEntangledNumericalRange[A_,noPoints_]:=Block[{ent,dim},
 	Table[ent=RandomEntangledUnitVector[dim];ent\[Conjugate].A.ent,{noPoints}]
 ];
 
-
-RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,k,u,e,phi0,psi0,chi0},
-    Do[psi[r,s]=2*Pi*Random[];,{r,1,d-1},{s,r+1,d}];
-	Do[chi[r,s]=0;,{r,2,d-1},{s,r+1,d}];
-	Do[chi[1,s]=2*Pi*Random[];,{s,2,d}];
-	Do[phi[r,s]=ArcSin[(Random[])^(1/(2r))];,{r,1,d-1},{s,r+1,d}];
-	e=Table[0,{r,1,d},{s,1,d},{i,1,d},{j,1,d}];
-	Do[e[[r,s]]=IdentityMatrix[d];
-    e[[r,s,r,r]]=Cos[phi0]*Exp[I*psi0];
-    e[[r,s,s,s]]=Cos[phi0]*Exp[-I*psi0];
-    e[[r,s,r,s]]=Sin[phi0]*Exp[I*chi0];
-    e[[r,s,s,r]]=-Sin[phi0]*Exp[-I*chi0];,{r,1,d-1},{s,r+1,d}];
-    u=IdentityMatrix[d];
-    Do[u=(e[[r,r+1]] /. {phi0->phi[d-r,s+1],psi0->psi[d-r,s+1],chi0->chi[d-r,s+1]}).u;,{s,d-1,1,-1},{r,d-1,d-s,-1}];
-    u
+RandomSpecialUnitary[dim_]:=Module[{U},
+	U=RandomUnitary[dim];
+	U/Det[U]
 ];
 
-
-RandomUnitaryEuler[d_]:=Exp[I*RandomReal[2*\[Pi]]]*RandomSpecialUnitary[d];
-
-
-RandomUnitaryQR[dim_]:=Module[{z,q,r,d,ph},
-	z=GinibreMatrix[dim,dim];
-	{q,r}=QRDecomposition[z];
+RandomUnitary[dim_]:=Module[{q,r,d,ph},
+	{q,r}=QRDecomposition[GinibreMatrix[dim,dim]];
 	d=Diagonal[r];
 	ph=d/Abs[d];
-	q=q.DiagonalMatrix[ph];
-	q
-]
-
-
-RandomUnitary[dim_,method_:"QR"]:=Switch[
-	method,		
-		"Euler", RandomUnitaryEuler[dim],
-		_, RandomUnitaryQR[dim]
+	Transpose[Transpose[q]*ph]
 ];
-
 
 RandomState[d_,dist_:"HS"]:=Block[{A,U},
 	Switch[dist,
@@ -1585,7 +1555,7 @@ End[];
 (*Package footer*)
 
 
-Protect@@QI`Private`qiNames;
-
+(*Protect@@QI`Private`qiNames;*)
+Protect@@Names["QI`*"]
 
 EndPackage[];
