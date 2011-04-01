@@ -5,10 +5,35 @@ BeginPackage["QI`"]
 
 RandomUnitaryEuler::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
 
+PartialTraceA::usage = "PartialTraceA[\[Rho],m,n] performs partial trace on m\[Cross]n-dimensional density matrix \[Rho] with respect to the m-demensional (first) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.";
 
+PartialTraceB::usage = "PartialTraceB[\[Rho],m,n] performs partial trace on m\[Cross]n-dimensional density matrix \[Rho] with respect to the n-dimensional (second) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.";
+
+PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the partial trace, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}. See also: PartialTraceA, PartialTraceB.";
+
+
+Begin["`Private`"] (* Begin Private Context *) 
+
+PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
+	trMtx=ChannelToMatrix[IdentityMatrix[m]Tr[#]&,m];
+	Unres[((trMtx\[CircleTimes]IdentityMatrix[n n]).Res[ReshuffleGeneral[\[Rho],m,m,n,n]])[[1;;n n]]]
+];
+
+
+PartialTraceB[\[Rho]_,m_,n_] := Block[{trMtx},
+	trMtx=ChannelToMatrix[IdentityMatrix[n]Tr[#]&,n];
+	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[ReshuffleGeneral[\[Rho],m,m,n,n]]]\[Transpose][[1]]]
+];
+
+
+PartialTraceGeneral[\[Rho]_,dim_,sys_] := Block[{n,m},
+	If[sys==1,
+		Table[Sum[MatrixElement[m,\[Mu],m,\[Nu],dim,\[Rho]],{m,dim[[1]]}],{\[Mu],dim[[2]]},{\[Nu],dim[[2]]}],
+		(* else *)
+		Table[Sum[MatrixElement[n,\[Mu],m,\[Mu],dim,\[Rho]],{\[Mu],dim[[2]]}],{n,dim[[1]]},{m,dim[[1]]}]]
+];
 
 RandomUnitaryEuler[d_]:=Exp[I*RandomReal[2*\[Pi]]]*RandomSpecialUnitary[d];
-Begin["`Private`"] (* Begin Private Context *) 
 
 RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,u,e,phi0,psi0,chi0},
     Do[psi[r,s]=2*Pi*Random[];,{r,1,d-1},{s,r+1,d}];

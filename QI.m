@@ -22,12 +22,6 @@ qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-qiVersion = "0.3.28";
-
-
-qiLastModification = "March 16, 2011";
-
-
 qiHistory = {
 	{"0.1.0", "05/06/2009", "Jarek", "Initial version"}, 
 	{"0.1.1", "09/06/2009", "Zbyszek", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
@@ -73,9 +67,13 @@ qiHistory = {
 	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."},
 	{"0.3.27", "14/02/2011", "Jarek", "Removed PartialTrace from the RandomState function and added induced measures."},
 	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."},
-	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."}
+	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."},
+	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."}
 };
 
+qiVersion = Last[qiHistory][[1]];
+
+qiLastModification = Last[qiHistory][[2]];
 
 qiAbout = "QI is a package of functions for Mathematica computer algebra system, which implements 
 number of functions used in the analysis of quantum states and quantum operations. In contrast to 
@@ -97,20 +95,12 @@ qiHistory::usage = "Display the history of modifications for the QI package.";
 
 qiConstInfo = ""(*" This is predefined constant."*);
 
-(*
-qiNames = {"ApplyChannel","ApplyKraus","ApplyUnitary","BaseMatrices","BaseVectors","BlochVector","ChannelToMatrix","cnot","Commutator","ComplexToPoint","Concurrence4","DepolarizingChannel","DynamicalMatrix","ExpectationValue","ExtendKraus","Fidelity","GellMannMatrices","GeneralizedPauliKraus","GeneralizedPauliMatrices","GeneralizedPauliX","GeneralizedPauliZ","GinibreMatrix","HolevoWernerChannel","id","IdentityChannel","IsotropicState","Jamiolkowski","Ket","Ketbra","KetFromDigits","KroneckerDeltaMatrix","KroneckerSum","Lambda1","Lambda2","Lambda3","Log0","MatrixAbs","MatrixElement","MatrixIm","MatrixRe","MatrixSqrt","MaxEnt","MaxMix","Negativity","NumericalRangeBound","OperatorSchmidtDecomposition","PartialTraceA","PartialTraceB","PartialTraceGeneral","PartialTransposeA","PartialTransposeB","PartialTransposeGeneral","PauliMatrices","ProbablityVector","ProbBures","ProbBuresNorm","ProbHS","ProbHSNorm","ProdDiff2","ProdSum","ProductSuperoperator","Proj","QFT","QuantumChannelEntropy","QuantumEntropy","QubitBitflipChannel","QubitBitflipKraus","QubitBitphaseflipChannel","QubitBitphaseflipKraus","QubitBlochState","QubitDaviesSuperoperator","QubitDecayKraus","QubitDepolarizingKraus","QubitDynamicalMatrix","QubitGeneralState","QubitKet","QubitPhaseflipChannel","QubitPhaseflipKraus","QubitPhaseKraus","QubitPureState","QutritSpontaneousEmissionKraus","RandomComplexUnitVector","RandomDynamicalMatrix","RandomEntangledUnitVector","RandomKet","RandomNormalMatrix","RandomProductKet","RandomProductNumericalRange","RandomRealUnitVector","RandomSimplex","RandomSpecialUnitary","RandomState","RandomUnitary","RandomUnitaryEuler","RandomUnitVector","RandomUnitVectorSchmidt","Res","Reshuffle","Reshuffle2","ReshuffleBase","ReshuffleBase2","ReshuffleGeneral","ReshuffleGeneral2","ReshufflePermutation","ReshufflePermutation2","SchmidtDecomposition","SpecialUnitary2","SquareMatrixQ","StateFromBlochVector","StateVector","Subfidelity","Superfidelity","Superoperator","Swap","sx","sy","SymbolicHermitianMatrix","SymbolicMatrix","SymbolicVector","sz","TPChannelQ","TraceDistance","TraceNorm","TransposeChannel","Unitary2","Unitary3","Unitary4Canonical","Unres","Unvec","VandermondeMatrix","Vec","VectorSchmidtDecomposition","WernerState","wh","\[Delta]","\[Eta]","\[Eta]2","\[Lambda]","\[Lambda]1","\[Lambda]2","\[Lambda]3","\[Lambda]4","\[Lambda]5","\[Lambda]6","\[Lambda]7","\[Lambda]8","\[Sigma]x","\[Sigma]y","\[Sigma]z","SuperoperatorToKraus","UpperTriangularOnes","UpperBandOnes","GateFidelity"};
-*)
-
 End[]; (* End of `Private` context *)
-
 
 Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
 
 Unprotect@@Names["QI`*"]
 Clear@@Names["QI`*"]
-(*Unprotect@@QI`Private`qiNames;
-Clear@@QI`Private`qiNames;*)
-
 
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
@@ -445,15 +435,7 @@ PartialTransposeA::usage = "PartialTransposeA[\[Rho],m,n] performs partial trans
 
 PartialTransposeB::usage = "PartialTransposeB[\[Rho],m,n] performs partial transposition on the n-dimensional (second) subsystem of the m\[Cross]n-state.";
 
-
-PartialTraceA::usage = "PartialTraceA[\[Rho],m,n] performs partial trace on m\[Cross]n-dimensional density matrix \[Rho] with respect to the m-demensional (first) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.";
-
-
-PartialTraceB::usage = "PartialTraceB[\[Rho],m,n] performs partial trace on m\[Cross]n-dimensional density matrix \[Rho] with respect to the n-dimensional (second) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.";
-
-
-PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the partial trace, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}. See also: PartialTraceA, PartialTraceB.";
-
+PartialTrace::usage = "PartialTrace[\[Rho],dim,sys] - Returns the partial trace, according to systems sys, of density matrix \[Rho] composed of subsystems of dimensions dim.";
 
 PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
 
@@ -755,22 +737,6 @@ ExpectationValue::argerr = "First argument should be a vector of a square matrix
 Commutator[A_?SquareMatrixQ,B_?SquareMatrixQ] := If[ And@Dimensions[A]==Dimensions[B], A.B-B.A, Null];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
@@ -866,7 +832,7 @@ Clear[\[Lambda]];
 \[Lambda][i_,n_]:=GeneralizedPauliMatrices[n][[i]];
 
 
-PauliMatrices = {sx,sy,sz};
+PauliMatrices = {IdentityMatrix[2],sx,sy,sz};
 
 
 GellMannMatrices = {\[Lambda]1,\[Lambda]2,\[Lambda]3,\[Lambda]4,\[Lambda]5,\[Lambda]6,\[Lambda]7,\[Lambda]8};
@@ -1223,25 +1189,25 @@ PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m*m]\[CircleTimes]Iden
 PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m*m]\[CircleTimes]Swap[n*n]).Res[Reshuffle[\[Rho]]]]];
 
 
-PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
-	trMtx=ChannelToMatrix[IdentityMatrix[m]Tr[#]&,m];
-	Unres[((trMtx\[CircleTimes]IdentityMatrix[n n]).Res[ReshuffleGeneral[\[Rho],m,m,n,n]])[[1;;n n]]]
+ListReshape[list_, shape_] := 
+  FlattenAt[Fold[Partition[#1, #2] &, Flatten[list], Reverse[shape]], 
+   1];
+
+PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
+	{offset, keep, dispose, keepdim, disposedim, perm1, perm2, perm, tensor},
+	offset=Length[dim];
+	keep=Complement[Range[offset], sys];
+	dispose=sys;
+	perm1=Join[dispose,keep];
+	perm2=perm1+offset;
+	perm=InversePermutation[Join[perm1,perm2]];
+	tensor=ListReshape[\[Rho], Join[dim,dim]];
+	keepdim=Apply[Times, Join[dim, dim][[keep]]];
+	disposedim=Apply[Times, Join[dim, dim][[dispose]]];
+	tensor=Transpose[tensor,perm];
+	tensor=ListReshape[tensor,{disposedim,keepdim,disposedim,keepdim}];
+	Sum[tensor[[i,All,i,All]],{i,1,disposedim}]
 ];
-
-
-PartialTraceB[\[Rho]_,m_,n_] := Block[{trMtx},
-	trMtx=ChannelToMatrix[IdentityMatrix[n]Tr[#]&,n];
-	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[ReshuffleGeneral[\[Rho],m,m,n,n]]]\[Transpose][[1]]]
-];
-
-
-PartialTraceGeneral[\[Rho]_,dim_,sys_] := Block[{n,m},
-	If[sys==1,
-		Table[Sum[MatrixElement[m,\[Mu],m,\[Nu],dim,\[Rho]],{m,dim[[1]]}],{\[Mu],dim[[2]]},{\[Nu],dim[[2]]}],
-		(* else *)
-		Table[Sum[MatrixElement[n,\[Mu],m,\[Mu],dim,\[Rho]],{\[Mu],dim[[2]]}],{n,dim[[1]]},{m,dim[[1]]}]]
-];
-
 
 PartialTransposeGeneral[\[Rho]_,dim_,sys_]:=
 If[sys==1,
@@ -1403,7 +1369,7 @@ RandomNormalMatrix[n_]:=Block[{DD,AA,QQ,RR},
 
 RandomDynamicalMatrix[n_,m_:0]:=Block[{X,Y,sY},	
 	X=GinibreMatrix[n^2,n^2-m];
-	Y=PartialTraceGeneral[X.X\[ConjugateTranspose],{n,n},1];
+	Y=PartialTrace[X.X\[ConjugateTranspose],{n,n},{1}];
 	sY=MatrixPower[Y,-1/2];
 	KroneckerProduct[IdentityMatrix[n],sY].X.X\[ConjugateTranspose].KroneckerProduct[IdentityMatrix[n],sY]
 ];
@@ -1554,8 +1520,6 @@ End[];
 (* ::Section::Closed:: *)
 (*Package footer*)
 
-
-(*Protect@@QI`Private`qiNames;*)
 Protect@@Names["QI`*"]
 
 EndPackage[];
