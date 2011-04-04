@@ -5,14 +5,32 @@ BeginPackage["QI`"]
 
 RandomUnitaryEuler::usage = "Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.";
 
+MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],dim,A] - returns the matrix element of a matrix A indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim=dim1*dim2.";
+
 PartialTraceA::usage = "PartialTraceA[\[Rho],m,n] performs partial trace on m\[Cross]n-dimensional density matrix \[Rho] with respect to the m-demensional (first) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.";
 
 PartialTraceB::usage = "PartialTraceB[\[Rho],m,n] performs partial trace on m\[Cross]n-dimensional density matrix \[Rho] with respect to the n-dimensional (second) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.";
 
 PartialTraceGeneral::usage = "PartialTraceGeneral[\[Rho],dim,sys] - Returns the partial trace, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA, dimB}. See also: PartialTraceA, PartialTraceB.";
 
+PartialTransposeA::usage = "PartialTransposeA[\[Rho],m,n] performs partial transposition on the m-dimensional (first) subsystem of the m\[Cross]n-state.";
+
+PartialTransposeB::usage = "PartialTransposeB[\[Rho],m,n] performs partial transposition on the n-dimensional (second) subsystem of the m\[Cross]n-state.";
+
+PartialTransposeGeneral::usage = "BUGGY! PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
+
+ReshuffleBase::usage = "ReshuffleBase[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If  the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: Reshuffle, ReshuffleGeneral, Reshuffle2.";
+
+ReshuffleBase2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: Reshuffle2, ReshuffleGeneral, Reshuffle, BaseMatrices";
+
+ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix.";
+
+ReshuffleGeneral2::usage = "ReshuffleGeneral2[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.";
 
 Begin["`Private`"] (* Begin Private Context *) 
+
+
+MatrixElement[n_,\[Nu]_,m_,\[Mu]_,dim_,mtx_]:=mtx[[(n-1)*dim[[2]]+\[Nu],(m-1)*dim[[2]]+\[Mu]]];
 
 PartialTraceA[\[Rho]_,m_,n_]:=Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[m]Tr[#]&,m];
@@ -24,6 +42,22 @@ PartialTraceB[\[Rho]_,m_,n_] := Block[{trMtx},
 	trMtx=ChannelToMatrix[IdentityMatrix[n]Tr[#]&,n];
 	Unres[Unres[(IdentityMatrix[m m]\[CircleTimes]trMtx).Res[ReshuffleGeneral[\[Rho],m,m,n,n]]]\[Transpose][[1]]]
 ];
+
+PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m*m]\[CircleTimes]IdentityMatrix[n*n]).Res[Reshuffle[\[Rho]]]]];
+
+
+PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m*m]\[CircleTimes]Swap[n*n]).Res[Reshuffle[\[Rho]]]]];
+
+PartialTransposeGeneral[\[Rho]_,dim_,sys_]:=
+If[sys==1,
+	ArrayFlatten[Table[
+		MatrixElement[n,\[Mu],m,\[Nu],dim,\[Rho]],{n,dim[[1]]},{m,dim[[1]]},{\[Nu],dim[[2]]},{\[Mu],dim[[2]]}
+	]]
+	,(*else*)
+	ArrayFlatten[Table[
+		MatrixElement[m,\[Nu],n,\[Mu],dim,\[Rho]],{n,dim[[1]]},{m,dim[[1]]},{\[Nu],dim[[2]]},{\[Mu],dim[[2]]}
+	]]
+];(*endif*)
 
 
 PartialTraceGeneral[\[Rho]_,dim_,sys_] := Block[{n,m},
@@ -50,6 +84,39 @@ RandomSpecialUnitary[d_]:=Module[{psi,chi,r,s,phi,i,j,u,e,phi0,psi0,chi0},
     Do[u=(e[[r,r+1]] /. {phi0->phi[d-r,s+1],psi0->psi[d-r,s+1],chi0->chi[d-r,s+1]}).u;,{s,d-1,1,-1},{r,d-1,d-s,-1}];
     u
 ];
+
+ReshuffleBase[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
+	If[dim1==0||dim2==0,
+		dim=Length[\[Rho]];
+		base1=BaseMatrices[Sqrt[dim]];
+		Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}],
+		(* else *)
+		base1=BaseMatrices[dim1];
+		base2=BaseMatrices[dim2];
+		Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])].Res[\[Rho]],{k,1,dim1 dim1},{l,1,dim2 dim2}]
+	]
+];
+
+
+ReshuffleBase2[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
+	If[dim1==0||dim2==0,
+		dim=Length[\[Rho]];
+		base1=BaseMatrices[Sqrt[dim]];
+		Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}],
+		(* else *)
+		base1=BaseMatrices[dim1];
+		base2=BaseMatrices[dim2];
+		Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim1 dim1},{k,1,dim2 dim2}]
+	]
+];
+
+ReshuffleGeneral[A_,n1_,m1_,n2_,m2_]:=Flatten[
+	Table[Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]],{i1,0,n1 n2-1,n2},{i2,0,m1 m2-1,m2}]
+,1];
+
+ReshuffleGeneral2[A_,n1_,m1_,n2_,m2_]:=Flatten[
+	Table[Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]\[Transpose]],{i2,0,m1 m2-1,m2},{i1,0,n1 n2-1,n2}]
+,1]\[Transpose];
 
 End[] (* End Private Context *)
 

@@ -68,16 +68,17 @@ qiHistory = {
 	{"0.3.27", "14/02/2011", "Jarek", "Removed PartialTrace from the RandomState function and added induced measures."},
 	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."},
 	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."},
-	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."}
+	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."},
+	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."}
 };
 
 qiVersion = Last[qiHistory][[1]];
 
 qiLastModification = Last[qiHistory][[2]];
 
-qiAbout = "QI is a package of functions for Mathematica computer algebra system, which implements 
-number of functions used in the analysis of quantum states and quantum operations. In contrast to 
-many available packages for symbolic and numerical simulation of quantum computation presented 
+qiAbout = "QI is a package of functions for Mathematica computer algebra system, which implements \
+number of functions used in the analysis of quantum states and quantum operations. In contrast to \
+many available packages for symbolic and numerical simulation of quantum computation presented \
 package is focused on geometrical aspects of quantum information theory.";
 
 
@@ -307,31 +308,22 @@ Res::usage = "Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A
 Unres::usage = "Unres[v,c] - de-reshaping of the vector into a matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into a square matrix. See also: Unvec, Res.";
 
 
-Reshuffle::usage = "Reshuffle[\[Rho],method] for square matrix of dimensions \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, returns reshuffled matrix, available methods: \"Fast\" (default) and \"BaseMatrices\" (slow). Use ReshuffleGeneral for matrices with dimensions different then \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer. See also: ReshuffleGeneral, ReshuffleBase, Reshuffle2.";
+Reshuffle::usage = "\
+Reshuffle[\[Rho], drows, dcols] for a matrix of dimensions (drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) returns reshuffled matrix with dimensions \
+(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]]), \
+drows and dcols parameters can be ommited for a square matrix.";
 
 
-Reshuffle2::usage = "Reshuffle2[\[Rho],method] for square matrix of dimensions \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, returns reshuffled matrix given by alternative definition of the reshuffling operation, available methods: \"Fast\" (default) and \"BaseMatrices\" (slow). Use ReshuffleGeneral2 for matrices with dimensions different then \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer. See also: ReshuffleGeneral2, ReshuffleBase2, Reshuffle.";
-
-
-ReshuffleBase::usage = "ReshuffleBase[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices. If  the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: Reshuffle, ReshuffleGeneral, Reshuffle2.";
-
-
-ReshuffleBase2::usage = "Alternative definition of the reshuffling operation. Reshuffle2[\[Rho],m,n] returns representation of the m\[Cross]n-dimensional square matrix \[Rho] in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix \[Rho] has dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\) then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: Reshuffle2, ReshuffleGeneral, Reshuffle, BaseMatrices";
-
-
-ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix.";
-
-
-ReshuffleGeneral2::usage = "ReshuffleGeneral2[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.";
-
-
-MatrixElement::usage = "MatrixElement[n,\[Nu],m,\[Mu],dim,A] - returns the matrix element of a matrix A indexed by two double indices n, \[Nu] and m, \[Mu] of the composite sytem of dimensions dim=dim1*dim2.";
+ReshufflePrim::usage = "\
+ReshufflePrim[\[Rho], drows, dcols] for a matrix of dimensions (drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) returns reshuffled (prim) matrix with dimensions \  
+(dcols[[2]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]drows[[1]]), \
+drows and dcols parameters can be ommited for a square matrix.";
 
 
 ReshufflePermutation::usage = "ReshufflePermutation[dim1,dim2] - permutation matrix equivalent to the reshuffling operation on dim1\[Cross]dim2-dimensional system. See also: Reshuffle.";
 
 
-ReshufflePermutation2::usage = "ReshufflePermutation2[dim1,dim2] - permutation matrix equivalent to the alternative reshuffling operation on dim1\[Cross]dim2-dimensional system. See also: Reshuffle.";
+ReshufflePermutationPrim::usage = "ReshufflePermutation2[dim1,dim2] - permutation matrix equivalent to the alternative reshuffling operation on dim1\[Cross]dim2-dimensional system. See also: Reshuffle.";
 
 
 ProductSuperoperator::usage = "ProductSuperoperator[\[CapitalPsi],\[CapitalPhi]] computes a product superoperator of superoperatos \[CapitalPsi] and \[CapitalPhi].";
@@ -429,16 +421,9 @@ SuperoperatorToKraus::usage = "Finds Kraus operators for a given super operator"
 (* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
-
-PartialTransposeA::usage = "PartialTransposeA[\[Rho],m,n] performs partial transposition on the m-dimensional (first) subsystem of the m\[Cross]n-state.";
-
-
-PartialTransposeB::usage = "PartialTransposeB[\[Rho],m,n] performs partial transposition on the n-dimensional (second) subsystem of the m\[Cross]n-state.";
+PartialTranspose::usage = "PartialTranspose[\[Rho],dim,sys] - Returns the partial transpose, according to systems sys, of density matrix \[Rho] composed of subsystems of dimensions dims.";
 
 PartialTrace::usage = "PartialTrace[\[Rho],dim,sys] - Returns the partial trace, according to systems sys, of density matrix \[Rho] composed of subsystems of dimensions dim.";
-
-PartialTransposeGeneral::usage = "PartialTransposeGeneral[\[Rho],dim,sys] - Returns the partial transpose, according to system sys, of density matrix \[Rho] composed of subsystems of dimensions dim={dimA,dimB}. ";
-
 
 (* ::Subsection::Closed:: *)
 (*Entanglement*)
@@ -935,7 +920,7 @@ VectorSchmidtDecomposition::argerr = "First argument should be a vector.";
 
 OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
 	If[MatrixQ[op],
-		mtx=ReshuffleGeneral[op,d1,d1,d2,d2];
+		mtx=Reshuffle[op,{d1,d2},{d1,d2}];
 		svd=SingularValueDecomposition[mtx];
 		If[NumericQ[svd[[2,1]]],
 			vals=Select[Diagonal[svd[[2]]],#!=0&],
@@ -981,81 +966,43 @@ Unres[v_List,cols_:0]:=Which[
 ];
 
 
-Reshuffle[\[Rho]_,method_:"Fast"]:=Block[{dim},
-dim = Sqrt[Length[\[Rho]]];
-If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
-Switch[
-	method,		
-		"BaseMatrices", ReshuffleBase[\[Rho]],
-		_, ReshuffleGeneral[\[Rho], dim,dim,dim,dim]
-],	
-Message[Reshuffle::argerr]
-]
+Reshuffle[\[Rho]_]:=Block[{dim},
+	dim = Sqrt[Length[\[Rho]]];
+	If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+		Reshuffle[\[Rho], {dim,dim},{dim,dim}]
+	(*else*),
+		Message[Reshuffle::argerr]
+	]
 ]
 Reshuffle::argerr = "Reshuffle works only for square matrices of dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, for other dimensions use ReshuffleGeneral";
 
-
-Reshuffle2[\[Rho]_,method_:"Fast"]:=Block[{dim},
-dim = Sqrt[Length[\[Rho]]];
-If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
-Switch[
-	method,		
-		"BaseMatrices", ReshuffleBase2[\[Rho]],
-		_, ReshuffleGeneral2[\[Rho], dim,dim,dim,dim]
-],	
-Message[Reshuffle2::argerr]
-]
-]
-Reshuffle2::argerr = "Reshuffle works only for square matrices of dimensions \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, for other shapes use ReshuffleGeneral2";
-
-
-ReshuffleBase[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
-	If[dim1==0||dim2==0,
-		dim=Length[\[Rho]];
-		base1=BaseMatrices[Sqrt[dim]];
-		Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])].Res[\[Rho]],{k,1,dim},{l,1,dim}],
-		(* else *)
-		base1=BaseMatrices[dim1];
-		base2=BaseMatrices[dim2];
-		Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])].Res[\[Rho]],{k,1,dim1 dim1},{l,1,dim2 dim2}]
+ReshufflePrim[\[Rho]_]:=Block[{dim},
+	dim = Sqrt[Length[\[Rho]]];
+	If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+		ReshufflePrim[\[Rho], {dim,dim},{dim,dim}]
+	(*else*),
+		Message[ReshufflePrim::argerr]
 	]
-];
+]
+ReshufflePrim::argerr = "ReshufflePrim works only for square matrices of dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, for other dimensions use ReshuffleGeneral";
 
-
-ReshuffleBase2[\[Rho]_,dim1_:0,dim2_:0]:=Block[{base1,base2,dim},
-	If[dim1==0||dim2==0,
-		dim=Length[\[Rho]];
-		base1=BaseMatrices[Sqrt[dim]];
-		Table[Res[(base1[[k]]\[CircleTimes]base1[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim},{k,1,dim}],
-		(* else *)
-		base1=BaseMatrices[dim1];
-		base2=BaseMatrices[dim2];
-		Table[Res[(base1[[k]]\[CircleTimes]base2[[l]])\[Transpose]].Res[\[Rho]],{l,1,dim1 dim1},{k,1,dim2 dim2}]
-	]
-];
-
-
-ReshuffleGeneral[A_,n1_,m1_,n2_,m2_]:=Flatten[
-	Table[Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]],{i1,0,n1 n2-1,n2},{i2,0,m1 m2-1,m2}]
+Reshuffle[A_,n_,m_]:=Flatten[
+	Table[Flatten[Part[A,1+i1;;n[[2]]+i1,1+i2;;m[[2]]+i2]],{i1,0,n[[1]] n[[2]]-1,n[[2]]},{i2,0,m[[1]]*m[[2]]-1,m[[2]]}]
 ,1];
 
-
-ReshuffleGeneral2[A_,n1_,m1_,n2_,m2_]:=Flatten[
-	Table[Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]\[Transpose]],{i2,0,m1 m2-1,m2},{i1,0,n1 n2-1,n2}]
+ReshufflePrim[A_,n_,m_]:=Flatten[
+	Table[Flatten[Part[A,1+i1;;n[[2]]+i1,1+i2;;m[[2]]+i2]\[Transpose]],{i2,0,m[[1]]*m[[2]]-1,m[[2]]},{i1,0,n[[1]]*n[[2]]-1,n[[2]]}]
 ,1]\[Transpose];
 
 
-MatrixElement[n_,\[Nu]_,m_,\[Mu]_,dim_,mtx_]:=mtx[[(n-1)*dim[[2]]+\[Nu],(m-1)*dim[[2]]+\[Mu]]];
-
-
 ReshufflePermutation[dim1_,dim2_]:=Block[{initPos},
-	initPos=Flatten[ReshuffleGeneral[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],dim1,dim1,dim2,dim2]];
+	initPos=Flatten[Reshuffle[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],{dim1,dim2},{dim1,dim2}]];
 	Table[UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1,1]]],{i,1,dim1*dim1*dim2*dim2}]
 ];
 
 
-ReshufflePermutation2[dim1_,dim2_]:=Block[{initPos},
-	initPos=Flatten[ReshuffleGeneral2[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],dim1,dim1,dim2,dim2]];
+ReshufflePermutationPrim[dim1_,dim2_]:=Block[{initPos},
+	initPos=Flatten[ReshufflePrim[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],{dim1,dim2},{dim1,dim2}]];
 	Table[UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1,1]]],{i,1,dim1*dim1*dim2*dim2}]
 ];
 
@@ -1183,12 +1130,6 @@ SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]
 (*Partial trace and transposition*)
 
 
-PartialTransposeA[\[Rho]_,m_,n_] := Reshuffle[Unres[(Swap[m*m]\[CircleTimes]IdentityMatrix[n*n]).Res[Reshuffle[\[Rho]]]]];
-
-
-PartialTransposeB[\[Rho]_,m_,n_] := Reshuffle[Unres[(IdentityMatrix[m*m]\[CircleTimes]Swap[n*n]).Res[Reshuffle[\[Rho]]]]];
-
-
 ListReshape[list_, shape_] := 
   FlattenAt[Fold[Partition[#1, #2] &, Flatten[list], Reverse[shape]], 
    1];
@@ -1209,16 +1150,18 @@ PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	Sum[tensor[[i,All,i,All]],{i,1,disposedim}]
 ];
 
-PartialTransposeGeneral[\[Rho]_,dim_,sys_]:=
-If[sys==1,
-	ArrayFlatten[Table[
-		MatrixElement[n,\[Mu],m,\[Nu],dim,\[Rho]],{n,dim[[1]]},{m,dim[[1]]},{\[Nu],dim[[2]]},{\[Mu],dim[[2]]}
-	]]
-	,(*else*)
-	ArrayFlatten[Table[
-		MatrixElement[m,\[Nu],n,\[Mu],dim,\[Rho]],{n,dim[[1]]},{m,dim[[1]]},{\[Nu],dim[[2]]},{\[Mu],dim[[2]]}
-	]]
-];(*endif*)
+PartialTranspose[\[Rho]_,dim_?ListQ,sys_?ListQ]:=Block[{offset,tensor,perm,idx1,idx2,s},
+	offset=Length[dim];
+	tensor=ListReshape[\[Rho], Join[dim,dim]];
+	perm=Range[offset*2];
+	For[s=1, s<=Length[sys], s+=1, 
+		idx1 = Position[perm, sys[[s]]][[1, 1]];
+		idx2 = Position[perm, sys[[s]] + offset][[1, 1]];
+		{perm[[idx1]],perm[[idx2]]}={perm[[idx2]],perm[[idx1]]};
+	];
+	tensor=Transpose[tensor,InversePermutation[perm]];
+	ListReshape[tensor,Dimensions[\[Rho]]]
+]
 
 
 (* ::Subsection::Closed:: *)
@@ -1231,7 +1174,7 @@ Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 ];
 
 
-Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTransposeA[\[Rho],m,n]],#>0&];
+Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTranspose[\[Rho],{m,n},1]],#>0&];
 
 
 (* ::Subsection::Closed:: *)
@@ -1472,7 +1415,8 @@ RandomUnitVectorSchmidt::argerr = "`1` is not a perfect square!";
 (*Numerical range*)
 
 
-NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[{w,Ath,Hth,m,s,Kth,pKp,ee,rr,mm,sm,mM,sM,e,r},
+NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[
+	{w,Ath,Hth,m,s,Kth,pKp,ee,rr,mm,sm,mM,sM,e,r},
 	w={};
 	Table[
 	Ath=Exp[I*(-\[Theta])]*A;
@@ -1482,11 +1426,17 @@ NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[{w,Ath,Hth,m,s,Kth,pKp,ee,rr,m
 	m=Max[e];
 	s=Position[e,m];
 	If[
-	Length[s]==1,(*then*)AppendTo[w,ArrayFlatten[Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose]]],
-	(*else*)
-	Kth=I*(Hth-Ath); pKp=Extract[r,s]\[Conjugate].Kth.Extract[r,s]\[Transpose]; {ee,rr}=Eigensystem[pKp]; ee=Re[ee]; mm=Min[ee]; sm=Position[ee,mm];
-	AppendTo[w,ArrayFlatten[Extract[rr,sm]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sm]\[Transpose]]];
-	mM=Max[ee];sM=Position[ee,mM];AppendTo[w,ArrayFlatten[Extract[rr,sM]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sM]\[Transpose]]]
+		Length[s]==1,(*then*)
+		AppendTo[w,ArrayFlatten[Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose]]],
+		(*else*)
+		Kth=I*(Hth-Ath); 
+		pKp=Extract[r,s]\[Conjugate].Kth.Extract[r,s]\[Transpose]; 
+		{ee,rr}=Eigensystem[pKp]; 
+		ee=Re[ee]; mm=Min[ee]; 
+		sm=Position[ee,mm];
+		AppendTo[w,ArrayFlatten[Extract[rr,sm]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sm]\[Transpose]]];
+		mM=Max[ee];
+		sM=Position[ee,mM];AppendTo[w,ArrayFlatten[Extract[rr,sM]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sM]\[Transpose]]]
 	(*end if*)
 	]
 	,{\[Theta],0,2\[Pi],step}];
@@ -1513,9 +1463,7 @@ StateFromBlochVector[vec_]:=Block[{dim},
 ];
 StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
 
-
 End[];
-
 
 (* ::Section::Closed:: *)
 (*Package footer*)
