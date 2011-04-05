@@ -69,7 +69,8 @@ qiHistory = {
 	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."},
 	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."},
 	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."},
-	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."}
+	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."},
+	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -532,7 +533,7 @@ ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBo
 (*Random states and operations*)
 
 
-RandomSimplex::usage = "RandomSimplex[d,\[Alpha]] generates a point on a d-dimensional simplex according to the Dirichlet distibution with parameter \[Alpha].\n RandomSimplex[d] uses the algorithm from the book 'Luc Devroye, Non-Uniform Random Variate Generation, Chapter 11, p. 568' and gives the flat distribution.";
+RandomSimplex::usage = "RandomSimplex[d] generates a point on a d-dimensional simplex according to the uniform distibution.";
 
 
 RandomKet::usage = "RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
@@ -744,7 +745,7 @@ Subfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Block[{prod = a.b}, Tr[prod] +Sq
 TraceNorm[a_?SquareMatrixQ]:=Plus@@SingularValueList[a];
 
 
-TraceDistance[a_?SquareMatrixQ,b_?SquareMatrixQ]:=1/2*Tr[MatrixAbs[a-b]];
+TraceDistance[a_?SquareMatrixQ,b_?SquareMatrixQ]:=1/2*TraceNorm[a-b];
 
 
 GateFidelity[mU_?SquareMatrixQ,mV_?SquareMatrixQ]:=Block[{dimU=Dimensions[mU][[1]]},
@@ -1120,7 +1121,7 @@ Jamiolkowski[fun_Function,dim_Integer] := 1/dim DynamicalMatrix[fun,dim];
 TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
 
 
-ExtendKraus[operators_,n_] := Module[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
+ExtendKraus[operators_,n_] := Block[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 
 SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
@@ -1138,7 +1139,7 @@ PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	{offset, keep, dispose, keepdim, disposedim, perm1, perm2, perm, tensor},
 	offset=Length[dim];
 	keep=Complement[Range[offset], sys];
-	dispose=sys;
+	dispose=Union[sys];
 	perm1=Join[dispose,keep];
 	perm2=perm1+offset;
 	perm=InversePermutation[Join[perm1,perm2]];
@@ -1150,13 +1151,14 @@ PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	Sum[tensor[[i,All,i,All]],{i,1,disposedim}]
 ];
 
-PartialTranspose[\[Rho]_,dim_?ListQ,sys_?ListQ]:=Block[{offset,tensor,perm,idx1,idx2,s},
+PartialTranspose[\[Rho]_,dim_?ListQ,sys_?ListQ]:=Block[{offset,tensor,perm,idx1,idx2,s,targetsys},
 	offset=Length[dim];
 	tensor=ListReshape[\[Rho], Join[dim,dim]];
+	targetsys=Union[sys];
 	perm=Range[offset*2];
-	For[s=1, s<=Length[sys], s+=1, 
-		idx1 = Position[perm, sys[[s]]][[1, 1]];
-		idx2 = Position[perm, sys[[s]] + offset][[1, 1]];
+	For[s=1, s<=Length[targetsys], s+=1, 
+		idx1 = Position[perm, targetsys[[s]]][[1, 1]];
+		idx2 = Position[perm, targetsys[[s]] + offset][[1, 1]];
 		{perm[[idx1]],perm[[idx2]]}={perm[[idx2]],perm[[idx1]]};
 	];
 	tensor=Transpose[tensor,InversePermutation[perm]];
@@ -1284,15 +1286,9 @@ RandomSimplex[d_]:=Block[{r,r1,r2},
 ];
 
 
-RandomSimplex[d_,\[Alpha]_]:=Block[{gammaSample},
-	gammaSample=RandomReal[GammaDistribution[\[Alpha],1],d];
-	gammaSample/Plus@@gammaSample
-];
-
-
 RandomKet[n_]:=Block[{p,ph},
 	p=Sqrt[RandomSimplex[n]];
-	ph=Exp[I RandomReal[{0,2\[Pi]},n-1]];
+	ph=Exp[I*RandomReal[{0,2\[Pi]},n-1]];
 	ph=Prepend[ph,1];
 	p*ph
 ];
