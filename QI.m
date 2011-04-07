@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -11,103 +11,14 @@
 
 
 BeginPackage["QI`"];
-
-
-Begin["`Private`"]; (* Start `Private` context *)
-
-
-qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
-
-
-qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
-
-
-qiHistory = {
-	{"0.1.0", "05/06/2009", "Jarek", "Initial version"}, 
-	{"0.1.1", "09/06/2009", "Zbyszek", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
-	{"0.1.2", "18/06/2009", "Gawron", "Added quantum channel parametrization for one qubit."}, 
-	{"0.1.3", "03/07/2009", "Zbyszek", "Added alternative reshuffling."},
-	{"0.1.4", "", "Jarek", "Changed default print output."}, 
-	{"0.2.0", "09/07/2009", "Jarek and Zbyszek", "Documentation generator added."},
-	{"0.2.1", "", "Jarek and Garwon", "Changed QubitGeneralState function."},
-	{"0.2.2", "04/08/2009", "Zbyszek", "Added reshuffling permutation and product of superoperators."},
-	{"0.2.3", "13/08/2009", "Jarek", "Minor update in documentation."},
-	{"0.2.4", "14/09/2009", "Jarek and Zbyszek", "Fixed \[Eta] function."},
-	{"0.2.5", "27/08/2009", "", "Fixed Werner state and added IsotropicState."},
-	{"0.2.6", "06/10/2009", "Jarek", "Spelling improvements."},
-	{"0.2.7", "02/11/2009", "Jarek", "Improved '\[CircleTimes]' usage, added ApplyUnitary."},
-	{"0.2.8", "03/22.1009", "", "Fixed small problem with MaxEnt."},
-	{"0.2.9", "", "Jarek", "Some code cleanups, fixed SchmidtDecomposition."},
-	{"0.3.0", "06/11/2009", "", "Added OperatorSchmidtDecomposition."},
-	{"0.3.1", "12/11/2009", "", "Added Concurrence4, fixed Cnot problem, some code cleanups."},
-	{"0.3.2", "17/11/2009", "Jarek", "Documentation improvements, SquareMatrixQ predicate."},
-	{"0.3.3", "18/11/2009", "Jarek", "All qi* functions and constants moved to the QI`Private context, added list of QI`* names."},
-	{"0.3.4", "19/11/2009", "", "Added Negativity, fixed SchmidtDecomposition."},
-	{"0.3.5", "21/11/2009", "Jarek", "SchmidtDecomposition now accepts vectos as well as matrices."},
-	{"0.3.6", "24/11/2009", "Jarek", "Minor update in qiNames."},
-	{"0.3.7", "04/12/2009", "", "OperatorSchmidtDecomposition fixed."},
-	{"0.3.8", "04/01/2010", "", "Added local vars in RandomState."},
-	{"0.3.9", "06/01/2010", "", "Added error message in Ket."},
-	{"0.3.10", "19/01/2010", "Jarek", "Improved Davies map."},
-	{"0.3.11", "26/01/2010", "Jarek", "Improved simplex generation algorithm, added some function for random vectors."},
-	{"0.3.12", "04/03/2010", "Jarek", "Changed parameter in Swap gate."},
-	{"0.3.13", "26/03/2010", "", "Fixed bug with state parametrization."},
-	{"0.3.14", "25/05/2010", "Jarek", "Fixed numerical bug in Concurrence4 - Chop function added."},
-	{"0.3.15", "07/06/2010", "", "RandomMaximallyEntangledNumericalRange added."},
-	{"0.3.16", "20/06/2010", "", "Alternative version of Ketbra function."},
-	{"0.3.17", "11/07/2010", "Jarek", "Name changed for Davies map."},
-	{"0.3.18", "11/08/2010", "Jarek", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
-	{"0.3.19", "13/09/2010", "Gawron", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."},
-	{"0.3.20", "04/10/2010", "Jarek", "Fixed inconsistency in QubitDepolarizingKraus and DepolarizingChannel."},
-	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."},
-	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition."},
-	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."},
-	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."},
-	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."},
-	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."},
-	{"0.3.27", "14/02/2011", "Jarek", "Removed PartialTrace from the RandomState function and added induced measures."},
-	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."},
-	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."},
-	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."},
-	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."},
-	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."}
-};
-
-qiVersion = Last[qiHistory][[1]];
-
-qiLastModification = Last[qiHistory][[2]];
-
-qiAbout = "QI is a package of functions for Mathematica computer algebra system, which implements \
-number of functions used in the analysis of quantum states and quantum operations. In contrast to \
-many available packages for symbolic and numerical simulation of quantum computation presented \
-package is focused on geometrical aspects of quantum information theory.";
-
-
-qiGenDoc::usage = "Generate documentation for the QI package. This function accepts up to two arguments - file name and output directory. By default the first one is set to 'qi_usage.tex' and the second one to '~/zksi-repo/qi/doc'.";
-
-
-qiAbout::usage = "Display a short information about the QI package.";
-
-
-qiVersion::usage = "Display the version of the QI package.";
-
-
-qiHistory::usage = "Display the history of modifications for the QI package.";
-
-
-qiConstInfo = ""(*" This is predefined constant."*);
-
-End[]; (* End of `Private` context *)
-
-Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
-
 Unprotect@@Names["QI`*"]
 Clear@@Names["QI`*"]
+
 
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
@@ -177,24 +88,24 @@ GateFidelity::usage = "GateFidelity[U,V] is equivalent to 1/d tr|UV\[ConjugateTr
 (*Commonly used matrices*)
 
 
-sx::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\)." <> QI`Private`qiConstInfo;
-sy::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\)." <> QI`Private`qiConstInfo;
-sz::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)." <> QI`Private`qiConstInfo;
+sx::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\).";
+sy::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\).";
+sz::usage = "Pauli matrix \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\).";
 \[Sigma]x::usage = sx::usage <> " This is an alternative notation for sx.";
 \[Sigma]y::usage = sy::usage <> " This is an alternative notation for sy.";
 \[Sigma]z::usage = sz::usage <> " This is an alternative notation for sz.";
-id::usage = "Identity matrix for one qubit. See also: IdentityMatrix." <> QI`Private`qiConstInfo;
-wh::usage = "Hadamard gate for one qubit. See also: QFT." <> QI`Private`qiConstInfo;
+id::usage = "Identity matrix for one qubit. See also: IdentityMatrix.";
+wh::usage = "Hadamard gate for one qubit. See also: QFT.";
 
 
-\[Lambda]1::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]2::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]3::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]4::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"4\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]5::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"5\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]6::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"6\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]7::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"7\"]\)." <> QI`Private`qiConstInfo;
-\[Lambda]8::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"8\"]\)." <> QI`Private`qiConstInfo;
+\[Lambda]1::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"1\"]\).";
+\[Lambda]2::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"2\"]\).";
+\[Lambda]3::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"3\"]\).";
+\[Lambda]4::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"4\"]\).";
+\[Lambda]5::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"5\"]\).";
+\[Lambda]6::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"6\"]\).";
+\[Lambda]7::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"7\"]\).";
+\[Lambda]8::usage = "Gell-Mann matrix \!\(\*SubscriptBox[\"\[Lambda]\", \"8\"]\).";
 
 
 Proj::usage = "Proj[{\!\(\*SubscriptBox[\"v\", \"1\"]\),\!\(\*SubscriptBox[\"v\", \"2\"]\),...,\!\(\*SubscriptBox[\"v\", \"n\"]\)}] returns projectors for the vectors in the input list.";
@@ -246,13 +157,13 @@ Swap::usage="Swap[d] returns permutation operator \!\(\*UnderoverscriptBox[RowBo
 QFT::usage = "QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbolic', which is default, or 'Numerical'. The second option makes this function much faster.";
 
 
-cnot::usage = "Controlled not matrix for two qubits."<> QI`Private`qiConstInfo ;
+cnot::usage = "Controlled not matrix for two qubits.";
 
 
-GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\)";
+GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\[Sigma]\_x\)";
 
 
-GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)";
+GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\[Sigma]\_z\)";
 
 
 (* ::Subsection::Closed:: *)
@@ -262,7 +173,7 @@ GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\*Subscrip
 Ket::usage = "Ket[i,d] returns |i\[RightAngleBracket] in d-dimensional Hilbert space. See also: StateVector for a different parametrization.";
 
 
-Ketbra::usage = "This function can be used in two ways. Ketbra[i,j,d] returns \[VerticalSeparator]i\[RightAngleBracket]\[LeftAngleBracket]j\[VerticalSeparator] acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the apropritae operator for vectors v1 and v2..";
+Ketbra::usage = "This function can be used in two ways. Ketbra[i,j,d] returns \[VerticalSeparator]i\[RightAngleBracket]\[LeftAngleBracket]j\[VerticalSeparator] acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the appropriate operator for vectors v1 and v2..";
 
 
 KetFromDigits::usage = "KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.";
@@ -300,10 +211,14 @@ SchmidtDecomposition::usage = "SchmidtDecomposition[e,d1,d2] - accepts a vector 
 Vec::usage = "Vec[A] - vectorization of the matrix A column by column. See also: Res.";
 
 
-Unvec::usage = "Unvec[v,c] - de-vectorization of the vector into the matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into square matrix. See also: Unres, Vec.";
+Unvec::usage = "Unvec[v,c] - de-vectorization of the vector into the matrix\
+with c columns. If the second parameter is omitted then it is assumed that v\ 
+can be mapped into square matrix. See also: Unres, Vec.";
 
 
-Res::usage = "Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A into a vector row by row. Note, that this is different then the reshape operation in Matlab or GNU Octave.";
+Res::usage = "Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps\
+matrix A  into a vector row by row. Note, that this is different then the\
+reshape operation in Matlab or GNU Octave.";
 
 
 Unres::usage = "Unres[v,c] - de-reshaping of the vector into a matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into a square matrix. See also: Unvec, Res.";
@@ -316,7 +231,7 @@ drows and dcols parameters can be ommited for a square matrix.";
 
 
 ReshufflePrim::usage = "\
-ReshufflePrim[\[Rho], drows, dcols] for a matrix of dimensions (drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) returns reshuffled (prim) matrix with dimensions \  
+ReshufflePrim[\[Rho], drows, dcols] for a matrix of dimensions (drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) returns reshuffled (prim) matrix with dimensions \
 (dcols[[2]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]drows[[1]]), \
 drows and dcols parameters can be ommited for a square matrix.";
 
@@ -422,9 +337,12 @@ SuperoperatorToKraus::usage = "Finds Kraus operators for a given super operator"
 (* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
+
 PartialTranspose::usage = "PartialTranspose[\[Rho],dim,sys] - Returns the partial transpose, according to systems sys, of density matrix \[Rho] composed of subsystems of dimensions dims.";
 
 PartialTrace::usage = "PartialTrace[\[Rho],dim,sys] - Returns the partial trace, according to systems sys, of density matrix \[Rho] composed of subsystems of dimensions dim.";
+
+
 
 (* ::Subsection::Closed:: *)
 (*Entanglement*)
@@ -602,63 +520,86 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
-Begin["`QI`Private`"];
+Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
-(*Miscellaneous functions*)
+qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
 
 
-qiGenDoc[docFile_:"qi_functions_list_alpha.tex",dir_:"~/zksi-repo/qi/doc"]:=Block[{latexHeader,latexFooter,f,txt,usage,name,functionsList},
-	ExportString["","TeX"];
-	SetDirectory[dir];
-
-	functionsList=Table[{Names["QI`*"][[i]],ToExpression[Evaluate[Names["QI`*"][[i]]<>"::usage"]]},{i,1,Length[Names["QI`*"]]}];
-	latexHeader="\\documentclass[a4paper,10pt]{scrartcl}
-	\\usepackage{amsmath,amssymb,graphicx}
-	\\usepackage{fullpage}
-	\\parindent=0pt
-	\\begin{document}
-	\\title{QI Package for \\emph{Mathematica} 7.0 \\\\(version " <> QI`Private`qiVersion <> ")}" <>
-	"\\author{Jaros{\\l}aw Adam Miszczak \\quad Piotr Gawron \\quad Zbigniew Pucha{\\l}a\\\\
-	{The Institute of Theoretical and Applied Informatics}\\\\
-	{Polish Academy of Sciences},\\\\
-	{Ba{\\l}tycka 5, 44-100 Gliwice, Poland}}
-	\\maketitle
-	\\begin{abstract}"
-	<> QI`Private`qiAbout <>
-	"\\end{abstract}
-	";
-
-	latexFooter = "\\end{document}";
-	f=OpenWrite[docFile];
-	WriteString[f,latexHeader];
-	For[i=1,i<= Length[functionsList],i++,
-		name=ToString[TeXForm[functionsList[[i,1]]]];
-		usage=ToString[TeXForm[DisplayForm[functionsList[[i,2]]]]];
-		txt = QI`Private`qiFormatUsageMsg[name, usage];
-		WriteString[f,txt];
-		WriteString[f,"\\\\\n\n"];
-	];
-	WriteString[f,latexFooter];
-	Close[f];
-];
-
-qiFormatUsageMsg[inName_,inMsg_] := Block[{name = "$ " <> inName <> " $ ",usage=inMsg,txt},
-	usage=StringReplace[usage,"\{"->"LEFTCURLY"];
-	usage=StringReplace[usage,"\}"->"RIGHTCURLY"];
-	txt="\\textbf{"<>name<>"}"<>"-- "<>StringDrop[StringReplace[usage,RegularExpression["\\\\text{([^\}]{5,1000})}"]-> " $$1$ "],2] <> " $";
-	txt=StringReplace[txt,"LEFTCURLY"-> "\{"];
-	txt=StringReplace[txt,"RIGHTCURLY"->"\}"];
-	txt
-];
+qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
-(* ::Subsection::Closed:: *)
+qiHistory = {
+	{"0.1.0", "05/06/2009", "Jarek", "Initial version"}, 
+	{"0.1.1", "09/06/2009", "Zbyszek", "Fixed \[Eta] and \[Eta]2 functions, fixed problem with protected symbols."}, 
+	{"0.1.2", "18/06/2009", "Gawron", "Added quantum channel parametrization for one qubit."}, 
+	{"0.1.3", "03/07/2009", "Zbyszek", "Added alternative reshuffling."},
+	{"0.1.4", "", "Jarek", "Changed default print output."}, 
+	{"0.2.0", "09/07/2009", "Jarek and Zbyszek", "Documentation generator added."},
+	{"0.2.1", "", "Jarek and Garwon", "Changed QubitGeneralState function."},
+	{"0.2.2", "04/08/2009", "Zbyszek", "Added reshuffling permutation and product of superoperators."},
+	{"0.2.3", "13/08/2009", "Jarek", "Minor update in documentation."},
+	{"0.2.4", "14/09/2009", "Jarek and Zbyszek", "Fixed \[Eta] function."},
+	{"0.2.5", "27/08/2009", "", "Fixed Werner state and added IsotropicState."},
+	{"0.2.6", "06/10/2009", "Jarek", "Spelling improvements."},
+	{"0.2.7", "02/11/2009", "Jarek", "Improved '\[CircleTimes]' usage, added ApplyUnitary."},
+	{"0.2.8", "03/22.1009", "", "Fixed small problem with MaxEnt."},
+	{"0.2.9", "", "Jarek", "Some code cleanups, fixed SchmidtDecomposition."},
+	{"0.3.0", "06/11/2009", "", "Added OperatorSchmidtDecomposition."},
+	{"0.3.1", "12/11/2009", "", "Added Concurrence4, fixed Cnot problem, some code cleanups."},
+	{"0.3.2", "17/11/2009", "Jarek", "Documentation improvements, SquareMatrixQ predicate."},
+	{"0.3.3", "18/11/2009", "Jarek", "All qi* functions and constants moved to the QI`Private context, added list of QI`* names."},
+	{"0.3.4", "19/11/2009", "", "Added Negativity, fixed SchmidtDecomposition."},
+	{"0.3.5", "21/11/2009", "Jarek", "SchmidtDecomposition now accepts vectos as well as matrices."},
+	{"0.3.6", "24/11/2009", "Jarek", "Minor update in qiNames."},
+	{"0.3.7", "04/12/2009", "", "OperatorSchmidtDecomposition fixed."},
+	{"0.3.8", "04/01/2010", "", "Added local vars in RandomState."},
+	{"0.3.9", "06/01/2010", "", "Added error message in Ket."},
+	{"0.3.10", "19/01/2010", "Jarek", "Improved Davies map."},
+	{"0.3.11", "26/01/2010", "Jarek", "Improved simplex generation algorithm, added some function for random vectors."},
+	{"0.3.12", "04/03/2010", "Jarek", "Changed parameter in Swap gate."},
+	{"0.3.13", "26/03/2010", "", "Fixed bug with state parametrization."},
+	{"0.3.14", "25/05/2010", "Jarek", "Fixed numerical bug in Concurrence4 - Chop function added."},
+	{"0.3.15", "07/06/2010", "", "RandomMaximallyEntangledNumericalRange added."},
+	{"0.3.16", "20/06/2010", "", "Alternative version of Ketbra function."},
+	{"0.3.17", "11/07/2010", "Jarek", "Name changed for Davies map."},
+	{"0.3.18", "11/08/2010", "Jarek", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
+	{"0.3.19", "13/09/2010", "Gawron", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."},
+	{"0.3.20", "04/10/2010", "Jarek", "Fixed inconsistency in QubitDepolarizingKraus and DepolarizingChannel."},
+	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."},
+	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition."},
+	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."},
+	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."},
+	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."},
+	{"0.3.26", "22/12/2010", "Jarek", "Two new functions: UpperBandOnes and UpperTriangularOnes."},
+	{"0.3.27", "14/02/2011", "Jarek", "Removed PartialTrace from the RandomState function and added induced measures."},
+	{"0.3.28", "16/03/2011", "Jarek", "Minor update in documentation and GateFidelity function added."},
+	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."},
+	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."},
+	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."},
+	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."}
+};
+
+qiVersion = Last[qiHistory][[1]];
+
+qiLastModification = Last[qiHistory][[2]];
+
+qiAbout = "QI is a package of functions for Mathematica computer algebra system, which implements \
+number of functions used in the analysis of quantum states and quantum operations. In contrast to \
+many available packages for symbolic and numerical simulation of quantum computation presented \
+package is focused on geometrical aspects of quantum information theory.";
+
+
+
+(* ::Subsection:: *)
+(*Miscellaneous functions asa*)
+
+
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -761,12 +702,9 @@ GateFidelity::argerr = "Both matrices have to be of the same dimension.";
 (*Commonly used matrices*)
 
 
-sx = {{0,1},{1,0}};
-sy = {{0,-I},{I,0}};
-sz = {{1,0},{0,-1}};
-\[Sigma]x = sx;
-\[Sigma]y = sy;
-\[Sigma]z = sz;
+\[Sigma]x = sx = {{0,1},{1,0}};
+\[Sigma]y = sy = {{0,-I},{I,0}};
+\[Sigma]z = sz = {{1,0},{0,-1}};
 id = {{1,0},{0,1}};
 wh = {{1,1},{1,-1}};
 
@@ -1102,7 +1040,7 @@ ApplyChannel[f_,\[Rho]_] := Map[f,\[Rho],{0}];
 
 
 ChannelToMatrix[fun_,dim_] := Table[
-	Tr[(fun[BaseMatrices[dim][[i]]])\[ConjugateTranspose].BaseMatrices[dim][[j]]],{i,1,dim^2},{j,1,dim^2}
+       Tr[(fun[BaseMatrices[dim][[i]]]).BaseMatrices[dim][[j]]\[ConjugateTranspose]],{j,1,dim^2},{i,1,dim^2}
 ];
 
 
@@ -1459,10 +1397,15 @@ StateFromBlochVector[vec_]:=Block[{dim},
 ];
 StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
 
+Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
+
 End[];
+
+
 
 (* ::Section::Closed:: *)
 (*Package footer*)
+
 
 Protect@@Names["QI`*"]
 
