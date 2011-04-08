@@ -27,6 +27,13 @@ ReshuffleGeneral::usage = "ReshuffleGeneral[\[Rho],n1,m1,n2,m2] for matrix of si
 
 ReshuffleGeneral2::usage = "ReshuffleGeneral2[\[Rho],n1,m1,n2,m2] for matrix of size (n1 n2)\[Times](m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.";
 
+VectorSchmidtDecomposition::usage = "VectorSchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
+
+OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1\[Cross]d2.";
+
+SchmidtDecomposition::usage = "SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.";
+
+
 Begin["`Private`"] (* Begin Private Context *) 
 
 
@@ -117,6 +124,37 @@ ReshuffleGeneral[A_,n1_,m1_,n2_,m2_]:=Flatten[
 ReshuffleGeneral2[A_,n1_,m1_,n2_,m2_]:=Flatten[
 	Table[Flatten[Part[A,1+i1;;n2+i1,1+i2;;m2+i2]\[Transpose]],{i2,0,m1 m2-1,m2},{i1,0,n1 n2-1,n2}]
 ,1]\[Transpose];
+
+VectorSchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1,d2]},
+	If[VectorQ[vec],
+		mtx = Partition[vec,d2];
+		svd=SingularValueDecomposition[mtx];
+		vals=Select[Diagonal[svd[[2]]],#!=0&];
+		snum=Length[vals];
+		Table[{vals[[i]],svd[[1]].BaseVectors[d1][[i]],svd[[3]]\[Conjugate].BaseVectors[d2][[i]]},{i,1,snum}],
+		(*else*)
+		Message[VectorSchmidtDecomposition::argerr,vec];
+	]
+];
+VectorSchmidtDecomposition::argerr = "First argument should be a vector.";
+
+OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
+	If[MatrixQ[op],
+		mtx=Reshuffle[op,{d1,d2},{d1,d2}];
+		svd=SingularValueDecomposition[mtx];
+		If[NumericQ[svd[[2,1]]],
+			vals=Select[Diagonal[svd[[2]]],#!=0&],
+			vals=Diagonal[svd[[2]]]
+		];
+		
+		snum=Length[vals];
+		Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}],
+		(*else*)
+		Message[OperatorSchmidtDecomposition::argerr]
+	]
+];
+OperatorSchmidtDecomposition::argerr = "First argument should be a matrix.";
+
 
 End[] (* End Private Context *)
 

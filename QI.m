@@ -195,13 +195,23 @@ IsotropicState::usage = "IsotropicState[d,p] - isotropic state of dimensions d\[
 (*Schmidt decomposition*)
 
 
-VectorSchmidtDecomposition::usage = "VectorSchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1\[Cross]d2-dimensional Hilbert space.";
+VectorSchmidtDecomposition::usage = "VectorSchmidtDecomposition[vec,dim] - \ 
+Schmidt decomposition of the vector vec in dimd[[1]]\[Cross]dim[[2]]-dimensional \
+Hilbert space.";
 
 
-OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1\[Cross]d2.";
+OperatorSchmidtDecomposition::usage = "OperatorSchmidtDecomposition[mtx,drows,dcols] - \ 
+Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension \
+(drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) \
+into list of 3-tuples: Schmidt number, matrix (drows[[1]]\[Times]dcols[[1]]), \   
+matrix (drows[[2]]\[Times]dcols[[2]]).
+W = OperatorSchmidtDecomposition[mtx, {r1, r2}, {c1, c2}];
+mtx == Sum[W[[i]][[1]]*KroneckerProduct[W[[i]][[2]], W[[i]][[3]]], {i,Length[W]}]";
 
 
-SchmidtDecomposition::usage = "SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.";
+SchmidtDecomposition::usage = "SchmidtDecomposition[e,dim] - accepts a vector \
+or a matrix as a first argument and returns apropriate Schmidt decomposition. \
+See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.";
 
 
 (* ::Subsection::Closed:: *)
@@ -581,7 +591,8 @@ qiHistory = {
 	{"0.3.29", "31/03/2011", "Gawron", "List of names to protect is automatically generated now. RandomUnitaryEuler removed."},
 	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."},
 	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."},
-	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."}
+	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."},
+	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -842,42 +853,48 @@ IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 (* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
 
+VectorSchmidtDecomposition[vec_?VectorQ, d_?ListQ] := 
+  Block[{mtx, u, w, v, vals, snum = Min[d[[1]], d[[2]]]},
+   	mtx = Partition[vec, d[[2]]];
+   	{u, w, v} = SingularValueDecomposition[mtx];
+   	vals = Select[Diagonal[w], # != 0 &];
+   	snum = Length[vals];
+     {vals, u\[Transpose][[1 ;; snum]], 
+     v\[Transpose][[1 ;; snum]]}\[Transpose]
+   ];
 
-VectorSchmidtDecomposition[vec_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1,d2]},
-	If[VectorQ[vec],
-		mtx = Partition[vec,d2];
-		svd=SingularValueDecomposition[mtx];
-		vals=Select[Diagonal[svd[[2]]],#!=0&];
-		snum=Length[vals];
-		Table[{vals[[i]],svd[[1]].BaseVectors[d1][[i]],svd[[3]]\[Conjugate].BaseVectors[d2][[i]]},{i,1,snum}],
-		(*else*)
-		Message[VectorSchmidtDecomposition::argerr,vec];
-	]
-];
-VectorSchmidtDecomposition::argerr = "First argument should be a vector.";
+VectorSchmidtDecomposition[vec_?VectorQ] :=
+Block[{sqrtDim},
+  sqrtDim = Sqrt[Dimensions[vec][[1]]];
+  If[IntegerQ[sqrtDim],
+   VectorSchmidtDecomposition[vec, {sqrtDim, sqrtDim}]
+   ]
+  ]
+  
+OperatorSchmidtDecomposition[op_, n_, m_] := 
+  Block[{mtx, u, w, v, snum = Min[n[[1]]*m[[1]], n[[2]]*m[[2]]]},
+   	mtx = Reshuffle[op, n, m];
+   	{u, w, v} = SingularValueDecomposition[mtx];	
+   Table[ {w[[i, i]], Partition[u\[Transpose][[i]], m[[1]]], 
+     Partition[(v\[Transpose])[[i]]\[Conjugate], m[[2]]]}, {i, 1, 
+     snum}]	
+   ];
+ 
+OperatorSchmidtDecomposition[op_?SquareMatrixQ, n_] := 
+ OperatorSchmidtDecomposition[op, n, n]
+
+OperatorSchmidtDecomposition[op_?SquareMatrixQ] := Block[{sqrtDim},
+  sqrtDim = Sqrt[Dimensions[op][[1]]];
+  If[IntegerQ[sqrtDim],
+   OperatorSchmidtDecomposition[
+    op, {sqrtDim, sqrtDim} , {sqrtDim, sqrtDim}]
+   ]
+  ]
 
 
-OperatorSchmidtDecomposition[op_,d1_,d2_]:=Block[{mtx, svd, vals, snum=Min[d1*d1,d2*d2]},
-	If[MatrixQ[op],
-		mtx=Reshuffle[op,{d1,d2},{d1,d2}];
-		svd=SingularValueDecomposition[mtx];
-		If[NumericQ[svd[[2,1]]],
-			vals=Select[Diagonal[svd[[2]]],#!=0&],
-			vals=Diagonal[svd[[2]]]
-		];
-		
-		snum=Length[vals];
-		Table[{vals[[i]],Unres[svd[[1]].Res[BaseMatrices[d1][[i]]]],Unres[svd[[3]]\[Conjugate].Res[BaseMatrices[d2][[i]]]]},{i,1,snum}],
-		(*else*)
-		Message[OperatorSchmidtDecomposition::argerr]
-	]
-];
-OperatorSchmidtDecomposition::argerr = "First argument should be a matrix.";
-
-
-SchmidtDecomposition[e_,d1_,d2_]:=Which[
-	MatrixQ[e], OperatorSchmidtDecomposition[e,d1,d2],
-	VectorQ[e], VectorSchmidtDecomposition[e,d1,d2],
+SchmidtDecomposition[e_,dim]:=Which[
+	MatrixQ[e], OperatorSchmidtDecomposition[e,dim],
+	VectorQ[e], VectorSchmidtDecomposition[e,dim],
 	True, Message[SchmidtDecomposition::argerr]
 ];
 SchmidtDecomposition::argerr = "First argument should be a vector or a matrix.";
@@ -968,7 +985,7 @@ Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*
 	MatrixExp[I*\[Lambda]2*b].MatrixExp[I*\[Lambda]3*c].MatrixExp[I*\[Lambda]8*ph];
 
 
-Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I a1 KroneckerProduct[\[Sigma]x,\[Sigma]x]+a2 I KroneckerProduct[\[Sigma]y,\[Sigma]y]+a3 I KroneckerProduct[\[Sigma]z,\[Sigma]z]];
+Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I*a1*KroneckerProduct[\[Sigma]x,\[Sigma]x]+a2*I*KroneckerProduct[\[Sigma]y,\[Sigma]y]+a3*I*KroneckerProduct[\[Sigma]z,\[Sigma]z]];
 
 
 ProbablityVector[l_]:=Block[{ll,N},
@@ -1039,9 +1056,7 @@ ApplyUnitary[U_,\[Rho]_]:=U.\[Rho].U\[ConjugateTranspose];
 ApplyChannel[f_,\[Rho]_] := Map[f,\[Rho],{0}];
 
 
-ChannelToMatrix[fun_,dim_] := Table[
-       Tr[(fun[BaseMatrices[dim][[i]]]).BaseMatrices[dim][[j]]\[ConjugateTranspose]],{j,1,dim^2},{i,1,dim^2}
-];
+ChannelToMatrix[fun_,dim_] := Map[Res[fun[#]] &, BaseMatrices[dim]];       
 
 
 Superoperator[ch_List] := Sum[ch[[i]]\[CircleTimes]ch[[i]]\[Conjugate],{i,1,Length[ch]}];
@@ -1052,8 +1067,8 @@ DynamicalMatrix[ch_List] := Reshuffle[Superoperator[ch]];
 DynamicalMatrix[fun_Function,dim_Integer] := Reshuffle[Superoperator[fun,dim]];
 
 
-Jamiolkowski[ch_List] := 1/Length[ch[[1]]] DynamicalMatrix[ch];
-Jamiolkowski[fun_Function,dim_Integer] := 1/dim DynamicalMatrix[fun,dim];
+Jamiolkowski[ch_List] := 1/Length[ch[[1]]]*DynamicalMatrix[ch];
+Jamiolkowski[fun_Function,dim_Integer] := 1/dim*DynamicalMatrix[fun,dim];
 
 
 TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
@@ -1147,14 +1162,14 @@ QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
 }
 
 
-QubitDaviesSuperoperator[a_,c_,p_]:={{1 - a,0,0,(a p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a p)/(1-p)}};
+QubitDaviesSuperoperator[a_,c_,p_]:={{1 - a,0,0,(a*p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a*p)/(1-p)}};
 
 
 (* ::Subsection::Closed:: *)
 (*One-qutrit channels*)
 
 
-QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1 t/2)],0},{0,0,Exp[-(A2 t/2)]}},{{0,Sqrt[1-Exp[-(A1 t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2 t)]]},{0,0,0},{0,0,0}}};
+QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1*t/2)],0},{0,0,Exp[-(A2*t/2)]}},{{0,Sqrt[1-Exp[-(A1*t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2*t)]]},{0,0,0},{0,0,0}}};
 
 
 (* ::Subsection::Closed:: *)
