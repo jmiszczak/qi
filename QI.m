@@ -592,7 +592,8 @@ qiHistory = {
 	{"0.3.30", "01/04/2011", "Gawron", "New PartialTrace, all other PartialTrace* functions removed as obsolete."},
 	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."},
 	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."},
-	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."}
+	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."},
+	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -1209,7 +1210,7 @@ QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun
 VandermondeMatrix[l_]:=Table[Table[l[[j]]^i,{i,0,Length[l]-1}],{j,1,Length[l]}];
 
 
-ProdSum[l_]:=Times@@Table[Table[l[[i]] + l[[j]], {i, 1, j - 1}], {j, 2, Length[l]}];
+ProdSum[l_]:=Times@@Flatten[Table[Table[l[[i]] + l[[j]], {i, 1, j - 1}], {j, 2, Length[l]}]];
 
 
 ProdDiff2[l_]:=Block[{x},Discriminant[Times@@Table[(x-l[[i]]),{i,1,Length[l]}],x]];
