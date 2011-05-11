@@ -464,7 +464,7 @@ ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBo
 RandomSimplex::usage = "RandomSimplex[d] generates a point on a d-dimensional simplex according to the uniform distibution.";
 
 
-RandomKet::usage = "RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
+RandomKet::usage = "RandomKet[d] - random ket vector in d-dimensional space. d may be a list of integers in this case ket will be in product form d[[1]]\[CircleTimes]...\[CircleTimes]d[[k]]. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
 
 
 RandomProductKet::usage = "RandomProductKet[{dim1,dim2,...,dimN}] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.";
@@ -593,7 +593,8 @@ qiHistory = {
 	{"0.3.31", "04/04/2011", "Gawron", "New PartialTranspose, all other PartialTranspose* functions removed as obsolete. Reshuffle and ReshufflePrim cleaned up."},
 	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."},
 	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."},
-	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."}
+	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."},
+	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -893,7 +894,7 @@ OperatorSchmidtDecomposition[op_?SquareMatrixQ] := Block[{sqrtDim},
   ]
 
 
-SchmidtDecomposition[e_,dim]:=Which[
+SchmidtDecomposition[e_,dim_]:=Which[
 	MatrixQ[e], OperatorSchmidtDecomposition[e,dim],
 	VectorQ[e], VectorSchmidtDecomposition[e,dim],
 	True, Message[SchmidtDecomposition::argerr]
@@ -1240,12 +1241,14 @@ RandomSimplex[d_]:=Block[{r,r1,r2},
 ];
 
 
-RandomKet[n_]:=Block[{p,ph},
+RandomKet[n_?IntegerQ]:=Block[{p,ph},
 	p=Sqrt[RandomSimplex[n]];
 	ph=Exp[I*RandomReal[{0,2\[Pi]},n-1]];
 	ph=Prepend[ph,1];
 	p*ph
 ];
+
+RandomKet[n_?ListQ]:=Flatten[Fold[KroneckerProduct[#1,RandomKet[#2]]&,{1},n]];
 
 
 RandomProductKet[l_]:=Flatten[Apply[KroneckerProduct,Table[RandomKet[l[[i]]],{i,1,Length[l]}]]];
