@@ -259,10 +259,13 @@ ProductSuperoperator::usage = "ProductSuperoperator[\[CapitalPsi],\[CapitalPhi]]
 (*Parametrizations*)
 
 
-Unitary2::usage = "Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]] returns the Euler parametrization of U(2).";
+Unitary2::usage = "Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]] returns a parametrization of U(2).";
 
 
-SpecialUnitary2::usage ="SpecialUnitary2[\[Beta],\[Gamma],\[Delta]] returns the Euler parametrization of SU(2). This is equivalent to Unitary2[0,\[Beta],\[Gamma],\[Delta]].";
+Unitary2Euler::usage = "Unitary2[\[Alpha],\[Beta],\[Gamma],\[Delta]] returns the Euler parametrization of U(2).";
+
+
+SpecialUnitary2::usage ="SpecialUnitary2[\[Beta],\[Gamma],\[Delta]] returns a parametrization of SU(2). This is equivalent to Unitary2[0,\[Beta],\[Gamma],\[Delta]].";
 
 
 Unitary3::usage = "Unitary3[\[Alpha],\[Beta],\[Gamma],\[Tau],a,b,c,ph] returns the Euler parametrization of U(3).";
@@ -491,6 +494,9 @@ RandomSpecialUnitary::usage = "Random special unitary matrix. See RandomUnitary"
 RandomUnitary::usage = "Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604";
 
 
+RandomOrthogonal::usage = "Random orthogonal matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604"
+
+
 RandomState::usage = "RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures'' or an integer K. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure. If dist is given as an integer K, the state is generated with respect to induced measure with an ancilla system od dimension K.";
 
 
@@ -528,6 +534,15 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 
 
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
+
+
+(* ::Subsection:: *)
+(*Integration over groups*)
+
+
+IntegrateSU2::usage = "IntegrateSU2[f,U] - gives the integral \[Integral]f dU, where dU is Haar measure on the group SU(2) - special unitary matrices of size 2. 
+\nIntegrateSU2[f,U,V,...] - gives the multiple integral  \[Integral]f dU dV dW ... on the group SU(2). 
+\nExample: Integration squares of absolute values of elements of ranom unitary matrix: IntegrateSU2[Abs[U\!\(\*SuperscriptBox[\(]\), \(2\)]\),U]"
 
 
 (* ::Section:: *)
@@ -594,7 +609,8 @@ qiHistory = {
 	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."},
 	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."},
 	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."},
-	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."}
+	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."},
+    {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -612,7 +628,7 @@ package is focused on geometrical aspects of quantum information theory.";
 (*Miscellaneous functions asa*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -855,6 +871,7 @@ IsotropicState::argerr = "The first `1` argument is not a perfect square.";
 (* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
 
+
 VectorSchmidtDecomposition[vec_?VectorQ, d_?ListQ] := 
   Block[{mtx, u, w, v, vals, snum = Min[d[[1]], d[[2]]]},
    	mtx = Partition[vec, d[[2]]];
@@ -977,6 +994,9 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 
 Unitary2[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_]:=
 Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}}.DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
+
+
+Unitary2Euler[\[Alpha]_,\[Theta]_,\[Phi]_,\[Psi]_]:={{E^(I*\[Alpha] + I*\[Phi])*Cos[\[Theta]], E^(I*\[Alpha] + I*\[Psi])*Sin[\[Theta]]}, {-(E^(I*\[Alpha] - I*\[Psi])*Sin[\[Theta]]), E^(I*\[Alpha] - I*\[Phi])*Cos[\[Theta]]}}
 
 
 SpecialUnitary2[\[Beta]_,\[Gamma]_,\[Delta]_]:=Unitary2[0,\[Beta],\[Gamma],\[Delta]];
@@ -1296,6 +1316,13 @@ RandomUnitary[dim_]:=Module[{q,r,d,ph},
 	Transpose[Transpose[q]*ph]
 ];
 
+RandomOrthogonal[dim_]:=Module[{q,r,d,ph},
+    {q,r}=QRDecomposition[RandomReal[NormalDistribution[0,1],{dim,dim}]];
+	d=Diagonal[r];
+	ph=d/Abs[d];
+	Transpose[Transpose[q]*ph]
+];
+
 RandomState[d_,dist_:"HS"]:=Block[{A,U},
 	Switch[dist,
 		"HS",
@@ -1416,15 +1443,30 @@ StateFromBlochVector[vec_]:=Block[{dim},
 ];
 StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
 
-Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
 
-End[];
+(* ::Subsection:: *)
+(*Integration over groups*)
 
+
+IntegrateSU2[f_,list__]:=Block[{variables,matrices,matricesCT,matricesC,replacement,range,func},
+variables=Map[SymbolicVector[#,3]&,{list}];
+matrices=Map[Unitary2Euler[0,ArcSin[Sqrt[#[[1]]]],#[[2]],#[[3]]]&, variables];
+matricesCT=Map[Unitary2Euler[0,-ArcSin[Sqrt[#[[1]]]],-#[[2]],#[[3]]]&, variables];
+matricesC=Map[Unitary2Euler[0,ArcSin[Sqrt[#[[1]]]],-#[[2]],-#[[3]]]&, variables];
+replacement = Join[ Map[#[[1]]-> #[[2]]&,{{list},matrices}\[Transpose]], Map[#[[1]]\[ConjugateTranspose]-> #[[2]]&,{{list},matricesCT}\[Transpose]],Map[Conjugate[#[[1]]]-> #[[2]]&,{{list},matricesC}\[Transpose]]];
+range=Flatten[Map[{{#[[1]],0,1},{#[[2]],0,2 * \[Pi]},{#[[3]],0,2 *\[Pi]}}&, variables],1];
+func = Expand[f/.replacement];
+1/(2*\[Pi])^(2 *Length[{list}])* Apply[Integrate[func,##]&,range]
+];
 
 
 (* ::Section::Closed:: *)
 (*Package footer*)
 
+
+Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
+
+End[];
 
 Protect@@Names["QI`*"]
 
