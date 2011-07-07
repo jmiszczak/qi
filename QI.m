@@ -40,6 +40,7 @@ SymbolicVector::usage = "SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and 
 
 SymbolicHermitianMatrix::usage = "SymbolicHermitianMatrix[sym,n] produces a n\[Cross]n Hermitian matrix. See also: SymbolicMatrix, SymbolicVector.";
 
+SymbolicBistochasticMatrix::usage = "SymbolicBistochasticMatrix[sym, dim] produces symbolic bistochastic matrix size dim. See also: SymbolicMatrix, SymbolicVector."; 
 
 ComplexToPoint::usage = "ComplexToPoint[z] returns a real and an imaginary parts of a complex number z as a pair of real numbers.";
 
@@ -610,7 +611,8 @@ qiHistory = {
 	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."},
 	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."},
 	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."},
-    {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."}
+    {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
+    {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -669,6 +671,10 @@ SymbolicHermitianMatrix[sym_,d_]:=Block[{mtx},
 	mtx
 ];
 
+SymbolicBistochasticMatrix[sym_, dim_] := Block[{f},
+  f = Map[Append[#, 1 - Apply[Plus, #]] &, #] &;
+  f[f[SymbolicMatrix[sym, dim - 1]]\[Transpose]]\[Transpose]
+];
 
 ComplexToPoint[z_]:={Re[z],Im[z]};
 SetAttributes[ComplexToPoint,Listable];
