@@ -12,7 +12,7 @@
 
 BeginPackage["QI`"];
 Unprotect@@Names["QI`*"]
-Clear@@Names["QI`*"]
+Clear@@Names["QI`*" ]
 
 
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
