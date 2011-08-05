@@ -22,6 +22,16 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 (*Help messages*)
 
 
+(* ::Subsection:: *)
+(*Miscellaneous functions*)
+
+
+HyperlinkToString::usage = "HyperlinkToString[text,link] creates a link labeled with text to the given URL and returns it as a Mathematica string.";
+
+
+DOIToString::usage = "DOIToString[text,doi] creates a link labeled with text to the given DOI and returns it as a Mathematica string.";
+
+
 (* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
@@ -537,7 +547,7 @@ BlochVector::usage = "BlochVector[A] - for a square matrix A returns a vector of
 StateFromBlochVector::usage = "StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Integration over groups*)
 
 
@@ -612,7 +622,8 @@ qiHistory = {
 	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."},
 	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."},
     {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
-    {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."}
+    {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
+	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -627,7 +638,13 @@ package is focused on geometrical aspects of quantum information theory.";
 
 
 (* ::Subsection:: *)
-(*Miscellaneous functions asa*)
+(*Miscellaneous functions*)
+
+
+HyperlinkToString[text_,link_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\""<>link<>"\"]\)";
+
+
+DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\"http://dx.doi.org/"<>doi<>"\"]\)";
 
 
 (* ::Subsection::Closed:: *)
@@ -1450,7 +1467,7 @@ StateFromBlochVector[vec_]:=Block[{dim},
 StateFromBlochVector::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Integration over groups*)
 
 
