@@ -7,6 +7,8 @@
 % v. 0.33 - 24/09/2010 - Jarek - update basic info, sync with 0.3.18 version 
 \documentclass{elsart}
 
+\usepackage{hyperref}
+
 %% This list environment is used for the references in the
 %% Program Summary
 %%
@@ -109,6 +111,7 @@
 \date{24/09/2009 (v. 0.33)}
 
 \author{J.~A.~Miszczak\thanksref{author}},
+\ead{miszczak@iitis.pl}
 \author{P.~Gawron},
 \author{Z.~Pucha{\l}a}
 
@@ -162,7 +165,7 @@ Quantum states; Quantum operations; Partial operations.
 {\em Programming language:} Mathematica 7\\
 {\em Computer:} Any computer supporting Mathematica 7\\
   %Computer(s) for which program has been designed.
-{\em Operating system:} Any operating system capable of running Mathematica 7, \eg\ GNU/Linux, MacOS X, FreeBSD, Microsoft Windows XP\\
+{\em Operating system:} Any operating system capable of running Mathematica 7 or higher, \eg\ GNU/Linux, MacOS X, FreeBSD, Microsoft Windows XP\\
   %Operating system(s) for which program has been designed.
 {\em RAM:} bytes                                              \\
   %RAM in bytes required to execute program with typical data.
@@ -195,13 +198,15 @@ Quantum states; Quantum operations; Partial operations.
    \\
 {\em Restrictions:}\\
   %Describe any restrictions on the complexity of the problem here.
+  Running time of the presented procedures grows rapidliy with the dimensionalty
+  of the problem.
    \\
-{\em Unusual features:}\\
-  %Describe any unusual features of the program/problem here.
-   \\
-{\em Additional comments:}\\
-  %Provide any additional comments here.
-   \\
+%{\em Unusual features:}\\
+%  %Describe any unusual features of the program/problem here.
+%   \\
+%{\em Additional comments:}\\
+%  %Provide any additional comments here.
+%   \\
 {\em Running time:}\\
   %Give an indication of the typical running time here.
    \\
@@ -242,21 +247,18 @@ problems~\cite{hastings09superadditivity} show that we are far from full
 understanding the nature of quantum channels. Exploring the space of quantum
 operations is fascinating, but cumbersome task.
 
-%One of the motivations behind quantum information theory was an observation that
-%the simulation of quantum systems on classical machine requires exponential 
-%resources.
-
-We present a~package of functions developed for \Mathematica\ 7.0 which aims to
-simplify the analysis of quantum states and quantum operations. The package was 
-developed in simplicity in mind and thus it uses only basic data structures
-available in \Mathematica. This allows to relatively easily port implemented
-functions to other scientific software systems. Also, in contrast to most
-quantum computing packages available~\cite{qdensity,qucalc,quantum2}, \qi\ is
-not aimed to provide tool for simulating quantum algorithms and protocols. We
-rather focus on the analysis of quantum states used in those protocols and
-quantum channels, which are used to describe allowed physical operations. The
-main goal of presented package is to provide basic mathematical tools useful for
-studding quantum stats and quantum channels.
+We present a~package of functions developed for \Mathematica\ computing system
+which aims to simplify the analysis of quantum states and quantum operations.
+The package was developed in simplicity in mind and thus it uses only basic data
+structures available in \Mathematica. This allows to relatively easily port
+implemented functions to other scientific software systems. Also, in contrast to
+most quantum computing packages
+available~\cite{qdensity,qucalc,quantum2,qcwave}, \qi\ is not aimed to provide
+tool for simulating quantum algorithms and protocols. We rather focus on the
+analysis of quantum states used in those protocols and quantum channels, which
+are used to describe allowed physical operations. The main goal of presented
+package is to provide basic mathematical tools useful for studding geometrical
+properties of quantum stats and quantum channels.
 
 This paper is organized as follows. In Section~\ref{sec:qi-intro} we review
 basic notion of quantum density matrices and quantum channels representing
@@ -280,9 +282,7 @@ normalized ($\tr{\rho}=1$).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pure and mixed states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Let $\HS{H}$ be a~separable, complex Hilbert space\index{Hilbert space} used
-to described the system in question. We use Dirac notation
-\cite{dirac58principles} for inner product in $\HS{H}$
+We use Dirac notation \cite{dirac58principles} for inner product in $\HS{H}$
 \begin{equation}
   \Iner{\psi}{\phi},
 \label{eqn:dirac-iner}
