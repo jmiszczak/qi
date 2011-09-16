@@ -30,6 +30,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb}
 \usepackage{dsfont}
+\usepackage{listings}
 \newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
 \newcommand{\bra}[1]{\ensuremath{\langle#1|}}
 \newcommand{\Mathematica}{\emph{Mathematica}}
@@ -74,6 +75,12 @@
 \newcommand{\halmos}{\newline\vspace{3mm}\hfill $\Box$}
 \newcommand{\proof}{\noindent {\it Proof.\ }}
 \newtheorem{theorem}{Theorem}
+\newcommand{\stackidx}[4]{
+  \substack{
+  #1  #2 \\
+  #3  #4}
+}
+
 
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
@@ -82,6 +89,8 @@
 \journal{Computer Physics Communications}
 
 \begin{document}
+
+\lstset{language=Mathematica,frame=lines}
 
 \begin{frontmatter}
 
@@ -295,6 +304,262 @@ plain \Mathematica\ lists and return lists.
 used matrices, for example matrices for \SWAP\ operation and Pauli matrices for
 small dimensions.
 \end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\section{Basic functions}\label{sec:basic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\qi{} provides functions that facilitate working with state vectors and 
+density matrices. In this section we will present the basic notation of 
+quantum mechanics and quantum information theory together with the way of 
+implementing it in \qi.
+
+\subsection{Dirac notation}
+The pure state of a~quantum system is described by complex normed vector. It 
+is usually denoted by the symbol $\ket{\psi}$. The dual vector to $\ket{\psi}$
+is denoted by $\bra{\psi}$. The scalar product of vectors $\ket{\psi}$, 
+$\ket{\phi}$ is denoted by $\braket{\phi}{\psi}$. The outer product 
+of these vectors is denoted as $\ketbra{\phi}{\psi}.$ 
+Vectors are labelled in the natural way: 
+$\ket{0}:=\left[1,0,\ldots,0\right]^T, 
+\ket{1}:=\left[0,1,\ldots,0\right]^T,\ket{n-1}:=\left[0,0,\ldots,1\right]^T$.
+Notation like $\ket{\phi\psi}$ denotes the tensor product of vectors and is
+equivalent to $\ket{\phi}\otimes\ket{\psi}$.
+
+\qi{} provides the functions \lstinline!Ket[n,d]! and
+\lstinline!KetFromDigits[\{$n_0,n_1,\ldots,n_k$\}, d]! that 
+create unit vectors. First one returns $\ket{n}\in\Cplx^d$ second one return 
+$\ket{n_0,n_1\ldots,n_k}\in\bigotimes_k\Cplx^d$.
+\begin{lstlisting}
+In[1]:= Ket[0, 3]
+
+Out[1]= {1, 0, 0}
+
+In[2]:= KetFromDigits[{2, 1}, 3]
+
+Out[2]= {0, 0, 0, 0, 0, 0, 0, 1, 0}
+\end{lstlisting}
+Because of the way the \Mathematica{} handles matrices and vectors kets are 
+represented as one-dimensional lists. The inner product of two vectors can be 
+calculated using the \Mathematica{} \lstinline!Dot! function. Outer product of 
+vectors can be obtained using function \lstinline!KroneckerProduct!
+
+\subsection{Density operators}
+The most general state of a~quantum system is described by a~density operator.
+In quantum mechanics a~density operator $\rho$ is defined as hermitian
+($\rho=\rho^\dagger$) positive semi-definite ($\rho\geq 0$) trace one
+($\tr{(\rho)}=1$) operator. When a basis is fixed the density operator can be
+written in the form of a~matrix. 
+
+\todo{Not really}
+In \qi{} there are various ways to create a~density operator.
+
+%\subsubsection{Entanglement}
+%Entanglement is one of the most important phenomena in quantum information 
+%theory. 
+%We say that state $\rho$ is separable iff it can be written in the
+%following form
+%\begin{equation}
+%\rho=\sum_{i=1}^{M} q_i\, \rho_i^A \otimes \rho_i^B,
+%\end{equation}
+%where $q_i>0$ and $\sum_{i=1}^{M} q_i=1$.
+%A state that is not separable is called entangled. It is an open problem of
+%great importance and under investigation, to decide if a~given quantum state 
+%is
+%entangled or not.
+%
+%\subsubsection{Subsystems}
+%Given two states $\rho^A$, $\rho^B$ of two systems $A$ and $B$, the product 
+%state
+%$\rho^{AB}$ of the composed system is obtained by taking the Kronecker product
+%of the states i.e. $\rho^{AB}=\rho^A\otimes\rho^B.$
+%
+%Let $[\rho^{AB}]_{kl}$ be a matrix representing a~quantum system composed of 
+%two
+%subsystems of dimensions $M$ and $N$. We want to index the matrix elements of
+%$\rho$ using two double indices $[\rho^{AB}]_{\stackidx{m}{\mu}{n}{\nu}},$ so 
+%that
+%Latin indices correspond to the system $A$ and Greek indices correspond to the
+%system $B$. The relation between indices is as follows $k=(m-1) N + \mu$, 
+%$l=(n-1) N
+%+ \nu$. 
+%The partial trace with respect to system $B$ reads
+%$\tr_B(\rho^{AB})=\sum_\mu \rho_{\stackidx{m}{\mu}{n}{\mu}}=\rho^A$, 
+%and the partial trace with respect to system $A$ reads
+%$\tr_A(\rho^{AB})=\sum_m \rho_{\stackidx{m}{\mu}{m}{\nu}}=\rho^B$.
+%
+%Given the state of the composed system $\rho^{AB}$ the state of subsystems can
+%by found by the means of taking partial trace of $\rho^{AB}$ with respect to 
+%one
+%of the subsystems. It should noted that tracing-out is not a reversible
+%operation, so in a~general case
+%\begin{equation}
+%    \rho^{AB}\neq \tr_A(\rho^{AB})\otimes\tr_B(\rho^{AB}).
+%\end{equation}
+
+\subsection{Completely positive trace-preserving maps (CPTP)}
+We~say that an operation is physical if it transforms density operators into
+density operators. Additionally we assume that physical operations are linear.
+Therefore an operation $\Phi(\cdot)$ to be physical has to fulfil the following
+set of conditions:
+\begin{enumerate}
+	\item For any operator $\rho$ its image under operation $\Phi$ has to have 
+its
+	trace and positivity preserved i.e. if 
+	$\tr{(\rho)}=1, \rho\geq0, \rho=\rho^\dagger$ then
+	$\tr{(\Phi(\rho))}=1, \Phi(\rho)\geq0, \Phi(\rho)=\Phi(\rho)^\dagger.$
+	\item Operator $\Phi$ has to be linear:
+	\begin{equation}
+		\Phi\left(\sum_i p_i\rho_i \right)=\sum_i p_i \Phi\left(\rho_i \right).
+	\end{equation}
+	\item The extension of the operator $\Phi$ to any larger dimension that 
+acts
+	trivially on the extended system has to preserve positivity. 
+	This feature is called complete positivity. It means that for all positive 
+semi-definite
+	$\rho,\xi\geq 0$ the following holds
+	\begin{equation}
+		(\Phi\otimes\1_{\dim{(\xi)}})\left(\rho\otimes\xi\right)
+		=\Phi\left(\rho\right)\otimes\xi \geq 0.
+	\end{equation}
+\end{enumerate}
+CPTP maps are often called quantum channels.
+
+There are various ways to construct, represent and apply quantum channels in 
+\qi{}: Kraus form, super-operator matrix and general function.
+
+\subsubsection{General function}
+Any function that fulfils criteria listed above is treated as physically 
+allowed. 
+
+\qi{} provides set of commonly used quantum channels:
+\begin{itemize}
+\item The trivial channel: \lstinline!IdentityChannel[n,\[Rho]]! 
+$\rho=id_n(\rho)$
+
+\item \lstinline!DepolarizingChannel[n,p,\[Rho]]! $\rho=id_n(\rho)$
+\end{itemize}
+
+%TransposeChannel::usage = "TransposeChannel[n,\[Rho]] - apply the 
+%transposition operation to a n-dimensional density matrix \[Rho]. Note that 
+%this operations is not completely positive.";
+%
+%
+
+
+
+%HolevoWernerChannel::usage = "HolevoWernerChannel[n,p,\[Rho]] - apply the 
+%Holeve-Werner channel, also known as transpose-depolarizing channel, with 
+%parameter p acting to a n-dimensional input state \[Rho]. See also: 
+%DepolarizingChannel.";
+
+\subsubsection{Kraus form}
+Any operator $\Phi$ that is completely positive and trace preserving can be
+expressed in so called Kraus form \cite{BZ06}, which consists
+of the finite set $\{E_k\}$ of Kraus operators -- matrices that fulfil the
+completeness relation: $\sum_k {E_k}^\dagger E_k=\1$.
+The image of state $\rho$ under 
+the map $\Phi$ is given by 
+\begin{equation}
+    \Phi(\rho)=\sum_k E_k \rho {E_k}^\dagger.
+\end{equation}
+
+In \qi{} any list of matrices of equal dimensions can be treated as Kraus form.
+
+
+\subsubsection{Super-operator matrix}
+
+
+
+\begin{lstlisting}
+
+
+
+ChannelToMatrix::usage = "ChannelToMatrix[E,d] returns matrix representation 
+of a channel E acting on d-dimensional state space. First argument should be a 
+pure function E such that E[\[Rho]] transforms input state according to the 
+channel definition.";
+
+
+GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus 
+operators for d-dimensional generalized Pauli channel with the d-dimesnional 
+matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, 
+Springer 2006, Example 5.8, p. 126.";
+
+
+ApplyKraus::usage = "ApplyKraus[ck,\[Rho]] - apply channel ck, given as a list 
+of Kraus operators, to the input state \[Rho]. See also: ApplyUnitary, 
+ApplyChannel.";
+
+
+ApplyUnitary::usage = "ApplyUnitary[U,\[Rho]] - apply unitary a unitary matrix 
+U to the input state \[Rho]. See also: ApplyKraus, ApplyChannel.";
+
+
+ApplyChannel::usage = "ApplayChannel[f,\[Rho]] - apply channel f, given as a 
+pure function, to the input state \[Rho]. See also: ApplyUnitary, ApplyKraus."
+
+
+Superoperator::usage = "Superoperator[kl] returns matrix representation of 
+quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is 
+just am alternative name for ChannelToMatrix[fun,dim] and returns matrix 
+representation of quantum channel, given as a pure function, acting on 
+dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,#]&,2] and 
+Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: 
+ChannelToMatrix.";
+
+
+DynamicalMatrix::usage = "Dynamical matrix of quantum channel given as a list 
+of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on 
+dim-dimensional space (DynamicalMatrix[fun,dim]). See also: Superoperator, 
+ChannelToMatrix.";
+
+
+Jamiolkowski::usage = "Jamiolkowski[K] gives the image of the Jamiolkowski 
+isomorphism for the channel given as the list of Karus operators K. 
+Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the 
+channel given as a function fun action on dim-dimensional space. See also: 
+Superoperator, ChannelToMatrix, DynamicalMatrix.";
+
+
+TPChannelQ::usage = "Performs some checks on Kraus operators. Use this if you 
+want to check if they represent quantum channel.";
+
+
+ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of 
+Kraus operators from the list ch.";
+
+
+SuperoperatorToKraus::usage = "Finds Kraus operators for a given super 
+operator";
+\end{lstlisting}
+
+\subsection{Measurement}
+Quantum states cannot be observed directly. In the literature one considers two
+main types of measurements: Von Neumann measurement and POVM (Positive Operator
+Valued Measure) measurement. In this paper we use only Von Neumann
+measurement but for the sake of completeness we also define POVM measurement.
+
+The mathematical formulation of Von Neumann measurement is given by a map from 
+a
+set of projection operators to real numbers. 
+
+Let us consider an orthogonal complete set of projection operators 
+$P=\{P_i\}_{i=1}^N$ and
+the set of real measurement outcomes $O=\{o_i\}_{i=1}^N$. Mapping $P\rightarrow
+O$ is called Von Neumann measurement. Assuming the system is in the state 
+$\rho$,
+the probability $p_i$ of measuring outcome $o_i$ is given by the relation 
+$p_i=\tr(P_i
+\rho)$.
+
+POVM measurement can be considered as a generalisation of Von Neumann
+measurement. Let us take a set of positive operators $F=\{F_i\}_{i=1}^N$ such
+that $\sum_{i=1}^N F_i=\1$ and the set of real measurement outcomes
+$O=\{o_i\}_{i=1}^N$. Mapping $F\rightarrow O$ is called POVM measurement. Given
+the system is in the state $\rho$, the probability $p_i$ of measuring outcome 
+$o_i$
+is given by the relation $p_i=\tr(F_i \rho)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concluding remarks}\label{sec:comclude}
