@@ -623,7 +623,8 @@ qiHistory = {
 	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."},
     {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
     {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
-	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."}
+	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."},
+	{"0.3.39", "11/10/2011", "Gawron", "Internal implemetation changed in order to support Mathematica 7.0. QIInversePermutation added."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -1133,6 +1134,12 @@ ListReshape[list_, shape_] :=
   FlattenAt[Fold[Partition[#1, #2] &, Flatten[list], Reverse[shape]], 
    1];
 
+QIInversePermutation[perm_] := 
+ If[Definition[InversePermutation] =!= Null, 
+  InversePermutation[perm], 
+  (Sort[({perm, Range[Length[#]]}\[Transpose]), #1[[1]] < #2[[1]] &])\[Transpose][[2]]
+  ]
+
 PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	{offset, keep, dispose, keepdim, disposedim, perm1, perm2, perm, tensor},
 	offset=Length[dim];
@@ -1140,7 +1147,7 @@ PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	dispose=Union[sys];
 	perm1=Join[dispose,keep];
 	perm2=perm1+offset;
-	perm=InversePermutation[Join[perm1,perm2]];
+	perm=QIInversePermutation[Join[perm1,perm2]];
 	tensor=ListReshape[\[Rho], Join[dim,dim]];
 	keepdim=Apply[Times, Join[dim, dim][[keep]]];
 	disposedim=Apply[Times, Join[dim, dim][[dispose]]];
@@ -1159,7 +1166,7 @@ PartialTranspose[\[Rho]_,dim_?ListQ,sys_?ListQ]:=Block[{offset,tensor,perm,idx1,
 		idx2 = Position[perm, targetsys[[s]] + offset][[1, 1]];
 		{perm[[idx1]],perm[[idx2]]}={perm[[idx2]],perm[[idx1]]};
 	];
-	tensor=Transpose[tensor,InversePermutation[perm]];
+	tensor=Transpose[tensor,QIInversePermutation[perm]];
 	ListReshape[tensor,Dimensions[\[Rho]]]
 ]
 
