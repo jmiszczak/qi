@@ -1,0 +1,66 @@
+1. wywalone KroneckerSum
+
+2. zmienione CircleTimes - teraz powinno działać na dowolnej ilości zmiennych
+
+3. wywalono ExpectationValue
+
+4. wywalono Commutator
+
+5. wywalono l{1:8}
+
+
+6. Poszło do QIExtras:
+          BaseVectors,
+          BaseMatrices,
+          KroneckerDeltaMatrix,
+          Lambda1,
+          Lambda2,
+          Lambda3,
+          GeneralizedPauliMatrices,
+          PauliMatrices,
+          GellMannMatrices,
+          UpperTriangularOnes,
+          UpperBandOnes,
+          Swap,
+          QFT,
+          GeneralizedPauliX,
+          GeneralizedPauliZ,          
+          Ket,
+          Ketbra,
+          KetFromDigits,
+          MaxMix,
+          MaxEnt,
+          WernerState,
+          IsotropicState
+          
+7. Zmiany W SchmidtDecomposition
+  
+8. Poszło do QIExtras:        
+          ReshufflePermutation,
+          ReshufflePermutationPrim,
+          ReshufflePrim
+          
+9. ProductSuperoperator do kanałów
+
+10. wywalono ProbablityVector, QubitBlochState->BlochToState
+          
+11. StateToBloch, BlochToState
+
+12. wywalono QubitGeneralState, ApplyUnitary, RandomNormalMatrix, RandomUnitVectorSchmidt, RandomEntangledUnitVector, RandomComplexUnitVector, RandomRealUnitVector, RandomUnitVector
+
+13. Poszło do QIExtras:  
+          IdentityChannel,
+          TransposeChannel,
+          DepolarizingChannel,
+          HolevoWernerChannel,
+          GeneralizedPauliKraus,
+          ExtendKraus,
+          Sekcje: One-qubit quantum channels, One-qutrit channels, Entropy, Distribution of eigenvalues ,
+          RandomProductKet
+          RandomProductNumericalRange,
+          RandomMaximallyEntangledNumericalRange,
+          NumericalRangeBound
+
+
+
+  

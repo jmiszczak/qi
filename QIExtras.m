@@ -1,0 +1,505 @@
+(* Mathematica Package *)
+
+BeginPackage["QIExtras`", { "QI`"}]
+(* Exported symbols added here with SymbolName::usage *)  
+
+
+
+BaseVectors::usage = "BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space \!\(\*SuperscriptBox[\"\[DoubleStruckCapitalC]\", \"n\"]\). See also: BaseMatrices.";
+
+BaseMatrices::usage = "BaseMatrices[n] returns a list with the canonical basis in n\[Cross]n-dimensional Hilbert-Schmidt space \!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", \"n\"]\). See also: BaseVectors.";
+
+KroneckerDeltaMatrix::usage = "KroneckerDeltaMatrix[i,j,d] returns d\[Cross]d matrix with 1 at position (i,j) and zeros elsewhere.";
+
+Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x. See also: GeneralizedPauliMatrices.";
+
+Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to \[Sigma]y. See also: GeneralizedPauliMatrices.";
+
+Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z. See also: GeneralizedPauliMatrices.";
+
+GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";
+
+PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)}. Use Map[MatrixForm[#]&,PauliMatrices] to get this list in more readible form.";
+
+GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,GellMannMatrices] to get this list in more readable form.";
+
+UpperTriangularOnes::usage = "UpperTriangularOnes[k,dim] returns not normal matirx of dimension dim with 1<k<dim-1 bands of ones over the diagonal.";
+
+UpperBandOnes::usage = "UpperBandOnes[k,dim] returns not normal matirx of dimension dim with bands at position k of ones over the diagonal.";
+
+
+Swap::usage="Swap[d] returns permutation operator \!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"i\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)\!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"j\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[LeftAngleBracket]j|\[CircleTimes]|j\[RightAngleBracket]\[LeftAngleBracket]i\[VerticalSeparator] acting on d-dimensional, d=\!\(\*SuperscriptBox[\"n\", \"2\"]\) space and exchanging two \[Sqrt]d-dimensional subsystems.";
+
+QFT::usage = "QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbolic', which is default, or 'Numerical'. The second option makes this function much faster.";
+
+GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\[Sigma]\_x\)";
+
+GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\[Sigma]\_z\)";
+
+
+Ket::usage = "Ket[i,d] returns |i\[RightAngleBracket] in d-dimensional Hilbert space. See also: StateVector for a different parametrization.";
+
+Ketbra::usage = "This function can be used in two ways. Ketbra[i,j,d] returns \[VerticalSeparator]i\[RightAngleBracket]\[LeftAngleBracket]j\[VerticalSeparator] acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the appropriate operator for vectors v1 and v2..";
+
+KetFromDigits::usage = "KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.";
+
+MaxMix::usage = "MaxMix[n] - the maximally mixed state in a n-dimensional space of density matrices.";
+
+MaxEnt::usage = "MaxEnt[n] - maximally entangled state in n dimensional vector space. Note that n must be perfect square.";
+
+WernerState::usage = "WernerState[d,p] - generalized Werner state d\[Cross]d-dimensional system with the mixing parameter p\[Element][0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p) MaxMix[d],. See also: MaxEnt, MaxMix..";
+
+IsotropicState::usage = "IsotropicState[d,p] - isotropic state of dimensions d\[Cross]d with a parameter p\[Element][0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p)/(\!\(\*SuperscriptBox[\"d\", \"2\"]\)-1)(I-Proj[MaxEnt[d]]]). This family of states is invariant for the operation of the form U\[CircleTimes]\!\(\*SuperscriptBox[\"U\", \"\[Star]\"]\).";
+
+
+
+ReshufflePermutation::usage = "ReshufflePermutation[dim1,dim2] - permutation matrix equivalent to the reshuffling operation on dim1\[Cross]dim2-dimensional system. See also: Reshuffle.";
+
+ReshufflePermutationPrim::usage = "ReshufflePermutation2[dim1,dim2] - permutation matrix equivalent to the alternative reshuffling operation on dim1\[Cross]dim2-dimensional system. See also: Reshuffle.";
+
+
+ReshufflePrim::usage = "\
+ReshufflePrim[\[Rho], drows, dcols] for a matrix of dimensions (drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) returns reshuffled (prim) matrix with dimensions \
+(dcols[[2]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]drows[[1]]), \
+drows and dcols parameters can be ommited for a square matrix.";
+
+
+IdentityChannel::usage = "IdentityChannel[n,\[Rho]] - apply the identity operation to a n-dimensional density matrix \[Rho].";
+
+
+TransposeChannel::usage = "TransposeChannel[n,\[Rho]] - apply the transposition operation to a n-dimensional density matrix \[Rho]. Note that this operations is not completely positive.";
+
+
+DepolarizingChannel::usage = "DepolarizingChannel[n,p,\[Rho]] - apply the completely depolarizing channel with parameter p acting to a n-dimensional input state \[Rho]. See also: QubitDepolarizingKraus, HolevoWernerChannel.";
+
+
+HolevoWernerChannel::usage = "HolevoWernerChannel[n,p,\[Rho]] - apply the Holeve-Werner channel, also known as transpose-depolarizing channel, with parameter p acting to a n-dimensional input state \[Rho]. See also: DepolarizingChannel.";
+
+GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Example 5.8, p. 126.";
+
+ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.";
+
+Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of a density matrix \[Rho] representing a state of two-qubit system. This function uses Chop to provide numerical results.";
+
+
+Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
+RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
+
+
+
+(* ::Subsection::Closed:: *)
+(*One-qubit quantum channels*)
+
+
+QubitBitflipChannel::usage = "BitflipChannel[p,\[Rho]] applies bif-flip channel to the input state \[Rho]. See also: QubitBitflipKraus.";
+
+
+QubitPhaseflipChannel::usage  = "QubitPhaseflipChannel[p,\[Rho]] applies phase-flip channel to the input state \[Rho]. See also: QubitPhaseflipKraus.";
+
+
+QubitBitphaseflipChannel::usage  = "QubitBitphaseflipChannel[p,\[Rho]] applies bit-phase-flip channel to the input state \[Rho]. See also: QubitPhaseflipKraus.";
+
+
+QubitDepolarizingKraus::usage = "Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=1.";
+
+
+QubitDecayKraus::usage = "Kraus operators of the decay channel, also know as amplitude damping, for one qubit.";
+
+
+QubitPhaseKraus::usage = "Kraus operators for one qubit phase damping channel.";
+
+
+QubitBitflipKraus::usage = "Kraus operators for one qubit bit-flip channel.";
+
+
+QubitPhaseflipKraus::usage = "Kraus operators for one qubit phase-flip channel.";
+
+
+QubitBitphaseflipKraus::usage = "Kraus operators for one qubit bit-phase-flip channel.";
+
+
+QubitDynamicalMatrix::usage = "QubitDynamicalMatrix[\!\(\*SubscriptBox[\"\[Kappa]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Kappa]\", \"z\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Eta]\", \"z\"]\)] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).";
+
+
+QubitDaviesSuperoperator::usage = "QubitDaviesSuperoperator[a,c,p] returns a superoperator matrix for one-qubit Davies channel with parameters a and c and the stationary state (p,1-p).";
+
+
+(* ::Subsection::Closed:: *)
+(*One-qutrit channels*)
+
+
+QutritSpontaneousEmissionKraus::usage="QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit spontaneous emission channel with parameters A1, A2, t >= 0. See: A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.";
+
+
+(* ::Subsection::Closed:: *)
+(*Entropy*)
+
+
+Log0::usage = "Log0[x] is equal to Log[2,x] for x>0 and 1 for x=0.";
+
+
+QuantumEntropy::usage = "QuantumEntropy[m] - von Neuman entropy for the matrix m.";
+
+
+QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channel in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.";
+
+
+
+(* ::Subsection::Closed:: *)
+(*Distribution of eigenvalues*)
+
+
+
+VandermondeMatrix::usage = "VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}] - Vandermonde matrix for variables (\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)).";
+
+
+ProdSum::usage = "ProdSum[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}] gives \!\(\*SubsuperscriptBox[\"\[Product]\", 
+RowBox[{\"i\", \"<\", \"j\"}], \"n\"]\)\!\(\*SubscriptBox[\"x\", \"i\"]\)+\!\(\*SubscriptBox[\"x\", \"j\"]\).";
+
+
+ProdDiff2::usage = "ProdDiff2[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}] is equivalent to Det[VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}]\!\(\*SuperscriptBox[\"]\", \"2\"]\) and gives a discriminant of the polynomial with roots {\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}.";
+
+
+ProbBuresNorm::usage = "ProbBNorm[n] - Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Bures distance.";
+
+
+ProbBures::usage = "ProbBures[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] - Joint probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}of a matrix according to Bures distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
+
+
+ProbHSNorm::usage = "Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Hilbert-Schmidt distribution.";
+
+
+ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
+
+
+
+RandomProductKet::usage = "RandomProductKet[{dim1,dim2,...,dimN}] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.";
+
+
+RandomProductNumericalRange::usage = "RandomLocalNumericalRange[M,{dim1,dim2,...,dimN},n] returns n points from the product numerical range of the matrix M with respect to division specified as {dim1,dim2,...,dimN}. Note that dim1\[Cross]dim2\[Cross]...\[Cross]dimN must be equal to the dimension of matrix M.";
+
+
+RandomMaximallyEntangledNumericalRange::usage = "RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]\[Cross]Sqrt[dim[M]].";
+
+
+NumericalRangeBound::usage = "NumericalRangeBound[A,dx] - bound of numerical range of matrix A calculated with given step dx. Default value of dx is 0.01. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.";
+
+
+IntegrateSU2::usage = "IntegrateSU2[f,U] - gives the integral \[Integral]f dU, where dU is Haar measure on the group SU(2) - special unitary matrices of size 2. 
+\nIntegrateSU2[f,U,V,...] - gives the multiple integral  \[Integral]f dU dV dW ... on the group SU(2). 
+\nExample: Integration squares of absolute values of elements of ranom unitary matrix: IntegrateSU2[Abs[U\!\(\*SuperscriptBox[\(]\), \(2\)]\),U]"
+
+
+
+
+
+
+
+
+
+Begin["`Private`"] (* Begin Private Context *) 
+
+
+BaseVectors[n_Integer]:=Table[UnitVector[n,k],{k,1,n}]
+
+BaseMatrices[n_Integer]:=Table[Unres[UnitVector[n^2,k]],{k,1,n^2}];
+
+KroneckerDeltaMatrix[m_,n_,dim_]:=Block[{mtx},
+    mtx=Table[0,{dim},{dim}];
+    mtx[[m,n]]=1;
+    mtx
+];
+
+Lambda1[i_ ,j_,n_]:=Table[KroneckerDelta[j,\[Mu]]KroneckerDelta[i,\[Nu]] + KroneckerDelta[j,\[Nu]]KroneckerDelta[i,\[Mu]] ,{\[Mu],1,n},{\[Nu],1,n}];
+
+Lambda2[i_ ,j_,n_]:=Table[-I(KroneckerDelta[i,\[Mu]]KroneckerDelta[j,\[Nu]] - KroneckerDelta[i,\[Nu]]KroneckerDelta[j,\[Mu]]) ,{\[Mu],1,n},{\[Nu],1,n}];
+
+Lambda3[i_,n_]:=Sqrt[2/(i^2-i)]DiagonalMatrix[Join[Append[Table[1,{i-1}],-(i-1)],Table[0,{n-i}]]];
+
+GeneralizedPauliMatrices[n_]:=Block[{l1,l2,l3,i,j},
+    l1=Flatten[Table[Lambda1[i,j,n],{i,1,n},{j,i+1,n}],1];
+    l2=Flatten[Table[Lambda2[i,j,n],{i,1,n},{j,i+1,n}],1];
+    l3=Table[Lambda3[i,n],{i,2,n}];
+    Join[l1,l2,l3]
+];
+
+PauliMatrices = GeneralizedPauliMatrices[2];
+
+GellMannMatrices = GeneralizedPauliMatrices[3];
+
+UpperTriangularOnes[rn_,dim_]:=Table[If[i<j&&j-i<rn+1,1,0],{i,1,dim},{j,1,dim}];
+
+UpperBandOnes[bandNo_,dim_]:=Table[If[i<j&&j-i==bandNo,1,0],{i,1,dim},{j,1,dim}];
+
+
+Swap[dim_]:=Plus@@Flatten[Table[KroneckerProduct[Ketbra[i,j,Sqrt[dim]],Ketbra[j,i,Sqrt[dim]]],{i,0,Sqrt[dim]-1},{j,0,Sqrt[dim]-1}],1];
+
+QFT[n_,method_:"Symbolic"]:=Block[{\[Omega]},
+    If [method=="Numerical",\[Omega]=N[Exp[2 \[Pi] I/n]],\[Omega]=Exp[2 \[Pi] I/n]];
+    Table[\[Omega]^(i*k) ,{i,1,n},{k,1,n}]
+];
+
+GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
+
+GeneralizedPauliZ[d_]:=DiagonalMatrix[Table[Exp[2\[Pi]*I*j/d],{j,0,d-1}]];
+
+
+Ket[label_,dim_]:=Block[{vec},
+    If[label<dim,
+        vec =Table[0,{dim}];
+        vec[[label+1]]=1;
+        vec,
+        (* else *)
+        Message[Ket::argerr,label,dim];
+    ]
+];
+Ket::argerr = "Requested index `1` not smaller than dimension of vector: `2`.";
+
+
+Ketbra[i_,j_,dim_]:=KroneckerProduct[Ket[i,dim],Ket[j,dim]];
+Ketbra[v1_?VectorQ,v2_?VectorQ]:={v1}\[ConjugateTranspose]\[CircleTimes]{v2};
+
+
+KetFromDigits[l_,b_:2]:=Ket[FromDigits[l,b],b^Length[l]];
+
+
+MaxMix[n_Integer]:=(1/n)*IdentityMatrix[n];
+
+
+MaxEnt[dim_]:=Block[{subDim=Sqrt[dim]},
+  If[IntegerQ[subDim],1/Sqrt[subDim] Plus@@Table[Ket[i,subDim]\[CircleTimes]Ket[i,subDim],{i,0,subDim-1}]]
+];
+
+
+WernerState[dim_,p_]:=Block[{subDim=Sqrt[dim]},
+If[IntegerQ[subDim],
+    p Proj[MaxEnt[dim]] + (1-p)*MaxMix[dim],
+    Message[WernerState::argerr,dim];
+]
+];
+WernerState::argerr = "The first `1` argument is not a perfect square.";
+
+
+IsotropicState[dim_,p_]:=Block[{subDim=Sqrt[dim]},
+If[IntegerQ[subDim],
+    p Proj[MaxEnt[dim]] + (1-p)/(subDim^2-1)(IdentityMatrix[dim]-Proj[MaxEnt[dim]]),
+    Message[WernerState::argerr,dim];
+]
+];
+IsotropicState::argerr = "The first `1` argument is not a perfect square.";
+
+
+ReshufflePermutation[dim1_,dim2_]:=Block[{initPos},
+    initPos=Flatten[Reshuffle[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],{dim1,dim2},{dim1,dim2}]];
+    Table[UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1,1]]],{i,1,dim1*dim1*dim2*dim2}]
+];
+
+
+ReshufflePermutationPrim[dim1_,dim2_]:=Block[{initPos},
+    initPos=Flatten[ReshufflePrim[Partition[Range[dim1*dim1*dim2*dim2],dim1*dim2],{dim1,dim2},{dim1,dim2}]];
+    Table[UnitVector[dim1*dim1*dim2*dim2,Position[initPos,i][[1,1]]],{i,1,dim1*dim1*dim2*dim2}]
+];
+
+
+ReshufflePrim[\[Rho]_]:=Block[{dim},
+    dim = Sqrt[Length[\[Rho]]];
+    If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+        ReshufflePrim[\[Rho], {dim,dim},{dim,dim}]
+    (*else*),
+        Message[ReshufflePrim::argerr]
+    ]
+]
+ReshufflePrim::argerr = "ReshufflePrim works only for square matrices of dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), where d is an Integer, for other dimensions use Reshuffle with extra parameters";
+
+ReshufflePrim[A_,{n_,m_}]:=Flatten[
+    Table[Flatten[Part[A,1+i1;;n[[2]]+i1,1+i2;;m[[2]]+i2]\[Transpose]],{i2,0,m[[1]]*m[[2]]-1,m[[2]]},{i1,0,n[[1]]*n[[2]]-1,n[[2]]}]
+,1]\[Transpose];
+
+
+
+IdentityChannel=Function[{dim,\[Rho]},IdentityMatrix[dim].\[Rho]];
+
+
+TransposeChannel=Function[{dim,\[Rho]},IdentityMatrix[dim].\[Rho]\[Transpose]];
+
+
+DepolarizingChannel=Function[{dim,p,\[Rho]},(1-p) IdentityMatrix[dim].\[Rho]+(p) Tr[\[Rho]]MaxMix[dim]];
+
+HolevoWernerChannel=Function[{dim,p,\[Rho]},( p \[Rho]\[Transpose]+ (1-p)Tr[\[Rho]]MaxMix[dim])];
+
+
+GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower[GeneralizedPauliX[d],i].MatrixPower[GeneralizedPauliZ[d],j])\[ConjugateTranspose],{i,0,d-1},{j,0,d-1}],1];
+
+ExtendKraus[operators_,n_] := Block[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
+
+
+Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
+    evl=Eigenvalues[MatrixSqrt[sqrtM.(sy\[CircleTimes]sy).m\[Conjugate].(sy\[CircleTimes]sy).sqrtM]];
+    Max[0,Chop[Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]]
+];
+
+
+Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTranspose[\[Rho],{m,n},1]],#>0&];
+
+
+(* ::Subsection::Closed:: *)
+(*One-qubit quantum channels*)
+
+
+QubitBitflipChannel=Function[{p,\[Rho]},(1-p) id.\[Rho]+p sx.\[Rho].sx\[ConjugateTranspose]];
+
+
+QubitPhaseflipChannel=Function[{p,\[Rho]},(1-p) id.\[Rho]+p sz.\[Rho].sz\[ConjugateTranspose]];
+
+
+QubitBitphaseflipChannel=Function[{dim,p,\[Rho]},(1-p) id.\[Rho]+p sy.\[Rho].sy\[ConjugateTranspose]];
+
+
+QubitDepolarizingKraus[p_]:={\[Sqrt](1-3p/4)*id,\[Sqrt](p/4)*sx,\[Sqrt](p/4)*sy,\[Sqrt](p/4)*sz};
+
+
+QubitDecayKraus[p_]:={ {{1,0},{0,\[Sqrt](1-p)}} , {{0,\[Sqrt]p},{0,0}} };
+
+
+QubitPhaseKraus[p_]:={ {{1,0},{0,\[Sqrt](1-p)}} , {{0,0},{0,\[Sqrt]p}} };
+
+
+QubitBitflipKraus[p_]:={ \[Sqrt](1-p)*id,\[Sqrt]p*sx};
+
+
+QubitPhaseflipKraus[p_]:={\[Sqrt](1-p)*id,\[Sqrt]p*sz};
+
+
+QubitBitphaseflipKraus[p_]:={\[Sqrt](1-p)*id,\[Sqrt]p*sy};
+
+
+QubitDynamicalMatrix[kx_,ky_,kz_,nx_,ny_,nz_]:= 1/2{
+    {1 + nz + kz, 0, kx + I ky, nx + ny},
+    {0, 1 - nz + kz, nx - ny, kx + I ky},
+    {kx - I ky, nx - ny, 1 - nz - kz, 0},
+    {nx + ny, kx - I ky, 0, 1 + nz - kz}
+}
+
+
+QubitDaviesSuperoperator[a_,c_,p_]:={{1 - a,0,0,(a*p)/(1-p) },{0,c,0,0},{0,0,c,0},{a,0,0,1-(a*p)/(1-p)}};
+
+
+(* ::Subsection::Closed:: *)
+(*One-qutrit channels*)
+
+
+QutritSpontaneousEmissionKraus[A1_,A2_,t_]:={{{1,0,0},{0,Exp[-(A1*t/2)],0},{0,0,Exp[-(A2*t/2)]}},{{0,Sqrt[1-Exp[-(A1*t)]],0},{0,0,0},{0,0,0}},{{0,0,Sqrt[1-Exp[-(A2*t)]]},{0,0,0},{0,0,0}}};
+
+
+(* ::Subsection::Closed:: *)
+(*Entropy*)
+
+
+Log0[x_]:=If[x==0,0,Log[2,x]];
+SetAttributes[Log0,Listable];
+
+
+\[Eta][x_]:= -x Log[2,x];
+
+
+\[Eta]2[x_]:= -x Log[2,x] - (1-x)Log[2,1-x];
+
+
+QuantumEntropy[m_]:=Block[{eigvals,qe},eigvals=Chop[Eigenvalues[m]];
+    qe=Sum[eigvals[[i]] Log0[eigvals[[i]]],{i,1,Length[eigvals]}];
+    - Chop[qe]
+];
+
+
+QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
+QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
+
+
+(* ::Subsection::Closed:: *)
+(*Distribution of eigenvalues*)
+
+
+\[Delta][a_,type_:"Dirac"] := Switch[type,
+    "Dirac", DiracDelta[a],
+    "Indicator", DiscreteDelta[a]
+]; 
+
+
+VandermondeMatrix[l_]:=Table[Table[l[[j]]^i,{i,0,Length[l]-1}],{j,1,Length[l]}];
+
+
+ProdSum[l_]:=Times@@Flatten[Table[Table[l[[i]] + l[[j]], {i, 1, j - 1}], {j, 2, Length[l]}]];
+
+
+ProdDiff2[l_]:=Block[{x},Discriminant[Times@@Table[(x-l[[i]]),{i,1,Length[l]}],x]];
+
+
+ProbBuresNorm[N_]:=2^(N^2-N) Gamma[N^2/2]/(\[Pi]^(N/2) Product[Gamma[j+1],{j,1,N}]);
+
+
+ProbBures[l_,delta_:"Dirac"]:=FullSimplify[ProbBuresNorm[Length[l]] \[Delta][\!\(
+\*SubsuperscriptBox[\(\[Sum]\), \(i = 1\), \(Length[l]\)]\(l[\([i]\)]\)\)-1,delta]/\[Sqrt](\!\(
+\*SubsuperscriptBox[\(\[Product]\), \(i = 1\), \(Length[l]\)]\(l[\([i]\)]\)\)) Det[VandermondeMatrix[l]]^2/ProdSum[l]];
+
+
+ProbHSNorm[N_]:=Gamma[N^2]/Product[Gamma[N-j] Gamma[N-j+1],{j,0,N-1}];
+
+
+ProbHS[l_,delta_:"Dirac"]:=ProbHSNorm[Length[l]]\[Delta][1-(Plus@@l),delta] Det[VandermondeMatrix[l]]^2;
+
+RandomProductKet[n_?ListQ]:=Flatten[Fold[KroneckerProduct[#1,RandomKet[#2]]&,{1},n]];
+
+RandomProductNumericalRange[A_,sys_,noPoints_:1]:=Block[{prod},
+    Table[prod=RandomProductKet[sys];Tr[Proj[prod].A],{noPoints}]
+];
+
+
+RandomMaximallyEntangledNumericalRange[A_,noPoints_]:=Block[{ent,dim},
+    dim=Dimensions[A][[1]];
+    Table[ent=RandomEntangledUnitVector[dim];ent\[Conjugate].A.ent,{noPoints}]
+];
+
+NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[
+    {w,Ath,Hth,m,s,Kth,pKp,ee,rr,mm,sm,mM,sM,e,r},
+    w={};
+    Table[
+    Ath=Exp[I*(-\[Theta])]*A;
+    Hth=MatrixRe[Ath];
+    {e,r}=Eigensystem[Hth];
+    e=Re[e];
+    m=Max[e];
+    s=Position[e,m];
+    If[
+        Length[s]==1,(*then*)
+        AppendTo[w,ArrayFlatten[Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose]]],
+        (*else*)
+        Kth=I*(Hth-Ath); 
+        pKp=Extract[r,s]\[Conjugate].Kth.Extract[r,s]\[Transpose]; 
+        {ee,rr}=Eigensystem[pKp]; 
+        ee=Re[ee]; mm=Min[ee]; 
+        sm=Position[ee,mm];
+        AppendTo[w,ArrayFlatten[Extract[rr,sm]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sm]\[Transpose]]];
+        mM=Max[ee];
+        sM=Position[ee,mM];AppendTo[w,ArrayFlatten[Extract[rr,sM]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sM]\[Transpose]]]
+    (*end if*)
+    ]
+    ,{\[Theta],0,2\[Pi],step}];
+Flatten[w,2]
+];
+
+IntegrateSU2[f_,list__]:=Block[{variables,matrices,matricesCT,matricesC,replacement,range,func},
+variables=Map[SymbolicVector[#,3]&,{list}];
+matrices=Map[Unitary2Euler[0,ArcSin[Sqrt[#[[1]]]],#[[2]],#[[3]]]&, variables];
+matricesCT=Map[Unitary2Euler[0,-ArcSin[Sqrt[#[[1]]]],-#[[2]],#[[3]]]&, variables];
+matricesC=Map[Unitary2Euler[0,ArcSin[Sqrt[#[[1]]]],-#[[2]],-#[[3]]]&, variables];
+replacement = Join[ Map[#[[1]]-> #[[2]]&,{{list},matrices}\[Transpose]], Map[#[[1]]\[ConjugateTranspose]-> #[[2]]&,{{list},matricesCT}\[Transpose]],Map[Conjugate[#[[1]]]-> #[[2]]&,{{list},matricesC}\[Transpose]]];
+range=Flatten[Map[{{#[[1]],0,1},{#[[2]],0,2 * \[Pi]},{#[[3]],0,2 *\[Pi]}}&, variables],1];
+func = Expand[f/.replacement];
+1/(2*\[Pi])^(2 *Length[{list}])* Apply[Integrate[func,##]&,range]
+];
+
+
+
+End[] (* End Private Context *)
+
+EndPackage[]
