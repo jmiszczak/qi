@@ -3,29 +3,25 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.3.27)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.4.0)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
-\begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements 
-number of functions used in the analysis of quantum states and quantum operations. In contrast to 
-many available packages for symbolic and numerical simulation of quantum computation presented 
-package is focused on geometrical aspects of quantum information theory.\end{abstract}
+\begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements number of functions used in the analysis of quantum states and quantum operations. In contrast to many available packages for symbolic and numerical simulation of quantum computation presented package is focused on geometrical aspects of quantum information theory.\end{abstract}
 \section{Kronecker sum and product, symbolic matrix}
 
-\noindent\textbf{$ \text{KroneckerSum} $ }-- KroneckerSum[A,B] returns the Kronecker sum of matrices A and B defined as A$\otimes $1+1$\otimes $B. Alternative syntax A$\oplus $B for KroneckerSum[A,B] is also provided. See also: KroneckerProduct.$  $\\[8pt]
 \noindent\textbf{$ \text{SquareMatrixQ} $ }-- SquareMatrixQ[A] returns True only if A is a square matrix, and gives False otherwise.$  $\\[8pt]
 \noindent\textbf{$ \text{SymbolicMatrix} $ }-- SymbolicMatrix[a,m,n] returns m$\times $n-matrix with elements a[i,j], i=1,...,m, j=1,...,n. If the third argument is ommited this function returns square m$\times $m matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.$  $\\[8pt]
 \noindent\textbf{$ \text{SymbolicVector} $ }-- SymbolicVector[a,n] is equivalent to Matrix[a,n,1] and it returns a vector with m elements a[i],i=1,...,n.$  $\\[8pt]
 \noindent\textbf{$ \text{SymbolicHermitianMatrix} $ }-- SymbolicHermitianMatrix[sym,n] produces a n$\times $n Hermitian matrix. See also: SymbolicMatrix, SymbolicVector.$  $\\[8pt]
+\noindent\textbf{$ \text{SymbolicBistochasticMatrix} $ }-- SymbolicBistochasticMatrix[sym, dim] produces symbolic bistochastic matrix size dim. See also: SymbolicMatrix, SymbolicVector.$  $\\[8pt]
 \noindent\textbf{$ \text{ComplexToPoint} $ }-- ComplexToPoint[z] returns a real and an imaginary parts of a complex number z as a pair of real numbers.$  $\\[8pt]
 \noindent\textbf{$ \text{MatrixSqrt} $ }-- MatrixSqrt[A] returns square root for the matrix A.$  $\\[8pt]
 \noindent\textbf{$ \text{MatrixAbs} $ }-- MatrixAbs[A] returns absolute value for matrix A defined as MatrixSqrt[A.A$  ^{\dagger } $]. See also: MatrixSqrt.$  $\\[8pt]
 \noindent\textbf{$ \text{MatrixRe} $ }-- Hermitian part of the matrix A i.e. $ \frac{1}{2}\text{(A+A} ^{\dagger }\text{).} $\\[8pt]
 \noindent\textbf{$ \text{MatrixIm} $ }-- Antyhermitian part of the matrix A i.e. $ \frac{1}{2}\text{(A-A} ^{\dagger }\text{).} $\\[8pt]
-\noindent\textbf{$ \text{ExpectationValue} $ }-- ExpectationValue[s,A] - accepts a state vector or a density matrix as a first argument and calculates the expectation value for the measurement of A in the state s.$  $\\[8pt]
-\noindent\textbf{$ \text{Commutator} $ }-- Commutator[A,B] returns the commutator of matrices A and B i.e. Commutator[A,B] = A.B - B.A.$  $\\[8pt]
+\noindent\textbf{$ \text{Proj} $ }-- Proj[$\{$$ v_1,v_2 $,...,$ v_n $$\}$] returns projectors for the vectors in the input list.$  $\\[8pt]
 \section{Fidelity, trace distance etc.}
 
 \noindent\textbf{$ \text{Fidelity} $ }-- Fidelity[$ \rho _1,\rho _2 $] returns the quantum fidelity between states $ \rho _1 $ and $ \rho _2 $ calculated using a simplified formula as ($\sum $$ \lambda _i)^2 $, where $ \lambda _i $ are the eigenvalues of $ \rho _1\rho _2. $\\[8pt]
@@ -33,179 +29,71 @@ package is focused on geometrical aspects of quantum information theory.\end{abs
 \noindent\textbf{$ \text{Subfidelity} $ }-- Subfidelity[$ \rho _1,\rho _2 $] returns subfidelity between states $ \rho _1 $ and $ \rho _2 $ See: J.A. Miszczak et al., Quantum Information $\&$ Computation, Vol.9 No.1$\&$2 (2009).$  $\\[8pt]
 \noindent\textbf{$ \text{TraceNorm} $ }-- TraceNorm[A] = $\sum $$ \sigma _i $, where $ \sigma _i $ are the singular values of A. See also: TraceDistance.$  $\\[8pt]
 \noindent\textbf{$ \text{TraceDistance} $ }-- TraceDistance[$ \rho _1,\rho _2 $] returns the trace distance between matrices $ \rho _1 $ and $ \rho _2 $, which is defined as $ \frac{1}{2} $tr$|$$ \rho _1-\rho _2\text{$|$.} $\\[8pt]
+\noindent\textbf{$ \text{GateFidelity} $ }-- GateFidelity[U,V] is equivalent to 1/d tr$|$UV$\dagger|$.$  $\\[8pt]
 \section{Commonly used matrices}
 
-\noindent\textbf{$ \text{sx} $ }-- Pauli matrix $ \sigma _y. $\\[8pt]
-\noindent\textbf{$ \text{sy} $ }-- Pauli matrix $ \sigma _y. $\\[8pt]
-\noindent\textbf{$ \text{sz} $ }-- Pauli matrix $ \sigma _z. $\\[8pt]
-\noindent\textbf{$ \text{$\sigma $x} $ }-- Pauli matrix $ \sigma _y $. This is an alternative notation for sx.$  $\\[8pt]
-\noindent\textbf{$ \text{$\sigma $y} $ }-- Pauli matrix $ \sigma _y $. This is an alternative notation for sy.$  $\\[8pt]
-\noindent\textbf{$ \text{$\sigma $z} $ }-- Pauli matrix $ \sigma _z $. This is an alternative notation for sz.$  $\\[8pt]
+\noindent\textbf{$ \text{sx} $ }-- Pauli matrix sx$  $\\[8pt]
+\noindent\textbf{$ \text{sy} $ }-- Pauli matrix sy$  $\\[8pt]
+\noindent\textbf{$ \text{sz} $ }-- Pauli matrix sz$  $\\[8pt]
 \noindent\textbf{$ \text{id} $ }-- Identity matrix for one qubit. See also: IdentityMatrix.$  $\\[8pt]
 \noindent\textbf{$ \text{wh} $ }-- Hadamard gate for one qubit. See also: QFT.$  $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $1} $ }-- Gell-Mann matrix $ \lambda _1. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $2} $ }-- Gell-Mann matrix $ \lambda _2. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $3} $ }-- Gell-Mann matrix $ \lambda _3. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $4} $ }-- Gell-Mann matrix $ \lambda _4. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $5} $ }-- Gell-Mann matrix $ \lambda _5. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $6} $ }-- Gell-Mann matrix $ \lambda _6. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $7} $ }-- Gell-Mann matrix $ \lambda _7. $\\[8pt]
-\noindent\textbf{$ \text{$\lambda $8} $ }-- Gell-Mann matrix $ \lambda _8. $\\[8pt]
-\noindent\textbf{$ \text{Proj} $ }-- Proj[$\{$$ v_1,v_2 $,...,$ v_n $$\}$] returns projectors for the vectors in the input list.$  $\\[8pt]
-\noindent\textbf{$ \text{BaseVectors} $ }-- BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space $ \mathbb{C}^n $. See also: BaseMatrices.$  $\\[8pt]
-\noindent\textbf{$ \text{BaseMatrices} $ }-- BaseMatrices[n] returns a list with the canonical basis in n$\times $n-dimensional Hilbert-Schmidt space $ \mathbb{M}_n $. See also: BaseVectors.$  $\\[8pt]
-\noindent\textbf{$ \text{KroneckerDeltaMatrix} $ }-- KroneckerDeltaMatrix[i,j,d] returns d$\times $d matrix with 1 at position (i,j) and zeros elsewhere.$  $\\[8pt]
-\noindent\textbf{$ \text{Lambda1} $ }-- Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli $\sigma $x. See also: GeneralizedPauliMatrices.$  $\\[8pt]
-\noindent\textbf{$ \text{Lambda2} $ }-- Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to $\sigma $y. See also: GeneralizedPauliMatrices.$  $\\[8pt]
-\noindent\textbf{$ \text{Lambda3} $ }-- Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to $\sigma $z. See also: GeneralizedPauliMatrices.$  $\\[8pt]
-\noindent\textbf{$ \text{GeneralizedPauliMatrices} $ }-- GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for SU(n). For n=2 these are just Pauli matrices and for n=3 - Gell-Mann matrices. Note that identity matrix is not included in the list. See also: PauliMatrices, GellMannMatrices, $\lambda $, Lambda1, Lambda2, Lambda3.$  $\\[8pt]
-\noindent\textbf{$ \lambda  $ }-- $\lambda $[i,n] is defined as GeneralizedPauliMatrices[n][[i]].$  $\\[8pt]
-\noindent\textbf{$ \text{PauliMatrices} $ }-- Predefined list of Pauli matrices $\{$$ \sigma _x,\sigma _y,\sigma _z $$\}$. Use Map[MatrixForm[$\#$]$\&$,PauliMatrices] to get this list in more readible form.$  $\\[8pt]
-\noindent\textbf{$ \text{GellMannMatrices} $ }-- List of Gell-Mann matrices. Use Map[MatrixForm[$\#$]$\&$,GellMannMatrices] to get this list in more readable form.$  $\\[8pt]
-\noindent\textbf{$ \text{UpperTriangularOnes} $ }-- UpperTriangularOnes[k,dim] returns not normal matirx of dimension dim with 1$<$k$<$dim-1 bands of ones over the diagonal.$  $\\[8pt]
-\noindent\textbf{$ \text{UpperBandOnes} $ }-- UpperBandOnes[k,dim] returns not normal matirx of dimension dim with bands at position k of ones over the diagonal.$  $\\[8pt]
-\section{Quantum gates}
-
-\noindent\textbf{$ \text{Swap} $ }-- Swap[d] returns permutation operator $ \underset{i=0}{\overset{n-1}{ \sum }}\underset{j=0}{\overset{n-1}{ \sum }} $$|$i$\rangle \langle $j$|\otimes |$j$\rangle \langle $i$|$ acting on d-dimensional, d=$ n^2 $ space and exchanging two $\surd $d-dimensional subsystems.$  $\\[8pt]
-\noindent\textbf{$ \text{QFT} $ }-- QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbolic', which is default, or 'Numerical'. The second option makes this function much faster.$  $\\[8pt]
 \noindent\textbf{$ \text{cnot} $ }-- Controlled not matrix for two qubits.$  $\\[8pt]
-\noindent\textbf{$ \text{GeneralizedPauliX} $ }-- Generalized Pauli matrix X. See also: $ \sigma _x $\\[8pt]
-\noindent\textbf{$ \text{GeneralizedPauliZ} $ }-- Generalized Pauli matrix Z. See also: $ \sigma _z $\\[8pt]
-\section{Special states}
-
-\noindent\textbf{$ \text{Ket} $ }-- Ket[i,d] returns $|$i$\rangle $ in d-dimensional Hilbert space. See also: StateVector for a different parametrization.$  $\\[8pt]
-\noindent\textbf{$ \text{Ketbra} $ }-- This function can be used in two ways. Ketbra[i,j,d] returns $|$i$\rangle \langle $j$|$ acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the apropritae operator for vectors v1 and v2..$  $\\[8pt]
-\noindent\textbf{$ \text{KetFromDigits} $ }-- KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.$  $\\[8pt]
-\noindent\textbf{$ \text{MaxMix} $ }-- MaxMix[n] - the maximally mixed state in a n-dimensional space of density matrices.$  $\\[8pt]
-\noindent\textbf{$ \text{MaxEnt} $ }-- MaxEnt[n] - maximally entangled state in n dimensional vector space. Note that n must be perfect square.$  $\\[8pt]
-\noindent\textbf{$ \text{WernerState} $ }-- WernerState[d,p] - generalized Werner state d$\times $d-dimensional system with the mixing parameter p$\in $[0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p) MaxMix[d],. See also: MaxEnt, MaxMix..$  $\\[8pt]
-\noindent\textbf{$ \text{IsotropicState} $ }-- IsotropicState[d,p] - isotropic state of dimensions d$\times $d with a parameter p$\in $[0,1]. This state is defined as p Proj[MaxEnt[d]] + (1-p)/($ d^2 $-1)(I-Proj[MaxEnt[d]]]). This family of states is invariant for the operation of the form U$\otimes $$ U^*. $\\[8pt]
 \section{Schmidt decomposition}
 
-\noindent\textbf{$ \text{VectorSchmidtDecomposition} $ }-- VectorSchmidtDecomposition[vec,d1,d2] - Schmidt decomposition of the vector vec in d1$\times $d2-dimensional Hilbert space.$  $\\[8pt]
-\noindent\textbf{$ \text{OperatorSchmidtDecomposition} $ }-- OperatorSchmidtDecomposition[mtx,d1,d2] - Schmidt decomposition of mtx in the Hilbert-Schmidt space of matrices of dimension d1$\times $d2.$  $\\[8pt]
-\noindent\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[e,d1,d2] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. See also: VectorSchmidtDecomposition, OperatorSchmidtDecomposition.$  $\\[8pt]
+\noindent\textbf{$ \text{(*VectorSchmidtDecomposition} $ }-- $\$$Failed$  $\\[8pt]
+\noindent\textbf{$ \text{OperatorSchmidtDecomposition} $ }-- OperatorSchmidtDecomposition$ \text{::} $usage$  $\\[8pt]
+\noindent\textbf{$ \text{SchmidtDecomposition} $ }-- SchmidtDecomposition[e,dim] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. $  $\\[8pt]
+\noindent\textbf{$ \text{$\texttt{"}$; (*TODO: Change SchmidtDecomposition} $ }-- $\$$Failed$  $\\[8pt]
 \section{Reshaping, vectorization and reshuffling}
 
 \noindent\textbf{$ \text{Vec} $ }-- Vec[A] - vectorization of the matrix A column by column. See also: Res.$  $\\[8pt]
-\noindent\textbf{$ \text{Unvec} $ }-- Unvec[v,c] - de-vectorization of the vector into the matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into square matrix. See also: Unres, Vec.$  $\\[8pt]
-\noindent\textbf{$ \text{Res} $ }-- Res[A] is equivalent to Vec[Transpose[A]]. Reshaping maps matrix A into a vector row by row.$  $\\[8pt]
+\noindent\textbf{$ \text{Unvec} $ }-- Unvec[v,c] - de-vectorization of the vector into the matrixwith c columns. If the second parameter is omitted then it is assumed that v $\backslash $ncan be mapped into square matrix. See also: Unres, Vec.$  $\\[8pt]
+\noindent\textbf{$ \text{Res} $ }-- Res[A] is equivalent to Vec[Transpose[A]]. Reshaping mapsmatrix A  into a vector row by row. Note, that this is different then thereshape operation in Matlab or GNU Octave.$  $\\[8pt]
 \noindent\textbf{$ \text{Unres} $ }-- Unres[v,c] - de-reshaping of the vector into a matrix with c columns. If the second parameter is omitted then it is assumed that v can be mapped into a square matrix. See also: Unvec, Res.$  $\\[8pt]
-\noindent\textbf{$ \text{Reshuffle} $ }-- Reshuffle[$\rho $,method] for square matrix of dimensions $ d^2\times d^2 $, where d is an Integer, returns reshuffled matrix, available methods: $\texttt{"$ $Fast$\texttt{"}$ (default) and $\texttt{"}$BaseMatrices$\texttt{"}$ (slow). Use ReshuffleGeneral for matrices with dimensions different then }d^2\times d^2 $, where d is an Integer. See also: ReshuffleGeneral, ReshuffleBase, Reshuffle2.$  $\\[8pt]
-\noindent\textbf{$ \text{Reshuffle2} $ }-- Reshuffle2[$\rho $,method] for square matrix of dimensions $ d^2\times d^2 $, where d is an Integer, returns reshuffled matrix given by alternative definition of the reshuffling operation, available methods: $\texttt{"$ $Fast$\texttt{"}$ (default) and $\texttt{"}$BaseMatrices$\texttt{"}$ (slow). Use ReshuffleGeneral2 for matrices with dimensions different then }d^2\times d^2 $, where d is an Integer. See also: ReshuffleGeneral2, ReshuffleBase2, Reshuffle.$  $\\[8pt]
-\noindent\textbf{$ \text{ReshuffleBase} $ }-- ReshuffleBase[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices. If  the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See also: Reshuffle, ReshuffleGeneral, Reshuffle2.$  $\\[8pt]
-\noindent\textbf{$ \text{ReshuffleBase2} $ }-- Alternative definition of the reshuffling operation. Reshuffle2[$\rho $,m,n] returns representation of the m$\times $n-dimensional square matrix $\rho $ in the basis consisting of product matrices which are transposed versions of standard base matrices. If the matrix $\rho $ has dimension $ d^2 $ then two last arguments can be omitted. In this case one obtains a reshuffle in the basis constructed by using two bases of d-dimensional Hilbert-Schmidt matrix spaces. See: See also: Reshuffle2, ReshuffleGeneral, Reshuffle, BaseMatrices$  $\\[8pt]
-\noindent\textbf{$ \text{ReshuffleGeneral} $ }-- ReshuffleGeneral[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix.$  $\\[8pt]
-\noindent\textbf{$ \text{ReshuffleGeneral2} $ }-- ReshuffleGeneral2[$\rho $,n1,m1,n2,m2] for matrix of size (n1 n2)$\times $(m1 m2) returns a reshuffled matrix - given by alternative definition of the reshuffling operation.$  $\\[8pt]
-\noindent\textbf{$ \text{MatrixElement} $ }-- MatrixElement[n,$\nu $,m,$\mu $,dim,A] - returns the matrix element of a matrix A indexed by two double indices n, $\nu $ and m, $\mu $ of the composite sytem of dimensions dim=dim1*dim2.$  $\\[8pt]
-\noindent\textbf{$ \text{ReshufflePermutation} $ }-- ReshufflePermutation[dim1,dim2] - permutation matrix equivalent to the reshuffling operation on dim1$\times $dim2-dimensional system. See also: Reshuffle.$  $\\[8pt]
-\noindent\textbf{$ \text{ReshufflePermutation2} $ }-- ReshufflePermutation2[dim1,dim2] - permutation matrix equivalent to the alternative reshuffling operation on dim1$\times $dim2-dimensional system. See also: Reshuffle.$  $\\[8pt]
-\noindent\textbf{$ \text{ProductSuperoperator} $ }-- ProductSuperoperator[$\Psi $,$\Phi $] computes a product superoperator of superoperatos $\Psi $ and $\Phi $.$  $\\[8pt]
+\noindent\textbf{$ \text{Reshuffle} $ }-- Reshuffle[$\rho $, $\{$drows, dcols$\}$] for a matrix of dimensions (drows[[1]]$\times $drows[[2]])$\times $(dcols[[1]]$\times $dcols[[2]]) returns reshuffled matrix with dimensions (drows[[1]]$\times $dcols[[1]])$\times $(drows[[2]]$\times $dcols[[2]]), drows and dcols parameters can be ommited for a square matrix.$  $\\[8pt]
 \section{Parametrizations}
 
-\noindent\textbf{$ \text{Unitary2} $ }-- Unitary2[$\alpha $,$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of U(2).$  $\\[8pt]
-\noindent\textbf{$ \text{SpecialUnitary2} $ }-- SpecialUnitary2[$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of SU(2). This is equivalent to Unitary2[0,$\beta $,$\gamma $,$\delta $].$  $\\[8pt]
+\noindent\textbf{$ \text{Unitary2} $ }-- Unitary2[$\alpha $,$\beta $,$\gamma $,$\delta $] returns a parametrization of U(2).$  $\\[8pt]
+\noindent\textbf{$ \text{Unitary2Euler} $ }-- Unitary2[$\alpha $,$\beta $,$\gamma $,$\delta $] returns the Euler parametrization of U(2).$  $\\[8pt]
+\noindent\textbf{$ \text{SpecialUnitary2} $ }-- SpecialUnitary2[$\beta $,$\gamma $,$\delta $] returns a parametrization of SU(2). This is equivalent to Unitary2[0,$\beta $,$\gamma $,$\delta $].$  $\\[8pt]
 \noindent\textbf{$ \text{Unitary3} $ }-- Unitary3[$\alpha $,$\beta $,$\gamma $,$\tau $,a,b,c,ph] returns the Euler parametrization of U(3).$  $\\[8pt]
 \noindent\textbf{$ \text{Unitary4Canonical} $ }-- Parametrization of non-local unitary matrices for two qubits. See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.$  $\\[8pt]
-\noindent\textbf{$ \text{ProbablityVector} $ }-- ProbablityVector[$\{$$ \theta _1 $,...,$ \theta _n $$\}$] returns probability vectors of dimension n+1 parametrize with $\{$$ \theta _1 $,...,$ \theta _n $$\}$. See also: StateVector.$  $\\[8pt]
-\noindent\textbf{$ \text{StateVector} $ }-- StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: ProbablityVector, SymbolicVector.$  $\\[8pt]
+\noindent\textbf{$ \text{StateVector} $ }-- StateVector[$\{$$ \theta _1 $,...,$ \theta _n,\phi _{n+1} $,...,$ \phi _{2 n} $$\}$] returns pure n+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers $\{$$ \theta _1 $,...,$ \theta _n $$\}$ and phases $\{$$ \phi _1 $,...,$ \phi _n $$\}$. See also: SymbolicVector.$  $\\[8pt]
 \section{One-qubit states}
 
 \noindent\textbf{$ \text{QubitKet} $ }-- QubitKet[$\alpha $,$\beta $] parametrization of the pure state (as a state vector) for one qubit as (Cos[$\alpha $] Exp[i$\beta $], Sin[$\alpha $]). This is equivalent to StateVector[$\{\alpha $,$\beta \}$]. See also: QubitPureState, StateVector.$  $\\[8pt]
 \noindent\textbf{$ \text{QubitPureState} $ }-- QubitPureState[$\alpha $,$\beta $] - a parametrization of the pure state as a density matrix for one qubit. This is just a alias for Proj[QubitKet[$\alpha $,$\beta $]]. See also: QubitKet.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitBlochState} $ }-- QubitBlochState[$\rho $] - a parametrization of the one-qubit mixed state on the Bloch sphere.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitGeneralState} $ }-- QubitGeneralState[$\alpha $,$\beta $,$\gamma $,$\delta $,$\lambda $] - Parametrization of the one-qubit mixed state using rotations and eigenvalues. Returns one-qubits density matrix with eigenvalues $\lambda $ and 1-$\lambda $ rotated as U.diag($\lambda $,1-$\lambda $).$ U^{\dagger } $ with U defined by parameters $\alpha $,$\beta $,$\gamma $ and $\delta $.$  $\\[8pt]
 \section{Quantum channels}
 
-\noindent\textbf{$ \text{IdentityChannel} $ }-- IdentityChannel[n,$\rho $] - apply the identity operation to a n-dimensional density matrix $\rho $.$  $\\[8pt]
-\noindent\textbf{$ \text{TransposeChannel} $ }-- TransposeChannel[n,$\rho $] - apply the transposition operation to a n-dimensional density matrix $\rho $. Note that this operations is not completely positive.$  $\\[8pt]
-\noindent\textbf{$ \text{DepolarizingChannel} $ }-- DepolarizingChannel[n,p,$\rho $] - apply the completely depolarizing channel with parameter p acting to a n-dimensional input state $\rho $. See also: QubitDepolarizingKraus, HolevoWernerChannel.$  $\\[8pt]
-\noindent\textbf{$ \text{HolevoWernerChannel} $ }-- HolevoWernerChannel[n,p,$\rho $] - apply the Holeve-Werner channel, also known as transpose-depolarizing channel, with parameter p acting to a n-dimensional input state $\rho $. See also: DepolarizingChannel.$  $\\[8pt]
-\noindent\textbf{$ \text{ChannelToMatrix} $ }-- ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[$\rho $] transforms input state according to the channel definition.$  $\\[8pt]
-\noindent\textbf{$ \text{GeneralizedPauliKraus} $ }-- GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Example 5.8, p. 126.$  $\\[8pt]
 \noindent\textbf{$ \text{ApplyKraus} $ }-- ApplyKraus[ck,$\rho $] - apply channel ck, given as a list of Kraus operators, to the input state $\rho $. See also: ApplyUnitary, ApplyChannel.$  $\\[8pt]
-\noindent\textbf{$ \text{ApplyUnitary} $ }-- ApplyUnitary[U,$\rho $] - apply unitary a unitary matrix U to the input state $\rho $. See also: ApplyKraus, ApplyChannel.$  $\\[8pt]
+\noindent\textbf{$ \text{ChannelToMatrix} $ }-- ChannelToMatrix[E,d] returns matrix representation of a channel E acting on d-dimensional state space. First argument should be a pure function E such that E[$\rho $] transforms input state according to the channel definition.$  $\\[8pt]
 \noindent\textbf{$ \text{ApplyChannel} $ }-- ApplayChannel[f,$\rho $] - apply channel f, given as a pure function, to the input state $\rho $. See also: ApplyUnitary, ApplyKraus.$  $\\[8pt]
 \noindent\textbf{$ \text{Superoperator} $ }-- Superoperator[kl] returns matrix representation of quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is just am alternative name for ChannelToMatrix[fun,dim] and returns matrix representation of quantum channel, given as a pure function, acting on dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,$\#$]$\&$,2] and Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: ChannelToMatrix.$  $\\[8pt]
 \noindent\textbf{$ \text{DynamicalMatrix} $ }-- Dynamical matrix of quantum channel given as a list of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on dim-dimensional space (DynamicalMatrix[fun,dim]). See also: Superoperator, ChannelToMatrix.$  $\\[8pt]
 \noindent\textbf{$ \text{Jamiolkowski} $ }-- Jamiolkowski[K] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators K. Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on dim-dimensional space. See also: Superoperator, ChannelToMatrix, DynamicalMatrix.$  $\\[8pt]
 \noindent\textbf{$ \text{TPChannelQ} $ }-- Performs some checks on Kraus operators. Use this if you want to check if they represent quantum channel.$  $\\[8pt]
-\noindent\textbf{$ \text{ExtendKraus} $ }-- ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.$  $\\[8pt]
 \noindent\textbf{$ \text{SuperoperatorToKraus} $ }-- Finds Kraus operators for a given super operator$  $\\[8pt]
+\noindent\textbf{$ \text{ProductSuperoperator} $ }-- ProductSuperoperator[$\Psi $,$\Phi $] computes a product superoperator of superoperatos $\Psi $ and $\Phi $.$  $\\[8pt]
 \section{Partial trace and transposition}
 
-\noindent\textbf{$ \text{PartialTransposeA} $ }-- PartialTransposeA[$\rho $,m,n] performs partial transposition on the m-dimensional (first) subsystem of the m$\times $n-state.$  $\\[8pt]
-\noindent\textbf{$ \text{PartialTransposeB} $ }-- PartialTransposeB[$\rho $,m,n] performs partial transposition on the n-dimensional (second) subsystem of the m$\times $n-state.$  $\\[8pt]
-\noindent\textbf{$ \text{PartialTraceA} $ }-- PartialTraceA[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the m-demensional (first) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.$  $\\[8pt]
-\noindent\textbf{$ \text{PartialTraceB} $ }-- PartialTraceB[$\rho $,m,n] performs partial trace on m$\times $n-dimensional density matrix $\rho $ with respect to the n-dimensional (second) subsystem. This function is implemented using composition of channels. Use PartialTraceGeneral for better performance.$  $\\[8pt]
-\noindent\textbf{$ \text{PartialTraceGeneral} $ }-- PartialTraceGeneral[$\rho $,dim,sys] - Returns the partial trace, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA, dimB$\}$. See also: PartialTraceA, PartialTraceB.$  $\\[8pt]
-\noindent\textbf{$ \text{PartialTransposeGeneral} $ }-- PartialTransposeGeneral[$\rho $,dim,sys] - Returns the partial transpose, according to system sys, of density matrix $\rho $ composed of subsystems of dimensions dim=$\{$dimA,dimB$\}$. $  $\\[8pt]
+\noindent\textbf{$ \text{PartialTranspose} $ }-- PartialTranspose[$\rho $,dim,sys] - Returns the partial transpose, according to systems sys, of density matrix $\rho $ composed of subsystems of dimensions dims.$  $\\[8pt]
+\noindent\textbf{$ \text{PartialTrace} $ }-- PartialTrace[$\rho $,dim,sys] - Returns the partial trace, according to systems sys, of density matrix $\rho $ composed of subsystems of dimensions dim.$  $\\[8pt]
 \section{Entanglement}
 
-\noindent\textbf{$ \text{Concurrence4} $ }-- Concurrence4[$\rho $] returns quantum concurrence of a density matrix $\rho $ representing a state of two-qubit system. This function uses Chop to provide numerical results.$  $\\[8pt]
-\noindent\textbf{$ \text{Negativity} $ }-- Negativity[$\rho $,m,n] returns the sum of negative eigenvalues of the density matrix $\rho \in $$ \mathbb{M}_{m\times n} $ after their partial transposition with respect to the first subsystem.$  $\\[8pt]
-\section{One-qubit quantum channels}
-
-\noindent\textbf{$ \text{QubitBitflipChannel} $ }-- BitflipChannel[p,$\rho $] applies bif-flip channel to the input state $\rho $. See also: QubitBitflipKraus.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitPhaseflipChannel} $ }-- QubitPhaseflipChannel[p,$\rho $] applies phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitBitphaseflipChannel} $ }-- QubitBitphaseflipChannel[p,$\rho $] applies bit-phase-flip channel to the input state $\rho $. See also: QubitPhaseflipKraus.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitDepolarizingKraus} $ }-- Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=1.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitDecayKraus} $ }-- Kraus operators of the decay channel, also know as amplitude damping, for one qubit.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitPhaseKraus} $ }-- Kraus operators for one qubit phase damping channel.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitBitflipKraus} $ }-- Kraus operators for one qubit bit-flip channel.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitPhaseflipKraus} $ }-- Kraus operators for one qubit phase-flip channel.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitBitphaseflipKraus} $ }-- Kraus operators for one qubit bit-phase-flip channel.$  $\\[8pt]
-\noindent\textbf{$ \text{QubitDynamicalMatrix} $ }-- QubitDynamicalMatrix[$ \kappa _x,\kappa _y,\kappa _z,\eta _x,\eta _y,\eta _z $] returns parametrization of one-qubit dynamical matrix. See: I. Bengtsson, K. Zyczkowski, Geometry of Quantum States, Chapter 10, Eg.(10.81).$  $\\[8pt]
-\noindent\textbf{$ \text{QubitDaviesSuperoperator} $ }-- QubitDaviesSuperoperator[a,c,p] returns a superoperator matrix for one-qubit Davies channel with parameters a and c and the stationary state (p,1-p).$  $\\[8pt]
-\section{One-qutrit channels}
-
-\noindent\textbf{$ \text{QutritSpontaneousEmissionKraus} $ }-- QutritSpontaneousEmissionKraus[A1,A2,t] Kraus operators for qutrit spontaneous emission channel with parameters A1, A2, t $>$= 0. See: A. Checinska, K. Wodkiewicz, Noisy Qutrit Channels, arXiv:quant-ph/0610127v2.$  $\\[8pt]
-\section{Entropy}
-
-\noindent\textbf{$ \text{Log0} $ }-- Log0[x] is equal to Log[2,x] for x$>$0 and 1 for x=0.$  $\\[8pt]
-\noindent\textbf{$ \eta  $ }-- $\eta $[x] = -x Log[2,x].$  $\\[8pt]
-\noindent\textbf{$ \text{$\eta $2} $ }-- $\eta $2[x] = $\eta $[x]+$\eta $[1-x].$  $\\[8pt]
-\noindent\textbf{$ \text{QuantumEntropy} $ }-- QuantumEntropy[m] - von Neuman entropy for the matrix m.$  $\\[8pt]
-\noindent\textbf{$ \text{QuantumChannelEntropy} $ }-- QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channel in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.$  $\\[8pt]
-\section{Distribution of eigenvalues}
-
-\noindent\textbf{$ \delta  $ }-- $\delta $[a] is equivalent to $\delta $[x,''Dirac''] and it represents Dirac delta at x. If the second argument is ''Indicator'', $\delta $[x,''Indicator''] is equivalent to DiscreteDelta[x].$  $\\[8pt]
-\noindent\textbf{$ \text{VandermondeMatrix} $ }-- VandermondeMatrix[$\{$$ x_1\text{,...}x_n $$\}$] - Vandermonde matrix for variables ($ x_1 $,...,$ x_n\text{).} $\\[8pt]
-\noindent\textbf{$ \text{ProdSum} $ }-- ProdSum[$\{$$ x_1 $,...,$ x_n $$\}$] gives $ \prod _{i<j}^nx_i+x_j. $\\[8pt]
-\noindent\textbf{$ \text{ProdDiff2} $ }-- ProdDiff2[$\{$$ x_1 $,...,$ x_n $$\}$] is equivalent to Det[VandermondeMatrix[$\{$$ x_1 $,...,$ x_n $$\}$]$ ]^2 $ and gives a discriminant of the polynomial with roots $\{$$ x_1 $,...,$ x_n $$\}$.$  $\\[8pt]
-\noindent\textbf{$ \text{ProbBuresNorm} $ }-- ProbBNorm[n] - Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Bures distance.$  $\\[8pt]
-\noindent\textbf{$ \text{ProbBures} $ }-- ProbBures[$\{$$ x_1\text{,...}x_n $$\}$,$\delta $] - Joint probability distribution of eigenvalues $\lambda $ = $\{$$ x_1\text{,...}x_n $$\}$of a matrix according to Bures distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: ''Indicator''$  $\\[8pt]
-\noindent\textbf{$ \text{ProbHSNorm} $ }-- Normalization factor used for calculating probability distribution of eigenvalues of matrix of dimension N according to Hilbert-Schmidt distribution.$  $\\[8pt]
-\noindent\textbf{$ \text{ProbHS} $ }-- ProbHS[$\{$$ x_1\text{,...}x_n $$\}$,$\delta $] Probability distribution of eigenvalues $\lambda $ = $\{$$ x_1\text{,...}x_n $$\}$ of a matrix according to Hilbert-Schmidt distance. By default $\delta $ is assumed to be Dirac delta. Other possible values: ''Indicator''$  $\\[8pt]
 \section{Random states and operations}
 
-\noindent\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d,$\alpha $] generates a point on a d-dimensional simplex according to the Dirichlet distibution with parameter $\alpha $.$\backslash $n RandomSimplex[d] uses the algorithm from the book 'Luc Devroye, Non-Uniform Random Variate Generation, Chapter 11, p. 568' and gives the flat distribution.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - random ket in d-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomProductKet} $ }-- RandomProductKet[$\{$dim1,dim2,...,dimN$\}$] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomNormalMatrix} $ }-- RandomNormalMatrix[d] - random normal matrix of dimension d.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equal to 0. Thanks to Wojtek Bruzda.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomSimplex} $ }-- RandomSimplex[d] generates a point on a d-dimensional simplex according to the uniform distibution.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomKet} $ }-- RandomKet[d] - ...  random ket vector in d-dimensional space. d may be a list of integers in this case ket will be in product form d[[1]]$\otimes $...$\otimes $d[[k]]. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.$  $\\[8pt]
+\noindent\textbf{$ \text{RandomDynamicalMatrix} $ }-- RandomDynamicalMatrix[d,k] returns dynamical matrix of operation acting on d-dimensional states with k eigenvalues equal to 0. Thanks to Wojtek Bruzda. see Random Quantum Operations DOI[10.1016/j.physleta.2008.11.043]$  $\\[8pt]
 \noindent\textbf{$ \text{GinibreMatrix} $ }-- GinibreMatrix[m,n] returns complex matrix of dimension m$\times $n with normal distribution of real and imaginary parts.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomProductNumericalRange} $ }-- RandomLocalNumericalRange[M,$\{$dim1,dim2,...,dimN$\}$,n] returns n points from the product numerical range of the matrix M with respect to division specified as $\{$dim1,dim2,...,dimN$\}$. Note that dim1$\times $dim2$\times $...$\times $dimN must be equal to the dimension of matrix M.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomMaximallyEntangledNumericalRange} $ }-- RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]$\times $Sqrt[dim[M]].$  $\\[8pt]
-\noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomUnitaryEuler} $ }-- Random unitary matrix. Thanks to Rafal Demkowicz-Dobrzanski.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomUnitaryQR} $ }-- Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604$  $\\[8pt]
-\noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix. This function can be used as RandomUnitary[dim,$\texttt{"$ $QR$\texttt{"}$] (default and faster) or RandomUnitary[dim,$\texttt{"}$Euler$\texttt{"}$] (slower) the first argument is the dimensions and the second argument specifies the generation method. See also RandomUnitaryEuler and RandomUnitaryQR.} $\\[8pt]
+\noindent\textbf{$ \text{RandomSpecialUnitary} $ }-- Random special unitary matrix. See RandomUnitary$  $\\[8pt]
+\noindent\textbf{$ \text{RandomUnitary} $ }-- Random unitary matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604$  $\\[8pt]
+\noindent\textbf{$ \text{RandomOrthogonal} $ }-- Random orthogonal matrix using QR decomposition. F. Mezzadri, See: NOTICES of the AMS, Vol. 54 (2007), 592-604$  $\\[8pt]
 \noindent\textbf{$ \text{RandomState} $ }-- RandomState[d,dist] - random density matrix of dimension d. Argument dist can be ''HS'' (default value) or ''Bures'' or an integer K. ''HS'' gives uniform distribution with respect to the Hilbert-Schmidt measure. ''Bures'' gives random state distributed according to Bures measure. If dist is given as an integer K, the state is generated with respect to induced measure with an ancilla system od dimension K.$  $\\[8pt]
-\section{Random vectors}
-
-\noindent\textbf{$ \text{RandomComplexUnitVector} $ }-- RandomComplexUnitVector[n] returns a normalized, n-dimensional vector of complex numbers.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomRealUnitVector} $ }-- RandomRealUnitVector[n] returns a normalized, n-dimensional vector of real numbers$  $\\[8pt]
-\noindent\textbf{$ \text{RandomUnitVector} $ }-- RandomUnitVector[n] returns a normalized, n-dimensional vector of complex numbers. If the second argument is set to 'Real', thef unction will output a vector over $ \mathbb{R}^n $. See also: RandomKet.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomEntangledUnitVector} $ }-- RandomEntangledUnitVector[n] returns a maximally entangled unit vector on the n-dimensional vector space.$  $\\[8pt]
-\noindent\textbf{$ \text{RandomUnitVectorSchmidt} $ }-- RandomUnitVectorSchmidt[n,r] returns a unit vector on n-dimensional space with a Schmidt rank r. Note that r has to smaller or equal $\surd $n and n has to be a perfect square.$  $\\[8pt]
-\section{Numerical range}
-
-\noindent\textbf{$ \text{NumericalRangeBound} $ }-- NumericalRangeBound[A,dx] - bound of numerical range of matrix A calculated with given step dx. Default value of dx is 0.01. Ref: Carl C. Cowen, Elad Harel, An Effective Algorithm for Computing the Numerical Range. Technical report, Dep. of Math. Purdue University, 1995.$  $\\[8pt]
 \section{Bloch Representation}
 
-\noindent\textbf{$ \text{BlochVector} $ }-- BlochVector[A] - for a square matrix A returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\[8pt]
-\noindent\textbf{$ \text{StateFromBlochVector} $ }-- StateFromBlochVector[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\[8pt]
+\noindent\textbf{$ \text{StateToBloch} $ }-- StateToBloch[A] - for a square matrix A returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\[8pt]
+\noindent\textbf{$ \text{BlochToState} $ }-- BlochToState[v] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: GeneralizedPauliMatrices.$  $\\[8pt]
 
 
 \end{document}
