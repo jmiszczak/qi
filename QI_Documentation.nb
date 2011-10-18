@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     46025,       1003]
-NotebookOptionsPosition[     35895,        729]
-NotebookOutlinePosition[     41541,        881]
-CellTagsIndexPosition[     41128,        868]
+NotebookDataLength[     46377,       1008]
+NotebookOptionsPosition[     36107,        730]
+NotebookOutlinePosition[     41894,        886]
+CellTagsIndexPosition[     41399,        871]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -34,11 +34,10 @@ Cell[BoxData[
   SequenceForm[
   "Package QI version ", "0.4.2", " (last modification: ", "18/10/2011", ")."],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.527921718396288*^9, 3.52792175913861*^9, 3.52792220333459*^9, {
-   3.527922748503462*^9, 3.5279227586332903`*^9}, 3.527922801294942*^9, 
-   3.527922896009317*^9, 3.5279230361983128`*^9, 3.527923171117201*^9, 
-   3.527923307915612*^9, 3.527923590455413*^9}]
+ CellChangeTimes->{{3.527927725268895*^9, 3.527927791536433*^9}, {
+   3.52792790680363*^9, 3.527927933157414*^9}, {3.52792796725356*^9, 
+   3.527928039675262*^9}, 3.527928305721822*^9, {3.5279284147247562`*^9, 
+   3.527928480576366*^9}, {3.5279285114781847`*^9, 3.5279285293205023`*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -55,15 +54,15 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- StyleBox["\<\"\\!\\(\\*StyleBox[\\\"ApplayChannel\\\", \\\"Input\\\"]\\)[\\!\
-\\(\\*StyleBox[\\\"f\\\", \\\"TI\\\"]\\),\\!\\(\\*StyleBox[\\\"\[Rho]\\\", \\\
-\"TI\\\"]\\)] - apply channel \\!\\(\\*StyleBox[\\\"f\\\", \\\"TI\\\"]\\), \
-given as a pure function, to the input state \
-\\!\\(\\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\\). See also: \
-\\!\\(\\*StyleBox[\\\"ApplyUnitary\\\", \\\"Input\\\"]\\), \\!\\(\\*StyleBox[\
-\\\"ApplyKraus\\\", \\\"Input\\\"]\\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923591211936*^9},
- CellTags->"Info3527930791-3547966"],
+ StyleBox["\<\"\!\(\*StyleBox[\\\"ApplayChannel\\\", \
+\\\"Input\\\"]\)[\!\(\*StyleBox[\\\"f\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\\\"\
+\[Rho]\\\", \\\"TI\\\"]\)] - apply channel \!\(\*StyleBox[\\\"f\\\", \\\"TI\\\
+\"]\), given as a pure function, to the input state \!\(\*StyleBox[\\\"\[Rho]\
+\\\", \\\"TI\\\"]\). See also: \!\(\*StyleBox[\\\"ApplyUnitary\\\", \\\"Input\
+\\\"]\), \!\(\*StyleBox[\\\"ApplyKraus\\\", \\\"Input\\\"]\).\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.527928646509068*^9},
+ CellTags->"Info3527935846-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"ApplyKraus\\\", \
@@ -74,8 +73,8 @@ Cell[BoxData[
 \!\(\*StyleBox[\\\"ApplyUnitary\\\", \\\"Input\\\"]\), \
 \!\(\*StyleBox[\\\"ApplyChannel\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print",\
  "PrintUsage",
- CellChangeTimes->{3.527923591263014*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.527928646570241*^9},
+ CellTags->"Info3527935846-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"BlochToState\\\", \
@@ -84,8 +83,8 @@ of appropriate dimension from Bloch vector, i.e. coefficients treated as \
 coefficients from expansion on normalized generalized Pauli matrices. See \
 also: \!\(\*StyleBox[\\\"GeneralizedPauliMatrices\\\", \\\"Input\\\"]\).\"\>",
    "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235913961563`*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.527928646703311*^9},
+ CellTags->"Info3527935846-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"ChannelToMatrix\\\", \
@@ -97,14 +96,14 @@ function \!\(\*StyleBox[\\\"E\\\", \\\"TI\\\"]\) such that \
 \!\(\*StyleBox[\\\"E\\\", \\\"TI\\\"]\)[\!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\
 \\\"]\)] transforms input state according to the channel definition.\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923591502232*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.527928646848709*^9},
+ CellTags->"Info3527935846-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"cnot\\\", \\\"TI\\\"]\) - Controlled not \
 matrix for two qubits.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923591627939*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.527928646992591*^9},
+ CellTags->"Info3527935846-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"ComplexToPoint\\\", \
@@ -112,8 +111,8 @@ Cell[BoxData[
 an imaginary parts of a complex number \!\(\*StyleBox[\\\"z\\\", \
 \\\"TI\\\"]\) as a pair of real numbers.\"\>", "MSG"]], "Print", "PrintUsage",
  
- CellChangeTimes->{3.527923591765176*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.5279286471253366`*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"DynamicalMatrix\\\", \\\"Input\\\"]\) \
@@ -129,8 +128,8 @@ function \!\(\*StyleBox[\\\"fun\\\", \\\"TI\\\"]\) acting on \
 \!\(\*StyleBox[\\\"Superoperator\\\", \\\"Input\\\"]\), \
 \!\(\*StyleBox[\\\"ChannelToMatrix\\\", \\\"Input\\\"]\).\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923591903121*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.5279286472645397`*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Fidelity\\\", \
@@ -143,15 +142,15 @@ simplified formula as (\[Sum]\!\(\*SubscriptBox[\\\"\[Lambda]\\\", \\\"i\\\"]\
 \[Lambda]\\\", \\\"i\\\"]\) are the eigenvalues of \!\(\*SubscriptBox[\\\"\
 \[Rho]\\\", \\\"1\\\"]\)\!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"2\\\"]\).\"\>",
    "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235920689783`*^9},
- CellTags->"Info3527930791-3547966"],
+ CellChangeTimes->{3.527928647399124*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"GateFidelity\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"U,V\\\", \\\"TI\\\"]\)] is equivalent to \
 1/d tr|UV\[ConjugateTranspose]|.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.52792359221276*^9},
- CellTags->"Info3527930792-3547966"],
+ CellChangeTimes->{3.527928647536517*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"GinibreMatrix\\\", \
@@ -159,22 +158,21 @@ Cell[BoxData[
 \\\", \\\"TI\\\"]\)] returns complex matrix of dimension \!\(\*StyleBox[\\\"m\
 \[Cross]n\\\", \\\"TI\\\"]\) with normal distribution of real and imaginary \
 parts.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923592360181*^9},
- CellTags->"Info3527930792-3547966"],
+ CellChangeTimes->{3.5279286476690283`*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"id\\\", \\\"TI\\\"]\) - Identity matrix for \
-one qubit. See also: \!\(\*StyleBox[\\\"IdentityMatrix\\\", \\\"Input\\\"]\).\
-\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235925072412`*^9},
- CellTags->"Info3527930792-3547966"],
+one qubit. See also: IdentityMatrix.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.527928647813878*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Jamiolkowski\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"K\\\", \\\"TI\\\"]\)] gives the image of \
 the Jamiolkowski isomorphism for the channel given as the list of Karus \
 operators \!\(\*StyleBox[\\\"K\\\", \\\"TI\\\"]\). \
-\!\(\*StyleBox[\\\"Jamiolkowski\\\", \
+\\n\!\(\*StyleBox[\\\"Jamiolkowski\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"fun\\\", \
 \\\"TI\\\"]\),\!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\)] gives the image of \
 the Jamiolkowski isomorphism for the channel given as a function fun action \
@@ -183,8 +181,8 @@ on \!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\)-dimensional space. See also: \
 \!\(\*StyleBox[\\\"ChannelToMatrix\\\", \\\"Input\\\"]\), \
 \!\(\*StyleBox[\\\"DynamicalMatrix\\\", \\\"Input\\\"]\).\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235926653*^9},
- CellTags->"Info3527930792-3547966"],
+ CellChangeTimes->{3.527928647965488*^9},
+ CellTags->"Info3527935847-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"MatrixAbs\\\", \
@@ -195,8 +193,8 @@ value for matrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) defined as \
 \\\"TI\\\"]\)\!\(\*SuperscriptBox[\\\" \\\", \\\"\[Dagger]\\\"]\)]. See also: \
 \!\(\*StyleBox[\\\"MatrixSqrt\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.527923592804675*^9},
- CellTags->"Info3527930792-3547966"],
+ CellChangeTimes->{3.527928648144652*^9},
+ CellTags->"Info3527935848-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"MatrixIm\\\", \
@@ -204,8 +202,8 @@ Cell[BoxData[
 antyhermitian part of the matrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) i.e. \
 \!\(\*FractionBox[\\\"1\\\", \\\"2\\\"]\)(A-A\!\(\*SuperscriptBox[\\\" \\\", \
 \\\"\[Dagger]\\\"]\)).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923592967742*^9},
- CellTags->"Info3527930792-3547966"],
+ CellChangeTimes->{3.52792864828424*^9},
+ CellTags->"Info3527935848-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"MatrixRe\\\", \
@@ -213,27 +211,38 @@ Cell[BoxData[
 part of the matrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) i.e. \
 \!\(\*FractionBox[\\\"1\\\", \\\"2\\\"]\)(A+A\!\(\*SuperscriptBox[\\\" \\\", \
 \\\"\[Dagger]\\\"]\)).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235931072598`*^9},
- CellTags->"Info3527930793-3547966"],
+ CellChangeTimes->{3.5279286484470797`*^9},
+ CellTags->"Info3527935848-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"MatrixSqrt\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\)] returns square root \
 for the matrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print",\
  "PrintUsage",
- CellChangeTimes->{3.527923593241086*^9},
- CellTags->"Info3527930793-3547966"],
+ CellChangeTimes->{3.5279286486575127`*^9},
+ CellTags->"Info3527935848-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"PartialTrace\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\
-\\\"dim\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\\\"sys\\\", \\\"TI\\\"]\)] - \
-Returns the partial trace, according to systems \!\(\*StyleBox[\\\"sys\\\", \
-\\\"TI\\\"]\), of density matrix \!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\) \
-composed of subsystems of dimensions \!\(\*StyleBox[\\\"dim\\\", \
-\\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235933798103`*^9},
- CellTags->"Info3527930793-3547966"],
+\\\"sys\\\", \\\"TI\\\"]\)] - Returns the partial trace of an operator \
+\!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\) acting on a bipartite \
+(\!\(\*StyleBox[\\\"d\[Times]d\\\", \\\"TI\\\"]\))-dimensional system, \
+assuming that matrix \!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\) is \
+(\!\(\*StyleBox[\\\"\!\(\*SuperscriptBox[\(d\), \
+\(2\)]\)\[Times]\!\(\*SuperscriptBox[\(d\), \(2\)]\)\\\", \\\"TI\\\"]\)) \
+dimensional. In this case the system specification can be given as a integer \
+1 or 2, by the list of integers consisting only 1 or 2 or by the empty list. \
+\\n\!\(\*StyleBox[\\\"PartialTrace\\\", \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"\
+\[Rho]\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\\\"dims\\\", \
+\\\"TI\\\"]\),\!\(\*StyleBox[\\\"sys\\\", \\\"TI\\\"]\)] - Returns the \
+partial trace of an operator \!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\) \
+acting on a composite system with subsystem dimensions given in the list \!\(\
+\*StyleBox[\\\"dims\\\", \\\"TI\\\"]\). List \!\(\*StyleBox[\\\"sys\\\", \
+\\\"TI\\\"]\) specifies systems to be discarded.\"\>", "MSG"]], "Print", \
+"PrintUsage",
+ CellChangeTimes->{3.527928648822599*^9},
+ CellTags->"Info3527935848-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"PartialTranspose\\\", \\\"Input\\\"]\)[\!\(\
@@ -243,8 +252,8 @@ transpose, according to systems \!\(\*StyleBox[\\\"sys\\\", \\\"TI\\\"]\), of \
 density matrix \!\(\*StyleBox[\\\"\[Rho]\\\", \\\"TI\\\"]\) composed of \
 subsystems of dimensions \!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\).\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923593551785*^9},
- CellTags->"Info3527930793-3547966"],
+ CellChangeTimes->{3.5279286490409*^9},
+ CellTags->"Info3527935848-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"ProductSuperoperator\\\", \\\"Input\\\"]\)[\
@@ -253,16 +262,16 @@ Cell[BoxData[
 superoperatos \!\(\*StyleBox[\\\"\[CapitalPsi]\\\", \\\"TI\\\"]\) and \
 \!\(\*StyleBox[\\\"\[CapitalPhi]\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.527923593698411*^9},
- CellTags->"Info3527930793-3547966"],
+ CellChangeTimes->{3.5279286492660313`*^9},
+ CellTags->"Info3527935849-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Proj\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"v\\\", \\\"TI\\\"]\)] returns projector \
 of the vector \!\(\*StyleBox[\\\"v\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print",\
  "PrintUsage",
- CellChangeTimes->{3.527923593844805*^9},
- CellTags->"Info3527930793-3547966"],
+ CellChangeTimes->{3.527928649451187*^9},
+ CellTags->"Info3527935849-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"QubitKet\\\", \
@@ -274,8 +283,8 @@ of the pure state (as a state vector) for one qubit as (Cos[\[Alpha]] Exp[i\
 also: \!\(\*StyleBox[\\\"QubitPureState\\\", \\\"Input\\\"]\), \
 \!\(\*StyleBox[\\\"StateVector\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.5279235939950113`*^9},
- CellTags->"Info3527930793-3547966"],
+ CellChangeTimes->{3.5279286496405478`*^9},
+ CellTags->"Info3527935849-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"QubitPureState\\\", \
@@ -285,8 +294,8 @@ parametrization of the pure state as a density matrix for one qubit. This is \
 just a alias for \!\(\*StyleBox[\\\"Proj\\\", \\\"TI\\\"]\)[\!\(\*StyleBox[\\\
 \"QubitKet\\\", \\\"TI\\\"]\)[\[Alpha],\[Beta]]]. See also: \!\(\*StyleBox[\\\
 \"QubitKet\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923594142413*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.5279286498064747`*^9},
+ CellTags->"Info3527935849-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomDynamicalMatrix\\\", \
@@ -296,8 +305,8 @@ Cell[BoxData[
 \!\(\*StyleBox[\\\"k\\\", \\\"TI\\\"]\) eigenvalues equal to 0. Thanks to \
 Wojtek Bruzda. see Random Quantum Operations \
 DOI[10.1016/j.physleta.2008.11.043].\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923594228959*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.527928650031501*^9},
+ CellTags->"Info3527935849-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomKet\\\", \
@@ -320,8 +329,8 @@ to 1, the length of the list must be less or equal to the Min[\!\(\*StyleBox[\
 \\\"d1\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\\\"d2\\\", \\\"TI\\\"]\)] - in this \
 case function returns random vectors with fixed Schmidt numbers given by \!\(\
 \*StyleBox[\\\"l\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923594373952*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.527928650212295*^9},
+ CellTags->"Info3527935850-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomOrthogonal\\\", \\\"Input\\\"]\)[\!\(\
@@ -329,24 +338,24 @@ Cell[BoxData[
 size \!\(\*StyleBox[\\\"d\\\", \\\"TI\\\"]\) using \!\(\*StyleBox[\\\"QR\\\", \
 \\\"TI\\\"]\) decomposition. See: F. Mezzadri, NOTICES of the AMS, Vol. 54 \
 (2007), 592-604.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923594528483*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.527928650394823*^9},
+ CellTags->"Info3527935850-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomSimplex\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"d\\\", \\\"TI\\\"]\)] generates a point \
 on a \!\(\*StyleBox[\\\"d\\\", \\\"TI\\\"]\)-dimensional simplex according to \
 the uniform distibution.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923594665724*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.527928650612852*^9},
+ CellTags->"Info3527935850-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomSpecialUnitary\\\", \\\"Input\\\"]\)[\
 \!\(\*StyleBox[\\\"d\\\", \\\"TI\\\"]\)] returns a random special unitary \
 matrix of size \!\(\*StyleBox[\\\"d\\\", \\\"TI\\\"]\). See \!\(\*StyleBox[\\\
 \"RandomUnitary\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235948180237`*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.5279286507920427`*^9},
+ CellTags->"Info3527935850-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomState\\\", \
@@ -363,8 +372,8 @@ distributed according to Bures measure. \\nInteger \!\(\*StyleBox[\\\"K\\\", \
 \\\"TI\\\"]\) - gives a random state generated with respect to induced \
 measure with an ancilla system od dimension K.\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.52792359498944*^9},
- CellTags->"Info3527930794-3547966"],
+ CellChangeTimes->{3.527928650968953*^9},
+ CellTags->"Info3527935850-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"RandomUnitary\\\", \
@@ -373,20 +382,19 @@ unitary matrix of size \!\(\*StyleBox[\\\"d\\\", \\\"TI\\\"]\) using \
 \!\(\*StyleBox[\\\"QR\\\", \\\"TI\\\"]\) decomposition. See: F. Mezzadri,  \
 NOTICES of the AMS, Vol. 54 (2007), 592-604.\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.527923595150003*^9},
- CellTags->"Info3527930795-3547966"],
+ CellChangeTimes->{3.527928651193699*^9},
+ CellTags->"Info3527935851-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Res\\\", \\\"Input\\\"]\)[\!\(\*StyleBox[\\\
 \"A\\\", \\\"TI\\\"]\)] is equivalent to \!\(\*StyleBox[\\\"Vec\\\", \
-\\\"Input\\\"]\)[\!\(\*StyleBox[\\\"Transpose\\\", \
-\\\"Input\\\"]\)[\!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\)]]. Reshaping \
-mapsmatrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) into a vector row by row. \
-Note, that this is different then thereshape operation in \
+\\\"Input\\\"]\)[Transpose[\!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\)]]. \
+Reshaping mapsmatrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) into a vector \
+row by row. Note, that this is different then thereshape operation in \
 \!\(\*StyleBox[\\\"Matlab\\\", \\\"TI\\\"]\) or \!\(\*StyleBox[\\\"GNU Octave\
 \\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235953100224`*^9},
- CellTags->"Info3527930795-3547966"],
+ CellChangeTimes->{3.527928651380156*^9},
+ CellTags->"Info3527935851-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Reshuffle\\\", \
@@ -400,8 +408,8 @@ returns a reshuffled matrix with dimensions \!\(\*StyleBox[\\\"(drows[[1]]\
 \\\"TI\\\"]\),\!\(\*StyleBox[\\\"dcols\\\", \\\"TI\\\"]\)} can be ommited for \
 a square matrix of dimension \!\(\*StyleBox[\\\"n^2\[Times]n^2\\\", \
 \\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923595496037*^9},
- CellTags->"Info3527930795-3547966"],
+ CellChangeTimes->{3.5279286515701036`*^9},
+ CellTags->"Info3527935851-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SchmidtDecomposition\\\", \\\"Input\\\"]\)[\
@@ -448,8 +456,8 @@ decomposition on \!\(\*StyleBox[\\\"r1 c1\[CircleTimes] r2 c2\\\", \
 \\\"TI\\\"]\)[[\!\(\*StyleBox[\\\"i\\\", \\\"TI\\\"]\),3]]], {\!\(\*StyleBox[\
 \\\"i\\\", \\\"TI\\\"]\), Length[\!\(\*StyleBox[\\\"sd\\\", \\\"TI\\\"]\)]}];\
 \"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923595631709*^9},
- CellTags->"Info3527930795-3547966"],
+ CellChangeTimes->{3.5279286517455*^9},
+ CellTags->"Info3527935851-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SpecialUnitary2\\\", \\\"Input\\\"]\)[\
@@ -458,16 +466,16 @@ Cell[BoxData[
 \!\(\*StyleBox[\\\"Unitary2\\\", \
 \\\"Input\\\"]\)[0,\[Beta],\[Gamma],\[Delta]].\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.5279235958154593`*^9},
- CellTags->"Info3527930795-3547966"],
+ CellChangeTimes->{3.527928651935129*^9},
+ CellTags->"Info3527935851-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SquareMatrixQ\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\)] returns True only \
 if \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) is a square matrix, and gives \
 False otherwise.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235959675617`*^9},
- CellTags->"Info3527930795-3547966"],
+ CellChangeTimes->{3.527928652103908*^9},
+ CellTags->"Info3527935852-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"StateToBloch\\\", \
@@ -476,8 +484,8 @@ matrix \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) returns a vector of \
 coefficients obtained from expansion on normed generalized Pauli matrices. \
 See also: \!\(\*StyleBox[\\\"GeneralizedPauliMatrices\\\", \
 \\\"Input\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923596115198*^9},
- CellTags->"Info3527930796-3547966"],
+ CellChangeTimes->{3.52792865227977*^9},
+ CellTags->"Info3527935852-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"StateVector\\\", \
@@ -494,8 +502,8 @@ phases {\!\(\*SubscriptBox[\\\"\[Phi]\\\", \
 \\\"1\\\"]\),...,\!\(\*SubscriptBox[\\\"\[Phi]\\\", \\\"n\\\"]\)}. See also: \
 \!\(\*StyleBox[\\\"SymbolicVector\\\", \\\"Input\\\"]\).\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923596252364*^9},
- CellTags->"Info3527930796-3547966"],
+ CellChangeTimes->{3.527928652476633*^9},
+ CellTags->"Info3527935852-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Subfidelity\\\", \
@@ -505,8 +513,8 @@ subfidelity between states \!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"1\\\"]\) \
 and \!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"2\\\"]\) See: J.A. Miszczak et \
 al., Quantum Information & Computation, Vol.9 No.1&2 (2009).\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923596421875*^9},
- CellTags->"Info3527930796-3547966"],
+ CellChangeTimes->{3.527928652634824*^9},
+ CellTags->"Info3527935852-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Superfidelity\\\", \
@@ -521,8 +529,8 @@ Tr[\!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"1\\\"]\).\!\(\*SubscriptBox[\\\"\
 \\\"2\\\"]\).\!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"2\\\"]\)]]. See: J.A. \
 Miszczak et al., Quantum Information & Computation, Vol.9 No.1&2 (2009).\"\>",
    "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923596559944*^9},
- CellTags->"Info3527930796-3547966"],
+ CellChangeTimes->{3.527928652827194*^9},
+ CellTags->"Info3527935852-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Superoperator\\\", \
@@ -534,37 +542,31 @@ alternative name for \!\(\*StyleBox[\\\"ChannelToMatrix\\\", \
 \\\"Input\\\"]\)[\!\(\*StyleBox[\\\"fun\\\", \
 \\\"TI\\\"]\),\!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\)] and returns matrix \
 representation of quantum channel, given as a pure function, acting on \
-\!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\)-dimensional space. So \
-\!\(\*StyleBox[\\\"Superoperator\\\", \
-\\\"Input\\\"]\)[\!\(\*StyleBox[\\\"DepolarizingChannel\\\", \
-\\\"Input\\\"]\)[2,\!\(\*StyleBox[\\\"p\\\", \\\"TI\\\"]\),#]&,2] and \
-\!\(\*StyleBox[\\\"Superoperator\\\", \
-\\\"Input\\\"]\)[\!\(\*StyleBox[\\\"QubitDepolarizingKraus\\\", \
-\\\"Input\\\"]\)[\!\(\*StyleBox[\\\"p\\\", \\\"TI\\\"]\)]] returns the same \
-matrix. See also: \!\(\*StyleBox[\\\"ChannelToMatrix\\\", \\\"Input\\\"]\).\"\
-\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923596726296*^9},
- CellTags->"Info3527930796-3547966"],
+\!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\)-dimensional space. See also: \
+\!\(\*StyleBox[\\\"ChannelToMatrix\\\", \\\"Input\\\"]\).\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.527928652998034*^9},
+ CellTags->"Info3527935852-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SuperoperatorToKraus\\\", \\\"Input\\\"]\)[\
 \!\(\*StyleBox[\\\"m\\\", \\\"TI\\\"]\)] returns Kraus operators for a given \
 super operator \!\(\*StyleBox[\\\"m\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print",\
  "PrintUsage",
- CellChangeTimes->{3.5279235968903093`*^9},
- CellTags->"Info3527930796-3547966"],
+ CellChangeTimes->{3.527928653165061*^9},
+ CellTags->"Info3527935853-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"sx\\\", \\\"TI\\\"]\) - Pauli matrix \
 \!\(\*StyleBox[\\\"sx\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923597063599*^9},
- CellTags->"Info3527930796-3547966"],
+ CellChangeTimes->{3.5279286533441772`*^9},
+ CellTags->"Info3527935853-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"sy\\\", \\\"TI\\\"]\) - Pauli matrix \
 \!\(\*StyleBox[\\\"sy\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235971950407`*^9},
- CellTags->"Info3527930797-3547966"],
+ CellChangeTimes->{3.527928653492043*^9},
+ CellTags->"Info3527935853-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SymbolicBistochasticMatrix\\\", \\\"Input\\\
@@ -572,8 +574,8 @@ Cell[BoxData[
 bistochastic matrix size \!\(\*StyleBox[\\\"dim\\\", \\\"TI\\\"]\). See also: \
 \!\(\*StyleBox[\\\"SymbolicMatrix, SymbolicVector\\\", \\\"Input\\\"]\).\"\>",
    "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923597363207*^9},
- CellTags->"Info3527930797-3547966"],
+ CellChangeTimes->{3.527928653695958*^9},
+ CellTags->"Info3527935853-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SymbolicHermitianMatrix\\\", \\\"Input\\\"]\
@@ -581,8 +583,8 @@ Cell[BoxData[
 \!\(\*StyleBox[\\\"n\[Cross]n\\\", \\\"TI\\\"]\) Hermitian matrix. See also: \
 \!\(\*StyleBox[\\\"SymbolicMatrix, SymbolicVector\\\", \\\"Input\\\"]\).\"\>",
    "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923597529973*^9},
- CellTags->"Info3527930797-3547966"],
+ CellChangeTimes->{3.527928653879283*^9},
+ CellTags->"Info3527935853-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SymbolicMatrix\\\", \
@@ -591,11 +593,10 @@ Cell[BoxData[
 \!\(\*StyleBox[\\\"a[i,j], i=1,...,m, j=1,...,n\\\", \\\"TI\\\"]\).If the \
 third argument is ommited this function returns square \!\(\*StyleBox[\\\"m\
 \[Cross]m\\\", \\\"TI\\\"]\) matrix. This functions can save you some \
-keystrokes and, thanks to \!\(\*StyleBox[\\\"TeXForm\\\", \\\"Input\\\"]\) \
-function, its results can be easily incorporated in LaTeX documents.\"\>", 
-  "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235976781187`*^9},
- CellTags->"Info3527930797-3547966"],
+keystrokes and, thanks to TeXForm function, its results can be easily \
+incorporated in LaTeX documents.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.527928654061224*^9},
+ CellTags->"Info3527935853-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"SymbolicVector\\\", \
@@ -603,14 +604,14 @@ Cell[BoxData[
 with \!\(\*StyleBox[\\\"n\\\", \\\"TI\\\"]\) elements \
 \!\(\*StyleBox[\\\"a[i],i=1,...,n\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.5279235978254337`*^9},
- CellTags->"Info3527930797-3547966"],
+ CellChangeTimes->{3.5279286542467127`*^9},
+ CellTags->"Info3527935854-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"sz\\\", \\\"TI\\\"]\) - Pauli matrix \
 \!\(\*StyleBox[\\\"sz\\\", \\\"TI\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923598001608*^9},
- CellTags->"Info3527930797-3547966"],
+ CellChangeTimes->{3.527928654431363*^9},
+ CellTags->"Info3527935854-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"TPChannelQ\\\", \
@@ -618,8 +619,8 @@ Cell[BoxData[
 checks on Kraus operators \!\(\*StyleBox[\\\"ck\\\", \\\"TI\\\"]\). Use this \
 if you want to check if they represent quantum channel.\"\>", "MSG"]], "Print",\
  "PrintUsage",
- CellChangeTimes->{3.5279235981313353`*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.527928654654661*^9},
+ CellTags->"Info3527935854-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"TraceDistance\\\", \
@@ -631,8 +632,8 @@ trace distance between matrices \!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"1\\\"]\
 \\\"2\\\"]\)tr|\!\(\*SubscriptBox[\\\"\[Rho]\\\", \
 \\\"1\\\"]\)-\!\(\*SubscriptBox[\\\"\[Rho]\\\", \\\"2\\\"]\)|.\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235982639637`*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.52792865485702*^9},
+ CellTags->"Info3527935854-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"TraceNorm\\\", \
@@ -641,8 +642,8 @@ Cell[BoxData[
 \!\(\*SubscriptBox[\\\"\[Sigma]\\\", \\\"i\\\"]\) are the singular values of \
 A. See also: \!\(\*StyleBox[\\\"TraceDistance\\\", \\\"Input\\\"]\).\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235984234056`*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.527928655024081*^9},
+ CellTags->"Info3527935854-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Unitary2\\\", \
@@ -651,8 +652,8 @@ Cell[BoxData[
 \"\[Gamma]\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\\\"\[Delta]\\\", \\\"TI\\\"]\)] \
 returns a parametrization of \!\(\*StyleBox[\\\"U\\\", \\\"TI\\\"]\)(2).\"\>",
    "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235985728493`*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.527928655195591*^9},
+ CellTags->"Info3527935855-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Unitary2\\\", \
@@ -661,8 +662,8 @@ Cell[BoxData[
 \"\[Gamma]\\\", \\\"TI\\\"]\),\!\(\*StyleBox[\\\"\[Delta]\\\", \\\"TI\\\"]\)] \
 returns the Euler parametrization of \!\(\*StyleBox[\\\"U\\\", \
 \\\"TI\\\"]\)(2).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923598687772*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.52792865537002*^9},
+ CellTags->"Info3527935855-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Unitary3\\\", \
@@ -674,8 +675,8 @@ Cell[BoxData[
 \", \\\"TI\\\"]\)] returns the Euler parametrization of \
 \!\(\*StyleBox[\\\"U\\\", \\\"TI\\\"]\)(3).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.5279235987870283`*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.527928655537487*^9},
+ CellTags->"Info3527935855-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Unitary4Canonical\\\", \
@@ -685,8 +686,8 @@ Cell[BoxData[
 parametrization of non-local unitary matrices for two qubits. See: B. Kraus, \
 J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923598886471*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.5279286557491217`*^9},
+ CellTags->"Info3527935855-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Unres\\\", \\\"Input\\\"]\)[\!\(\*StyleBox[\
@@ -697,8 +698,8 @@ that \!\(\*StyleBox[\\\"v\\\", \\\"TI\\\"]\) can be mapped into a square \
 matrix. See also: \!\(\*StyleBox[\\\"Unvec\\\", \\\"Input\\\"]\), \
 \!\(\*StyleBox[\\\"Res\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.5279235990318537`*^9},
- CellTags->"Info3527930798-3547966"],
+ CellChangeTimes->{3.5279286559262133`*^9},
+ CellTags->"Info3527935855-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Unvec\\\", \\\"Input\\\"]\)[\!\(\*StyleBox[\
@@ -707,8 +708,8 @@ with \!\(\*StyleBox[\\\"c\\\", \\\"TI\\\"]\) columns. If the second parameter \
 is omitted then it is assumed that \!\(\*StyleBox[\\\"v\\\", \\\"TI\\\"]\) \
 can be mapped into square matrix. See also: \!\(\*StyleBox[\\\"Unres, \
 Vec\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.527923599155416*^9},
- CellTags->"Info3527930799-3547966"],
+ CellChangeTimes->{3.527928656112124*^9},
+ CellTags->"Info3527935856-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"Vec\\\", \\\"Input\\\"]\)[\!\(\*StyleBox[\\\
@@ -716,18 +717,18 @@ Cell[BoxData[
 \!\(\*StyleBox[\\\"A\\\", \\\"TI\\\"]\) column by column. See also: \
 \!\(\*StyleBox[\\\"Res\\\", \\\"Input\\\"]\).\"\>", "MSG"]], "Print", \
 "PrintUsage",
- CellChangeTimes->{3.527923599310892*^9},
- CellTags->"Info3527930799-3547966"],
+ CellChangeTimes->{3.5279286562893267`*^9},
+ CellTags->"Info3527935856-2567618"],
 
 Cell[BoxData[
  StyleBox["\<\"\!\(\*StyleBox[\\\"wh\\\", \\\"TI\\\"]\) - Hadamard gate for \
 one qubit.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.5279235994553432`*^9},
- CellTags->"Info3527930799-3547966"]
+ CellChangeTimes->{3.527928656450276*^9},
+ CellTags->"Info3527935856-2567618"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1920, 1123},
+WindowSize->{1918, 1122},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 ShowSelection->True,
 FrontEndVersion->"8.0 for Linux x86 (64-bit) (February 23, 2011)",
@@ -738,271 +739,275 @@ StyleDefinitions->"Default.nb"
 (* Internal cache information *)
 (*CellTagsOutline
 CellTagsIndex->{
- "Info3527930791-3547966"->{
-  Cell[1748, 56, 592, 9, 43, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[2343, 67, 577, 10, 43, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[2923, 79, 492, 8, 43, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[3418, 89, 695, 11, 43, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[4116, 102, 230, 4, 43, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[4349, 108, 375, 7, 43, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[4727, 117, 855, 15, 100, "Print",
-   CellTags->"Info3527930791-3547966"],
-  Cell[5585, 134, 777, 12, 46, "Print",
-   CellTags->"Info3527930791-3547966"]},
- "Info3527930792-3547966"->{
-  Cell[6365, 148, 295, 5, 43, "Print",
-   CellTags->"Info3527930792-3547966"],
-  Cell[6663, 155, 428, 7, 43, "Print",
-   CellTags->"Info3527930792-3547966"],
-  Cell[7094, 164, 292, 5, 43, "Print",
-   CellTags->"Info3527930792-3547966"],
-  Cell[7389, 171, 885, 15, 62, "Print",
-   CellTags->"Info3527930792-3547966"],
-  Cell[8277, 188, 547, 10, 46, "Print",
-   CellTags->"Info3527930792-3547966"],
-  Cell[8827, 200, 433, 7, 68, "Print",
-   CellTags->"Info3527930792-3547966"]},
- "Info3527930793-3547966"->{
-  Cell[9263, 209, 430, 7, 68, "Print",
-   CellTags->"Info3527930793-3547966"],
-  Cell[9696, 218, 320, 6, 43, "Print",
-   CellTags->"Info3527930793-3547966"],
-  Cell[10019, 226, 579, 9, 43, "Print",
-   CellTags->"Info3527930793-3547966"],
-  Cell[10601, 237, 586, 9, 43, "Print",
-   CellTags->"Info3527930793-3547966"],
-  Cell[11190, 248, 481, 8, 43, "Print",
-   CellTags->"Info3527930793-3547966"],
-  Cell[11674, 258, 311, 6, 43, "Print",
-   CellTags->"Info3527930793-3547966"],
-  Cell[11988, 266, 641, 11, 43, "Print",
-   CellTags->"Info3527930793-3547966"]},
- "Info3527930794-3547966"->{
-  Cell[12632, 279, 576, 9, 43, "Print",
-   CellTags->"Info3527930794-3547966"],
-  Cell[13211, 290, 569, 9, 43, "Print",
-   CellTags->"Info3527930794-3547966"],
-  Cell[13783, 301, 1519, 22, 138, "Print",
-   CellTags->"Info3527930794-3547966"],
-  Cell[15305, 325, 460, 7, 43, "Print",
-   CellTags->"Info3527930794-3547966"],
-  Cell[15768, 334, 368, 6, 43, "Print",
-   CellTags->"Info3527930794-3547966"],
-  Cell[16139, 342, 405, 6, 43, "Print",
-   CellTags->"Info3527930794-3547966"],
-  Cell[16547, 350, 1000, 16, 100, "Print",
-   CellTags->"Info3527930794-3547966"]},
- "Info3527930795-3547966"->{
-  Cell[17550, 368, 457, 8, 43, "Print",
-   CellTags->"Info3527930795-3547966"],
-  Cell[18010, 378, 646, 10, 43, "Print",
-   CellTags->"Info3527930795-3547966"],
-  Cell[18659, 390, 845, 13, 62, "Print",
-   CellTags->"Info3527930795-3547966"],
-  Cell[19507, 405, 3070, 46, 251, "Print",
-   CellTags->"Info3527930795-3547966"],
-  Cell[22580, 453, 417, 8, 43, "Print",
-   CellTags->"Info3527930795-3547966"],
-  Cell[23000, 463, 357, 6, 43, "Print",
-   CellTags->"Info3527930795-3547966"]},
- "Info3527930796-3547966"->{
-  Cell[23360, 471, 484, 8, 43, "Print",
-   CellTags->"Info3527930796-3547966"],
-  Cell[23847, 481, 945, 16, 43, "Print",
-   CellTags->"Info3527930796-3547966"],
-  Cell[24795, 499, 526, 9, 43, "Print",
-   CellTags->"Info3527930796-3547966"],
-  Cell[25324, 510, 865, 14, 43, "Print",
-   CellTags->"Info3527930796-3547966"],
-  Cell[26192, 526, 1252, 20, 62, "Print",
-   CellTags->"Info3527930796-3547966"],
-  Cell[27447, 548, 348, 6, 43, "Print",
-   CellTags->"Info3527930796-3547966"],
-  Cell[27798, 556, 245, 4, 41, "Print",
-   CellTags->"Info3527930796-3547966"]},
- "Info3527930797-3547966"->{
-  Cell[28046, 562, 247, 4, 43, "Print",
-   CellTags->"Info3527930797-3547966"],
-  Cell[28296, 568, 439, 7, 43, "Print",
-   CellTags->"Info3527930797-3547966"],
-  Cell[28738, 577, 425, 7, 43, "Print",
-   CellTags->"Info3527930797-3547966"],
-  Cell[29166, 586, 706, 11, 62, "Print",
-   CellTags->"Info3527930797-3547966"],
-  Cell[29875, 599, 379, 7, 43, "Print",
-   CellTags->"Info3527930797-3547966"],
-  Cell[30257, 608, 245, 4, 41, "Print",
-   CellTags->"Info3527930797-3547966"]},
- "Info3527930798-3547966"->{
-  Cell[30505, 614, 396, 7, 43, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[30904, 623, 623, 11, 68, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[31530, 636, 461, 8, 43, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[31994, 646, 469, 8, 43, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[32466, 656, 474, 8, 43, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[32943, 666, 641, 11, 43, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[33587, 679, 494, 9, 43, "Print",
-   CellTags->"Info3527930798-3547966"],
-  Cell[34084, 690, 626, 10, 43, "Print",
-   CellTags->"Info3527930798-3547966"]},
- "Info3527930799-3547966"->{
-  Cell[34713, 702, 544, 8, 43, "Print",
-   CellTags->"Info3527930799-3547966"],
-  Cell[35260, 712, 383, 7, 43, "Print",
-   CellTags->"Info3527930799-3547966"],
-  Cell[35646, 721, 221, 4, 43, "Print",
-   CellTags->"Info3527930799-3547966"]}
+ "Info3527935846-2567618"->{
+  Cell[1755, 55, 565, 9, 43, "Print",
+   CellTags->"Info3527935846-2567618"],
+  Cell[2323, 66, 577, 10, 43, "Print",
+   CellTags->"Info3527935846-2567618"],
+  Cell[2903, 78, 490, 8, 43, "Print",
+   CellTags->"Info3527935846-2567618"],
+  Cell[3396, 88, 695, 11, 43, "Print",
+   CellTags->"Info3527935846-2567618"],
+  Cell[4094, 101, 230, 4, 43, "Print",
+   CellTags->"Info3527935846-2567618"]},
+ "Info3527935847-2567618"->{
+  Cell[4327, 107, 377, 7, 43, "Print",
+   CellTags->"Info3527935847-2567618"],
+  Cell[4707, 116, 857, 15, 100, "Print",
+   CellTags->"Info3527935847-2567618"],
+  Cell[5567, 133, 775, 12, 46, "Print",
+   CellTags->"Info3527935847-2567618"],
+  Cell[6345, 147, 296, 5, 43, "Print",
+   CellTags->"Info3527935847-2567618"],
+  Cell[6644, 154, 430, 7, 43, "Print",
+   CellTags->"Info3527935847-2567618"],
+  Cell[7077, 163, 247, 4, 43, "Print",
+   CellTags->"Info3527935847-2567618"],
+  Cell[7327, 169, 890, 15, 62, "Print",
+   CellTags->"Info3527935847-2567618"]},
+ "Info3527935848-2567618"->{
+  Cell[8220, 186, 547, 10, 46, "Print",
+   CellTags->"Info3527935848-2567618"],
+  Cell[8770, 198, 432, 7, 68, "Print",
+   CellTags->"Info3527935848-2567618"],
+  Cell[9205, 207, 430, 7, 68, "Print",
+   CellTags->"Info3527935848-2567618"],
+  Cell[9638, 216, 322, 6, 43, "Print",
+   CellTags->"Info3527935848-2567618"],
+  Cell[9963, 224, 1321, 20, 82, "Print",
+   CellTags->"Info3527935848-2567618"],
+  Cell[11287, 246, 584, 9, 43, "Print",
+   CellTags->"Info3527935848-2567618"]},
+ "Info3527935849-2567618"->{
+  Cell[11874, 257, 483, 8, 43, "Print",
+   CellTags->"Info3527935849-2567618"],
+  Cell[12360, 267, 311, 6, 43, "Print",
+   CellTags->"Info3527935849-2567618"],
+  Cell[12674, 275, 641, 11, 43, "Print",
+   CellTags->"Info3527935849-2567618"],
+  Cell[13318, 288, 578, 9, 43, "Print",
+   CellTags->"Info3527935849-2567618"],
+  Cell[13899, 299, 569, 9, 43, "Print",
+   CellTags->"Info3527935849-2567618"]},
+ "Info3527935850-2567618"->{
+  Cell[14471, 310, 1519, 22, 138, "Print",
+   CellTags->"Info3527935850-2567618"],
+  Cell[15993, 334, 460, 7, 43, "Print",
+   CellTags->"Info3527935850-2567618"],
+  Cell[16456, 343, 368, 6, 43, "Print",
+   CellTags->"Info3527935850-2567618"],
+  Cell[16827, 351, 405, 6, 43, "Print",
+   CellTags->"Info3527935850-2567618"],
+  Cell[17235, 359, 1001, 16, 100, "Print",
+   CellTags->"Info3527935850-2567618"]},
+ "Info3527935851-2567618"->{
+  Cell[18239, 377, 457, 8, 43, "Print",
+   CellTags->"Info3527935851-2567618"],
+  Cell[18699, 387, 601, 9, 43, "Print",
+   CellTags->"Info3527935851-2567618"],
+  Cell[19303, 398, 847, 13, 62, "Print",
+   CellTags->"Info3527935851-2567618"],
+  Cell[20153, 413, 3068, 46, 251, "Print",
+   CellTags->"Info3527935851-2567618"],
+  Cell[23224, 461, 415, 8, 43, "Print",
+   CellTags->"Info3527935851-2567618"]},
+ "Info3527935852-2567618"->{
+  Cell[23642, 471, 355, 6, 43, "Print",
+   CellTags->"Info3527935852-2567618"],
+  Cell[24000, 479, 483, 8, 43, "Print",
+   CellTags->"Info3527935852-2567618"],
+  Cell[24486, 489, 945, 16, 43, "Print",
+   CellTags->"Info3527935852-2567618"],
+  Cell[25434, 507, 526, 9, 43, "Print",
+   CellTags->"Info3527935852-2567618"],
+  Cell[25963, 518, 865, 14, 43, "Print",
+   CellTags->"Info3527935852-2567618"],
+  Cell[26831, 534, 883, 14, 62, "Print",
+   CellTags->"Info3527935852-2567618"]},
+ "Info3527935853-2567618"->{
+  Cell[27717, 550, 346, 6, 43, "Print",
+   CellTags->"Info3527935853-2567618"],
+  Cell[28066, 558, 247, 4, 41, "Print",
+   CellTags->"Info3527935853-2567618"],
+  Cell[28316, 564, 245, 4, 43, "Print",
+   CellTags->"Info3527935853-2567618"],
+  Cell[28564, 570, 439, 7, 43, "Print",
+   CellTags->"Info3527935853-2567618"],
+  Cell[29006, 579, 425, 7, 43, "Print",
+   CellTags->"Info3527935853-2567618"],
+  Cell[29434, 588, 660, 10, 62, "Print",
+   CellTags->"Info3527935853-2567618"]},
+ "Info3527935854-2567618"->{
+  Cell[30097, 600, 379, 7, 43, "Print",
+   CellTags->"Info3527935854-2567618"],
+  Cell[30479, 609, 245, 4, 41, "Print",
+   CellTags->"Info3527935854-2567618"],
+  Cell[30727, 615, 394, 7, 43, "Print",
+   CellTags->"Info3527935854-2567618"],
+  Cell[31124, 624, 620, 11, 68, "Print",
+   CellTags->"Info3527935854-2567618"],
+  Cell[31747, 637, 459, 8, 43, "Print",
+   CellTags->"Info3527935854-2567618"]},
+ "Info3527935855-2567618"->{
+  Cell[32209, 647, 467, 8, 43, "Print",
+   CellTags->"Info3527935855-2567618"],
+  Cell[32679, 657, 473, 8, 43, "Print",
+   CellTags->"Info3527935855-2567618"],
+  Cell[33155, 667, 639, 11, 43, "Print",
+   CellTags->"Info3527935855-2567618"],
+  Cell[33797, 680, 496, 9, 43, "Print",
+   CellTags->"Info3527935855-2567618"],
+  Cell[34296, 691, 626, 10, 43, "Print",
+   CellTags->"Info3527935855-2567618"]},
+ "Info3527935856-2567618"->{
+  Cell[34925, 703, 544, 8, 43, "Print",
+   CellTags->"Info3527935856-2567618"],
+  Cell[35472, 713, 385, 7, 43, "Print",
+   CellTags->"Info3527935856-2567618"],
+  Cell[35860, 722, 219, 4, 43, "Print",
+   CellTags->"Info3527935856-2567618"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info3527930791-3547966", 36217, 740},
- {"Info3527930792-3547966", 36880, 757},
- {"Info3527930793-3547966", 37386, 770},
- {"Info3527930794-3547966", 37975, 785},
- {"Info3527930795-3547966", 38571, 800},
- {"Info3527930796-3547966", 39086, 813},
- {"Info3527930797-3547966", 39680, 828},
- {"Info3527930798-3547966", 40191, 841},
- {"Info3527930799-3547966", 40864, 858}
+ {"Info3527935846-2567618", 36429, 741},
+ {"Info3527935847-2567618", 36852, 752},
+ {"Info3527935848-2567618", 37439, 767},
+ {"Info3527935849-2567618", 37947, 780},
+ {"Info3527935850-2567618", 38378, 791},
+ {"Info3527935851-2567618", 38814, 802},
+ {"Info3527935852-2567618", 39248, 813},
+ {"Info3527935853-2567618", 39761, 826},
+ {"Info3527935854-2567618", 40272, 839},
+ {"Info3527935855-2567618", 40703, 850},
+ {"Info3527935856-2567618", 41135, 861}
  }
 *)
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 166, 3, 30, "Input"],
-Cell[748, 27, 665, 13, 23, "Print"]
+Cell[748, 27, 672, 12, 23, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1450, 45, 273, 7, 30, "Input"],
+Cell[1457, 44, 273, 7, 30, "Input"],
 Cell[CellGroupData[{
-Cell[1748, 56, 592, 9, 43, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[2343, 67, 577, 10, 43, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[2923, 79, 492, 8, 43, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[3418, 89, 695, 11, 43, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[4116, 102, 230, 4, 43, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[4349, 108, 375, 7, 43, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[4727, 117, 855, 15, 100, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[5585, 134, 777, 12, 46, "Print",
- CellTags->"Info3527930791-3547966"],
-Cell[6365, 148, 295, 5, 43, "Print",
- CellTags->"Info3527930792-3547966"],
-Cell[6663, 155, 428, 7, 43, "Print",
- CellTags->"Info3527930792-3547966"],
-Cell[7094, 164, 292, 5, 43, "Print",
- CellTags->"Info3527930792-3547966"],
-Cell[7389, 171, 885, 15, 62, "Print",
- CellTags->"Info3527930792-3547966"],
-Cell[8277, 188, 547, 10, 46, "Print",
- CellTags->"Info3527930792-3547966"],
-Cell[8827, 200, 433, 7, 68, "Print",
- CellTags->"Info3527930792-3547966"],
-Cell[9263, 209, 430, 7, 68, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[9696, 218, 320, 6, 43, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[10019, 226, 579, 9, 43, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[10601, 237, 586, 9, 43, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[11190, 248, 481, 8, 43, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[11674, 258, 311, 6, 43, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[11988, 266, 641, 11, 43, "Print",
- CellTags->"Info3527930793-3547966"],
-Cell[12632, 279, 576, 9, 43, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[13211, 290, 569, 9, 43, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[13783, 301, 1519, 22, 138, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[15305, 325, 460, 7, 43, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[15768, 334, 368, 6, 43, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[16139, 342, 405, 6, 43, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[16547, 350, 1000, 16, 100, "Print",
- CellTags->"Info3527930794-3547966"],
-Cell[17550, 368, 457, 8, 43, "Print",
- CellTags->"Info3527930795-3547966"],
-Cell[18010, 378, 646, 10, 43, "Print",
- CellTags->"Info3527930795-3547966"],
-Cell[18659, 390, 845, 13, 62, "Print",
- CellTags->"Info3527930795-3547966"],
-Cell[19507, 405, 3070, 46, 251, "Print",
- CellTags->"Info3527930795-3547966"],
-Cell[22580, 453, 417, 8, 43, "Print",
- CellTags->"Info3527930795-3547966"],
-Cell[23000, 463, 357, 6, 43, "Print",
- CellTags->"Info3527930795-3547966"],
-Cell[23360, 471, 484, 8, 43, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[23847, 481, 945, 16, 43, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[24795, 499, 526, 9, 43, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[25324, 510, 865, 14, 43, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[26192, 526, 1252, 20, 62, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[27447, 548, 348, 6, 43, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[27798, 556, 245, 4, 41, "Print",
- CellTags->"Info3527930796-3547966"],
-Cell[28046, 562, 247, 4, 43, "Print",
- CellTags->"Info3527930797-3547966"],
-Cell[28296, 568, 439, 7, 43, "Print",
- CellTags->"Info3527930797-3547966"],
-Cell[28738, 577, 425, 7, 43, "Print",
- CellTags->"Info3527930797-3547966"],
-Cell[29166, 586, 706, 11, 62, "Print",
- CellTags->"Info3527930797-3547966"],
-Cell[29875, 599, 379, 7, 43, "Print",
- CellTags->"Info3527930797-3547966"],
-Cell[30257, 608, 245, 4, 41, "Print",
- CellTags->"Info3527930797-3547966"],
-Cell[30505, 614, 396, 7, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[30904, 623, 623, 11, 68, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[31530, 636, 461, 8, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[31994, 646, 469, 8, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[32466, 656, 474, 8, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[32943, 666, 641, 11, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[33587, 679, 494, 9, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[34084, 690, 626, 10, 43, "Print",
- CellTags->"Info3527930798-3547966"],
-Cell[34713, 702, 544, 8, 43, "Print",
- CellTags->"Info3527930799-3547966"],
-Cell[35260, 712, 383, 7, 43, "Print",
- CellTags->"Info3527930799-3547966"],
-Cell[35646, 721, 221, 4, 43, "Print",
- CellTags->"Info3527930799-3547966"]
+Cell[1755, 55, 565, 9, 43, "Print",
+ CellTags->"Info3527935846-2567618"],
+Cell[2323, 66, 577, 10, 43, "Print",
+ CellTags->"Info3527935846-2567618"],
+Cell[2903, 78, 490, 8, 43, "Print",
+ CellTags->"Info3527935846-2567618"],
+Cell[3396, 88, 695, 11, 43, "Print",
+ CellTags->"Info3527935846-2567618"],
+Cell[4094, 101, 230, 4, 43, "Print",
+ CellTags->"Info3527935846-2567618"],
+Cell[4327, 107, 377, 7, 43, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[4707, 116, 857, 15, 100, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[5567, 133, 775, 12, 46, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[6345, 147, 296, 5, 43, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[6644, 154, 430, 7, 43, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[7077, 163, 247, 4, 43, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[7327, 169, 890, 15, 62, "Print",
+ CellTags->"Info3527935847-2567618"],
+Cell[8220, 186, 547, 10, 46, "Print",
+ CellTags->"Info3527935848-2567618"],
+Cell[8770, 198, 432, 7, 68, "Print",
+ CellTags->"Info3527935848-2567618"],
+Cell[9205, 207, 430, 7, 68, "Print",
+ CellTags->"Info3527935848-2567618"],
+Cell[9638, 216, 322, 6, 43, "Print",
+ CellTags->"Info3527935848-2567618"],
+Cell[9963, 224, 1321, 20, 82, "Print",
+ CellTags->"Info3527935848-2567618"],
+Cell[11287, 246, 584, 9, 43, "Print",
+ CellTags->"Info3527935848-2567618"],
+Cell[11874, 257, 483, 8, 43, "Print",
+ CellTags->"Info3527935849-2567618"],
+Cell[12360, 267, 311, 6, 43, "Print",
+ CellTags->"Info3527935849-2567618"],
+Cell[12674, 275, 641, 11, 43, "Print",
+ CellTags->"Info3527935849-2567618"],
+Cell[13318, 288, 578, 9, 43, "Print",
+ CellTags->"Info3527935849-2567618"],
+Cell[13899, 299, 569, 9, 43, "Print",
+ CellTags->"Info3527935849-2567618"],
+Cell[14471, 310, 1519, 22, 138, "Print",
+ CellTags->"Info3527935850-2567618"],
+Cell[15993, 334, 460, 7, 43, "Print",
+ CellTags->"Info3527935850-2567618"],
+Cell[16456, 343, 368, 6, 43, "Print",
+ CellTags->"Info3527935850-2567618"],
+Cell[16827, 351, 405, 6, 43, "Print",
+ CellTags->"Info3527935850-2567618"],
+Cell[17235, 359, 1001, 16, 100, "Print",
+ CellTags->"Info3527935850-2567618"],
+Cell[18239, 377, 457, 8, 43, "Print",
+ CellTags->"Info3527935851-2567618"],
+Cell[18699, 387, 601, 9, 43, "Print",
+ CellTags->"Info3527935851-2567618"],
+Cell[19303, 398, 847, 13, 62, "Print",
+ CellTags->"Info3527935851-2567618"],
+Cell[20153, 413, 3068, 46, 251, "Print",
+ CellTags->"Info3527935851-2567618"],
+Cell[23224, 461, 415, 8, 43, "Print",
+ CellTags->"Info3527935851-2567618"],
+Cell[23642, 471, 355, 6, 43, "Print",
+ CellTags->"Info3527935852-2567618"],
+Cell[24000, 479, 483, 8, 43, "Print",
+ CellTags->"Info3527935852-2567618"],
+Cell[24486, 489, 945, 16, 43, "Print",
+ CellTags->"Info3527935852-2567618"],
+Cell[25434, 507, 526, 9, 43, "Print",
+ CellTags->"Info3527935852-2567618"],
+Cell[25963, 518, 865, 14, 43, "Print",
+ CellTags->"Info3527935852-2567618"],
+Cell[26831, 534, 883, 14, 62, "Print",
+ CellTags->"Info3527935852-2567618"],
+Cell[27717, 550, 346, 6, 43, "Print",
+ CellTags->"Info3527935853-2567618"],
+Cell[28066, 558, 247, 4, 41, "Print",
+ CellTags->"Info3527935853-2567618"],
+Cell[28316, 564, 245, 4, 43, "Print",
+ CellTags->"Info3527935853-2567618"],
+Cell[28564, 570, 439, 7, 43, "Print",
+ CellTags->"Info3527935853-2567618"],
+Cell[29006, 579, 425, 7, 43, "Print",
+ CellTags->"Info3527935853-2567618"],
+Cell[29434, 588, 660, 10, 62, "Print",
+ CellTags->"Info3527935853-2567618"],
+Cell[30097, 600, 379, 7, 43, "Print",
+ CellTags->"Info3527935854-2567618"],
+Cell[30479, 609, 245, 4, 41, "Print",
+ CellTags->"Info3527935854-2567618"],
+Cell[30727, 615, 394, 7, 43, "Print",
+ CellTags->"Info3527935854-2567618"],
+Cell[31124, 624, 620, 11, 68, "Print",
+ CellTags->"Info3527935854-2567618"],
+Cell[31747, 637, 459, 8, 43, "Print",
+ CellTags->"Info3527935854-2567618"],
+Cell[32209, 647, 467, 8, 43, "Print",
+ CellTags->"Info3527935855-2567618"],
+Cell[32679, 657, 473, 8, 43, "Print",
+ CellTags->"Info3527935855-2567618"],
+Cell[33155, 667, 639, 11, 43, "Print",
+ CellTags->"Info3527935855-2567618"],
+Cell[33797, 680, 496, 9, 43, "Print",
+ CellTags->"Info3527935855-2567618"],
+Cell[34296, 691, 626, 10, 43, "Print",
+ CellTags->"Info3527935855-2567618"],
+Cell[34925, 703, 544, 8, 43, "Print",
+ CellTags->"Info3527935856-2567618"],
+Cell[35472, 713, 385, 7, 43, "Print",
+ CellTags->"Info3527935856-2567618"],
+Cell[35860, 722, 219, 4, 43, "Print",
+ CellTags->"Info3527935856-2567618"]
 }, Open  ]]
 }, Open  ]]
 }

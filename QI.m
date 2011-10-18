@@ -25,11 +25,12 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 (* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
+
 SquareMatrixQ::usage = "<f>SquareMatrixQ</f>[<v>A</v>] returns True only if <v>A</v> is a square matrix, and gives False otherwise.";
 
 SymbolicMatrix::usage = "<f>SymbolicMatrix</f>[<v>a,m,n</v>] returns <v>m\[Cross]n</v>-matrix with elements <v>a[i,j], i=1,...,m, j=1,...,n</v>.\
 If the third argument is ommited this function returns square <v>m\[Cross]m</v> matrix. This functions can save you some keystrokes and, thanks \
-to <f>TeXForm</f> function, its results can be easily incorporated in LaTeX documents.";
+to TeXForm function, its results can be easily incorporated in LaTeX documents.";
 
 SymbolicVector::usage = "<f>SymbolicVector</f>[<v>a,n</v>] returns a vector with <v>n</v> elements <v>a[i],i=1,...,n</v>.";
 
@@ -52,8 +53,11 @@ MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an antyhermitian part of th
 
 Proj::usage = "<f>Proj</f>[<v>v</v>] returns projector of the vector <v>v</v>.";
 
+
+
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
+
 
 Fidelity::usage = "<f>Fidelity</f>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] returns the quantum fidelity \
 between states \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\) calculated using a simplified formula as \
@@ -78,18 +82,24 @@ which is defined as \!\(\*FractionBox[\"1\", \"2\"]\)tr|\!\(\*SubscriptBox[\"\[R
 
 GateFidelity::usage = "<f>GateFidelity</f>[<v>U,V</v>] is equivalent to 1/d tr|UV\[ConjugateTranspose]|.";
 
+
+
 (* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
+
 
 sx::usage = "<v>sx</v> - Pauli matrix <v>sx</v>.";
 sy::usage = "<v>sy</v> - Pauli matrix <v>sy</v>.";
 sz::usage = "<v>sz</v> - Pauli matrix <v>sz</v>.";
-id::usage = "<v>id</v> - Identity matrix for one qubit. See also: <f>IdentityMatrix</f>.";
+id::usage = "<v>id</v> - Identity matrix for one qubit. See also: IdentityMatrix.";
 wh::usage = "<v>wh</v> - Hadamard gate for one qubit.";
 cnot::usage = "<v>cnot</v> - Controlled not matrix for two qubits.";
 
+
+
 (* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
+
 
 SchmidtDecomposition::usage = "<f>SchmidtDecomposition</f>[<v>x</v>,<v>dim</v>] - accepts a vector \
 or a matrix as a first argument and returns apropriate Schmidt decomposition. The second argument \
@@ -111,13 +121,14 @@ and reconstruct the original matrix as
 (* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
+
 Vec::usage = "<f>Vec</f>[<v>A</v>] - vectorization of the matrix <v>A</v> column by column. See also: <f>Res</f>.";
 
 Unvec::usage = "<f>Unvec</f>[<v>v,c</v>] - de-vectorization of the vector into the matrix \
 with <v>c</v> columns. If the second parameter is omitted then it is assumed that <v>v</v> \
 can be mapped into square matrix. See also: <f>Unres, Vec</f>.";
 
-Res::usage = "<f>Res</f>[<v>A</v>] is equivalent to <f>Vec</f>[<f>Transpose</f>[<v>A</v>]]. Reshaping maps\
+Res::usage = "<f>Res</f>[<v>A</v>] is equivalent to <f>Vec</f>[Transpose[<v>A</v>]]. Reshaping maps\
 matrix <v>A</v> into a vector row by row. Note, that this is different then the\
 reshape operation in <v>Matlab</v> or <v>GNU Octave</v>.";
 
@@ -129,8 +140,11 @@ Reshuffle::usage = "\
 returns a reshuffled matrix with dimensions <v>(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]])</v>.
 Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <v>n^2\[Times]n^2</v>.";
 
+
+
 (* ::Subsection::Closed:: *)
 (*Parametrizations*)
+
 
 Unitary2::usage = "<f>Unitary2</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v>,<v>\[Delta]</v>] returns a parametrization of <v>U</v>(2).";
 
@@ -150,8 +164,11 @@ by numbers {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\
 {\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)}. \
 See also: <f>SymbolicVector</f>.";
 
+
+
 (* ::Subsection::Closed:: *)
 (*One-qubit states*)
+
 
 QubitKet::usage = "<f>QubitKet</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>] parametrization of the pure state (as a state vector) for one qubit as \
 (Cos[\[Alpha]] Exp[i\[Beta]], Sin[\[Alpha]]). This is equivalent to <f>StateVector</f>[{\[Alpha],\[Beta]}]. See also: <f>QubitPureState</f>, <f>StateVector</f>.";
@@ -159,6 +176,8 @@ QubitKet::usage = "<f>QubitKet</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>] parametrizati
 QubitPureState::usage = "<f>QubitPureState</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>] - \
 a parametrization of the pure state as a density matrix for one qubit. \
 This is just a alias for <v>Proj</v>[<v>QubitKet</v>[\[Alpha],\[Beta]]]. See also: <f>QubitKet</f>.";
+
+
 
 (* ::Subsection::Closed:: *)
 (*Quantum channels*)
@@ -178,8 +197,7 @@ Superoperator::usage = "<f>Superoperator</f>[<v>kl</v>] returns matrix represent
 given as a list of Kraus operators. <f>Superoperator</f>[<v>fun</v>,<v>dim</v>] is just am alternative name \
 for <f>ChannelToMatrix</f>[<v>fun</v>,<v>dim</v>] and returns matrix representation of quantum channel, \
 given as a pure function, acting on <v>dim</v>-dimensional space. \
-So <f>Superoperator</f>[<f>DepolarizingChannel</f>[2,<v>p</v>,#]&,2] and <f>Superoperator</f>[<f>QubitDepolarizingKraus</f>[<v>p</v>]] \
-returns the same matrix. See also: <f>ChannelToMatrix</f>.";
+See also: <f>ChannelToMatrix</f>.";
 
 DynamicalMatrix::usage = "<f>DynamicalMatrix</f> returns a dynamical matrix of quantum channel
 <f>DynamicalMatrix</f>[<v>ch</v>] -  operates on a quantum channel given as a list of Kraus operators.
@@ -187,7 +205,8 @@ DynamicalMatrix::usage = "<f>DynamicalMatrix</f> returns a dynamical matrix of q
 See also: <f>Superoperator</f>, <f>ChannelToMatrix</f>.";
 
 Jamiolkowski::usage = "<f>Jamiolkowski</f>[<v>K</v>] gives the image of the Jamiolkowski isomorphism for the channel given as the list of \
-Karus operators <v>K</v>. <f>Jamiolkowski</f>[<v>fun</v>,<v>dim</v>] gives the image of the Jamiolkowski isomorphism for the channel given \
+Karus operators <v>K</v>. 
+<f>Jamiolkowski</f>[<v>fun</v>,<v>dim</v>] gives the image of the Jamiolkowski isomorphism for the channel given \
 as a function fun action on <v>dim</v>-dimensional space. See also: <f>Superoperator</f>, <f>ChannelToMatrix</f>, <f>DynamicalMatrix</f>.";
 
 TPChannelQ::usage = "<f>TPChannelQ</f>[<v>ck</v>] performs some checks on Kraus operators <v>ck</v>. Use this if you want to check if they represent quantum channel.";
@@ -198,16 +217,24 @@ ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<v>\[CapitalPsi]</v>,
 computes a product superoperator of superoperatos <v>\[CapitalPsi]</v> and <v>\[CapitalPhi]</v>.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
+
 
 PartialTranspose::usage = "<f>PartialTranspose</f>[<v>\[Rho]</v>,<v>dim</v>,<v>sys</v>] - \
 Returns the partial transpose, according to systems <v>sys</v>, of density matrix <v>\[Rho]</v> composed of subsystems of dimensions <v>dim</v>.";
 
-PartialTrace::usage = "<f>PartialTrace</f>[<v>\[Rho]</v>,<v>dim</v>,<v>sys</v>] - \
-Returns the partial trace, according to systems <v>sys</v>, of density matrix <v>\[Rho]</v> composed of subsystems of dimensions <v>dim</v>.";
+PartialTrace::usage = "<f>PartialTrace</f>[<v>\[Rho]</v>,<v>sys</v>] - \
+Returns the partial trace of an operator <v>\[Rho]</v> acting on a bipartite (<v>d\[Times]d</v>)-dimensional system, \
+assuming that matrix <v>\[Rho]</v> is (<v>\!\(\*SuperscriptBox[\(d\), \(2\)]\)\[Times]\!\(\*SuperscriptBox[\(d\), \(2\)]\)</v>) dimensional. \
+In this case the system specification can be given as a integer 1 or 2, by the list of integers consisting only 1 or 2 or by the empty list. 
+<f>PartialTrace</f>[<v>\[Rho]</v>,<v>dims</v>,<v>sys</v>] - \
+Returns the partial trace of an operator <v>\[Rho]</v> acting on a composite system with subsystem dimensions given in the list \
+<v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
 
-(* ::Subsection::Closed:: *)
+
+
+(* ::Subsection:: *)
 (*Entanglement*)
 
 
@@ -253,6 +280,7 @@ Integer <v>K</v> - gives a random state generated with respect to induced measur
 
 (* ::Subsection::Closed:: *)
 (*Bloch Representation*)
+
 
 StateToBloch::usage = "<f>StateToBloch</f>[<v>A</v>] - for a square matrix <v>A</v> returns a vector of coefficients obtained from expansion on \
 normed generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
@@ -345,8 +373,11 @@ number of functions used in the analysis of quantum states and quantum operation
 many available packages for symbolic and numerical simulation of quantum computation presented \
 package is focused on geometrical aspects of quantum information theory.";
 
+
+
 (* ::Subsection:: *)
 (*Miscellaneous functions*)
+
 
 HyperlinkToString::usage = "HyperlinkToString[text,link] creates a link labeled with text to the given URL and returns it as a Mathematica string.";
 
@@ -356,8 +387,11 @@ DOIToString::usage = "DOIToString[text,doi] creates a link labeled with text to 
 
 DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\"http://dx.doi.org/"<>doi<>"\"]\)";
 
+
+
 (* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
+
 
 CircleTimes[x_?MatrixQ,y_?MatrixQ] := KroneckerProduct[x,y];
 CircleTimes[x_?VectorQ,y_?VectorQ] := Flatten[KroneckerProduct[x,y]];
@@ -394,8 +428,11 @@ MatrixIm[A_?SquareMatrixQ]:=(A-A\[ConjugateTranspose])/2;
 
 Proj[v_]:=Table[v[[i]]Conjugate[v[[j]]],{i,1,Length[v]},{j,1,Length[v]}];
 
+
+
 (* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
+
 
 MatrixSqrt[m_?SquareMatrixQ]:=MatrixPower[m,1/2];
 
@@ -422,6 +459,7 @@ GateFidelity::argerr = "Both matrices have to be of the same dimension.";
 
 (* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
+
 
 sx = {{0,1},{1,0}};
 sy = {{0,-I},{I,0}};
@@ -518,6 +556,7 @@ Reshuffle[A_,{n_,m_}]:=Flatten[
 (* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
+
 Unitary2[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_]:=
 Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}}.DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
 
@@ -584,11 +623,14 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
     perm.(m1\[CircleTimes]m2).perm\[Transpose]
 ];
 
+
+
 (* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
-
+PartialTrace[A_, {}]:=A;
+PartialTrace[A_, dim_, {}]:=A;
 
 PartialTrace[A_, s_] := Block[ {d = Length[A], sys},
     If[ IntegerQ[s],
@@ -678,7 +720,7 @@ PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,i
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Entanglement*)
 
 
@@ -769,6 +811,8 @@ RandomState[d_,dist_:"HS"]:=Block[{A,U},
 ];
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an integer K>2, mesure \"`1`\" not implemented yet.";
 
+
+
 (* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
@@ -787,8 +831,11 @@ BlochToState[vec_]:=Block[{dim},
 ];
 BlochToState::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
 
+
+
 (* ::Section::Closed:: *)
 (*Package footer*)
+
 
 Print["Package QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
 
