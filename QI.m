@@ -245,7 +245,7 @@ RandomOrthogonal::usage = "<f>RandomOrthogonal</f>[<v>d</v>] returns a random or
 See: F. Mezzadri, NOTICES of the AMS, Vol. 54 (2007), 592-604."
 
 RandomState::usage = "<f>RandomState</f>[<v>d</v>,<v>dist</v>] - random density matrix of dimension <v>d</v>. \
-Argument dist can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or an integer <v>K</v>. 
+Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or an integer <v>K</v>. 
 ''<v>HS</v>'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. 
 ''<v>Bures</v>'' - gives a random state distributed according to Bures measure. 
 Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
@@ -331,7 +331,9 @@ qiHistory = {
     {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
     {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
 	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."},
-	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package"}
+	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package."},
+	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation imporoved."},
+	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -586,11 +588,66 @@ ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
 (*Partial trace and transposition*)
 
 
+
+
+PartialTrace[A_, s_] := Block[ {d = Length[A], sys},
+    If[ IntegerQ[s],
+      sys = {s}, (*else*)
+      sys = s
+    ];  
+    If[  IntegerQ[Sqrt[d]],
+    If[ Length[sys]==1 ,
+      Switch[sys[[1]],
+       1, PartialTrace1[A],
+       2, PartialTrace2[A],
+       _,Print["B1"]; Message[PartialTrace::syserr, sys]
+       ], (*else*)
+      If[ sys=={1,2} || sys=={2,1},
+        Tr[A], (*else*)
+        Print["B2"]; Message[PartialTrace::syserr, sys]
+      ]
+    ]
+    ,
+    Message[PartialTrace::dimerr, Dimensions[A]]    
+    ]
+  ];
+  
+
+
+PartialTrace[A_,dim_?VectorQ,s_]:=Block[{sys},
+	If[IntegerQ[s], sys={s}, (*else*) sys=s];
+    If[Length[dim] == 2 && Length[sys]==1,
+	   Switch[sys[[1]],
+        1, PartialTrace1[A,dim],
+        2, PartialTrace2[A,dim],
+        _, Message[PartialTrace::sysspecerr, Length[dim], Select[sys, Or[#>Length[dim],  # < 1]&]]
+        ]
+        ,(*else*)
+        If[Fold[#1 && (1<= #2 <= Length[dim])&,True,sys], 
+        	If[Union[sys] == Range[Length[dim]], 
+        		Tr[A], (*else*)
+                PartialTraceGeneral[A,dim,sys]
+        	],
+        (*else*)
+            Message[PartialTrace::sysspecerr, Length[dim], Select[sys, Or[#>Length[dim],  # < 1]&]]
+        ]
+    ]
+];
+
+PartialTrace::syserr = "The second argument is expected to be 1, 2 or {1,2} (`1` was given)";
+PartialTrace::dimerr = "This function expects square matrix of size d^2\[Times]d^2 (the matrix of size `1` was given)";
+PartialTrace::sysspecerr = "The system specification is invalid. In the case of `1`-partite systems, it is inpossible to trace out with respect to sub-systems `2`.";
+
+PartialTrace1[X_] := Block[{d = Sqrt[Length[X]]}, Total[X[[1 + d # ;; d + d #, 1 + d # ;; d + d # ]] & /@ Range[0, d - 1]]];
+PartialTrace2[X_] := Block[{d = Sqrt[Length[X]]}, Total[X[[1 + # ;; d^2 ;; d, 1 + # ;; d^2 ;; d]] & /@ Range[0, d - 1]]];
+PartialTrace1[X_, {d1_, d2_}] := Total[X[[1 + d2 # ;; d2 + d2 #, 1 + d2 # ;; d2 + d2 # ]] & /@ Range[0, d1 - 1]];
+PartialTrace2[X_, {d1_, d2_}] := Total[X[[1 + # ;; d1*d2 ;; d2, 1 + # ;; d1*d2 ;; d2]] & /@ Range[0, d2 - 1]];
+
 ListReshape[list_, shape_] := 
   FlattenAt[Fold[Partition[#1, #2] &, Flatten[list], Reverse[shape]], 
    1];
 
-PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
+PartialTraceGeneral[A_,dim_?VectorQ,sys_?VectorQ] := Block[
 	{offset, keep, dispose, keepdim, disposedim, perm1, perm2, perm, tensor},
 	offset=Length[dim];
 	keep=Complement[Range[offset], sys];
@@ -598,7 +655,7 @@ PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	perm1=Join[dispose,keep];
 	perm2=perm1+offset;
 	perm=Ordering[Join[perm1,perm2]];
-	tensor=ListReshape[\[Rho], Join[dim,dim]];
+	tensor=ListReshape[A, Join[dim,dim]];
 	keepdim=Apply[Times, Join[dim, dim][[keep]]];
 	disposedim=Apply[Times, Join[dim, dim][[dispose]]];
 	tensor=Transpose[tensor,perm];
@@ -606,7 +663,7 @@ PartialTrace[\[Rho]_,dim_?ListQ,sys_?ListQ] := Block[
 	Sum[tensor[[i,All,i,All]],{i,1,disposedim}]
 ];
 
-PartialTranspose[\[Rho]_,dim_?ListQ,sys_?ListQ]:=Block[{offset,tensor,perm,idx1,idx2,s,targetsys},
+PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,idx1,idx2,s,targetsys},
 	offset=Length[dim];
 	tensor=ListReshape[\[Rho], Join[dim,dim]];
 	targetsys=Union[sys];
@@ -618,7 +675,7 @@ PartialTranspose[\[Rho]_,dim_?ListQ,sys_?ListQ]:=Block[{offset,tensor,perm,idx1,
 	];
 	tensor=Transpose[tensor,InversePermutation[perm]];
 	ListReshape[tensor,Dimensions[\[Rho]]]
-]
+];
 
 
 (* ::Subsection::Closed:: *)
