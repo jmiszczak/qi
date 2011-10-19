@@ -233,11 +233,6 @@ Returns the partial trace of an operator <v>\[Rho]</v> acting on a composite sys
 <v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
 
 
-
-(* ::Subsection:: *)
-(*Entanglement*)
-
-
 (* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
@@ -361,7 +356,8 @@ qiHistory = {
 	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."},
 	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package."},
 	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation imporoved."},
-	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."}
+	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
+	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."}	
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -618,9 +614,10 @@ TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]]
 
 SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
 
-ProductSuperoperator[m1_,m2_]:=Block[{dim1=Length[m1],dim2=Length[m2],perm},
-    perm=ReshufflePermutation[Sqrt[dim1],Sqrt[dim2]];
-    perm.(m1\[CircleTimes]m2).perm\[Transpose]
+
+ProductSuperoperator[M1_,M2_]:=Block[{prod = M1\[CircleTimes]M2, q1, d1 = Sqrt[Length[M1]], d2 = Sqrt[Length[M2]]},
+    q1 = Table[Res[Reshuffle[Unres[prod[[i]], d2 d2], {{d1, d1}, {d2, d2}}]], {i,1, d1*d1*d2*d2}];
+    Table[Res[ Reshuffle[ Unres[(q1\[Transpose])[[i]], d2 d2], {{d1, d1}, {d2, d2}}]], {i,1,d1*d1*d2*d2}]\[Transpose]
 ];
 
 
@@ -807,7 +804,6 @@ RandomState[d_,dist_:"HS"]:=Block[{A,U},
 				Message[RandomState::argerr,dist]
 			]
 	]
-
 ];
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an integer K>2, mesure \"`1`\" not implemented yet.";
 
