@@ -190,6 +190,10 @@ IntegrateSU2::usage = "IntegrateSU2[f,U] - gives the integral \[Integral]f dU, w
 \nExample: Integration squares of absolute values of elements of ranom unitary matrix: IntegrateSU2[Abs[U\!\(\*SuperscriptBox[\(]\), \(2\)]\),U]"
 
 
+Unitary3::usage = "<f>Unitary3</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v>,<v>\[Tau]</v>,<v>a</v>,<v>b</v>,<v>c</v>,<v>ph</v>] returns the Euler parametrization of <v>U</v>(3).";
+
+Unitary4Canonical::usage = "<f>Unitary4Canonical</f>[<v>a1</v>,<v>a2</v>,<v>a3</v>] returns the parametrization of non-local unitary matrices for two qubits. \
+See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 
 
 
@@ -498,6 +502,11 @@ func = Expand[f/.replacement];
 1/(2*\[Pi])^(2 *Length[{list}])* Apply[Integrate[func,##]&,range]
 ];
 
+Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*\[Lambda]2*be].
+    MatrixExp[I*\[Lambda]3*ga].MatrixExp[I*\[Lambda]5*th].MatrixExp[I*\[Lambda]3*a].
+    MatrixExp[I*\[Lambda]2*b].MatrixExp[I*\[Lambda]3*c].MatrixExp[I*\[Lambda]8*ph];
+
+Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I*a1*KroneckerProduct[sx,sx]+a2*I*KroneckerProduct[sy,sy]+a3*I*KroneckerProduct[sz,sz]];
 
 
 End[] (* End Private Context *)

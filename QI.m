@@ -152,10 +152,7 @@ Unitary2Euler::usage = "<f>Unitary2</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamm
 
 SpecialUnitary2::usage ="<f>SpecialUnitary2</f>[\[Beta],\[Gamma],\[Delta]] returns a parametrization of <v>SU</v>(2). This is equivalent to <f>Unitary2</f>[0,\[Beta],\[Gamma],\[Delta]].";
 
-Unitary3::usage = "<f>Unitary3</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v>,<v>\[Tau]</v>,<v>a</v>,<v>b</v>,<v>c</v>,<v>ph</v>] returns the Euler parametrization of <v>U</v>(3).";
 
-Unitary4Canonical::usage = "<f>Unitary4Canonical</f>[<v>a1</v>,<v>a2</v>,<v>a3</v>] returns the parametrization of non-local unitary matrices for two qubits. \
-See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 
 StateVector::usage = "<f>StateVector</f>[{\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\),\!\(\*SubscriptBox[\"\[Phi]\", 
 RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\", 
@@ -357,7 +354,8 @@ qiHistory = {
 	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package."},
 	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation imporoved."},
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
-	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."}	
+	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
+	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."}
 };
 
 qiVersion = Last[qiHistory][[1]];
@@ -560,11 +558,6 @@ Unitary2Euler[\[Alpha]_,\[Theta]_,\[Phi]_,\[Psi]_]:={{E^(I*\[Alpha] + I*\[Phi])*
 
 SpecialUnitary2[\[Beta]_,\[Gamma]_,\[Delta]_]:=Unitary2[0,\[Beta],\[Gamma],\[Delta]];
 
-Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*\[Lambda]2*be].
-	MatrixExp[I*\[Lambda]3*ga].MatrixExp[I*\[Lambda]5*th].MatrixExp[I*\[Lambda]3*a].
-	MatrixExp[I*\[Lambda]2*b].MatrixExp[I*\[Lambda]3*c].MatrixExp[I*\[Lambda]8*ph];
-
-Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I*a1*KroneckerProduct[\[Sigma]x,\[Sigma]x]+a2*I*KroneckerProduct[\[Sigma]y,\[Sigma]y]+a3*I*KroneckerProduct[\[Sigma]z,\[Sigma]z]];
 
 StateVector[l_]:=Block[{pr,ph,N,ProbablityVector},
 	ProbablityVector[li_]:=Block[{ll,Ni},
