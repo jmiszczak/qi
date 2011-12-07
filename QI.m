@@ -352,7 +352,7 @@ qiHistory = {
     {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
 	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."},
 	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package."},
-	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation imporoved."},
+	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
 	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
 	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."}
