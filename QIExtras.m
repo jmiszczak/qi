@@ -82,7 +82,7 @@ ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kra
 Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of a density matrix \[Rho] representing a state of two-qubit system. This function uses Chop to provide numerical results.";
 
 
-Negativity::usage = "Negativity[\[Rho],m,n] returns the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
+Negativity::usage = "Negativity[\[Rho],{m,n}] returns the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
 RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
 
 
@@ -343,7 +343,7 @@ Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
 ];
 
 
-Negativity[\[Rho]_,m_,n_]:=Plus@@Select[Eigenvalues[PartialTranspose[\[Rho],{m,n},1]],#>0&];
+Negativity[\[Rho]_, {m_, n_}] := Plus@@Select[Eigenvalues[PartialTranspose[\[Rho], {m, n}, {1}]], # > 0 &];
 
 
 (* ::Subsection::Closed:: *)
