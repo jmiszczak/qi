@@ -273,6 +273,15 @@ Integer <v>K</v> - gives a random state generated with respect to induced measur
 (* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
+Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x. See also: GeneralizedPauliMatrices.";
+
+Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to \[Sigma]y. See also: GeneralizedPauliMatrices.";
+
+Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z. See also: GeneralizedPauliMatrices.";
+
+GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for \
+<v>SU(n)</v>. For <v>n=2</v> these are just Pauli matrices and for <v>n=3</v> - Gell-Mann matrices. \
+Note that identity matrix is not included in the list.";  (*See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";*)
 
 StateToBloch::usage = "<f>StateToBloch</f>[<v>A</v>] - for a square matrix <v>A</v> returns a vector of coefficients obtained from expansion on \
 normed generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
@@ -804,6 +813,19 @@ RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an i
 
 (* ::Subsection::Closed:: *)
 (*Bloch Representation*)
+
+Lambda1[i_ ,j_,n_]:=Table[KroneckerDelta[j,\[Mu]]KroneckerDelta[i,\[Nu]] + KroneckerDelta[j,\[Nu]]KroneckerDelta[i,\[Mu]] ,{\[Mu],1,n},{\[Nu],1,n}];
+
+Lambda2[i_ ,j_,n_]:=Table[-I(KroneckerDelta[i,\[Mu]]KroneckerDelta[j,\[Nu]] - KroneckerDelta[i,\[Nu]]KroneckerDelta[j,\[Mu]]) ,{\[Mu],1,n},{\[Nu],1,n}];
+
+Lambda3[i_,n_]:=Sqrt[2/(i^2-i)]DiagonalMatrix[Join[Append[Table[1,{i-1}],-(i-1)],Table[0,{n-i}]]];
+
+GeneralizedPauliMatrices[n_]:=Block[{l1,l2,l3,i,j},
+    l1=Flatten[Table[Lambda1[i,j,n],{i,1,n},{j,i+1,n}],1];
+    l2=Flatten[Table[Lambda2[i,j,n],{i,1,n},{j,i+1,n}],1];
+    l3=Table[Lambda3[i,n],{i,2,n}];
+    Join[l1,l2,l3]
+];
 
 
 StateToBloch[A_]:=Block[{dim},
