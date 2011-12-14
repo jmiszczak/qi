@@ -73,6 +73,7 @@ ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kra
 
 Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of a density matrix \[Rho] representing a state of two-qubit system. This function uses Chop to provide numerical results.";
 
+EntanglementOfFormation4::usage = "EntanglementOfFormation4[\[Rho]] returns entanglement of formation of density matrix  \[Rho] representing a state of two-qubit system."
 
 Negativity::usage = "Negativity[\[Rho],{m,n}] returns the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
 RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
@@ -315,16 +316,20 @@ GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower
 
 ExtendKraus[operators_,n_] := Block[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
-
 Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
-    evl=Eigenvalues[MatrixSqrt[sqrtM.(sy\[CircleTimes]sy).m\[Conjugate].(sy\[CircleTimes]sy).sqrtM]];
-    Max[0,Chop[Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]]
+evl=Eigenvalues[MatrixSqrt[sqrtM.(sy\[CircleTimes]sy).m.(sy\[CircleTimes]sy).sqrtM]];
+Max[0,Re[Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]]
 ];
 
 
-Negativity[\[Rho]_, {m_, n_}] := Plus@@Select[Eigenvalues[PartialTranspose[\[Rho], {m, n}, {1}]], # > 0 &];
+EntanglementOfFormation4[rho_] := Block[{h},
+  h[x_] := -x*Log0[x] - (1 - x)*Log0[1 - x];
+  h[1/2*(1 + Sqrt[1 - Concurrence4[rho]^2])]
+];
 
+Negativity[\[Rho]_, {m_, n_}] := Plus@@Select[Eigenvalues[PartialTranspose[\[Rho], {m, n}, {1}]], # < 0 &];
 
+   
 (* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 
