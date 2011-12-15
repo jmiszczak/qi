@@ -49,7 +49,7 @@ See also: <f>MatrixSqrt</f>.";
 
 MatrixRe::usage = "<f>MatrixRe</f>[<v>A</v>] returns a hermitian part of the matrix <v>A</v> i.e. <v>1/2(A+A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>)</v>.";
 
-MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an antyhermitian part of the matrix <v>A</v> i.e. <s>\!\(\*FractionBox[\"1\", \"2\"]\)(A-A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\))</s>.";
+MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an antyhermitian part of the matrix <v>A</v> i.e. <v>1/2(A-A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>)</v>.";
 
 Proj::usage = "<f>Proj</f>[<v>v</v>] returns projector of the vector <v>v</v>.";
 
@@ -64,23 +64,23 @@ between states <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s> and <s>\!\(\*Subsc
 <s>(\[Sum]\!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\)\!\(\*SuperscriptBox[\")\", \"2\"]\)</s>, where <s>\!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\)</s> are the \
 eigenvalues of <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s>.";
 
-Superfidelity::usage = "<f>Superfidelity</f>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] calculates superfidelity \
-between \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\) defined as \
-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] + Sqrt[1-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)]]Sqrt[1-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]]. \
-See: J.A. Miszczak et al., Quantum Information & Computation, Vol.9 No.1&2 (2009)."; 
+Superfidelity::usage = "<f>Superfidelity</f><s>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]</s> calculates superfidelity \
+between <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s> and <s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s> defined as \
+<s>Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] + Sqrt[1-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)]]Sqrt[1-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]]</s>. \
+See: J.A. Miszczak et al., Quantum Information \& Computation, Vol.9 No.1\&2 (2009)."; 
 
-Subfidelity::usage = "<f>Subfidelity</f>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] returns subfidelity between \
-states \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\) \
-See: J.A. Miszczak et al., Quantum Information & Computation, Vol.9 No.1&2 (2009).";
+Subfidelity::usage = "<f>Subfidelity</f><s>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]</s> returns subfidelity between \
+states <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s> and <s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s> \
+See: J.A. Miszczak et al., Quantum Information \& Computation, Vol.9 No.1\&2 (2009).";
 
-TraceNorm::usage = "<f>TraceNorm</f>[<v>A</v>] = \[Sum]\!\(\*SubscriptBox[\"\[Sigma]\", \"i\"]\), where \!\(\*SubscriptBox[\"\[Sigma]\", \"i\"]\) are the singular values of A. \
+TraceNorm::usage = "<f>TraceNorm</f>[<v>A</v>] = <s>\[Sum]\!\(\*SubscriptBox[\"\[Sigma]\", \"i\"]\)</s>, where <s>\!\(\*SubscriptBox[\"\[Sigma]\", \"i\"]\)</s> are the singular values of <v>A</v>. \
 See also: <f>TraceDistance</f>.";
 
-TraceDistance::usage = "<f>TraceDistance</f>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] \
-returns the trace distance between matrices \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\), \
-which is defined as \!\(\*FractionBox[\"1\", \"2\"]\)tr|\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)-\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)|.";
+TraceDistance::usage = "<f>TraceDistance</f>[<s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s>] \
+returns the trace distance between matrices <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s> and <s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s>, \
+which is defined as <s>\!\(\*FractionBox[\"1\", \"2\"]\)tr|\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)-\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)|</s>.";
 
-GateFidelity::usage = "<f>GateFidelity</f>[<v>U,V</v>] is equivalent to 1/d tr|UV\[ConjugateTranspose]|.";
+GateFidelity::usage = "<f>GateFidelity</f>[<v>U,V</v>] is equivalent to <v>1/d</v><s>tr|UV\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>|</v>.";
 
 
 
@@ -136,43 +136,41 @@ Unres::usage = "<f>Unres</f>[<v>v</v>,<v>c</v>] - de-reshaping of the vector int
 If the second parameter is omitted, then it is assumed that <v>v</v> can be mapped into a square matrix. See also: <f>Unvec</f>, <f>Res</f>.";
 
 Reshuffle::usage = "\
-<f>Reshuffle</f>[<v>\[Rho]</v>, {<v>drows</v>, <v>dcols</v>}] for a matrix of dimensions <v>(drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]])</v> \
-returns a reshuffled matrix with dimensions <v>(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]])</v>.
-Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <v>n^2\[Times]n^2</v>.";
-
+<f>Reshuffle</f>[<s>\[Rho]</s>, {<v>drows</v>, <v>dcols</v>}] for a matrix of dimensions <s>(drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]])</s> \
+returns a reshuffled matrix with dimensions <s>(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]])</s>.
+Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <s>n^2\[Times]n^2</s>.";
 
 
 (* ::Subsection:: *)
 (*Parametrizations*)
 
 
-Unitary2::usage = "<f>Unitary2</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v>,<v>\[Delta]</v>] returns a parametrization of <v>U</v>(2).";
+Unitary2::usage = "<f>Unitary2</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>,<s>\[Gamma]</s>,<s>\[Delta]</s>] returns a parametrization of <v>U</v>(2).";
 
-Unitary2Euler::usage = "<f>Unitary2</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v>,<v>\[Delta]</v>] returns the Euler parametrization of <v>U</v>(2).";
+Unitary2Euler::usage = "<f>Unitary2</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>,<s>\[Gamma]</s>,<s>\[Delta]</s>] returns the Euler parametrization of <v>U</v>(2).";
 
-SpecialUnitary2::usage ="<f>SpecialUnitary2</f>[\[Beta],\[Gamma],\[Delta]] returns a parametrization of <v>SU</v>(2). This is equivalent to <f>Unitary2</f>[0,\[Beta],\[Gamma],\[Delta]].";
+SpecialUnitary2::usage ="<f>SpecialUnitary2</f>[<s>\[Beta],\[Gamma],\[Delta]</s>] returns a parametrization of <v>SU</v>(2). \
+This is equivalent to <f>Unitary2</f>[<s>0,\[Beta],\[Gamma],\[Delta]</s>].";
 
 
-
-StateVector::usage = "<f>StateVector</f>[{\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\),\!\(\*SubscriptBox[\"\[Phi]\", 
-RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\", 
-RowBox[{\"2\", \" \", \"n\"}]]\)}] returns pure <v>n</v>+1-dimensional pure state (ket vector) constructed form probability distribution parametrize \
-by numbers {\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)} and phases \
-{\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)}. \
+StateVector::usage = "<f>StateVector</f>[{<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\),\!\(\*SubscriptBox[\"\[Phi]\", 
+RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \
+RowBox[{\"2\", \" \", \"n\"}]]\)</s>}] returns pure <v>n</v>+1-dimensional pure state (ket vector) constructed form probability distribution parametrize \
+by numbers {<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)</s>} and phases \
+{<s>\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)</s>}. \
 See also: <f>SymbolicVector</f>.";
-
 
 
 (* ::Subsection:: *)
 (*One-qubit states*)
 
 
-QubitKet::usage = "<f>QubitKet</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>] parametrization of the pure state (as a state vector) for one qubit as \
-(Cos[\[Alpha]] Exp[i\[Beta]], Sin[\[Alpha]]). This is equivalent to <f>StateVector</f>[{\[Alpha],\[Beta]}]. See also: <f>QubitPureState</f>, <f>StateVector</f>.";
+QubitKet::usage = "<f>QubitKet</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>] parametrization of the pure state (as a state vector) for one qubit as \
+(<s>Cos[\[Alpha]] Exp[i\[Beta]], Sin[\[Alpha]]</s>). This is equivalent to <f>StateVector</f>[{<s>\[Alpha],\[Beta]</s>}]. See also: <f>QubitPureState</f>, <f>StateVector</f>.";
 
-QubitPureState::usage = "<f>QubitPureState</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>] - \
+QubitPureState::usage = "<f>QubitPureState</f>[<s>\[Alpha],\[Beta]</s>] - \
 a parametrization of the pure state as a density matrix for one qubit. \
-This is just a alias for <v>Proj</v>[<v>QubitKet</v>[\[Alpha],\[Beta]]]. See also: <f>QubitKet</f>.";
+This is just a alias for <v>Proj</v>[<v>QubitKet</v>[<s>\[Alpha],\[Beta]</s>]]. See also: <f>QubitKet</f>.";
 
 
 
@@ -180,15 +178,15 @@ This is just a alias for <v>Proj</v>[<v>QubitKet</v>[\[Alpha],\[Beta]]]. See als
 (*Quantum channels*)
 
 
-ApplyKraus::usage = "<f>ApplyKraus</f>[<v>ck</v>,<v>\[Rho]</v>] - apply channel <v>ck</v>, given as a list of Kraus operators, \
-to the input state <v>\[Rho]</v>. See also: <f>ApplyUnitary</f>, <f>ApplyChannel</f>.";
+ApplyKraus::usage = "<f>ApplyKraus</f>[<v>ck</v>,<s>\[Rho]</s>] - apply channel <v>ck</v>, given as a list of Kraus operators, \
+to the input state <s>\[Rho]</s>. See also: <f>ApplyUnitary</f>, <f>ApplyChannel</f>.";
 
 ChannelToMatrix::usage = "<f>ChannelToMatrix</f>[<v>E</v>,<v>d</v>] returns matrix representation of a \
 channel <v>E</v> acting on <v>d</v>-dimensional state space. First argument should be a pure function <v>E</v> \
-such that <v>E</v>[<v>\[Rho]</v>] transforms input state according to the channel definition.";
+such that <v>E</v>[<s>\[Rho]</s>] transforms input state according to the channel definition.";
 
-ApplyChannel::usage = "<f>ApplayChannel</f>[<v>f</v>,<v>\[Rho]</v>] - apply channel <v>f</v>, given as a \
-pure function, to the input state <v>\[Rho]</v>. See also: <f>ApplyUnitary</f>, <f>ApplyKraus</f>."
+ApplyChannel::usage = "<f>ApplayChannel</f>[<v>f</v>,<s>\[Rho]</s>] - apply channel <v>f</v>, given as a \
+pure function, to the input state <s>\[Rho]</s>. See also: <f>ApplyUnitary</f>, <f>ApplyKraus</f>."
 
 Superoperator::usage = "<f>Superoperator</f>[<v>kl</v>] returns matrix representation of quantum channel \
 given as a list of Kraus operators. <f>Superoperator</f>[<v>fun</v>,<v>dim</v>] is just am alternative name \
@@ -210,23 +208,23 @@ TPChannelQ::usage = "<f>TPChannelQ</f>[<v>ck</v>] performs some checks on Kraus 
 
 SuperoperatorToKraus::usage = "<f>SuperoperatorToKraus</f>[<v>m</v>] returns Kraus operators for a given super operator <v>m</v>.";
 
-ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<v>\[CapitalPsi]</v>,<v>\[CapitalPhi]</v>] \
-computes a product superoperator of superoperatos <v>\[CapitalPsi]</v> and <v>\[CapitalPhi]</v>.";
+ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<s>\[CapitalPsi]</s>,<s>\[CapitalPhi]</s>] \
+computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[CapitalPhi]</s>.";
 
 
 (* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
-PartialTranspose::usage = "<f>PartialTranspose</f>[<v>\[Rho]</v>,<v>dim</v>,<v>sys</v>] - \
-Returns the partial transpose, according to systems <v>sys</v>, of density matrix <v>\[Rho]</v> composed of subsystems of dimensions <v>dim</v>.";
+PartialTranspose::usage = "<f>PartialTranspose</f>[<s>\[Rho]</s>,<v>dim</v>,<v>sys</v>] - \
+Returns the partial transpose, according to systems <v>sys</v>, of density matrix <s>\[Rho]</s> composed of subsystems of dimensions <v>dim</v>.";
 
-PartialTrace::usage = "<f>PartialTrace</f>[<v>\[Rho]</v>,<v>sys</v>] - \
-Returns the partial trace of an operator <v>\[Rho]</v> acting on a bipartite (<v>d\[Times]d</v>)-dimensional system, \
-assuming that matrix <v>\[Rho]</v> is (<v>\!\(\*SuperscriptBox[\(d\), \(2\)]\)\[Times]\!\(\*SuperscriptBox[\(d\), \(2\)]\)</v>) dimensional. \
+PartialTrace::usage = "<f>PartialTrace</f>[<s>\[Rho]</s>,<v>sys</v>] - \
+Returns the partial trace of an operator <s>\[Rho]</s> acting on a bipartite (<s>d\[Times]d</s>)-dimensional system, \
+assuming that matrix <s>\[Rho]</s> is (<s>\!\(\*SuperscriptBox[\(d\), \(2\)]\)\[Times]\!\(\*SuperscriptBox[\(d\), \(2\)]\)</s>) dimensional. \
 In this case the system specification can be given as a integer 1 or 2, by the list of integers consisting only 1 or 2 or by the empty list. 
-<f>PartialTrace</f>[<v>\[Rho]</v>,<v>dims</v>,<v>sys</v>] - \
-Returns the partial trace of an operator <v>\[Rho]</v> acting on a composite system with subsystem dimensions given in the list \
+<f>PartialTrace</f>[<s>\[Rho]</s>,<v>dims</v>,<v>sys</v>] - \
+Returns the partial trace of an operator <s>\[Rho]</s> acting on a composite system with subsystem dimensions given in the list \
 <v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
 
 
@@ -253,7 +251,7 @@ this case ket will be in product form d[[1]]\[CircleTimes]...\[CircleTimes]d[[k]
 RandomDynamicalMatrix::usage = "<f>RandomDynamicalMatrix</f>[<v>d</v>,<v>k</v>] returns dynamical matrix of operation acting \
 on <v>d</v>-dimensional states with <v>k</v> eigenvalues equal to 0. Thanks to Wojtek Bruzda. see Random Quantum Operations DOI[10.1016/j.physleta.2008.11.043].";
 
-GinibreMatrix::usage = "<f>GinibreMatrix</f>[<v>m</v>,<v>n</v>] returns complex matrix of dimension <v>m\[Cross]n</v> with normal distribution of real and imaginary parts.";
+GinibreMatrix::usage = "<f>GinibreMatrix</f>[<v>m</v>,<v>n</v>] returns complex matrix of dimension <s>m\[Cross]n</s> with normal distribution of real and imaginary parts.";
 
 RandomSpecialUnitary::usage = "<f>RandomSpecialUnitary</f>[<v>d</v>] returns a random special unitary matrix of size <v>d</v>. See <f>RandomUnitary</f>.";
 
@@ -265,22 +263,22 @@ See: F. Mezzadri, NOTICES of the AMS, Vol. 54 (2007), 592-604."
 
 RandomState::usage = "<f>RandomState</f>[<v>d</v>,<v>dist</v>] - random density matrix of dimension <v>d</v>. \
 Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or an integer <v>K</v>. 
-''<v>HS</v>'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. 
-''<v>Bures</v>'' - gives a random state distributed according to Bures measure. 
-Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
+\t ''<v>HS</v>'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. 
+\t ''<v>Bures</v>'' - gives a random state distributed according to Bures measure. 
+\t Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
 
 
 (* ::Subsection:: *)
 (*Bloch Representation*)
 
 
-Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x. See also: GeneralizedPauliMatrices.";
+Lambda1::usage = "<f>Lambda1</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda1</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]x</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
-Lambda2::usage = "Lambda2[i,j,n] generalized Pauli matrix. For example Lambda2[1,2,2] is equal to \[Sigma]y. See also: GeneralizedPauliMatrices.";
+Lambda2::usage = "<f>Lambda2</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda2</f>[<v>1,2,2</v>] is equal to <s>\[Sigma]y</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
-Lambda3::usage ="Lambda3[i,n] generalized Pauli matrix. For example Lambda3[2,2] is equal to \[Sigma]z. See also: GeneralizedPauliMatrices.";
+Lambda3::usage ="<f>Lambda3</f>[<v>i,n</v>] generalized Pauli matrix. For example <f>Lambda3</f>[<v>2,2</v>] is equal to <s>\[Sigma]z</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
-GeneralizedPauliMatrices::usage = "GeneralizedPauliMatrices[n] returns list of generalized Pauli matrices for \
+GeneralizedPauliMatrices::usage = "<f>GeneralizedPauliMatrices</f>[<v>n</v>] returns list of generalized Pauli matrices for \
 <v>SU(n)</v>. For <v>n=2</v> these are just Pauli matrices and for <v>n=3</v> - Gell-Mann matrices. \
 Note that identity matrix is not included in the list.";  (*See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";*)
 
@@ -292,7 +290,6 @@ returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients t
 expansion on normalized generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
 
 
-
 (* ::Section:: *)
 (*Private definitions*)
 
@@ -300,7 +297,7 @@ expansion on normalized generalized Pauli matrices. See also: <f>GeneralizedPaul
 Begin["`Private`"];
 
 QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
-(*(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];*)
+(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];
 
 qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
 
@@ -365,8 +362,9 @@ qiHistory = {
 	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
 	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
-	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."}
-};
+	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
+	{"0.4.32",  "25/10/2011", "Zbyszek, Jarek", "Documentation improved."}
+};  
 
 qiVersion = Last[qiHistory][[1]];
 
@@ -434,7 +432,8 @@ Proj[v_]:=Table[v[[i]]Conjugate[v[[j]]],{i,1,Length[v]},{j,1,Length[v]}];
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
+
 (*Fidelity, trace distance etc.*)
 
 

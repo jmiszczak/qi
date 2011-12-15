@@ -1,1 +1,86 @@
-\textbf{MatrixRe}[$A$] returns a hermitian part of the matrix $A$ i.e. $1/2(A+A^{\dagger })$.
+\begin{itemize}\item  \textbf{ApplayChannel}[$f$,$\rho$] - apply channel $f$, given as a pure function, to the input state $\rho$. See also: \textbf{ApplyUnitary}, \textbf{ApplyKraus}.
+\item  \textbf{ApplyKraus}[$ck$,$\rho$] - apply channel $ck$, given as a list of Kraus operators, to the input state $\rho$. See also: \textbf{ApplyUnitary}, \textbf{ApplyChannel}.
+\item  \textbf{BlochToState}[$v$] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: \textbf{GeneralizedPauliMatrices}.
+\item  \textbf{ChannelToMatrix}[$E$,$d$] returns matrix representation of a channel $E$ acting on $d$-dimensional state space. First argument should be a pure function $E$ such that $E$[$\rho$] transforms input state according to the channel definition.
+\item  $cnot$ - Controlled not matrix for two qubits.
+\item  \textbf{ComplexToPoint}[$z$] returns a real and an imaginary parts of a complex number $z$ as a pair of real numbers.
+\item  \textbf{DynamicalMatrix} returns a dynamical matrix of quantum channel\newline{}
+\textbf{DynamicalMatrix}[$ch$] -  operates on a quantum channel given as a list of Kraus operators.\newline{}
+\textbf{DynamicalMatrix}[$fun$,$dim$]  - operates on a a function $fun$ acting on $dim$-dimensional space. \newline{}
+See also: \textbf{Superoperator}, \textbf{ChannelToMatrix}.
+\item  \textbf{Fidelity}[$\rho _1$,$\rho _2$] returns the quantum fidelity between states $\rho _1$ and $\rho _2$ calculated using a simplified formula as $\text{($\sum $}\lambda _i)^2$, where $\lambda _i$ are the eigenvalues of $\rho _1\rho _2$.
+\item  \textbf{GateFidelity}[$U,V$] is equivalent to $1/d\text{tr$|$UV} ^{\dagger }|$.
+\item  \textbf{GeneralizedPauliMatrices}[$n$] returns list of generalized Pauli matrices for $SU(n)$. For $n=2$ these are just Pauli matrices and for $n=3$ - Gell-Mann matrices. Note that identity matrix is not included in the list.
+\item  \textbf{GinibreMatrix}[$m$,$n$] returns complex matrix of dimension $\text{m$\times $n}$ with normal distribution of real and imaginary parts.
+\item  $id$ - Identity matrix for one qubit. See also: IdentityMatrix.
+\item  \textbf{Jamiolkowski}[$K$] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators $K$. \newline{}
+\textbf{Jamiolkowski}[$fun$,$dim$] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on $dim$-dimensional space. See also: \textbf{Superoperator}, \textbf{ChannelToMatrix}, \textbf{DynamicalMatrix}.
+\item  \textbf{Lambda1}[$i,j,n$] generalized Pauli matrix. For example \textbf{Lambda1}[$1,2,2$] is equal to Pauli $\text{$\sigma $x}$. See also: \textbf{GeneralizedPauliMatrices}.
+\item  \textbf{Lambda2}[$i,j,n$] generalized Pauli matrix. For example \textbf{Lambda2}[$1,2,2$] is equal to $\text{$\sigma $y}$. See also: \textbf{GeneralizedPauliMatrices}.
+\item  \textbf{Lambda3}[$i,n$] generalized Pauli matrix. For example \textbf{Lambda3}[$2,2$] is equal to $\text{$\sigma $z}$. See also: \textbf{GeneralizedPauliMatrices}.
+\item  \textbf{MatrixAbs}[$A$] returns absolute value for matrix $A$ defined as \textbf{MatrixSqrt}[$A.A^{\dagger }$]. See also: \textbf{MatrixSqrt}.
+\item  \textbf{MatrixIm}[$A$] returns an antyhermitian part of the matrix $A$ i.e. $1/2(A-A^{\dagger })$.
+\item  \textbf{MatrixRe}[$A$] returns a hermitian part of the matrix $A$ i.e. $1/2(A+A^{\dagger })$.
+\item  \textbf{MatrixSqrt}[$A$] returns square root for the matrix $A$.
+\item  \textbf{PartialTrace}[$\rho$,$sys$] - Returns the partial trace of an operator $\rho$ acting on a bipartite ($\text{d$\times $d}$)-dimensional system, assuming that matrix $\rho$ is ($d^2\times d^2$) dimensional. In this case the system specification can be given as a integer 1 or 2, by the list of integers consisting only 1 or 2 or by the empty list. \newline{}
+\textbf{PartialTrace}[$\rho$,$dims$,$sys$] - Returns the partial trace of an operator $\rho$ acting on a composite system with subsystem dimensions given in the list $dims$. List $sys$ specifies systems to be discarded.
+\item  \textbf{PartialTranspose}[$\rho$,$dim$,$sys$] - Returns the partial transpose, according to systems $sys$, of density matrix $\rho$ composed of subsystems of dimensions $dim$.
+\item  \textbf{ProductSuperoperator}[$\Psi$,$\Phi$] computes a product superoperator of superoperatos $\Psi$ and $\Phi$.
+\item  \textbf{Proj}[$v$] returns projector of the vector $v$.
+\item  \textbf{QubitKet}[$\alpha$,$\beta$] parametrization of the pure state (as a state vector) for one qubit as ($\text{Cos[$\alpha $] Exp[i$\beta $], Sin[$\alpha $]}$). This is equivalent to \textbf{StateVector}[{$\text{$\alpha $,$\beta $}$}]. See also: \textbf{QubitPureState}, \textbf{StateVector}.
+\item  \textbf{QubitPureState}[$\text{$\alpha $,$\beta $}$] - a parametrization of the pure state as a density matrix for one qubit. This is just a alias for $Proj$[$QubitKet$[$\text{$\alpha $,$\beta $}$]]. See also: \textbf{QubitKet}.
+\item  \textbf{RandomDynamicalMatrix}[$d$,$k$] returns dynamical matrix of operation acting on $d$-dimensional states with $k$ eigenvalues equal to 0. Thanks to Wojtek Bruzda. see Random Quantum Operations DOI[10.1016/j.physleta.2008.11.043].
+\item  \textbf{RandomKet}[$d$] - for integer $d$ returns a random ket vector in $d$-dimensional space. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664. \newline{}
+\textbf{RandomKet}[{$d1$,$d2$}, $type$] - for integers $d1$, $d2$ returns a random ket vector in $d1 d2$-dimensional space with distribution specified by $type$. \newline{}
+The parameter $type$ can be:\newline{}
+\indent{} ''Sep'' - in this case function returns separable random vectors,\newline{}
+\indent{} ''MaxEnt'' - in this case function returns maximally entangled random vectors,\newline{}
+\indent{} $l$ list of positive numbers summing up to 1, the length of the list must be less or equal to the Min[$d1$,$d2$] - in this case function returns random vectors with fixed Schmidt numbers given by $l$.
+\item  \textbf{RandomOrthogonal}[$d$] returns a random orthogonal matrix of size $d$ using $QR$ decomposition. See: F. Mezzadri, NOTICES of the AMS, Vol. 54 (2007), 592-604.
+\item  \textbf{RandomSimplex}[$d$] generates a point on a $d$-dimensional simplex according to the uniform distibution.
+\item  \textbf{RandomSpecialUnitary}[$d$] returns a random special unitary matrix of size $d$. See \textbf{RandomUnitary}.
+\item  \textbf{RandomState}[$d$,$dist$] - random density matrix of dimension $d$. Argument $dist$ can be ''$HS$'' (default value), ''$Bures$'' or an integer $K$. \newline{}
+\indent{} ''$HS$'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. \newline{}
+\indent{} ''$Bures$'' - gives a random state distributed according to Bures measure. \newline{}
+\indent{} Integer $K$ - gives a random state generated with respect to induced measure with an ancilla system od dimension K.
+\item  \textbf{RandomUnitary}[$d$] returns a random unitary matrix of size $d$ using $QR$ decomposition. See: F. Mezzadri,  NOTICES of the AMS, Vol. 54 (2007), 592-604.
+\item  \textbf{Res}[$A$] is equivalent to \textbf{Vec}[Transpose[$A$]]. Reshaping mapsmatrix $A$ into a vector row by row. Note, that this is different then thereshape operation in $Matlab$ or $GNU Octave$.
+\item  \textbf{Reshuffle}[$\rho$, {$drows$, $dcols$}] for a matrix of dimensions $\text{(drows[[1]]$\times $drows[[2]])$\times $(dcols[[1]]$\times $dcols[[2]])}$ returns a reshuffled matrix with dimensions $\text{(drows[[1]]$\times $dcols[[1]])$\times $(drows[[2]]$\times $dcols[[2]])}$.\newline{}
+Parameters {$drows$,$dcols$} can be ommited for a square matrix of dimension $\text{n${}^{\wedge}$2$\times $n${}^{\wedge}$2}$.
+\item  \textbf{SchmidtDecomposition}[$x$,$dim$] - accepts a vector or a matrix as a first argument and returns apropriate Schmidt decomposition. The second argument is optional and specifies the dimensions of subsystems.\newline{}
+If $x$ is a vector\newline{}
+\indent{} \textbf{SchmidtDecomposition}[$x$] assumes that $x$ is ($n^2$)-dimensional,\newline{}
+\indent{} \textbf{SchmidtDecomposition}[$x$,{$n$,$m$}] assumes that the vector is a $n xm$-dimensional.\newline{}
+If $x$ is a matrix, this function can be used in three different ways.\newline{}
+\indent{} \textbf{SchmidtDecomposition}[$x$] assumes that $x$ is ($n^2xn^2$)-dimensional, \newline{}
+\indent{} \textbf{SchmidtDecomposition}[$x$,{$n$,$m$}] assume that the matrix is a $n mxn m$ square matrix and\newline{}
+\indent{} \textbf{SchmidtDecomposition}[$x$,{{$r1$,$r2$},{$c1$,$c2$}]\newline{}
+For example, for a matrix $mtx$ of dimension $r1 r2x c1 c2$ one can obtain a Schmidt decomposition on $r1 c1(x) r2 c2$ system as \newline{}
+\indent{} $sd$ = \textbf{SchmidtDecomposition}[$mtx$, {{$r1$, $r2$}, {$c1$, $c2$}}];\newline{}
+and reconstruct the original matrix as\newline{}
+\indent{} $mtx$ == Sum[$sd$[[$i$,1]]*KroneckerProduct[$sd$[[$i$,2]], $sd$[[$i$,3]]], {$i$, Length[$sd$]}];
+\item  \textbf{SpecialUnitary2}[$\text{$\beta $,$\gamma $,$\delta $}$] returns a parametrization of $SU$(2). This is equivalent to \textbf{Unitary2}[$\text{0,$\beta $,$\gamma $,$\delta $}$].
+\item  \textbf{SquareMatrixQ}[$A$] returns True only if $A$ is a square matrix, and gives False otherwise.
+\item  \textbf{StateToBloch}[$A$] - for a square matrix $A$ returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: \textbf{GeneralizedPauliMatrices}.
+\item  \textbf{StateVector}[{$\theta _1\text{,...,}\theta _n,\phi _{n+1}\text{,...,}\phi _{2 n}$}] returns pure $n$+1-dimensional pure state (ket vector) constructed form probability distribution parametrize by numbers {$\theta _1\text{,...,}\theta _n$} and phases {$\phi _1\text{,...,}\phi _n$}. See also: \textbf{SymbolicVector}.
+\item  \textbf{Subfidelity}$\left[\rho _1,\rho _2\right]$ returns subfidelity between states $\rho _1$ and $\rho _2$ See: J.A. Miszczak et al., Quantum Information \& Computation, Vol.9 No.1\&2 (2009).
+\item  \textbf{Superfidelity}$\left[\rho _1,\rho _2\right]$ calculates superfidelity between $\rho _1$ and $\rho _2$ defined as $\text{Tr[}\rho _1.\rho _2\text{] + Sqrt[1-Tr[}\rho _1.\rho _1\text{]]Sqrt[1-Tr[}\rho _2.\rho _2\text{]]}$. See: J.A. Miszczak et al., Quantum Information \& Computation, Vol.9 No.1\&2 (2009).
+\item  \textbf{Superoperator}[$kl$] returns matrix representation of quantum channel given as a list of Kraus operators. \textbf{Superoperator}[$fun$,$dim$] is just am alternative name for \textbf{ChannelToMatrix}[$fun$,$dim$] and returns matrix representation of quantum channel, given as a pure function, acting on $dim$-dimensional space. See also: \textbf{ChannelToMatrix}.
+\item  \textbf{SuperoperatorToKraus}[$m$] returns Kraus operators for a given super operator $m$.
+\item  $sx$ - Pauli matrix $sx$.
+\item  $sy$ - Pauli matrix $sy$.
+\item  \textbf{SymbolicBistochasticMatrix}[$sym, dim$] produces symbolic bistochastic matrix size $dim$. See also: \textbf{SymbolicMatrix, SymbolicVector}.
+\item  \textbf{SymbolicHermitianMatrix}[$sym,n$] produces a $\text{n$\times $n}$ Hermitian matrix. See also: \textbf{SymbolicMatrix, SymbolicVector}.
+\item  \textbf{SymbolicMatrix}[$a,m,n$] returns $\text{m$\times $n}$-matrix with elements $a[i,j], i=1,...,m, j=1,...,n$.If the third argument is ommited this function returns square $\text{m$\times $m}$ matrix. This functions can save you some keystrokes and, thanks to TeXForm function, its results can be easily incorporated in LaTeX documents.
+\item  \textbf{SymbolicVector}[$a,n$] returns a vector with $n$ elements $a[i],i=1,...,n$.
+\item  $sz$ - Pauli matrix $sz$.
+\item  \textbf{TPChannelQ}[$ck$] performs some checks on Kraus operators $ck$. Use this if you want to check if they represent quantum channel.
+\item  \textbf{TraceDistance}[$\rho _1,\rho _2$] returns the trace distance between matrices $\rho _1$ and $\rho _2$, which is defined as $\left.\frac{1}{2}\text{tr$|$}\rho _1-\rho _2\right|$.
+\item  \textbf{TraceNorm}[$A$] = $\sum \sigma _i$, where $\sigma _i$ are the singular values of $A$. See also: \textbf{TraceDistance}.
+\item  \textbf{Unitary2}[$\alpha$,$\beta$,$\gamma$,$\delta$] returns a parametrization of $U$(2).
+\item  \textbf{Unitary2}[$\alpha$,$\beta$,$\gamma$,$\delta$] returns the Euler parametrization of $U$(2).
+\item  \textbf{Unres}[$v$,$c$] - de-reshaping of the vector into a matrix with $c$ columns. If the second parameter is omitted, then it is assumed that $v$ can be mapped into a square matrix. See also: \textbf{Unvec}, \textbf{Res}.
+\item  \textbf{Unvec}[$v,c$] - de-vectorization of the vector into the matrix with $c$ columns. If the second parameter is omitted then it is assumed that $v$ can be mapped into square matrix. See also: \textbf{Unres, Vec}.
+\item  \textbf{Vec}[$A$] - vectorization of the matrix $A$ column by column. See also: \textbf{Res}.
+\item  $wh$ - Hadamard gate for one qubit.
+\end{itemize}

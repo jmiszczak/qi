@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      9468,        241]
-NotebookOptionsPosition[      8798,        212]
-NotebookOutlinePosition[      9134,        227]
-CellTagsIndexPosition[      9091,        224]
+NotebookDataLength[     10259,        252]
+NotebookOptionsPosition[      9740,        229]
+NotebookOutlinePosition[     10098,        245]
+CellTagsIndexPosition[     10055,        242]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -31,187 +31,205 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Package QI version \"\>", 
-   "\[InvisibleSpace]", "\<\"0.4.31\"\>", 
+   "\[InvisibleSpace]", "\<\"0.4.32\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
    "\[InvisibleSpace]", "\<\"25/10/2011\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.4.31", " (last modification: ", "25/10/2011", 
+  "Package QI version ", "0.4.32", " (last modification: ", "25/10/2011", 
    ")."],
   Editable->False]], "Print",
  CellChangeTimes->{
-  3.5329355789689083`*^9, 3.532935692301539*^9, 3.5329363511111794`*^9, 
-   3.5329400593225613`*^9, 3.532940109421932*^9, {3.5329405758525963`*^9, 
-   3.532940602527484*^9}, 3.532941946852467*^9, 3.532942659456661*^9, {
-   3.532942818406581*^9, 3.532942829176446*^9}, 3.532942928556281*^9, 
-   3.532943009122909*^9, 3.532943144529831*^9}]
+  3.532943276205545*^9, 3.5329433998690968`*^9, 3.532943863888913*^9, {
+   3.532943917757277*^9, 3.532943945218823*^9}, 3.532943998783107*^9, {
+   3.532944074818474*^9, 3.532944094507978*^9}, 3.53294412800395*^9, {
+   3.5329441837686243`*^9, 3.532944211937299*^9}, 3.532944319112109*^9, 
+   3.5329443758332567`*^9, 3.532944550329632*^9, 3.532945084872141*^9, 
+   3.532945126531445*^9, 3.5329451624274178`*^9, 3.532945318313012*^9, 
+   3.5329457623274107`*^9, 3.532945809153577*^9, 3.532945965387356*^9, 
+   3.5329464408958273`*^9, 3.5329472900103292`*^9, 3.532947892195366*^9, 
+   3.532949868460103*^9, 3.532950242324728*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"SetDirectory", "[", 
-  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.532936036938587*^9, 3.532936045639469*^9}}],
-
-Cell[BoxData["\<\"/home/jam/Desktop/smietnik\"\>"], "Output",
- CellChangeTimes->{
-  3.532936046065502*^9, 3.532936351982396*^9, 3.53293683969632*^9, 
-   3.532936871422243*^9, 3.532940059585376*^9, {3.5329400994437838`*^9, 
-   3.5329401097170362`*^9}, {3.5329405772413073`*^9, 3.53294060323615*^9}, 
-   3.532941947174424*^9, 3.532942659653638*^9, 3.532942818913064*^9, 
-   3.5329429291852283`*^9, 3.53294314509636*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
+Cell["\<\
+Aby wygenerowac plik tex - owy z dokumentacja nalezy zakomentowac pierwsze \
+dwie linie w sekcji Private (wszystko przed qiAuthors) w pliku QI.m\
+\>", "Subsubtitle",
+ CellChangeTimes->{{3.5329499112585497`*^9, 3.532949938512663*^9}, {
+  3.5329499693853483`*^9, 3.5329500346361322`*^9}}],
 
 Cell[BoxData[
- RowBox[{"myStringList", "=", 
-  RowBox[{"StringSplit", "[", 
+ RowBox[{
+  RowBox[{"TeXConverter", "[", "docString_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
    RowBox[{
-    RowBox[{"MatrixRe", "::", "usage"}], ",", 
     RowBox[{"{", 
      RowBox[{
-      RowBox[{"\"\<<s>\>\"", "\[Rule]", "\"\<<s>\>\""}], ",", 
-      RowBox[{"\"\<</s>\>\"", "\[Rule]", "\"\<</s>\>\""}], ",", 
-      RowBox[{"\"\<<f>\>\"", "\[Rule]", "\"\<<f>\>\""}], ",", 
-      RowBox[{"\"\<</f>\>\"", "\[Rule]", "\"\<</f>\>\""}], ",", 
-      RowBox[{"\"\<<v>\>\"", "\[Rule]", "\"\<<v>\>\""}], ",", 
-      RowBox[{"\"\<</v>\>\"", "\[Rule]", "\"\<</v>\>\""}]}], "}"}]}], 
-   "]"}]}]], "Input",
- CellChangeTimes->{{3.5329407355867987`*^9, 3.532940738084222*^9}, {
-   3.5329407749699697`*^9, 3.532940848814886*^9}, {3.532940890103416*^9, 
-   3.532940896329627*^9}, {3.532941150447165*^9, 3.532941227344054*^9}, {
-   3.532941280236444*^9, 3.532941285652618*^9}, {3.532941746794942*^9, 
-   3.5329417777318068`*^9}, 3.532942652716037*^9, {3.532942749147975*^9, 
-   3.53294277252155*^9}, 3.532943005493724*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"<f>\"\>", ",", "\<\"MatrixRe\"\>", ",", "\<\"</f>\"\>", 
-   ",", "\<\"[\"\>", ",", "\<\"<v>\"\>", ",", "\<\"A\"\>", 
-   ",", "\<\"</v>\"\>", 
-   ",", "\<\"] returns a hermitian part of the matrix \"\>", 
-   ",", "\<\"<v>\"\>", ",", "\<\"A\"\>", ",", "\<\"</v>\"\>", 
-   ",", "\<\" i.e. \"\>", ",", "\<\"<v>\"\>", ",", "\<\"1/2(A+A\"\>", 
-   ",", "\<\"</v>\"\>", ",", "\<\"\"\>", ",", "\<\"<s>\"\>", 
-   ",", "\<\"\\!\\(\\*SuperscriptBox[\\\" \\\", \\\"\[Dagger]\\\"]\\)\"\>", 
-   ",", "\<\"</s>\"\>", ",", "\<\"\"\>", ",", "\<\"<v>\"\>", ",", "\<\")\"\>",
-    ",", "\<\"</v>\"\>", ",", "\<\".\"\>"}], "}"}]], "Output",
- CellChangeTimes->{{3.532940834941702*^9, 3.53294084922558*^9}, {
-   3.532940892442967*^9, 3.532940896813121*^9}, {3.532941152371511*^9, 
-   3.532941227803495*^9}, 3.5329412860744257`*^9, 3.532941778206822*^9, {
-   3.532941935459318*^9, 3.532941947388887*^9}, 3.5329419909449863`*^9, {
-   3.532942653437546*^9, 3.532942660267145*^9}, 3.5329427729910383`*^9, {
-   3.5329428199459867`*^9, 3.532942831438072*^9}, 3.532942930277635*^9, 
-   3.532943011736623*^9, {3.532943140669731*^9, 3.5329431455827503`*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"inMathMode", "=", "False"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"inFunctionMode", "=", "False"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"inVariableMode", "=", "False"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"result", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"For", "[", 
-   RowBox[{
-    RowBox[{"i", "=", "1"}], ",", 
-    RowBox[{"i", "\[LessEqual]", 
-     RowBox[{"Length", "[", "myStringList", "]"}]}], ",", " ", 
-    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+     "myStringList", ",", "inMathMode", ",", "inFunctionMode", ",", 
+      "inVariableMode", ",", "result"}], "}"}], ",", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"Switch", "[", 
-      RowBox[{
-       RowBox[{"myStringList", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", "\[IndentingNewLine]", 
-       "\"\<<s>\>\"", ",", 
-       RowBox[{
-        RowBox[{"inMathMode", "=", "True"}], ";", 
-        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
-       "\"\<</s>\>\"", ",", 
-       RowBox[{
-        RowBox[{"inMathMode", "=", "False"}], ";", 
-        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
-       "\"\<<f>\>\"", ",", 
-       RowBox[{
-        RowBox[{"inFunctionMode", "=", "True"}], ";", 
-        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
-       "\"\<</f>\>\"", ",", 
-       RowBox[{
-        RowBox[{"inFunctionMode", "=", "False"}], ";", 
-        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
-       "\"\<<v>\>\"", ",", 
-       RowBox[{
-        RowBox[{"inVariableMode", "=", "True"}], ";", 
-        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
-       "\"\<</v>\>\"", ",", 
-       RowBox[{
-        RowBox[{"inVariableMode", "=", "False"}], ";", 
-        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", "_", 
-       ",", "Null"}], "\[IndentingNewLine]", "]"}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"If", "[", 
-      RowBox[{"inMathMode", ",", "\[IndentingNewLine]", 
-       RowBox[{"result", "=", 
-        RowBox[{"result", "<>", "\"\<$\>\"", "<>", 
-         RowBox[{"ToString", "[", 
-          RowBox[{"TeXForm", "[", 
-           RowBox[{"myStringList", "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "<>", 
-         "\"\<$\>\""}]}]}], "\[IndentingNewLine]", "]"}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"If", "[", 
-      RowBox[{"inFunctionMode", ",", "\[IndentingNewLine]", 
-       RowBox[{"result", "=", 
-        RowBox[{"result", "<>", "\"\<\\\\textbf{\>\"", "<>", 
-         RowBox[{"myStringList", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<}\>\""}]}]}], 
-      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"If", "[", 
-      RowBox[{"inVariableMode", ",", "\[IndentingNewLine]", 
-       RowBox[{"result", "=", 
-        RowBox[{"result", "<>", "\"\<$\>\"", "<>", 
-         RowBox[{"myStringList", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<$\>\""}]}]}], 
-      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{"!", 
-        RowBox[{"(", 
+     RowBox[{"myStringList", "=", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"docString", ",", 
+        RowBox[{"{", 
          RowBox[{
-         "inMathMode", "||", "inFunctionMode", "||", "inVariableMode"}], 
-         ")"}]}], ",", "\[IndentingNewLine]", 
-       RowBox[{"result", "=", 
-        RowBox[{"result", "<>", 
-         RowBox[{"myStringList", "[", 
-          RowBox[{"[", "i", "]"}], "]"}]}]}]}], "]"}]}]}], 
-   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"result", "=", 
-  RowBox[{"StringReplace", "[", 
-   RowBox[{"result", ",", 
-    RowBox[{"\"\<$$\>\"", "\[Rule]", "\"\<\>\""}]}], "]"}]}]}], "Input",
+          RowBox[{"\"\<<s>\>\"", "\[Rule]", "\"\<<s>\>\""}], ",", 
+          RowBox[{"\"\<</s>\>\"", "\[Rule]", "\"\<</s>\>\""}], ",", 
+          RowBox[{"\"\<<f>\>\"", "\[Rule]", "\"\<<f>\>\""}], ",", 
+          RowBox[{"\"\<</f>\>\"", "\[Rule]", "\"\<</f>\>\""}], ",", 
+          RowBox[{"\"\<<v>\>\"", "\[Rule]", "\"\<<v>\>\""}], ",", 
+          RowBox[{"\"\<</v>\>\"", "\[Rule]", "\"\<</v>\>\""}]}], "}"}]}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"inMathMode", "=", "False"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"inFunctionMode", "=", "False"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"inVariableMode", "=", "False"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"result", "=", "\"\<\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", 
+        RowBox[{"Length", "[", "myStringList", "]"}]}], ",", " ", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Switch", "[", 
+         RowBox[{
+          RowBox[{"myStringList", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          "\"\<<s>\>\"", ",", 
+          RowBox[{
+           RowBox[{"inMathMode", "=", "True"}], ";", 
+           RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+          "\"\<</s>\>\"", ",", 
+          RowBox[{
+           RowBox[{"inMathMode", "=", "False"}], ";", 
+           RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+          "\"\<<f>\>\"", ",", 
+          RowBox[{
+           RowBox[{"inFunctionMode", "=", "True"}], ";", 
+           RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+          "\"\<</f>\>\"", ",", 
+          RowBox[{
+           RowBox[{"inFunctionMode", "=", "False"}], ";", 
+           RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+          "\"\<<v>\>\"", ",", 
+          RowBox[{
+           RowBox[{"inVariableMode", "=", "True"}], ";", 
+           RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+          "\"\<</v>\>\"", ",", 
+          RowBox[{
+           RowBox[{"inVariableMode", "=", "False"}], ";", 
+           RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", "_", 
+          ",", "Null"}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{"inMathMode", ",", "\[IndentingNewLine]", 
+          RowBox[{"result", "=", 
+           RowBox[{"result", "<>", "\"\<$\>\"", "<>", 
+            RowBox[{"ToString", "[", 
+             RowBox[{"TeXForm", "[", 
+              RowBox[{"myStringList", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "<>", 
+            "\"\<$\>\""}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{"inFunctionMode", ",", "\[IndentingNewLine]", 
+          RowBox[{"result", "=", 
+           RowBox[{"result", "<>", "\"\<\\\\textbf{\>\"", "<>", 
+            RowBox[{"myStringList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<}\>\""}]}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{"inVariableMode", ",", "\[IndentingNewLine]", 
+          RowBox[{"result", "=", 
+           RowBox[{"result", "<>", "\"\<$\>\"", "<>", 
+            RowBox[{"myStringList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<$\>\""}]}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"(", 
+            RowBox[{
+            "inMathMode", "||", "inFunctionMode", "||", "inVariableMode"}], 
+            ")"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"result", "=", 
+           RowBox[{"result", "<>", 
+            RowBox[{"myStringList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}]}]}], "]"}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"result", "=", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"result", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<$$\>\"", "\[Rule]", "\"\<\>\""}], ",", 
+          RowBox[{"\"\<\\n\>\"", "\[Rule]", "\"\<\\\\newline{}\\n\>\""}], ",",
+           " ", 
+          RowBox[{"\"\<\\t\>\"", "\[Rule]", "\"\<\\\\indent{}\>\""}]}], " ", 
+         "}"}]}], "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
  CellChangeTimes->{{3.5329412741802464`*^9, 3.532941360878127*^9}, {
    3.532941435388933*^9, 3.532941624479641*^9}, {3.532941655703589*^9, 
    3.5329416662010736`*^9}, {3.532941712536687*^9, 3.532941722509941*^9}, {
    3.532941792408928*^9, 3.532942032937245*^9}, {3.532942067213715*^9, 
    3.532942245754828*^9}, {3.532942285253415*^9, 3.5329422892430267`*^9}, 
    3.532942343011773*^9, {3.5329423856267776`*^9, 3.532942386522251*^9}, {
-   3.5329428809576797`*^9, 3.53294293684571*^9}}],
+   3.5329428809576797`*^9, 3.53294293684571*^9}, {3.5329434145909147`*^9, 
+   3.5329435175615473`*^9}, {3.5329453739085703`*^9, 
+   3.5329455292658787`*^9}, {3.532945565269437*^9, 3.53294558016434*^9}, {
+   3.53294563817479*^9, 3.53294564136346*^9}, {3.53294610278446*^9, 
+   3.532946180503974*^9}, {3.532946222527216*^9, 3.5329462759351377`*^9}, {
+   3.5329469512684383`*^9, 3.532946961220214*^9}, {3.53294699978533*^9, 
+   3.532947009597506*^9}, {3.5329471180147753`*^9, 3.532947136446288*^9}, {
+   3.5329472407314663`*^9, 3.532947273015051*^9}, {3.5329473378904943`*^9, 
+   3.5329473457830133`*^9}, {3.5329474388553333`*^9, 3.532947445425045*^9}, {
+   3.532947529617062*^9, 3.532947555798821*^9}, {3.5329475959509563`*^9, 
+   3.5329476305007973`*^9}, {3.5329477808296127`*^9, 3.532947819298634*^9}}],
 
-Cell[BoxData["\<\"\\\\textbf{MatrixRe}[$A$] returns a hermitian part of the \
-matrix $A$ i.e. $1/2(A+A^{\\\\dagger })$.\"\>"], "Output",
- CellChangeTimes->{{3.532942915209663*^9, 3.5329429373620996`*^9}, 
-   3.532943012387381*^9, {3.532943141350967*^9, 3.532943146110944*^9}}]
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"strings", "=", " ", 
+   RowBox[{"Map", "[", "\[IndentingNewLine]", 
+    RowBox[{"TeXConverter", ",", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ToExpression", "[", 
+         RowBox[{"#", "<>", "\"\<::usage\>\""}], "]"}], "&"}], "/@", 
+       RowBox[{"Names", "[", "\"\<QI`*\>\"", "]"}]}], ")"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "=", 
+   RowBox[{"OpenWrite", "[", "\"\<usage.tex\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"WriteString", "[", 
+  RowBox[{"f", ",", "\"\<\\\\begin{itemize}\>\""}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"WriteString", "[", 
+     RowBox[{"f", ",", 
+      RowBox[{
+      "\"\<\\\\item  \>\"", " ", "<>", " ", "#", "<>", "\"\<\\n\>\""}]}], 
+     "]"}], "&"}], "/@", "strings"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"WriteString", "[", 
+  RowBox[{"f", ",", "\"\<\\\\end{itemize}\>\""}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Close", "[", "f", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.532943546966723*^9, 3.532943600315217*^9}, {
+   3.5329501791512947`*^9, 3.532950188157571*^9}, 3.5329502844011507`*^9}]
 }, Open  ]]
 },
 WindowSize->{1920, 1106},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowMargins->{{-5, Automatic}, {Automatic, 0}},
+ShowSelection->True,
 FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
 StyleDefinitions->"Default.nb"
 ]
@@ -226,22 +244,15 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 118, 2, 29, "Input"],
+Cell[557, 20, 118, 2, 30, "Input"],
 Cell[CellGroupData[{
-Cell[700, 26, 113, 2, 29, "Input"],
-Cell[816, 30, 753, 16, 22, "Print"]
+Cell[700, 26, 113, 2, 30, "Input"],
+Cell[816, 30, 1040, 20, 23, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1606, 51, 170, 3, 29, "Input"],
-Cell[1779, 56, 417, 6, 29, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2233, 67, 989, 19, 29, "Input"],
-Cell[3225, 88, 1169, 18, 34, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[4431, 111, 4072, 93, 498, "Input"],
-Cell[8506, 206, 276, 3, 29, "Output"]
+Cell[1893, 55, 296, 5, 31, "Subsubtitle"],
+Cell[2192, 62, 6184, 125, 582, "Input"],
+Cell[8379, 189, 1345, 37, 183, "Input"]
 }, Open  ]]
 }
 ]
