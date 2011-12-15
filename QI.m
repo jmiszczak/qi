@@ -22,19 +22,19 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 (*Help messages*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
 SquareMatrixQ::usage = "<f>SquareMatrixQ</f>[<v>A</v>] returns True only if <v>A</v> is a square matrix, and gives False otherwise.";
 
-SymbolicMatrix::usage = "<f>SymbolicMatrix</f>[<v>a,m,n</v>] returns <v>m\[Cross]n</v>-matrix with elements <v>a[i,j], i=1,...,m, j=1,...,n</v>.\
-If the third argument is ommited this function returns square <v>m\[Cross]m</v> matrix. This functions can save you some keystrokes and, thanks \
+SymbolicMatrix::usage = "<f>SymbolicMatrix</f>[<v>a,m,n</v>] returns <s>m\[Cross]n</s>-matrix with elements <v>a[i,j], i=1,...,m, j=1,...,n</v>.\
+If the third argument is ommited this function returns square <s>m\[Cross]m</s> matrix. This functions can save you some keystrokes and, thanks \
 to TeXForm function, its results can be easily incorporated in LaTeX documents.";
 
 SymbolicVector::usage = "<f>SymbolicVector</f>[<v>a,n</v>] returns a vector with <v>n</v> elements <v>a[i],i=1,...,n</v>.";
 
-SymbolicHermitianMatrix::usage = "<f>SymbolicHermitianMatrix</f>[<v>sym,n</v>] produces a <v>n\[Cross]n</v> Hermitian matrix. \
+SymbolicHermitianMatrix::usage = "<f>SymbolicHermitianMatrix</f>[<v>sym,n</v>] produces a <s>n\[Cross]n</s> Hermitian matrix. \
 See also: <f>SymbolicMatrix, SymbolicVector</f>.";
 
 SymbolicBistochasticMatrix::usage = "<f>SymbolicBistochasticMatrix</f>[<v>sym, dim</v>] produces symbolic bistochastic matrix size <v>dim</v>. \
@@ -44,25 +44,25 @@ ComplexToPoint::usage = "<f>ComplexToPoint</f>[<v>z</v>] returns a real and an i
 
 MatrixSqrt::usage= "<f>MatrixSqrt</f>[<v>A</v>] returns square root for the matrix <v>A</v>.";
 
-MatrixAbs::usage= "<f>MatrixAbs</f>[<v>A</v>] returns absolute value for matrix <v>A</v> defined as <f>MatrixSqrt</f>[<v>A.A</v>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)]. \
+MatrixAbs::usage= "<f>MatrixAbs</f>[<v>A</v>] returns absolute value for matrix <v>A</v> defined as <f>MatrixSqrt</f>[<v>A.A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s>]. \
 See also: <f>MatrixSqrt</f>.";
 
-MatrixRe::usage = "<f>MatrixRe</f>[<v>A</v>] returns a hermitian part of the matrix <v>A</v> i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A+A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)).";
+MatrixRe::usage = "<f>MatrixRe</f>[<v>A</v>] returns a hermitian part of the matrix <v>A</v> i.e. <v>1/2(A+A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>)</v>.";
 
-MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an antyhermitian part of the matrix <v>A</v> i.e. \!\(\*FractionBox[\"1\", \"2\"]\)(A-A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)).";
+MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an antyhermitian part of the matrix <v>A</v> i.e. <s>\!\(\*FractionBox[\"1\", \"2\"]\)(A-A\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\))</s>.";
 
 Proj::usage = "<f>Proj</f>[<v>v</v>] returns projector of the vector <v>v</v>.";
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Fidelity, trace distance etc.*)
 
 
-Fidelity::usage = "<f>Fidelity</f>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] returns the quantum fidelity \
-between states \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\) calculated using a simplified formula as \
-(\[Sum]\!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\)\!\(\*SuperscriptBox[\")\", \"2\"]\), where \!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\) are the \
-eigenvalues of \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\).";
+Fidelity::usage = "<f>Fidelity</f>[<s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s>,<s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s>] returns the quantum fidelity \
+between states <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s> and <s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s> calculated using a simplified formula as \
+<s>(\[Sum]\!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\)\!\(\*SuperscriptBox[\")\", \"2\"]\)</s>, where <s>\!\(\*SubscriptBox[\"\[Lambda]\", \"i\"]\)</s> are the \
+eigenvalues of <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s>.";
 
 Superfidelity::usage = "<f>Superfidelity</f>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] calculates superfidelity \
 between \!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\) and \!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\) defined as \
@@ -84,7 +84,7 @@ GateFidelity::usage = "<f>GateFidelity</f>[<v>U,V</v>] is equivalent to 1/d tr|U
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Commonly used matrices*)
 
 
@@ -97,7 +97,7 @@ cnot::usage = "<v>cnot</v> - Controlled not matrix for two qubits.";
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Schmidt decomposition*)
 
 
@@ -118,7 +118,7 @@ and reconstruct the original matrix as
 \t <v>mtx</v> == Sum[<v>sd</v>[[<v>i</v>,1]]*KroneckerProduct[<v>sd</v>[[<v>i</v>,2]], <v>sd</v>[[<v>i</v>,3]]], {<v>i</v>, Length[<v>sd</v>]}];"; 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -142,7 +142,7 @@ Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dim
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Parametrizations*)
 
 
@@ -163,7 +163,7 @@ See also: <f>SymbolicVector</f>.";
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*One-qubit states*)
 
 
@@ -176,7 +176,7 @@ This is just a alias for <v>Proj</v>[<v>QubitKet</v>[\[Alpha],\[Beta]]]. See als
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Quantum channels*)
 
 
@@ -230,7 +230,7 @@ Returns the partial trace of an operator <v>\[Rho]</v> acting on a composite sys
 <v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -270,8 +270,9 @@ Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or a
 Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bloch Representation*)
+
 
 Lambda1::usage = "Lambda1[i,j,n] generalized Pauli matrix. For example Lambda1[1,2,2] is equal to Pauli \[Sigma]x. See also: GeneralizedPauliMatrices.";
 
@@ -298,8 +299,8 @@ expansion on normalized generalized Pauli matrices. See also: <f>GeneralizedPaul
 
 Begin["`Private`"];
 
-QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)"} 
-(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];
+QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
+(*(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];*)
 
 qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
 
@@ -392,7 +393,7 @@ DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Activ
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -433,7 +434,7 @@ Proj[v_]:=Table[v[[i]]Conjugate[v[[j]]],{i,1,Length[v]},{j,1,Length[v]}];
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Fidelity, trace distance etc.*)
 
 
@@ -723,7 +724,7 @@ PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,i
 (*Entanglement*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Random states and operations*)
 
 
@@ -811,8 +812,9 @@ RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an i
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Bloch Representation*)
+
 
 Lambda1[i_ ,j_,n_]:=Table[KroneckerDelta[j,\[Mu]]KroneckerDelta[i,\[Nu]] + KroneckerDelta[j,\[Nu]]KroneckerDelta[i,\[Mu]] ,{\[Mu],1,n},{\[Nu],1,n}];
 

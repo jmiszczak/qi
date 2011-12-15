@@ -1,0 +1,250 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9468,        241]
+NotebookOptionsPosition[      8798,        212]
+NotebookOutlinePosition[      9134,        227]
+CellTagsIndexPosition[      9091,        224]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.532936324350525*^9, 3.532936325214817*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "QI`"}]], "Input",
+ CellChangeTimes->{{3.532935577740396*^9, 3.532935578318552*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package QI version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.4.31\"\>", 
+   "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"25/10/2011\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package QI version ", "0.4.31", " (last modification: ", "25/10/2011", 
+   ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.5329355789689083`*^9, 3.532935692301539*^9, 3.5329363511111794`*^9, 
+   3.5329400593225613`*^9, 3.532940109421932*^9, {3.5329405758525963`*^9, 
+   3.532940602527484*^9}, 3.532941946852467*^9, 3.532942659456661*^9, {
+   3.532942818406581*^9, 3.532942829176446*^9}, 3.532942928556281*^9, 
+   3.532943009122909*^9, 3.532943144529831*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.532936036938587*^9, 3.532936045639469*^9}}],
+
+Cell[BoxData["\<\"/home/jam/Desktop/smietnik\"\>"], "Output",
+ CellChangeTimes->{
+  3.532936046065502*^9, 3.532936351982396*^9, 3.53293683969632*^9, 
+   3.532936871422243*^9, 3.532940059585376*^9, {3.5329400994437838`*^9, 
+   3.5329401097170362`*^9}, {3.5329405772413073`*^9, 3.53294060323615*^9}, 
+   3.532941947174424*^9, 3.532942659653638*^9, 3.532942818913064*^9, 
+   3.5329429291852283`*^9, 3.53294314509636*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"myStringList", "=", 
+  RowBox[{"StringSplit", "[", 
+   RowBox[{
+    RowBox[{"MatrixRe", "::", "usage"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<<s>\>\"", "\[Rule]", "\"\<<s>\>\""}], ",", 
+      RowBox[{"\"\<</s>\>\"", "\[Rule]", "\"\<</s>\>\""}], ",", 
+      RowBox[{"\"\<<f>\>\"", "\[Rule]", "\"\<<f>\>\""}], ",", 
+      RowBox[{"\"\<</f>\>\"", "\[Rule]", "\"\<</f>\>\""}], ",", 
+      RowBox[{"\"\<<v>\>\"", "\[Rule]", "\"\<<v>\>\""}], ",", 
+      RowBox[{"\"\<</v>\>\"", "\[Rule]", "\"\<</v>\>\""}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.5329407355867987`*^9, 3.532940738084222*^9}, {
+   3.5329407749699697`*^9, 3.532940848814886*^9}, {3.532940890103416*^9, 
+   3.532940896329627*^9}, {3.532941150447165*^9, 3.532941227344054*^9}, {
+   3.532941280236444*^9, 3.532941285652618*^9}, {3.532941746794942*^9, 
+   3.5329417777318068`*^9}, 3.532942652716037*^9, {3.532942749147975*^9, 
+   3.53294277252155*^9}, 3.532943005493724*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"<f>\"\>", ",", "\<\"MatrixRe\"\>", ",", "\<\"</f>\"\>", 
+   ",", "\<\"[\"\>", ",", "\<\"<v>\"\>", ",", "\<\"A\"\>", 
+   ",", "\<\"</v>\"\>", 
+   ",", "\<\"] returns a hermitian part of the matrix \"\>", 
+   ",", "\<\"<v>\"\>", ",", "\<\"A\"\>", ",", "\<\"</v>\"\>", 
+   ",", "\<\" i.e. \"\>", ",", "\<\"<v>\"\>", ",", "\<\"1/2(A+A\"\>", 
+   ",", "\<\"</v>\"\>", ",", "\<\"\"\>", ",", "\<\"<s>\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\\" \\\", \\\"\[Dagger]\\\"]\\)\"\>", 
+   ",", "\<\"</s>\"\>", ",", "\<\"\"\>", ",", "\<\"<v>\"\>", ",", "\<\")\"\>",
+    ",", "\<\"</v>\"\>", ",", "\<\".\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{{3.532940834941702*^9, 3.53294084922558*^9}, {
+   3.532940892442967*^9, 3.532940896813121*^9}, {3.532941152371511*^9, 
+   3.532941227803495*^9}, 3.5329412860744257`*^9, 3.532941778206822*^9, {
+   3.532941935459318*^9, 3.532941947388887*^9}, 3.5329419909449863`*^9, {
+   3.532942653437546*^9, 3.532942660267145*^9}, 3.5329427729910383`*^9, {
+   3.5329428199459867`*^9, 3.532942831438072*^9}, 3.532942930277635*^9, 
+   3.532943011736623*^9, {3.532943140669731*^9, 3.5329431455827503`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"inMathMode", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"inFunctionMode", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"inVariableMode", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"result", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "myStringList", "]"}]}], ",", " ", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Switch", "[", 
+      RowBox[{
+       RowBox[{"myStringList", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+       "\"\<<s>\>\"", ",", 
+       RowBox[{
+        RowBox[{"inMathMode", "=", "True"}], ";", 
+        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       "\"\<</s>\>\"", ",", 
+       RowBox[{
+        RowBox[{"inMathMode", "=", "False"}], ";", 
+        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       "\"\<<f>\>\"", ",", 
+       RowBox[{
+        RowBox[{"inFunctionMode", "=", "True"}], ";", 
+        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       "\"\<</f>\>\"", ",", 
+       RowBox[{
+        RowBox[{"inFunctionMode", "=", "False"}], ";", 
+        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       "\"\<<v>\>\"", ",", 
+       RowBox[{
+        RowBox[{"inVariableMode", "=", "True"}], ";", 
+        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       "\"\<</v>\>\"", ",", 
+       RowBox[{
+        RowBox[{"inVariableMode", "=", "False"}], ";", 
+        RowBox[{"Continue", "[", "]"}]}], ",", "\[IndentingNewLine]", "_", 
+       ",", "Null"}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"inMathMode", ",", "\[IndentingNewLine]", 
+       RowBox[{"result", "=", 
+        RowBox[{"result", "<>", "\"\<$\>\"", "<>", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"TeXForm", "[", 
+           RowBox[{"myStringList", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "<>", 
+         "\"\<$\>\""}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"inFunctionMode", ",", "\[IndentingNewLine]", 
+       RowBox[{"result", "=", 
+        RowBox[{"result", "<>", "\"\<\\\\textbf{\>\"", "<>", 
+         RowBox[{"myStringList", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<}\>\""}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"inVariableMode", ",", "\[IndentingNewLine]", 
+       RowBox[{"result", "=", 
+        RowBox[{"result", "<>", "\"\<$\>\"", "<>", 
+         RowBox[{"myStringList", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<$\>\""}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"(", 
+         RowBox[{
+         "inMathMode", "||", "inFunctionMode", "||", "inVariableMode"}], 
+         ")"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"result", "=", 
+        RowBox[{"result", "<>", 
+         RowBox[{"myStringList", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"result", "=", 
+  RowBox[{"StringReplace", "[", 
+   RowBox[{"result", ",", 
+    RowBox[{"\"\<$$\>\"", "\[Rule]", "\"\<\>\""}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.5329412741802464`*^9, 3.532941360878127*^9}, {
+   3.532941435388933*^9, 3.532941624479641*^9}, {3.532941655703589*^9, 
+   3.5329416662010736`*^9}, {3.532941712536687*^9, 3.532941722509941*^9}, {
+   3.532941792408928*^9, 3.532942032937245*^9}, {3.532942067213715*^9, 
+   3.532942245754828*^9}, {3.532942285253415*^9, 3.5329422892430267`*^9}, 
+   3.532942343011773*^9, {3.5329423856267776`*^9, 3.532942386522251*^9}, {
+   3.5329428809576797`*^9, 3.53294293684571*^9}}],
+
+Cell[BoxData["\<\"\\\\textbf{MatrixRe}[$A$] returns a hermitian part of the \
+matrix $A$ i.e. $1/2(A+A^{\\\\dagger })$.\"\>"], "Output",
+ CellChangeTimes->{{3.532942915209663*^9, 3.5329429373620996`*^9}, 
+   3.532943012387381*^9, {3.532943141350967*^9, 3.532943146110944*^9}}]
+}, Open  ]]
+},
+WindowSize->{1920, 1106},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 118, 2, 29, "Input"],
+Cell[CellGroupData[{
+Cell[700, 26, 113, 2, 29, "Input"],
+Cell[816, 30, 753, 16, 22, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1606, 51, 170, 3, 29, "Input"],
+Cell[1779, 56, 417, 6, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2233, 67, 989, 19, 29, "Input"],
+Cell[3225, 88, 1169, 18, 34, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4431, 111, 4072, 93, 498, "Input"],
+Cell[8506, 206, 276, 3, 29, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
