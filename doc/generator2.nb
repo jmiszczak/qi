@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     10259,        252]
-NotebookOptionsPosition[      9740,        229]
-NotebookOutlinePosition[     10098,        245]
-CellTagsIndexPosition[     10055,        242]
+NotebookDataLength[     11810,        281]
+NotebookOptionsPosition[     11252,        257]
+NotebookOutlinePosition[     11610,        273]
+CellTagsIndexPosition[     11567,        270]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -48,7 +48,9 @@ Cell[BoxData[
    3.532945126531445*^9, 3.5329451624274178`*^9, 3.532945318313012*^9, 
    3.5329457623274107`*^9, 3.532945809153577*^9, 3.532945965387356*^9, 
    3.5329464408958273`*^9, 3.5329472900103292`*^9, 3.532947892195366*^9, 
-   3.532949868460103*^9, 3.532950242324728*^9}]
+   3.532949868460103*^9, 3.532950242324728*^9, 3.533017545075487*^9, 
+   3.5330178019512157`*^9, 3.53301791224265*^9, 3.533018029308031*^9, 
+   3.533018253323448*^9, 3.533018637217259*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -58,7 +60,28 @@ Aby wygenerowac plik tex - owy z dokumentacja nalezy zakomentowac pierwsze \
 dwie linie w sekcji Private (wszystko przed qiAuthors) w pliku QI.m\
 \>", "Subsubtitle",
  CellChangeTimes->{{3.5329499112585497`*^9, 3.532949938512663*^9}, {
-  3.5329499693853483`*^9, 3.5329500346361322`*^9}}],
+  3.5329499693853483`*^9, 3.5329500346361322`*^9}, {3.533018253795149*^9, 
+  3.533018254434556*^9}, {3.533018637972369*^9, 3.533018638562335*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"latexHeader", "=", 
+   RowBox[{
+   "\"\<\\\\documentclass[a4paper,10pt]{scrartcl}\n\
+\\\\usepackage{amsmath,amssymb,graphicx}\n\\\\usepackage{fullpage}\n\
+\\\\parindent=0pt\n\\\\begin{document}\n\\\\title{QI Package for \
+\\\\emph{Mathematica} 7.0 \\\\\\\\(version \>\"", " ", "<>", " ", 
+    "QI`Private`qiVersion", " ", "<>", " ", "\"\<)}\>\"", " ", "<>", "\n", 
+    "\"\<\\\\author{Jaros{\\\\l}aw Adam Miszczak \\\\quad Piotr Gawron \
+\\\\quad Zbigniew Pucha{\\\\l}a\\\\\\\\\n{The Institute of Theoretical and \
+Applied Informatics}\\\\\\\\\n{Polish Academy of Sciences},\\\\\\\\\n\
+{Ba{\\\\l}tycka 5, 44-100 Gliwice, Poland}}\n\\\\maketitle\n\
+\\\\begin{abstract}\>\"", "<>", " ", "QI`Private`qiAbout", " ", "<>", "\n", 
+    "\"\<\\\\end{abstract}\n\\n \\n \\n\n\>\""}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"latexFooter", " ", "=", " ", "\"\<\\\\end{document}\>\""}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.533018583325081*^9, 3.5330185876422977`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -205,10 +228,12 @@ Cell[BoxData[{
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"f", "=", 
-   RowBox[{"OpenWrite", "[", "\"\<usage.tex\>\"", "]"}]}], 
+   RowBox[{"OpenWrite", "[", "\"\<qi_functions_list_alpha.tex\>\"", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"WriteString", "[", 
-  RowBox[{"f", ",", "\"\<\\\\begin{itemize}\>\""}], 
+  RowBox[{"f", ",", "latexHeader"}], " ", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"WriteString", "[", 
+  RowBox[{"f", ",", "\"\<\\\\begin{itemize} \\n\>\""}], 
   "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -219,12 +244,15 @@ Cell[BoxData[{
       "\"\<\\\\item  \>\"", " ", "<>", " ", "#", "<>", "\"\<\\n\>\""}]}], 
      "]"}], "&"}], "/@", "strings"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{"WriteString", "[", 
-  RowBox[{"f", ",", "\"\<\\\\end{itemize}\>\""}], 
+  RowBox[{"f", ",", "\"\<\\\\end{itemize} \\n\>\""}], 
   "]"}], "\[IndentingNewLine]", 
+ RowBox[{"WriteString", "[", 
+  RowBox[{"f", ",", "latexFooter"}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Close", "[", "f", "]"}], ";"}]}], "Input",
  CellChangeTimes->{{3.532943546966723*^9, 3.532943600315217*^9}, {
-   3.5329501791512947`*^9, 3.532950188157571*^9}, 3.5329502844011507`*^9}]
+   3.5329501791512947`*^9, 3.532950188157571*^9}, 3.5329502844011507`*^9, {
+   3.533018542510886*^9, 3.533018631915453*^9}}]
 }, Open  ]]
 },
 WindowSize->{1920, 1106},
@@ -247,12 +275,13 @@ Notebook[{
 Cell[557, 20, 118, 2, 30, "Input"],
 Cell[CellGroupData[{
 Cell[700, 26, 113, 2, 30, "Input"],
-Cell[816, 30, 1040, 20, 23, "Print"]
+Cell[816, 30, 1181, 22, 23, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1893, 55, 296, 5, 31, "Subsubtitle"],
-Cell[2192, 62, 6184, 125, 582, "Input"],
-Cell[8379, 189, 1345, 37, 183, "Input"]
+Cell[2034, 57, 391, 6, 31, "Subsubtitle"],
+Cell[2428, 65, 996, 18, 316, "Input"],
+Cell[3427, 85, 6184, 125, 582, "Input"],
+Cell[9614, 212, 1622, 42, 221, "Input"]
 }, Open  ]]
 }
 ]

@@ -66,7 +66,7 @@ eigenvalues of <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)\!\(\*SubscriptBox[\"\[
 
 Superfidelity::usage = "<f>Superfidelity</f><s>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]</s> calculates superfidelity \
 between <s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s> and <s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s> defined as \
-<s>Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)] + Sqrt[1-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)]]Sqrt[1-Tr[\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\).\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]]</s>. \
+<s>tr[\!\(\*SubscriptBox[\(\[Rho]\), \(1\)]\)\!\(\*SubscriptBox[\(\[Rho]\), \(2\)]\)]+\!\(\*SqrtBox[\(\((1 - tr[\*SubsuperscriptBox[\(\[Rho]\), \(1\), \(2\)]])\) \((1 - tr[\*SubsuperscriptBox[\(\[Rho]\), \(2\), \(2\)]])\)\)]\)</s>
 See: J.A. Miszczak et al., Quantum Information \& Computation, Vol.9 No.1\&2 (2009)."; 
 
 Subfidelity::usage = "<f>Subfidelity</f><s>[\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\),\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)]</s> returns subfidelity between \
@@ -110,7 +110,7 @@ If <v>x</v> is a vector
 If <v>x</v> is a matrix, this function can be used in three different ways.
 \t <f>SchmidtDecomposition</f>[<v>x</v>] assumes that <v>x</v> is (<v>n^2\[Times]n^2</v>)-dimensional, 
 \t <f>SchmidtDecomposition</f>[<v>x</v>,{<v>n</v>,<v>m</v>}] assume that the matrix is a <v>n m\[Times]n m</v> square matrix and
-\t <f>SchmidtDecomposition</f>[<v>x</v>,{{<v>r1</v>,<v>r2</v>},{<v>c1</v>,<v>c2</v>}]
+\t <f>SchmidtDecomposition</f>[<v>x</v>,{{<v>r1</v>,<v>r2</v>},{<v>c1</v>,<v>c2</v>}}]
 For example, for a matrix <v>mtx</v> of dimension <v>r1 r2\[Times] c1 c2</v> one can obtain a Schmidt \
 decomposition on <v>r1 c1\[CircleTimes] r2 c2</v> system as 
 \t <v>sd</v> = <f>SchmidtDecomposition</f>[<v>mtx</v>, {{<v>r1</v>, <v>r2</v>}, {<v>c1</v>, <v>c2</v>}}];
@@ -170,7 +170,7 @@ QubitKet::usage = "<f>QubitKet</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>] parametrizati
 
 QubitPureState::usage = "<f>QubitPureState</f>[<s>\[Alpha],\[Beta]</s>] - \
 a parametrization of the pure state as a density matrix for one qubit. \
-This is just a alias for <v>Proj</v>[<v>QubitKet</v>[<s>\[Alpha],\[Beta]</s>]]. See also: <f>QubitKet</f>.";
+This is just a alias for <f>Proj</f>[<f>QubitKet</f>[<s>\[Alpha],\[Beta]</s>]]. See also: <f>QubitKet</f>.";
 
 
 
@@ -274,9 +274,9 @@ Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or a
 
 Lambda1::usage = "<f>Lambda1</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda1</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]x</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
-Lambda2::usage = "<f>Lambda2</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda2</f>[<v>1,2,2</v>] is equal to <s>\[Sigma]y</s>. See also: <f>GeneralizedPauliMatrices</f>.";
+Lambda2::usage = "<f>Lambda2</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda2</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]y</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
-Lambda3::usage ="<f>Lambda3</f>[<v>i,n</v>] generalized Pauli matrix. For example <f>Lambda3</f>[<v>2,2</v>] is equal to <s>\[Sigma]z</s>. See also: <f>GeneralizedPauliMatrices</f>.";
+Lambda3::usage ="<f>Lambda3</f>[<v>i,n</v>] generalized Pauli matrix. For example <f>Lambda3</f>[<v>2,2</v>] is equal to Pauli <s>\[Sigma]z</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
 GeneralizedPauliMatrices::usage = "<f>GeneralizedPauliMatrices</f>[<v>n</v>] returns list of generalized Pauli matrices for \
 <v>SU(n)</v>. For <v>n=2</v> these are just Pauli matrices and for <v>n=3</v> - Gell-Mann matrices. \
@@ -363,7 +363,7 @@ qiHistory = {
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
 	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
 	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
-	{"0.4.32",  "25/10/2011", "Zbyszek, Jarek", "Documentation improved."}
+	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -433,7 +433,6 @@ Proj[v_]:=Table[v[[i]]Conjugate[v[[j]]],{i,1,Length[v]},{j,1,Length[v]}];
 
 
 (* ::Subsection::Closed:: *)
-
 (*Fidelity, trace distance etc.*)
 
 
