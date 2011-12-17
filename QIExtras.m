@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Mathematica Package *)
 
 BeginPackage["QIExtras`", { "QI`"}]
@@ -75,8 +77,8 @@ Concurrence4::usage = "Concurrence4[\[Rho]] returns quantum concurrence of a den
 
 EntanglementOfFormation4::usage = "EntanglementOfFormation4[\[Rho]] returns entanglement of formation of density matrix  \[Rho] representing a state of two-qubit system."
 
-Negativity::usage = "Negativity[\[Rho],{m,n}] returns the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
-RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem.";
+Negativity::usage = "Negativity[\[Rho],{m,n}] returns the absolute value of the sum of negative eigenvalues of the density matrix \[Rho]\[Element]\!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", 
+RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with respect to the first subsystem. See: G. Vidal, R.F. Werner, A computable measure of entanglement, Phys. Rev. A 65, 032314 (2002) DOI[10.1103/PhysRevA.65.032314].";
 
 
 
@@ -138,9 +140,8 @@ QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy o
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Distribution of eigenvalues*)
-
 
 
 VandermondeMatrix::usage = "VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}] - Vandermonde matrix for variables (\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)).";
@@ -327,9 +328,11 @@ EntanglementOfFormation4[rho_] := Block[{h},
   h[1/2*(1 + Sqrt[1 - Concurrence4[rho]^2])]
 ];
 
-Negativity[\[Rho]_, {m_, n_}] := Plus@@Select[Eigenvalues[PartialTranspose[\[Rho], {m, n}, {1}]], # < 0 &];
+Negativity[\[Rho]_, {m_, n_}] := Plus@@Abs[Select[Eigenvalues[PartialTranspose[\[Rho], {m, n}, {1}]], # < 0 &]];
 
    
+
+
 (* ::Subsection::Closed:: *)
 (*One-qubit quantum channels*)
 

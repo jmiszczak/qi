@@ -363,7 +363,9 @@ qiHistory = {
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
 	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
 	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
-	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."}
+	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
+	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"}
+
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -722,7 +724,7 @@ PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,i
 (*Entanglement*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
