@@ -4,8 +4,8 @@
 
 BeginPackage["QIExtras`", { "QI`"}]
 (* Exported symbols added here with SymbolName::usage *)  
-
-
+Unprotect@@Names["QIExtras`*"]
+Clear@@Names["QIExtras`*" ]
 
 BaseVectors::usage = "BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space \!\(\*SuperscriptBox[\"\[DoubleStruckCapitalC]\", \"n\"]\). See also: BaseMatrices.";
 
@@ -190,12 +190,15 @@ Unitary4Canonical::usage = "<f>Unitary4Canonical</f>[<v>a1</v>,<v>a2</v>,<v>a3</
 See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 
 
-
+Mub::usage ="<f>Mub</f>[<v>p,m</v>] for prime number <v>p</v> and positive integer <v>m</v> returns <v>p^m+1</v> mutually unbaised bases of <v>p^m</v> dimensional Hilbert space." 
 
 
 
 
 Begin["`Private`"] (* Begin Private Context *) 
+
+QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
+(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QIExtras`*"];
 
 
 BaseVectors[n_Integer]:=Table[UnitVector[n,k],{k,1,n}]
@@ -495,8 +498,64 @@ Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*
 
 Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I*a1*KroneckerProduct[sx,sx]+a2*I*KroneckerProduct[sy,sy]+a3*I*KroneckerProduct[sz,sz]];
 
+
+Needs["FiniteFields`"]
+
+MubElement[0, t_, p_, m_: 1] := UnitVector[p^m, t + 1];
+fieldSqrt[\[Omega]_, k_, q_, p_, m_] := 
+ Block[{qF, prod = 1, pow2n, qmod2n, km1},
+  If[p == 2,
+   qF = FromElementCode[GF[p, m], q];
+   Product[
+    If[qF =!= 0 && qF[[1]][[n + 1]] != 0,
+     pow2n = FromElementCode[GF[p, m], 2^n];
+     qmod2n = FromElementCode[GF[p, m], Mod[q, 2^n]];
+     km1 = FromElementCode[GF[p, m], k - 1];
+     I^(ToElementCode[
+         ReduceElement[km1*pow2n*pow2n]])*\[Omega]^(ToElementCode[
+         ReduceElement[km1*pow2n*qmod2n]])
+     ,(*else*)
+     1
+     ]
+    , {n, 0, m - 1}]
+   ,(*else*)
+   \[Omega]^(ToElementCode[
+      ReduceElement[
+       FromElementCode[GF[p, m], k - 1] FromElementCode[GF[p, m], 
+         q] FromElementCode[GF[p, m], q]/
+         FromElementCode[GF[p, m], 2]]])
+   ]
+  ]
+MubElement[k_, j_, p_, m_: 1] := Block[{},
+   \[Omega][kk_, pp_] := Exp[2  \[Pi] I/pp]^(kk);
+   1/Sqrt[p^m] Plus @@
+     Table[
+      \[Omega][
+        ToElementCode[
+         ReduceElement[-FromElementCode[GF[p, m], q] FromElementCode[
+            GF[p, m], j]]], p]*fieldSqrt[\[Omega][1, p], k, q, p, m]*
+       MubElement[0, q, p, m],
+      {q, 0, p^m - 1}
+      ]
+   ];
+Mub[p_, m_: 1] := Block[{},
+   Table[
+    Table[
+     MubElement[b, t, p, m], {t, 0, p^m - 1}
+     ]
+    , {b, 0, p^m}
+    ]
+   ];
+
+
+
+
 Print["Package QIExtras for QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
 
+
+
 End[] (* End Private Context *)
+
+Protect@@Names["QIExtras`*"]
 
 EndPackage[]
