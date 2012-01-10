@@ -1,576 +1,89 @@
-% v. 0.2 - 11/08/2009 - Jarek - extended introductions and bibliography
-% v. 0.21 - 12/08/2009 - Jarek - preliminary sections
-% v. 0.22 - 13/08/2009 - Jarek - added in intro and sec. 2
-% v. 0.3 - 17/11/2009 - Jarek - added an appendix with a list of functions
-% v. 0.31 - 18/11/2009 - Jarek - sections on states and operations
-% v. 0.32 - 19/11/2009 - Jarek - improved abstact, applied CPC template 
-% v. 0.33 - 24/09/2010 - Jarek - update basic info, sync with 0.3.18 version 
-\documentclass[a4paper,11pt]{elsart}
-
-\usepackage{hyperref}
-
-%% This list environment is used for the references in the
-%% Program Summary
-%%
-%\newcounter{bla}
-%\newenvironment{refnummer}{%
-%\list{[\arabic{bla}]}%
-%{\usecounter{bla}%
-% \setlength{\itemindent}{0pt}%
-% \setlength{\topsep}{0pt}%
-% \setlength{\itemsep}{0pt}%
-% \setlength{\labelsep}{2pt}%
-% \setlength{\listparindent}{0pt}%
-% \settowidth{\labelwidth}{[9]}%
-% \setlength{\leftmargin}{\labelwidth}%
-% \addtolength{\leftmargin}{\labelsep}%
-% \setlength{\rightmargin}{0pt}}}
-% {\endlist}
+% v. 0.01 - 
+\documentclass[11pt,a4paper]{article}
+\usepackage{fullpage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{amsmath,amssymb}
-\usepackage{dsfont}
-\usepackage{listings}
-\newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
-\newcommand{\bra}[1]{\ensuremath{\langle#1|}}
-\newcommand{\Mathematica}{\emph{Mathematica}}
-\newcommand{\wek}{\mathbf{vec}}
-\newcommand{\res}{\mathbf{res}}
-\newcommand{\1}{{\rm 1\hspace{-0.9mm}l}}
-\newcommand{\Id}{\1}
-\newcommand{\SWAP}{\ensuremath{\mathrm{SWAP}}}
-\newcommand{\tr}{\mathrm{tr}}
-\newcommand{\M}{\ensuremath{\mathbb{M}}}
 \newcommand{\qi}{QI}
-\newcommand{\code}[1]{\texttt{\small #1}}
-\newcommand{\HS}[1]{\ensuremath{\mathcal{#1}}} % Hilbert space
-\newcommand{\Cplx}{\ensuremath{\mathbb{C}}}
-\newcommand{\eg}{\emph{eg.}}
-\newcommand{\ie}{\emph{ie.}}
-%\newcommand{\etal}{\emph{et al.}}
-\newcommand{\Prob}[1]{\ensuremath{\mathrm{P}(#1)}}
-\newcommand{\Observ}[1]{\ensuremath{#1}}
-\newcommand{\Spectrum}[1]{\ensuremath{\sigma(#1)}}
-\newcommand{\Spec}[1]{\Spectrum{#1}}
-\newcommand{\ketbra}[2]{\ensuremath{\ket{#1}\bra{#2}}}
-\newcommand{\proj}[1]{\ensuremath{\ketbra{#1}{#1}}}
-\newcommand{\Proj}[1]{\proj{#1}}
-\newcommand{\iner}[2]{\braket{#1}{#2}}
-\newcommand{\Iner}[2]{\iner{#1}{#2}}
-\newcommand{\braket}[2]{\ensuremath{\langle#1|#2\rangle}}
-\newcommand{\Tr}[2][]{\ensuremath{\tr_{#1}{#2}}}
-\newcommand{\id}{\mathds{1}}
-\newcommand{\Space}[1]{\mathcal{#1}}
-\newcommand{\SetOfStates}[1]{\ensuremath{\mathcal{S}(#1)}}
-\newcommand{\States}[1]{\SetOfStates{#1}}
-\newcommand{\Real}{\ensuremath{\mathds{R}}}
-\newcommand{\N}{\ensuremath{\mathds{N}}}
-\newcommand{\Z}{\ensuremath{\mathds{Z}}}
-\newcommand{\set}[2]{\ensuremath{\left\{#1|#2\right\}}}
-\newcommand{\re}[1]{\ensuremath{\mathrm{Re}\left(#1\right)}}
-\newcommand{\im}[1]{\ensuremath{\mathrm{Im}\left(#1\right)}}
-\newcommand{\Group}[2]{\ensuremath{(#1,#2)}}
-\newcommand{\ord}[2]{\mathrm{ord}_#2(#1)}
-\newcommand{\Var}[1]{\ensuremath{\mathrm{Var}(#1)}}
-\newcommand{\halmos}{\newline\vspace{3mm}\hfill $\Box$}
-\newcommand{\proof}{\noindent {\it Proof.\ }}
-\newtheorem{theorem}{Theorem}
-\newcommand{\stackidx}[4]{
-  \substack{
-  #1  #2 \\
-  #3  #4}
-}
-
-
-\usepackage{xcolor}
-\newcommand{\todo}[1]{\textcolor{red}{\bf TODO: #1}}
+\newcommand{\Mathematica}{\emph{Mathematica}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\journal{Computer Physics Communications}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\qi: A package for the analysis of quantum states and operations in
+\Mathematica}
+\date{10/01/2012 (v. 0.01)}
+\author{ZKSI}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\lstset{language=Mathematica,frame=lines}
-
-\begin{frontmatter}
-
-%% Title, authors and addresses
-
-%% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for theassociated footnote;
-%% use the fnref command within \author or \address for footnotes;
-%% use the fntext command for theassociated footnote;
-%% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for theassociated footnote;
-%% use the ead command for the email address,
-%% and the form \ead[url] for the home page:
-%% \title{Title\tnoteref{label1}}
-%% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
-%% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
-%% \address{Address\fnref{label3}}
-%% \fntext[label3]{}
-
-\title{\qi: A package for the analysis of quantum states and operations in
-\Mathematica}
-
-\date{15/09/2011 (v. 0.34)}
-
-\author{J.~A.~Miszczak\thanksref{author}},
-\ead{miszczak@iitis.pl}
-\author{P.~Gawron},
-\ead{gawron@iitis.pl}
-\author{Z.~Pucha{\l}a}
-\ead{z.puchala@iitis.pl}
-
-\thanks[author]{Corresponding author}
-
-\address{Institute of Theoretical and Applied Informatics, Polish Academy of 
-Sciences, Ba{\l}tycka 5, 44-100 Gliwice, Poland}
-
-\begin{abstract}
-QI is a package of functions for the \Mathematica\ computer algebra system,
-which provides a framework for the analysis of quantum states and quantum
-operations. In contrast to many available packages for symbolic and numerical
-simulation of quantum computation presented package is focused on geometrical
-aspects of quantum information theory. In particular \qi provides
-parametrization of quantum states and selected families of quantum operation,
-function for constructing composite quantum operations and methods for the
-generation and analysis of random quantum operations. Also basic structures are
-provided including the construction of ket vectors, basic unitary gates, random
-states and unitaries, distance measures between quantum states and the selected
-methods for the analysis of separability in quantum systems.
-
-\begin{flushleft}
-  %Insert your suggested PACS number here
-%quantum information, symbolic computation (computer algebra) 
-PACS: 03.67.-a; 02.70.Wz.
-\end{flushleft}
-
-\begin{keyword}
-  % Please give some freely chosen keywords that we can use in a
-  % cumulative keyword index.
-quantum states; quantum channels; partial operations.
-\end{keyword}
-\end{abstract}
-
-\end{frontmatter}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-{\bf PROGRAM SUMMARY}
-  %Delete as appropriate.
-
-\begin{small}
-\noindent
-{\em Manuscript Title:} \qi: A package for the analysis of quantum states and operations in
-\Mathematica\\
-{\em Authors:} J.A.~Miszczak, P.~Gawron, Z.~Pucha{\l}a \\
-{\em Program Title:} QI \\
-{\em Journal Reference:}                                      \\
-  %Leave blank, supplied by Elsevier.
-{\em Catalogue identifier:}                                   \\
-  %Leave blank, supplied by Elsevier.
-{\em Licensing provisions:} GPLv3 \\
-{\em Programming language:} Mathematica 7\\
-{\em Computer:} Any computer supporting Mathematica 7\\
-  %Computer(s) for which program has been designed.
-{\em Operating system:} Any operating system capable of running Mathematica 7 or higher, \eg\ GNU/Linux, MacOS X, FreeBSD, Microsoft Windows XP\\
-  %Operating system(s) for which program has been designed.
-{\em RAM:} bytes                                              \\
-  %RAM in bytes required to execute program with typical data.
-{\em Number of processors used:}                              \\
-  %If more than one processor.
-{\em Supplementary material:}                                 \\
-  % Fill in if necessary, otherwise leave out.
-{\em Keywords:} quantum states, quantum operations, partial operations  \\
-  % Please give some freely chosen keywords that we can use in a
-  % cumulative keyword index.
-{\em PACS:} 03.67.-a, 02.70.Wz.\\
-  % see http://www.aip.org/pacs/pacs.html
-{\em Classification:} 4.15 \\
-  %Classify using CPC Program Library Subject Index, see (
-  % http://cpc.cs.qub.ac.uk/subjectIndex/SUBJECT_index.html)
-  %e.g. 4.4 Feynman diagrams, 5 Computer Algebra.
-{\em External routines/libraries:}                                      \\
-  % Fill in if necessary, otherwise leave out.
-{\em Subprograms used:}                                       \\
-  %Fill in if necessary, otherwise leave out.
-
-{\em Nature of problem:}\\
-  %Describe the nature of the problem here.
-  Construction of composed quantum operations, analysis of quantum states and
-  operations.
-   \\
-{\em Solution method:}\\
-  %Describe the method solution here.
-  A package of functions for \Mathematica\ computer algebra system.
-   \\
-{\em Restrictions:}\\
-  %Describe any restrictions on the complexity of the problem here.
-  Running time of the presented procedures grows rapidliy with the dimensionalty
-  of the problem.
-   \\
-%{\em Unusual features:}\\
-%  %Describe any unusual features of the program/problem here.
-%   \\
-%{\em Additional comments:}\\
-%  %Provide any additional comments here.
-%   \\
-{\em Running time:}\\
-  %Give an indication of the typical running time here.
-   \\
-
-\end{small}
-
-%\newpage
-
-% In program descriptions the main text of the paper is listed under
-% the heading LONG WRITE-UP.
-
-%\hspace{1pc}
-%{\bf LONG WRITE-UP}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\tableofcontents
-
-%% \linenumbers
-
-%% main text
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}\label{sec:intro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Quantum information theory aims to harness the behavior of quantum mechanical
-objects to store, transfer and process information~\cite{hayashi}. This behavior
-is in many cases very different from the one we observe in classical world.
-Quantum algorithms and protocols take advantage of superposition of states and
-require the presence of entangled states. Both phenomena arise from the rich
-structure of the space of quantum states. Hence, to explore the capabilities of
-quantum information processing, one needs to fully understand this
-space~\cite{BZ06}. 
-
-Quantum mechanics provides us also with much larger than in classical case space
-of allowed operations which can be used to manipulate quantum
-states~\cite{hayashi,BZ06}. Recent results concerning additivity
-problems~\cite{hastings09superadditivity} show that we are far from full
-understanding the nature of quantum channels. Exploring the space of quantum
-operations is fascinating, but cumbersome task.
-
-We present a~package of functions developed for \Mathematica\ computing system
-which aims to simplify the analysis of quantum states and quantum operations.
-The package was developed in simplicity in mind and thus it uses only basic data
-structures available in \Mathematica. This allows to relatively easily port
-implemented functions to other scientific software systems. Also, in contrast to
-most quantum computing packages
-available~\cite{qdensity,qucalc,quantum2,qcwave}, \qi\ is not aimed to provide
-tool for simulating quantum algorithms and protocols. We rather focus on the
-analysis of quantum states used in those protocols and quantum channels, which
-are used to describe allowed physical operations. The main goal of presented
-package is to provide basic mathematical tools useful for studding geometrical
-properties of quantum stats and quantum channels.
-
-
-
+\maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Design principles}
+\section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcounter{principle}
-\begin{list}{\textbf{P\arabic{principle}}}{\usecounter{principle}}
-\item Functions are as simple as possible -- functions have minimum reasonable
-number of arguments and implement small pieces of functionality. For example in
-order to get partial trace on few subsystems user needs to perform permutation
-and then apply partial trace 
-\item User knows what she is doing -- functions implemented in \qi\ do not
-validate the input and user is expected to provide reasonable data.
-\item Only basic \Mathematica\ structures are used -- functions operator on
-plain \Mathematica\ lists and return lists.
-\item Some data are used more often then other -- \qi\ predefines some commonly
-used matrices, for example matrices for \SWAP\ operation and Pauli matrices for
-small dimensions.
-\end{list}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-\section{Basic functions}\label{sec:basic}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\qi{} provides functions that facilitate working with state vectors and 
-density matrices. In this section we will present the basic notation of 
-quantum mechanics and quantum information theory together with the way of 
-implementing it in \qi.
-
-\subsection{Dirac notation}
-The pure state of a~quantum system is described by complex normed vector. It 
-is usually denoted by the symbol $\ket{\psi}$. The dual vector to $\ket{\psi}$
-is denoted by $\bra{\psi}$. The scalar product of vectors $\ket{\psi}$, 
-$\ket{\phi}$ is denoted by $\braket{\phi}{\psi}$. The outer product 
-of these vectors is denoted as $\ketbra{\phi}{\psi}.$ 
-Vectors are labelled in the natural way: 
-$\ket{0}:=\left[1,0,\ldots,0\right]^T, 
-\ket{1}:=\left[0,1,\ldots,0\right]^T,\ket{n-1}:=\left[0,0,\ldots,1\right]^T$.
-Notation like $\ket{\phi\psi}$ denotes the tensor product of vectors and is
-equivalent to $\ket{\phi}\otimes\ket{\psi}$.
-
-\qi{} provides the functions \lstinline!Ket[n,d]! and
-\lstinline!KetFromDigits[\{$n_0,n_1,\ldots,n_k$\}, d]! that 
-create unit vectors. First one returns $\ket{n}\in\Cplx^d$ second one return 
-$\ket{n_0,n_1\ldots,n_k}\in\bigotimes_k\Cplx^d$.
-\begin{lstlisting}
-In[1]:= Ket[0, 3]
-
-Out[1]= {1, 0, 0}
-
-In[2]:= KetFromDigits[{2, 1}, 3]
-
-Out[2]= {0, 0, 0, 0, 0, 0, 0, 1, 0}
-\end{lstlisting}
-Because of the way the \Mathematica{} handles matrices and vectors kets are 
-represented as one-dimensional lists. The inner product of two vectors can be 
-calculated using the \Mathematica{} \lstinline!Dot! function. Outer product of 
-vectors can be obtained using function \lstinline!KroneckerProduct!
-
-\subsection{Density operators}
-The most general state of a~quantum system is described by a~density operator.
-In quantum mechanics a~density operator $\rho$ is defined as hermitian
-($\rho=\rho^\dagger$) positive semi-definite ($\rho\geq 0$) trace one
-($\tr{(\rho)}=1$) operator. When a basis is fixed the density operator can be
-written in the form of a~matrix. 
-
-\todo{Not really}
-In \qi{} there are various ways to create a~density operator.
-
-%\subsubsection{Entanglement}
-%Entanglement is one of the most important phenomena in quantum information 
-%theory. 
-%We say that state $\rho$ is separable iff it can be written in the
-%following form
-%\begin{equation}
-%\rho=\sum_{i=1}^{M} q_i\, \rho_i^A \otimes \rho_i^B,
-%\end{equation}
-%where $q_i>0$ and $\sum_{i=1}^{M} q_i=1$.
-%A state that is not separable is called entangled. It is an open problem of
-%great importance and under investigation, to decide if a~given quantum state 
-%is
-%entangled or not.
-%
-%\subsubsection{Subsystems}
-%Given two states $\rho^A$, $\rho^B$ of two systems $A$ and $B$, the product 
-%state
-%$\rho^{AB}$ of the composed system is obtained by taking the Kronecker product
-%of the states i.e. $\rho^{AB}=\rho^A\otimes\rho^B.$
-%
-%Let $[\rho^{AB}]_{kl}$ be a matrix representing a~quantum system composed of 
-%two
-%subsystems of dimensions $M$ and $N$. We want to index the matrix elements of
-%$\rho$ using two double indices $[\rho^{AB}]_{\stackidx{m}{\mu}{n}{\nu}},$ so 
-%that
-%Latin indices correspond to the system $A$ and Greek indices correspond to the
-%system $B$. The relation between indices is as follows $k=(m-1) N + \mu$, 
-%$l=(n-1) N
-%+ \nu$. 
-%The partial trace with respect to system $B$ reads
-%$\tr_B(\rho^{AB})=\sum_\mu \rho_{\stackidx{m}{\mu}{n}{\mu}}=\rho^A$, 
-%and the partial trace with respect to system $A$ reads
-%$\tr_A(\rho^{AB})=\sum_m \rho_{\stackidx{m}{\mu}{m}{\nu}}=\rho^B$.
-%
-%Given the state of the composed system $\rho^{AB}$ the state of subsystems can
-%by found by the means of taking partial trace of $\rho^{AB}$ with respect to 
-%one
-%of the subsystems. It should noted that tracing-out is not a reversible
-%operation, so in a~general case
-%\begin{equation}
-%    \rho^{AB}\neq \tr_A(\rho^{AB})\otimes\tr_B(\rho^{AB}).
-%\end{equation}
-
-\subsection{Completely positive trace-preserving maps (CPTP)}
-We~say that an operation is physical if it transforms density operators into
-density operators. Additionally we assume that physical operations are linear.
-Therefore an operation $\Phi(\cdot)$ to be physical has to fulfil the following
-set of conditions:
-\begin{enumerate}
-	\item For any operator $\rho$ its image under operation $\Phi$ has to have 
-its
-	trace and positivity preserved i.e. if 
-	$\tr{(\rho)}=1, \rho\geq0, \rho=\rho^\dagger$ then
-	$\tr{(\Phi(\rho))}=1, \Phi(\rho)\geq0, \Phi(\rho)=\Phi(\rho)^\dagger.$
-	\item Operator $\Phi$ has to be linear:
-	\begin{equation}
-		\Phi\left(\sum_i p_i\rho_i \right)=\sum_i p_i \Phi\left(\rho_i \right).
-	\end{equation}
-	\item The extension of the operator $\Phi$ to any larger dimension that 
-acts
-	trivially on the extended system has to preserve positivity. 
-	This feature is called complete positivity. It means that for all positive 
-semi-definite
-	$\rho,\xi\geq 0$ the following holds
-	\begin{equation}
-		(\Phi\otimes\1_{\dim{(\xi)}})\left(\rho\otimes\xi\right)
-		=\Phi\left(\rho\right)\otimes\xi \geq 0.
-	\end{equation}
-\end{enumerate}
-CPTP maps are often called quantum channels.
-
-There are various ways to construct, represent and apply quantum channels in 
-\qi{}: Kraus form, super-operator matrix and general function.
-
-\subsubsection{General function}
-Any function that fulfils criteria listed above is treated as physically 
-allowed. 
-
-\qi{} provides set of commonly used quantum channels:
-\begin{itemize}
-\item The trivial channel: \lstinline!IdentityChannel[n,\[Rho]]! 
-$\rho=id_n(\rho)$
-
-\item \lstinline!DepolarizingChannel[n,p,\[Rho]]! $\rho=id_n(\rho)$
-\end{itemize}
-
-%TransposeChannel::usage = "TransposeChannel[n,\[Rho]] - apply the 
-%transposition operation to a n-dimensional density matrix \[Rho]. Note that 
-%this operations is not completely positive.";
-%
-%
-
-
-
-%HolevoWernerChannel::usage = "HolevoWernerChannel[n,p,\[Rho]] - apply the 
-%Holeve-Werner channel, also known as transpose-depolarizing channel, with 
-%parameter p acting to a n-dimensional input state \[Rho]. See also: 
-%DepolarizingChannel.";
-
-\subsubsection{Kraus form}
-Any operator $\Phi$ that is completely positive and trace preserving can be
-expressed in so called Kraus form \cite{BZ06}, which consists
-of the finite set $\{E_k\}$ of Kraus operators -- matrices that fulfil the
-completeness relation: $\sum_k {E_k}^\dagger E_k=\1$.
-The image of state $\rho$ under 
-the map $\Phi$ is given by 
-\begin{equation}
-    \Phi(\rho)=\sum_k E_k \rho {E_k}^\dagger.
-\end{equation}
-
-In \qi{} any list of matrices of equal dimensions can be treated as Kraus form.
-
-
-\subsubsection{Super-operator matrix}
-
-
-
-\begin{lstlisting}
-
-
-
-ChannelToMatrix::usage = "ChannelToMatrix[E,d] returns matrix representation 
-of a channel E acting on d-dimensional state space. First argument should be a 
-pure function E such that E[\[Rho]] transforms input state according to the 
-channel definition.";
-
-
-GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus 
-operators for d-dimensional generalized Pauli channel with the d-dimesnional 
-matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, 
-Springer 2006, Example 5.8, p. 126.";
-
-
-ApplyKraus::usage = "ApplyKraus[ck,\[Rho]] - apply channel ck, given as a list 
-of Kraus operators, to the input state \[Rho]. See also: ApplyUnitary, 
-ApplyChannel.";
-
-
-ApplyUnitary::usage = "ApplyUnitary[U,\[Rho]] - apply unitary a unitary matrix 
-U to the input state \[Rho]. See also: ApplyKraus, ApplyChannel.";
-
-
-ApplyChannel::usage = "ApplayChannel[f,\[Rho]] - apply channel f, given as a 
-pure function, to the input state \[Rho]. See also: ApplyUnitary, ApplyKraus."
-
-
-Superoperator::usage = "Superoperator[kl] returns matrix representation of 
-quantum channel given as a list of Kraus operators. Superoperator[fun,dim] is 
-just am alternative name for ChannelToMatrix[fun,dim] and returns matrix 
-representation of quantum channel, given as a pure function, acting on 
-dim-dimensional space. So Superoperator[DepolarizingChannel[2,p,#]&,2] and 
-Superoperator[QubitDepolarizingKraus[p]] returns the same matrix. See also: 
-ChannelToMatrix.";
-
-
-DynamicalMatrix::usage = "Dynamical matrix of quantum channel given as a list 
-of Kraus operators (DynamicalMatrix[ch]) or as a function fun action on 
-dim-dimensional space (DynamicalMatrix[fun,dim]). See also: Superoperator, 
-ChannelToMatrix.";
-
-
-Jamiolkowski::usage = "Jamiolkowski[K] gives the image of the Jamiolkowski 
-isomorphism for the channel given as the list of Karus operators K. 
-Jamiolkowski[fun,dim] gives the image of the Jamiolkowski isomorphism for the 
-channel given as a function fun action on dim-dimensional space. See also: 
-Superoperator, ChannelToMatrix, DynamicalMatrix.";
-
-
-TPChannelQ::usage = "Performs some checks on Kraus operators. Use this if you 
-want to check if they represent quantum channel.";
-
-
-ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of 
-Kraus operators from the list ch.";
-
-
-SuperoperatorToKraus::usage = "Finds Kraus operators for a given super 
-operator";
-\end{lstlisting}
-
-\subsection{Measurement}
-Quantum states cannot be observed directly. In the literature one considers two
-main types of measurements: Von Neumann measurement and POVM (Positive Operator
-Valued Measure) measurement. In this paper we use only Von Neumann
-measurement but for the sake of completeness we also define POVM measurement.
-
-The mathematical formulation of Von Neumann measurement is given by a map from 
-a
-set of projection operators to real numbers. 
-
-Let us consider an orthogonal complete set of projection operators 
-$P=\{P_i\}_{i=1}^N$ and
-the set of real measurement outcomes $O=\{o_i\}_{i=1}^N$. Mapping $P\rightarrow
-O$ is called Von Neumann measurement. Assuming the system is in the state 
-$\rho$,
-the probability $p_i$ of measuring outcome $o_i$ is given by the relation 
-$p_i=\tr(P_i
-\rho)$.
-
-POVM measurement can be considered as a generalisation of Von Neumann
-measurement. Let us take a set of positive operators $F=\{F_i\}_{i=1}^N$ such
-that $\sum_{i=1}^N F_i=\1$ and the set of real measurement outcomes
-$O=\{o_i\}_{i=1}^N$. Mapping $F\rightarrow O$ is called POVM measurement. Given
-the system is in the state $\rho$, the probability $p_i$ of measuring outcome 
-$o_i$
-is given by the relation $p_i=\tr(F_i \rho)$.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Concluding remarks}\label{sec:comclude}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Package \qi\ provide set of functions which aims to simplify the task of
-exploring the space of quantum states and understanding quantum operations.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Acknowledgements}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We acknowledge the financial support by Polish Research Network LFPPI.
-
-\appendix
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{List of provided functions}
+\subsection{Related work}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\input{qi_functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Preliminaries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliography{qi}
-\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Description of the package}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Algebraic tools}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Kronecker product and friends}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Schmidt decomposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Partial trace and transposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Geometric tools}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Distance measures}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Bloch Representation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Quantum states}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Parameterizations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Random states}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Quantum channels}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Final remarks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
-\endinput
-%%
-%% End of file `elsarticle-template-num.tex'.

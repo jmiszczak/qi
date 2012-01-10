@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Package header*)
 
 
@@ -22,7 +22,7 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 (*Help messages*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -55,7 +55,7 @@ Proj::usage = "<f>Proj</f>[<v>v</v>] returns projector of the vector <v>v</v>.";
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Fidelity, trace distance etc.*)
 
 
@@ -84,7 +84,7 @@ GateFidelity::usage = "<f>GateFidelity</f>[<v>U,V</v>] is equivalent to <v>1/d</
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
@@ -97,7 +97,7 @@ cnot::usage = "<v>cnot</v> - Controlled not matrix for two qubits.";
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Schmidt decomposition*)
 
 
@@ -118,7 +118,7 @@ and reconstruct the original matrix as
 \t <v>mtx</v> == Sum[<v>sd</v>[[<v>i</v>,1]]*KroneckerProduct[<v>sd</v>[[<v>i</v>,2]], <v>sd</v>[[<v>i</v>,3]]], {<v>i</v>, Length[<v>sd</v>]}];"; 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Reshaping, vectorization and reshuffling*)
 
 
@@ -141,7 +141,7 @@ returns a reshuffled matrix with dimensions <s>(drows[[1]]\[Times]dcols[[1]])\[T
 Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <s>n^2\[Times]n^2</s>.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Parametrizations*)
 
 
@@ -161,7 +161,7 @@ by numbers {<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[
 See also: <f>SymbolicVector</f>.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*One-qubit states*)
 
 
@@ -174,7 +174,7 @@ This is just a alias for <f>Proj</f>[<f>QubitKet</f>[<s>\[Alpha],\[Beta]</s>]]. 
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
 
@@ -212,7 +212,7 @@ ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<s>\[CapitalPsi]</s>,
 computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[CapitalPhi]</s>.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Partial trace and transposition*)
 
 
@@ -228,7 +228,7 @@ Returns the partial trace of an operator <s>\[Rho]</s> acting on a composite sys
 <v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
 
@@ -268,7 +268,7 @@ Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or a
 \t Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
@@ -290,7 +290,7 @@ returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients t
 expansion on normalized generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Private definitions*)
 
 
@@ -379,7 +379,7 @@ package is focused on geometrical aspects of quantum information theory.";
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Miscellaneous functions*)
 
 
@@ -393,7 +393,7 @@ DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Activ
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -720,10 +720,6 @@ PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,i
 ];
 
 
-(* ::Subsection:: *)
-(*Entanglement*)
-
-
 (* ::Subsection::Closed:: *)
 (*Random states and operations*)
 
@@ -812,7 +808,7 @@ RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an i
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Bloch Representation*)
 
 
