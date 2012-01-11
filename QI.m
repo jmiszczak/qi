@@ -364,7 +364,8 @@ qiHistory = {
 	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
 	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
 	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
-	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"}
+	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
+	{"0.4.34", "11/01/2012", "Zbyszzek", "VectorSchmidtDecomposition fixed"}
 
 };  
 
@@ -484,7 +485,7 @@ VectorSchmidtDecomposition[vec_?VectorQ, d_?ListQ] :=
    	vals = Select[Diagonal[w], # != 0 &];
    	snum = Length[vals];
      {vals, u\[Transpose][[1 ;; snum]], 
-     v\[Transpose][[1 ;; snum]]}\[Transpose]
+     v\[ConjugateTranspose][[1 ;; snum]]}\[Transpose]
    ];
 
 VectorSchmidtDecomposition[vec_?VectorQ] :=
