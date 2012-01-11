@@ -3,13 +3,14 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.4.32)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.4.34)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
 \maketitle
 \begin{abstract}QI is a package of functions for Mathematica computer algebra system, which implements number of functions used in the analysis of quantum states and quantum operations. In contrast to many available packages for symbolic and numerical simulation of quantum computation presented package is focused on geometrical aspects of quantum information theory.\end{abstract}
 
+ 
  
 
 \begin{itemize} 
@@ -26,8 +27,9 @@ See also: \textbf{Superoperator}, \textbf{ChannelToMatrix}.
 \item  \textbf{Fidelity}[$\rho _1$,$\rho _2$] returns the quantum fidelity between states $\rho _1$ and $\rho _2$ calculated using a simplified formula as $\text{($\sum $}\lambda _i)^2$, where $\lambda _i$ are the eigenvalues of $\rho _1\rho _2$.
 \item  \textbf{GateFidelity}[$U,V$] is equivalent to $1/d\text{tr$|$UV} ^{\dagger }|$.
 \item  \textbf{GeneralizedPauliMatrices}[$n$] returns list of generalized Pauli matrices for $SU(n)$. For $n=2$ these are just Pauli matrices and for $n=3$ - Gell-Mann matrices. Note that identity matrix is not included in the list.
-\item  \textbf{GinibreMatrix}[$m$,$n$] returns complex matrix of dimension $\text{m$\times $n}$ with normal distribution of real and imaginary parts.
+\item  \textbf{GinibreMatrix}[$m$,$n$] returns complex matrix of dimension $\text{m$\times $n}$ with the standard normal distribution of real and imaginary parts.
 \item  $id$ - Identity matrix for one qubit. See also: IdentityMatrix.
+\item  \textbf{Id}[$n$] returns an identity matrix of dimension $n$. This is equivalent to IdentityMatrix[$n$].
 \item  \textbf{Jamiolkowski}[$K$] gives the image of the Jamiolkowski isomorphism for the channel given as the list of Karus operators $K$. \newline{}
 \textbf{Jamiolkowski}[$fun$,$dim$] gives the image of the Jamiolkowski isomorphism for the channel given as a function fun action on $dim$-dimensional space. See also: \textbf{Superoperator}, \textbf{ChannelToMatrix}, \textbf{DynamicalMatrix}.
 \item  \textbf{Lambda1}[$i,j,n$] generalized Pauli matrix. For example \textbf{Lambda1}[$1,2,2$] is equal to Pauli $\text{$\sigma $x}$. See also: \textbf{GeneralizedPauliMatrices}.

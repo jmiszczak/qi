@@ -23,6 +23,19 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
 (* ::Subsection::Closed:: *)
+(*Commonly used matrices*)
+
+
+sx::usage = "<v>sx</v> - Pauli matrix <v>sx</v>.";
+sy::usage = "<v>sy</v> - Pauli matrix <v>sy</v>.";
+sz::usage = "<v>sz</v> - Pauli matrix <v>sz</v>.";
+id::usage = "<v>id</v> - Identity matrix for one qubit. See also: IdentityMatrix.";
+wh::usage = "<v>wh</v> - Hadamard gate for one qubit.";
+cnot::usage = "<v>cnot</v> - Controlled not matrix for two qubits.";
+Id::usage = "<f>Id</f>[<v>n</v>] returns an identity matrix of dimension <v>n</v>. This is equivalent to IdentityMatrix[<v>n</v>].";
+
+
+(* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
 
@@ -56,7 +69,67 @@ Proj::usage = "<f>Proj</f>[<v>v</v>] returns projector of the vector <v>v</v>.";
 
 
 (* ::Subsection::Closed:: *)
-(*Fidelity, trace distance etc.*)
+(*Reshaping, vectorization and reshuffling*)
+
+
+Vec::usage = "<f>Vec</f>[<v>A</v>] - vectorization of the matrix <v>A</v> column by column. See also: <f>Res</f>.";
+
+Unvec::usage = "<f>Unvec</f>[<v>v,c</v>] - de-vectorization of the vector into the matrix \
+with <v>c</v> columns. If the second parameter is omitted then it is assumed that <v>v</v> \
+can be mapped into square matrix. See also: <f>Unres, Vec</f>.";
+
+Res::usage = "<f>Res</f>[<v>A</v>] is equivalent to <f>Vec</f>[Transpose[<v>A</v>]]. Reshaping maps\
+matrix <v>A</v> into a vector row by row. Note, that this is different then the\
+reshape operation in <v>Matlab</v> or <v>GNU Octave</v>.";
+
+Unres::usage = "<f>Unres</f>[<v>v</v>,<v>c</v>] - de-reshaping of the vector into a matrix with <v>c</v> columns. \
+If the second parameter is omitted, then it is assumed that <v>v</v> can be mapped into a square matrix. See also: <f>Unvec</f>, <f>Res</f>.";
+
+Reshuffle::usage = "\
+<f>Reshuffle</f>[<s>\[Rho]</s>, {<v>drows</v>, <v>dcols</v>}] for a matrix of dimensions <s>(drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]])</s> \
+returns a reshuffled matrix with dimensions <s>(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]])</s>.
+Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <s>n^2\[Times]n^2</s>.";
+
+
+(* ::Subsection::Closed:: *)
+(*Schmidt decomposition*)
+
+
+SchmidtDecomposition::usage = "<f>SchmidtDecomposition</f>[<v>x</v>,<v>dim</v>] - accepts a vector \
+or a matrix as a first argument and returns apropriate Schmidt decomposition. The second argument \
+is optional and specifies the dimensions of subsystems.
+If <v>x</v> is a vector
+\t <f>SchmidtDecomposition</f>[<v>x</v>] assumes that <v>x</v> is (<v>n^2</v>)-dimensional,
+\t <f>SchmidtDecomposition</f>[<v>x</v>,{<v>n</v>,<v>m</v>}] assumes that the vector is a <v>n \[Times]m</v>-dimensional.
+If <v>x</v> is a matrix, this function can be used in three different ways.
+\t <f>SchmidtDecomposition</f>[<v>x</v>] assumes that <v>x</v> is (<v>n^2\[Times]n^2</v>)-dimensional, 
+\t <f>SchmidtDecomposition</f>[<v>x</v>,{<v>n</v>,<v>m</v>}] assume that the matrix is a <v>n m\[Times]n m</v> square matrix and
+\t <f>SchmidtDecomposition</f>[<v>x</v>,{{<v>r1</v>,<v>r2</v>},{<v>c1</v>,<v>c2</v>}}]
+For example, for a matrix <v>mtx</v> of dimension <v>r1 r2\[Times] c1 c2</v> one can obtain a Schmidt \
+decomposition on <v>r1 c1\[CircleTimes] r2 c2</v> system as 
+\t <v>sd</v> = <f>SchmidtDecomposition</f>[<v>mtx</v>, {{<v>r1</v>, <v>r2</v>}, {<v>c1</v>, <v>c2</v>}}];
+and reconstruct the original matrix as
+\t <v>mtx</v> == Sum[<v>sd</v>[[<v>i</v>,1]]*KroneckerProduct[<v>sd</v>[[<v>i</v>,2]], <v>sd</v>[[<v>i</v>,3]]], {<v>i</v>, Length[<v>sd</v>]}];"; 
+
+
+(* ::Subsection::Closed:: *)
+(*Partial trace and transposition*)
+
+
+PartialTranspose::usage = "<f>PartialTranspose</f>[<s>\[Rho]</s>,<v>dim</v>,<v>sys</v>] - \
+Returns the partial transpose, according to systems <v>sys</v>, of density matrix <s>\[Rho]</s> composed of subsystems of dimensions <v>dim</v>.";
+
+PartialTrace::usage = "<f>PartialTrace</f>[<s>\[Rho]</s>,<v>sys</v>] - \
+Returns the partial trace of an operator <s>\[Rho]</s> acting on a bipartite (<s>d\[Times]d</s>)-dimensional system, \
+assuming that matrix <s>\[Rho]</s> is (<s>\!\(\*SuperscriptBox[\(d\), \(2\)]\)\[Times]\!\(\*SuperscriptBox[\(d\), \(2\)]\)</s>) dimensional. \
+In this case the system specification can be given as a integer 1 or 2, by the list of integers consisting only 1 or 2 or by the empty list. 
+<f>PartialTrace</f>[<s>\[Rho]</s>,<v>dims</v>,<v>sys</v>] - \
+Returns the partial trace of an operator <s>\[Rho]</s> acting on a composite system with subsystem dimensions given in the list \
+<v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
+
+
+(* ::Subsection::Closed:: *)
+(*Distance measures*)
 
 
 Fidelity::usage = "<f>Fidelity</f>[<s>\!\(\*SubscriptBox[\"\[Rho]\", \"1\"]\)</s>,<s>\!\(\*SubscriptBox[\"\[Rho]\", \"2\"]\)</s>] returns the quantum fidelity \
@@ -85,60 +158,25 @@ GateFidelity::usage = "<f>GateFidelity</f>[<v>U,V</v>] is equivalent to <v>1/d</
 
 
 (* ::Subsection::Closed:: *)
-(*Commonly used matrices*)
+(*Bloch Representation*)
 
 
-sx::usage = "<v>sx</v> - Pauli matrix <v>sx</v>.";
-sy::usage = "<v>sy</v> - Pauli matrix <v>sy</v>.";
-sz::usage = "<v>sz</v> - Pauli matrix <v>sz</v>.";
-id::usage = "<v>id</v> - Identity matrix for one qubit. See also: IdentityMatrix.";
-wh::usage = "<v>wh</v> - Hadamard gate for one qubit.";
-cnot::usage = "<v>cnot</v> - Controlled not matrix for two qubits.";
+Lambda1::usage = "<f>Lambda1</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda1</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]x</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
+Lambda2::usage = "<f>Lambda2</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda2</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]y</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
+Lambda3::usage ="<f>Lambda3</f>[<v>i,n</v>] generalized Pauli matrix. For example <f>Lambda3</f>[<v>2,2</v>] is equal to Pauli <s>\[Sigma]z</s>. See also: <f>GeneralizedPauliMatrices</f>.";
 
-(* ::Subsection::Closed:: *)
-(*Schmidt decomposition*)
+GeneralizedPauliMatrices::usage = "<f>GeneralizedPauliMatrices</f>[<v>n</v>] returns list of generalized Pauli matrices for \
+<v>SU(n)</v>. For <v>n=2</v> these are just Pauli matrices and for <v>n=3</v> - Gell-Mann matrices. \
+Note that identity matrix is not included in the list.";  (*See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";*)
 
+StateToBloch::usage = "<f>StateToBloch</f>[<v>A</v>] - for a square matrix <v>A</v> returns a vector of coefficients obtained from expansion on \
+normed generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
 
-SchmidtDecomposition::usage = "<f>SchmidtDecomposition</f>[<v>x</v>,<v>dim</v>] - accepts a vector \
-or a matrix as a first argument and returns apropriate Schmidt decomposition. The second argument \
-is optional and specifies the dimensions of subsystems.
-If <v>x</v> is a vector
-\t <f>SchmidtDecomposition</f>[<v>x</v>] assumes that <v>x</v> is (<v>n^2</v>)-dimensional,
-\t <f>SchmidtDecomposition</f>[<v>x</v>,{<v>n</v>,<v>m</v>}] assumes that the vector is a <v>n \[Times]m</v>-dimensional.
-If <v>x</v> is a matrix, this function can be used in three different ways.
-\t <f>SchmidtDecomposition</f>[<v>x</v>] assumes that <v>x</v> is (<v>n^2\[Times]n^2</v>)-dimensional, 
-\t <f>SchmidtDecomposition</f>[<v>x</v>,{<v>n</v>,<v>m</v>}] assume that the matrix is a <v>n m\[Times]n m</v> square matrix and
-\t <f>SchmidtDecomposition</f>[<v>x</v>,{{<v>r1</v>,<v>r2</v>},{<v>c1</v>,<v>c2</v>}}]
-For example, for a matrix <v>mtx</v> of dimension <v>r1 r2\[Times] c1 c2</v> one can obtain a Schmidt \
-decomposition on <v>r1 c1\[CircleTimes] r2 c2</v> system as 
-\t <v>sd</v> = <f>SchmidtDecomposition</f>[<v>mtx</v>, {{<v>r1</v>, <v>r2</v>}, {<v>c1</v>, <v>c2</v>}}];
-and reconstruct the original matrix as
-\t <v>mtx</v> == Sum[<v>sd</v>[[<v>i</v>,1]]*KroneckerProduct[<v>sd</v>[[<v>i</v>,2]], <v>sd</v>[[<v>i</v>,3]]], {<v>i</v>, Length[<v>sd</v>]}];"; 
-
-
-(* ::Subsection::Closed:: *)
-(*Reshaping, vectorization and reshuffling*)
-
-
-Vec::usage = "<f>Vec</f>[<v>A</v>] - vectorization of the matrix <v>A</v> column by column. See also: <f>Res</f>.";
-
-Unvec::usage = "<f>Unvec</f>[<v>v,c</v>] - de-vectorization of the vector into the matrix \
-with <v>c</v> columns. If the second parameter is omitted then it is assumed that <v>v</v> \
-can be mapped into square matrix. See also: <f>Unres, Vec</f>.";
-
-Res::usage = "<f>Res</f>[<v>A</v>] is equivalent to <f>Vec</f>[Transpose[<v>A</v>]]. Reshaping maps\
-matrix <v>A</v> into a vector row by row. Note, that this is different then the\
-reshape operation in <v>Matlab</v> or <v>GNU Octave</v>.";
-
-Unres::usage = "<f>Unres</f>[<v>v</v>,<v>c</v>] - de-reshaping of the vector into a matrix with <v>c</v> columns. \
-If the second parameter is omitted, then it is assumed that <v>v</v> can be mapped into a square matrix. See also: <f>Unvec</f>, <f>Res</f>.";
-
-Reshuffle::usage = "\
-<f>Reshuffle</f>[<s>\[Rho]</s>, {<v>drows</v>, <v>dcols</v>}] for a matrix of dimensions <s>(drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]])</s> \
-returns a reshuffled matrix with dimensions <s>(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]])</s>.
-Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <s>n^2\[Times]n^2</s>.";
+BlochToState::usage = "<f>BlochToState</f>[<v>v</v>] - \
+returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from \
+expansion on normalized generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
 
 
 (* ::Subsection::Closed:: *)
@@ -161,10 +199,6 @@ by numbers {<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[
 See also: <f>SymbolicVector</f>.";
 
 
-(* ::Subsection::Closed:: *)
-(*One-qubit states*)
-
-
 QubitKet::usage = "<f>QubitKet</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>] parametrization of the pure state (as a state vector) for one qubit as \
 (<s>Cos[\[Alpha]] Exp[i\[Beta]], Sin[\[Alpha]]</s>). This is equivalent to <f>StateVector</f>[{<s>\[Alpha],\[Beta]</s>}]. See also: <f>QubitPureState</f>, <f>StateVector</f>.";
 
@@ -175,8 +209,48 @@ This is just a alias for <f>Proj</f>[<f>QubitKet</f>[<s>\[Alpha],\[Beta]</s>]]. 
 
 
 (* ::Subsection::Closed:: *)
+(*Random states*)
+
+
+RandomSimplex::usage = "<f>RandomSimplex</f>[<v>d</v>] generates a point on a <v>d</v>-dimensional simplex according to the uniform distibution.";
+
+RandomKet::usage = "<f>RandomKet</f>[<v>d</v>] - for integer <v>d</v> returns a random ket vector in <v>d</v>-dimensional space. \
+See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664. 
+<f>RandomKet</f>[{<v>d1</v>,<v>d2</v>}, <v>type</v>] - for integers <v>d1</v>, <v>d2</v> returns a random ket \
+vector in <v>d1 d2</v>-dimensional space with distribution specified by <v>type</v>. 
+The parameter <v>type</v> can be:
+\t ''Sep'' - in this case function returns separable random vectors,
+\t ''MaxEnt'' - in this case function returns maximally entangled random vectors,
+\t <v>l</v> list of positive numbers summing up to 1, the length of the list must be less or equal to the Min[<v>d1</v>,<v>d2</v>] \
+- in this case function returns random vectors with fixed Schmidt numbers given by <v>l</v>.";
+
+(*<v>d</v> may be a list of integers in \
+this case ket will be in product form d[[1]]\[CircleTimes]...\[CircleTimes]d[[k]]. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
+*)
+
+GinibreMatrix::usage = "<f>GinibreMatrix</f>[<v>m</v>,<v>n</v>] returns complex matrix of dimension <s>m\[Cross]n</s> with the standard normal distribution of real and imaginary parts.";
+
+RandomSpecialUnitary::usage = "<f>RandomSpecialUnitary</f>[<v>d</v>] returns a random special unitary matrix of size <v>d</v>. See <f>RandomUnitary</f>.";
+
+RandomUnitary::usage = "<f>RandomUnitary</f>[<v>d</v>] returns a random unitary matrix of size <v>d</v> using <v>QR</v> decomposition. \
+See: F. Mezzadri,  NOTICES of the AMS, Vol. 54 (2007), 592-604.";
+
+RandomOrthogonal::usage = "<f>RandomOrthogonal</f>[<v>d</v>] returns a random orthogonal matrix of size <v>d</v> using <v>QR</v> decomposition. \
+See: F. Mezzadri, NOTICES of the AMS, Vol. 54 (2007), 592-604."
+
+RandomState::usage = "<f>RandomState</f>[<v>d</v>,<v>dist</v>] - random density matrix of dimension <v>d</v>. \
+Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or an integer <v>K</v>. 
+\t ''<v>HS</v>'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. 
+\t ''<v>Bures</v>'' - gives a random state distributed according to Bures measure. 
+\t Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
+
+
+(* ::Subsection::Closed:: *)
 (*Quantum channels*)
 
+
+RandomDynamicalMatrix::usage = "<f>RandomDynamicalMatrix</f>[<v>d</v>,<v>k</v>] returns dynamical matrix of operation acting \
+on <v>d</v>-dimensional states with <v>k</v> eigenvalues equal to 0. Thanks to Wojtek Bruzda. see Random Quantum Operations DOI[10.1016/j.physleta.2008.11.043].";
 
 ApplyKraus::usage = "<f>ApplyKraus</f>[<v>ck</v>,<s>\[Rho]</s>] - apply channel <v>ck</v>, given as a list of Kraus operators, \
 to the input state <s>\[Rho]</s>. See also: <f>ApplyUnitary</f>, <f>ApplyChannel</f>.";
@@ -212,92 +286,18 @@ ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<s>\[CapitalPsi]</s>,
 computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[CapitalPhi]</s>.";
 
 
-(* ::Subsection::Closed:: *)
-(*Partial trace and transposition*)
-
-
-PartialTranspose::usage = "<f>PartialTranspose</f>[<s>\[Rho]</s>,<v>dim</v>,<v>sys</v>] - \
-Returns the partial transpose, according to systems <v>sys</v>, of density matrix <s>\[Rho]</s> composed of subsystems of dimensions <v>dim</v>.";
-
-PartialTrace::usage = "<f>PartialTrace</f>[<s>\[Rho]</s>,<v>sys</v>] - \
-Returns the partial trace of an operator <s>\[Rho]</s> acting on a bipartite (<s>d\[Times]d</s>)-dimensional system, \
-assuming that matrix <s>\[Rho]</s> is (<s>\!\(\*SuperscriptBox[\(d\), \(2\)]\)\[Times]\!\(\*SuperscriptBox[\(d\), \(2\)]\)</s>) dimensional. \
-In this case the system specification can be given as a integer 1 or 2, by the list of integers consisting only 1 or 2 or by the empty list. 
-<f>PartialTrace</f>[<s>\[Rho]</s>,<v>dims</v>,<v>sys</v>] - \
-Returns the partial trace of an operator <s>\[Rho]</s> acting on a composite system with subsystem dimensions given in the list \
-<v>dims</v>. List <v>sys</v> specifies systems to be discarded.";
-
-
-(* ::Subsection::Closed:: *)
-(*Random states and operations*)
-
-
-RandomSimplex::usage = "<f>RandomSimplex</f>[<v>d</v>] generates a point on a <v>d</v>-dimensional simplex according to the uniform distibution.";
-
-RandomKet::usage = "<f>RandomKet</f>[<v>d</v>] - for integer <v>d</v> returns a random ket vector in <v>d</v>-dimensional space. \
-See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664. 
-<f>RandomKet</f>[{<v>d1</v>,<v>d2</v>}, <v>type</v>] - for integers <v>d1</v>, <v>d2</v> returns a random ket \
-vector in <v>d1 d2</v>-dimensional space with distribution specified by <v>type</v>. 
-The parameter <v>type</v> can be:
-\t ''Sep'' - in this case function returns separable random vectors,
-\t ''MaxEnt'' - in this case function returns maximally entangled random vectors,
-\t <v>l</v> list of positive numbers summing up to 1, the length of the list must be less or equal to the Min[<v>d1</v>,<v>d2</v>] \
-- in this case function returns random vectors with fixed Schmidt numbers given by <v>l</v>.";
-
-(*<v>d</v> may be a list of integers in \
-this case ket will be in product form d[[1]]\[CircleTimes]...\[CircleTimes]d[[k]]. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
-*)
-
-RandomDynamicalMatrix::usage = "<f>RandomDynamicalMatrix</f>[<v>d</v>,<v>k</v>] returns dynamical matrix of operation acting \
-on <v>d</v>-dimensional states with <v>k</v> eigenvalues equal to 0. Thanks to Wojtek Bruzda. see Random Quantum Operations DOI[10.1016/j.physleta.2008.11.043].";
-
-GinibreMatrix::usage = "<f>GinibreMatrix</f>[<v>m</v>,<v>n</v>] returns complex matrix of dimension <s>m\[Cross]n</s> with normal distribution of real and imaginary parts.";
-
-RandomSpecialUnitary::usage = "<f>RandomSpecialUnitary</f>[<v>d</v>] returns a random special unitary matrix of size <v>d</v>. See <f>RandomUnitary</f>.";
-
-RandomUnitary::usage = "<f>RandomUnitary</f>[<v>d</v>] returns a random unitary matrix of size <v>d</v> using <v>QR</v> decomposition. \
-See: F. Mezzadri,  NOTICES of the AMS, Vol. 54 (2007), 592-604.";
-
-RandomOrthogonal::usage = "<f>RandomOrthogonal</f>[<v>d</v>] returns a random orthogonal matrix of size <v>d</v> using <v>QR</v> decomposition. \
-See: F. Mezzadri, NOTICES of the AMS, Vol. 54 (2007), 592-604."
-
-RandomState::usage = "<f>RandomState</f>[<v>d</v>,<v>dist</v>] - random density matrix of dimension <v>d</v>. \
-Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or an integer <v>K</v>. 
-\t ''<v>HS</v>'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. 
-\t ''<v>Bures</v>'' - gives a random state distributed according to Bures measure. 
-\t Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
-
-
-(* ::Subsection::Closed:: *)
-(*Bloch Representation*)
-
-
-Lambda1::usage = "<f>Lambda1</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda1</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]x</s>. See also: <f>GeneralizedPauliMatrices</f>.";
-
-Lambda2::usage = "<f>Lambda2</f>[<v>i,j,n</v>] generalized Pauli matrix. For example <f>Lambda2</f>[<v>1,2,2</v>] is equal to Pauli <s>\[Sigma]y</s>. See also: <f>GeneralizedPauliMatrices</f>.";
-
-Lambda3::usage ="<f>Lambda3</f>[<v>i,n</v>] generalized Pauli matrix. For example <f>Lambda3</f>[<v>2,2</v>] is equal to Pauli <s>\[Sigma]z</s>. See also: <f>GeneralizedPauliMatrices</f>.";
-
-GeneralizedPauliMatrices::usage = "<f>GeneralizedPauliMatrices</f>[<v>n</v>] returns list of generalized Pauli matrices for \
-<v>SU(n)</v>. For <v>n=2</v> these are just Pauli matrices and for <v>n=3</v> - Gell-Mann matrices. \
-Note that identity matrix is not included in the list.";  (*See also: PauliMatrices, GellMannMatrices, \[Lambda], Lambda1, Lambda2, Lambda3.";*)
-
-StateToBloch::usage = "<f>StateToBloch</f>[<v>A</v>] - for a square matrix <v>A</v> returns a vector of coefficients obtained from expansion on \
-normed generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
-
-BlochToState::usage = "<f>BlochToState</f>[<v>v</v>] - \
-returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from \
-expansion on normalized generalized Pauli matrices. See also: <f>GeneralizedPauliMatrices</f>.";
-
-
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
+
+
+(* ::Subsection::Closed:: *)
+(*Internal functions (without usage strings)*)
 
 
 Begin["`Private`"];
 
-QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
-(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];
+(*QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
+(MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];*)
 
 qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
 
@@ -365,7 +365,7 @@ qiHistory = {
 	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
 	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
-	{"0.4.34", "11/01/2012", "Zbyszzek", "VectorSchmidtDecomposition fixed"}
+	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"}
 
 };  
 
@@ -380,10 +380,6 @@ package is focused on geometrical aspects of quantum information theory.";
 
 
 
-(* ::Subsection::Closed:: *)
-(*Miscellaneous functions*)
-
-
 HyperlinkToString::usage = "HyperlinkToString[text,link] creates a link labeled with text to the given URL and returns it as a Mathematica string.";
 
 HyperlinkToString[text_,link_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\""<>link<>"\"]\)";
@@ -392,6 +388,19 @@ DOIToString::usage = "DOIToString[text,doi] creates a link labeled with text to 
 
 DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\"http://dx.doi.org/"<>doi<>"\"]\)";
 
+
+
+(* ::Subsection::Closed:: *)
+(*Commonly used matrices*)
+
+
+sx = {{0,1},{1,0}};
+sy = {{0,-I},{I,0}};
+sz = {{1,0},{0,-1}};
+id = {{1,0},{0,1}};
+wh = {{1,1},{1,-1}};
+cnot = {{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,0,1,0}};
+Id[n_]:=IdentityMatrix[n];
 
 
 (* ::Subsection::Closed:: *)
@@ -436,42 +445,37 @@ Proj[v_]:=Table[v[[i]]Conjugate[v[[j]]],{i,1,Length[v]},{j,1,Length[v]}];
 
 
 (* ::Subsection::Closed:: *)
-(*Fidelity, trace distance etc.*)
+(*Reshaping, vectorization and reshuffling*)
 
 
-MatrixSqrt[m_?SquareMatrixQ]:=MatrixPower[m,1/2];
+Vec[m_]:=Flatten[Transpose[m]]; 
 
-MatrixAbs[a_?SquareMatrixQ]:=MatrixSqrt[a.(a\[ConjugateTranspose])];
-
-Fidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=(Plus@@(Sqrt[Eigenvalues[a.b]]))^2;
-
-Superfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Tr[a.b]+Sqrt[(1-Tr[a.a])]*Sqrt[(1-Tr[b.b])];
-
-Subfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Block[{prod = a.b}, Tr[prod] +Sqrt[2]Sqrt[(Tr[prod]*Tr[prod]-Tr[prod.prod])]];
-
-TraceNorm[a_?SquareMatrixQ]:=Plus@@SingularValueList[a];
-
-TraceDistance[a_?SquareMatrixQ,b_?SquareMatrixQ]:=1/2*TraceNorm[a-b];
-
-GateFidelity[mU_?SquareMatrixQ,mV_?SquareMatrixQ]:=Block[{dimU=Dimensions[mU][[1]]},
-	If[dimU==Dimensions[mV][[1]],
-		1/dimU Abs[Tr[mU.ConjugateTranspose[mV]]],
-		Message[GateFidelity::argerr]
-	]
+Unvec[v_List,cols_:0]:=Which[
+ (cols== 0)&&IntegerQ[\[Sqrt]Length[v]],Transpose[Partition[v,\[Sqrt]Length[v]]],
+ Mod[Length[v],cols]==0,Transpose[Partition[v,cols]]
 ];
-GateFidelity::argerr = "Both matrices have to be of the same dimension.";
 
+Res[m_List]:=Flatten[m]; 
 
-(* ::Subsection::Closed:: *)
-(*Commonly used matrices*)
+Unres[v_List,cols_:0]:=Which[
+ (cols== 0)&&IntegerQ[\[Sqrt]Length[v]],Partition[v,\[Sqrt]Length[v]],
+ Mod[Length[v],cols]==0,Partition[v,cols]
+];
 
+Reshuffle[\[Rho]_]:=Block[{dim},
+	dim = Sqrt[Length[\[Rho]]];
+	If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+		Reshuffle[\[Rho], {{dim,dim},{dim,dim}}]
+	(*else*),
+		Message[Reshuffle::argerr]
+	]
+]
+Reshuffle::argerr = "Reshuffle works only for square matrices of dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), \
+where d is an Integer, for other dimensions use ReshuffleGeneral";
 
-sx = {{0,1},{1,0}};
-sy = {{0,-I},{I,0}};
-sz = {{1,0},{0,-1}};
-id = {{1,0},{0,1}};
-wh = {{1,1},{1,-1}};
-cnot = {{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,0,1,0}};
+Reshuffle[A_,{n_,m_}]:=Flatten[
+	Table[Flatten[Part[A,1+i1;;n[[2]]+i1,1+i2;;m[[2]]+i2]],{i1,0,n[[1]] n[[2]]-1,n[[2]]},{i2,0,m[[1]]*m[[2]]-1,m[[2]]}]
+,1];
 
 
 (* ::Subsection::Closed:: *)
@@ -522,108 +526,6 @@ SchmidtDecomposition[e_,dim___]:=Which[
 	True, Message[SchmidtDecomposition::argerr]
 ];
 SchmidtDecomposition::argerr = "First argument should be a vector or a matrix.";
-
-
-(* ::Subsection::Closed:: *)
-(*Reshaping, vectorization and reshuffling*)
-
-
-Vec[m_]:=Flatten[Transpose[m]]; 
-
-Unvec[v_List,cols_:0]:=Which[
- (cols== 0)&&IntegerQ[\[Sqrt]Length[v]],Transpose[Partition[v,\[Sqrt]Length[v]]],
- Mod[Length[v],cols]==0,Transpose[Partition[v,cols]]
-];
-
-Res[m_List]:=Flatten[m]; 
-
-Unres[v_List,cols_:0]:=Which[
- (cols== 0)&&IntegerQ[\[Sqrt]Length[v]],Partition[v,\[Sqrt]Length[v]],
- Mod[Length[v],cols]==0,Partition[v,cols]
-];
-
-Reshuffle[\[Rho]_]:=Block[{dim},
-	dim = Sqrt[Length[\[Rho]]];
-	If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
-		Reshuffle[\[Rho], {{dim,dim},{dim,dim}}]
-	(*else*),
-		Message[Reshuffle::argerr]
-	]
-]
-Reshuffle::argerr = "Reshuffle works only for square matrices of dimension \!\(\*SuperscriptBox[\"d\", \"2\"]\)\[Times]\!\(\*SuperscriptBox[\"d\", \"2\"]\), \
-where d is an Integer, for other dimensions use ReshuffleGeneral";
-
-Reshuffle[A_,{n_,m_}]:=Flatten[
-	Table[Flatten[Part[A,1+i1;;n[[2]]+i1,1+i2;;m[[2]]+i2]],{i1,0,n[[1]] n[[2]]-1,n[[2]]},{i2,0,m[[1]]*m[[2]]-1,m[[2]]}]
-,1];
-
-
-(* ::Subsection::Closed:: *)
-(*Parametrizations*)
-
-
-Unitary2[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_]:=
-Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}}.DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
-
-Unitary2Euler[\[Alpha]_,\[Theta]_,\[Phi]_,\[Psi]_]:={{E^(I*\[Alpha] + I*\[Phi])*Cos[\[Theta]], E^(I*\[Alpha] + I*\[Psi])*Sin[\[Theta]]}, {-(E^(I*\[Alpha] - I*\[Psi])*Sin[\[Theta]]), E^(I*\[Alpha] - I*\[Phi])*Cos[\[Theta]]}}
-
-SpecialUnitary2[\[Beta]_,\[Gamma]_,\[Delta]_]:=Unitary2[0,\[Beta],\[Gamma],\[Delta]];
-
-
-StateVector[l_]:=Block[{pr,ph,N,ProbablityVector},
-	ProbablityVector[li_]:=Block[{ll,Ni},
-		Ni=Length[li]+2;
-        ll=Prepend[li,\[Pi]/2];
-        Table[Sin[ll[[i-1]]]^2*Product[Cos[ll[[j-1]]]^2,{j,i+1,Ni}],{i,2,Ni}]
-    ];
-	N=Length[l]/2;
-	pr=ProbablityVector[l[[1;;N]]];
-	ph=Prepend[Exp[I*l[[N+1;;2*N]]],1];
-	FullSimplify[Sqrt[pr]*ph, Assumptions -> Table[0<l[[i]]<\[Pi]/2,{i,1,N}]]
-];
-
-
-(* ::Subsection::Closed:: *)
-(*One-qubit states*)
-
-
-QubitKet[\[Alpha]_,\[Beta]_]:={Cos[\[Alpha]], Exp[I*\[Beta]]*Sin[\[Alpha]]};
-
-QubitPureState[\[Alpha]_,\[Beta]_]:=Proj[QubitKet[\[Alpha],\[Beta]]];
-
-
-(* ::Subsection::Closed:: *)
-(*Quantum channels*)
-
-
-ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]].\[Rho].(ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
-
-ApplyChannel[f_,\[Rho]_] := Map[f,\[Rho],{0}];
-
-ChannelToMatrix[fun_,dim_] := Map[Res[fun[#]] &, BaseMatrices[dim]];       
-
-Superoperator[ch_List] := Sum[ch[[i]]\[CircleTimes]ch[[i]]\[Conjugate],{i,1,Length[ch]}];
-
-Superoperator[fun_,dim_] := ChannelToMatrix[fun,dim];
-
-DynamicalMatrix[ch_List] := Reshuffle[Superoperator[ch]];
-
-DynamicalMatrix[fun_Function,dim_Integer] := Reshuffle[Superoperator[fun,dim]];
-
-Jamiolkowski[ch_List] := 1/Length[ch[[1]]]*DynamicalMatrix[ch];
-
-Jamiolkowski[fun_Function,dim_Integer] := 1/dim*DynamicalMatrix[fun,dim];
-
-TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
-
-SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
-
-
-ProductSuperoperator[M1_,M2_]:=Block[{prod = M1\[CircleTimes]M2, q1, d1 = Sqrt[Length[M1]], d2 = Sqrt[Length[M2]]},
-    q1 = Table[Res[Reshuffle[Unres[prod[[i]], d2 d2], {{d1, d1}, {d2, d2}}]], {i,1, d1*d1*d2*d2}];
-    Table[Res[ Reshuffle[ Unres[(q1\[Transpose])[[i]], d2 d2], {{d1, d1}, {d2, d2}}]], {i,1,d1*d1*d2*d2}]\[Transpose]
-];
-
 
 
 (* ::Subsection::Closed:: *)
@@ -722,7 +624,98 @@ PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,i
 
 
 (* ::Subsection::Closed:: *)
-(*Random states and operations*)
+(*Distance measures*)
+
+
+MatrixSqrt[m_?SquareMatrixQ]:=MatrixPower[m,1/2];
+
+MatrixAbs[a_?SquareMatrixQ]:=MatrixSqrt[a.(a\[ConjugateTranspose])];
+
+Fidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=(Plus@@(Sqrt[Eigenvalues[a.b]]))^2;
+
+Superfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Tr[a.b]+Sqrt[(1-Tr[a.a])]*Sqrt[(1-Tr[b.b])];
+
+Subfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Block[{prod = a.b}, Tr[prod] +Sqrt[2]Sqrt[(Tr[prod]*Tr[prod]-Tr[prod.prod])]];
+
+TraceNorm[a_?SquareMatrixQ]:=Plus@@SingularValueList[a];
+
+TraceDistance[a_?SquareMatrixQ,b_?SquareMatrixQ]:=1/2*TraceNorm[a-b];
+
+GateFidelity[mU_?SquareMatrixQ,mV_?SquareMatrixQ]:=Block[{dimU=Dimensions[mU][[1]]},
+	If[dimU==Dimensions[mV][[1]],
+		1/dimU Abs[Tr[mU.ConjugateTranspose[mV]]],
+		Message[GateFidelity::argerr]
+	]
+];
+GateFidelity::argerr = "Both matrices have to be of the same dimension.";
+
+
+(* ::Subsection::Closed:: *)
+(*Bloch Representation*)
+
+
+Lambda1[i_ ,j_,n_]:=Table[KroneckerDelta[j,\[Mu]]KroneckerDelta[i,\[Nu]] + KroneckerDelta[j,\[Nu]]KroneckerDelta[i,\[Mu]] ,{\[Mu],1,n},{\[Nu],1,n}];
+
+Lambda2[i_ ,j_,n_]:=Table[-I(KroneckerDelta[i,\[Mu]]KroneckerDelta[j,\[Nu]] - KroneckerDelta[i,\[Nu]]KroneckerDelta[j,\[Mu]]) ,{\[Mu],1,n},{\[Nu],1,n}];
+
+Lambda3[i_,n_]:=Sqrt[2/(i^2-i)]DiagonalMatrix[Join[Append[Table[1,{i-1}],-(i-1)],Table[0,{n-i}]]];
+
+GeneralizedPauliMatrices[n_]:=Block[{l1,l2,l3,i,j},
+    l1=Flatten[Table[Lambda1[i,j,n],{i,1,n},{j,i+1,n}],1];
+    l2=Flatten[Table[Lambda2[i,j,n],{i,1,n},{j,i+1,n}],1];
+    l3=Table[Lambda3[i,n],{i,2,n}];
+    Join[l1,l2,l3]
+];
+
+
+StateToBloch[A_]:=Block[{dim},
+  dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[dim])
+];
+
+BlochToState[vec_]:=Block[{dim},
+	If[IntegerQ[Sqrt[Length[vec]+1]],
+		dim= Sqrt[Length[vec]+1];
+		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
+		Message[StateFromBlochVector::argerr, vec];
+		Beep[];
+	]
+];
+BlochToState::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
+
+
+
+(* ::Subsection::Closed:: *)
+(*Parametrizations*)
+
+
+Unitary2[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_]:=
+Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}}.DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
+
+Unitary2Euler[\[Alpha]_,\[Theta]_,\[Phi]_,\[Psi]_]:={{E^(I*\[Alpha] + I*\[Phi])*Cos[\[Theta]], E^(I*\[Alpha] + I*\[Psi])*Sin[\[Theta]]}, {-(E^(I*\[Alpha] - I*\[Psi])*Sin[\[Theta]]), E^(I*\[Alpha] - I*\[Phi])*Cos[\[Theta]]}}
+
+SpecialUnitary2[\[Beta]_,\[Gamma]_,\[Delta]_]:=Unitary2[0,\[Beta],\[Gamma],\[Delta]];
+
+
+StateVector[l_]:=Block[{pr,ph,N,ProbablityVector},
+	ProbablityVector[li_]:=Block[{ll,Ni},
+		Ni=Length[li]+2;
+        ll=Prepend[li,\[Pi]/2];
+        Table[Sin[ll[[i-1]]]^2*Product[Cos[ll[[j-1]]]^2,{j,i+1,Ni}],{i,2,Ni}]
+    ];
+	N=Length[l]/2;
+	pr=ProbablityVector[l[[1;;N]]];
+	ph=Prepend[Exp[I*l[[N+1;;2*N]]],1];
+	FullSimplify[Sqrt[pr]*ph, Assumptions -> Table[0<l[[i]]<\[Pi]/2,{i,1,N}]]
+];
+
+
+QubitKet[\[Alpha]_,\[Beta]_]:={Cos[\[Alpha]], Exp[I*\[Beta]]*Sin[\[Alpha]]};
+
+QubitPureState[\[Alpha]_,\[Beta]_]:=Proj[QubitKet[\[Alpha],\[Beta]]];
+
+
+(* ::Subsection::Closed:: *)
+(*Random states*)
 
 
 RandomSimplex[d_]:=Block[{r,r1,r2},
@@ -757,12 +750,7 @@ RandomKet[{d1_?IntegerQ, d2_?IntegerQ}, a_: "Sep"] :=
    ];
 RandomKet::argerr = "Error - the last parameter should be a list of Schmidt numbers or one of the predefined values: ''Sep'' or ''MaxEnt''."; 
 
-RandomDynamicalMatrix[n_,m_:0]:=Block[{X,Y,sY},	
-	X=GinibreMatrix[n^2,n^2-m];
-	Y=PartialTrace[X.X\[ConjugateTranspose],{n,n},{1}];
-	sY=MatrixPower[Y,-1/2];
-	KroneckerProduct[IdentityMatrix[n],sY].X.X\[ConjugateTranspose].KroneckerProduct[IdentityMatrix[n],sY]
-];
+
 
 GinibreMatrix[m_,n_]:=RandomReal[NormalDistribution[0,1],{m,n}] + I RandomReal[NormalDistribution[0,1],{m,n}];
 
@@ -810,37 +798,43 @@ RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an i
 
 
 (* ::Subsection::Closed:: *)
-(*Bloch Representation*)
+(*Quantum channels*)
 
 
-Lambda1[i_ ,j_,n_]:=Table[KroneckerDelta[j,\[Mu]]KroneckerDelta[i,\[Nu]] + KroneckerDelta[j,\[Nu]]KroneckerDelta[i,\[Mu]] ,{\[Mu],1,n},{\[Nu],1,n}];
+ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]].\[Rho].(ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
 
-Lambda2[i_ ,j_,n_]:=Table[-I(KroneckerDelta[i,\[Mu]]KroneckerDelta[j,\[Nu]] - KroneckerDelta[i,\[Nu]]KroneckerDelta[j,\[Mu]]) ,{\[Mu],1,n},{\[Nu],1,n}];
+ApplyChannel[f_,\[Rho]_] := Map[f,\[Rho],{0}];
 
-Lambda3[i_,n_]:=Sqrt[2/(i^2-i)]DiagonalMatrix[Join[Append[Table[1,{i-1}],-(i-1)],Table[0,{n-i}]]];
+ChannelToMatrix[fun_,dim_] := Map[Res[fun[#]] &, BaseMatrices[dim]];       
 
-GeneralizedPauliMatrices[n_]:=Block[{l1,l2,l3,i,j},
-    l1=Flatten[Table[Lambda1[i,j,n],{i,1,n},{j,i+1,n}],1];
-    l2=Flatten[Table[Lambda2[i,j,n],{i,1,n},{j,i+1,n}],1];
-    l3=Table[Lambda3[i,n],{i,2,n}];
-    Join[l1,l2,l3]
+Superoperator[ch_List] := Sum[ch[[i]]\[CircleTimes]ch[[i]]\[Conjugate],{i,1,Length[ch]}];
+
+Superoperator[fun_,dim_] := ChannelToMatrix[fun,dim];
+
+DynamicalMatrix[ch_List] := Reshuffle[Superoperator[ch]];
+
+DynamicalMatrix[fun_Function,dim_Integer] := Reshuffle[Superoperator[fun,dim]];
+
+Jamiolkowski[ch_List] := 1/Length[ch[[1]]]*DynamicalMatrix[ch];
+
+Jamiolkowski[fun_Function,dim_Integer] := 1/dim*DynamicalMatrix[fun,dim];
+
+TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
+
+SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
+
+
+ProductSuperoperator[M1_,M2_]:=Block[{prod = M1\[CircleTimes]M2, q1, d1 = Sqrt[Length[M1]], d2 = Sqrt[Length[M2]]},
+    q1 = Table[Res[Reshuffle[Unres[prod[[i]], d2 d2], {{d1, d1}, {d2, d2}}]], {i,1, d1*d1*d2*d2}];
+    Table[Res[ Reshuffle[ Unres[(q1\[Transpose])[[i]], d2 d2], {{d1, d1}, {d2, d2}}]], {i,1,d1*d1*d2*d2}]\[Transpose]
 ];
 
-
-StateToBloch[A_]:=Block[{dim},
-  dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[dim])
+RandomDynamicalMatrix[n_,m_:0]:=Block[{X,Y,sY},	
+	X=GinibreMatrix[n^2,n^2-m];
+	Y=PartialTrace[X.X\[ConjugateTranspose],{n,n},{1}];
+	sY=MatrixPower[Y,-1/2];
+	KroneckerProduct[IdentityMatrix[n],sY].X.X\[ConjugateTranspose].KroneckerProduct[IdentityMatrix[n],sY]
 ];
-
-BlochToState[vec_]:=Block[{dim},
-	If[IntegerQ[Sqrt[Length[vec]+1]],
-		dim= Sqrt[Length[vec]+1];
-		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
-		Message[StateFromBlochVector::argerr, vec];
-		Beep[];
-	]
-];
-BlochToState::argerr= "Given vector (`1`) is not a Bloch vector of any dimension.";
-
 
 
 (* ::Section::Closed:: *)
