@@ -2,15 +2,28 @@
 % v. 0.02 - 11/01/2012 - 
 \documentclass[11pt,a4paper]{article}
 \usepackage{fullpage}
-
+\usepackage{amsmath}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\qi}{QI}
+\newcommand{\qi}{\texttt{QI}}
 \newcommand{\Mathematica}{\emph{Mathematica}}
 \newcommand{\res}{\mathrm{res}}
 \newcommand{\vek}{\mathrm{vek}}
 \newcommand{\unres}{\mathrm{unres}}
 \newcommand{\unvek}{\mathrm{unvec}}
 \newcommand{\reshuffle}[1]{{#1}^{\mathcal{R}}}
+\newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\langle#1|}}
+\newcommand{\ketbra}[2]{\ensuremath{\ket{#1}\bra{#2}}}
+\newcommand{\scalar}[2]{\ensuremath{\langle#1\ket{#2}}}
+\newcommand{\Hilb}[1]{\mathcal{H}_{#1}}
+\newcommand{\Lin}{\mathrm{L}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{fact}{Fact}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,6 +68,87 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Schmidt decomposition (ZP)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section we present Schmidt decomposition for vectors and operators
+on bipartite Hilbert space.
+
+\paragraph{Vector Schmidt decomposition}
+\begin{theorem} \label{th:Schmidt-Decomposition}
+For a given vector  $\ket{\psi} \in \Hilb{K}\otimes \Hilb{M}$,
+let $\Psi \in \Lin(\Hilb{M},\Hilb{K})$, such that $\res(\Psi) = \ket{\psi}$.
+There exists a decomposition
+\begin{equation}
+ \ket{\psi} = 
+ \sum \sqrt{\lambda_i} \ket{U(i)} \otimes \overline{\ket{V(i)}},
+\end{equation}
+where 
+\begin{itemize}
+ \item $\sqrt{\lambda_i}$ are singular values of matrix $\Psi$,
+ \item $\ket{U(i)}$ is eigenvector of
+$\Psi\Psi^{\dagger}$
+ with the eigenvalue $\lambda_i$,
+ \item $\ket{V(i)}$ is eigenvector of 
+$\Psi^{\dagger} \Psi$
+ with the eigenvalue $\lambda_i$.
+\end{itemize}
+\end{theorem}
+
+To perform Schmidt decomposition on a vector $\psi \in \Hilb{K}\otimes
+\Hilb{M}$ in package \qi{} one can call function
+\begin{equation}
+\text{\texttt{SchmidtDecomposition}}[ \psi, \{K,M\}]
+\end{equation} 
+in the case, when $K=M$, the dimension specification can be omitted.
+See the function list in the appendix for specification of the function
+\texttt{SchmidtDecomposition}.
+%Example of performing Schmidt decomposition in the package \qi. 
+
+...
+
+\paragraph{Operator Schmidt decomposition}
+\begin{theorem} \label{th:Operator-Schmidt-Decomposition}
+Let $A \in \Lin(\Hilb{m_1}\otimes \Hilb{m_2},\Hilb{n_1}\otimes \Hilb{n_2})$,
+then there exists decomposition
+\begin{equation}
+ A = \sum \sqrt{\lambda_i} U(i) \otimes \overline{V(i)},
+\end{equation}
+where 
+\begin{itemize}
+ \item $\sqrt{\lambda_i}$ are singular values of matrix $\reshuffle{A}$,
+ \item $U(i) \in \Lin(\Hilb{m_1}, \Hilb{n_1})$, such that $\res(U(i))$ is eigenvector of $\reshuffle{A} (\reshuffle{A})^{\dagger}$
+ with the eigenvalue $\lambda_i$,
+\item $V(i) \in \Lin(\Hilb{m_2}, \Hilb{n_2})$, such that $\res(V(i))$ is eigenvector of $(\reshuffle{A})^{\dagger} \reshuffle{A}$
+ with the eigenvalue $\lambda_i$.
+\end{itemize}
+\end{theorem}
+
+To perform operator Schmidt decomposition on an operator $A \in \Lin(\Hilb{m_1}\otimes \Hilb{m_2},\Hilb{n_1}\otimes \Hilb{n_2})$ 
+in the package \qi{} one can call function
+\begin{equation}
+\text{\texttt{SchmidtDecomposition}}[ A, \{... , ... \}]
+\end{equation} 
+in the case, when ...... $K=M$, the dimension specification can be omitted.
+See the function list in the appendix for specification of the function
+\texttt{SchmidtDecomposition}.
+
+%Let $A \in M_{n_1 n_2,m_1 m_2}$. 
+%If we write singular value decomposition (see Theorem \ref{th:SVD})for reshuffled matrix $A$, we get
+%\begin{equation}
+% A^{R} = \sum \sigma_i \ketbra{U(i)}{V(i)}.
+%\end{equation}
+%Because $(A^{R})^{R} = A$ we get
+%\begin{equation}
+% A = (A^{R})^{R} = \sum \sigma_i (\ketbra{U(i)}{V(i)})^R.
+%\end{equation}
+%Now we use our previous result concerning reshuffling of rank 1 partial isometries 
+%Eqn. (\ref{Eqn:Reshuffling-for-rank1-partial-isometry}) and obtain 
+%\begin{equation}
+% A = \sum \sigma_i (\ketbra{U(i)}{V(i)})^R =
+% \sum \sigma_i \res^{-1}(\ket{U(i)}) \otimes \res^{-1}(\ket{V(i)})^{\star}
+%\end{equation}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Partial trace and transposition (PG)}
