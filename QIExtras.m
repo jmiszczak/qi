@@ -1,11 +1,24 @@
 (* ::Package:: *)
 
+(* ::Section::Closed:: *)
+(*Package header*)
+
+
 (* Mathematica Package *)
 
 BeginPackage["QIExtras`", { "QI`"}]
 (* Exported symbols added here with SymbolName::usage *)  
 Unprotect@@Names["QIExtras`*"]
 Clear@@Names["QIExtras`*" ]
+
+
+(* ::Section:: *)
+(*Public definitions*)
+
+
+(* ::Subsection:: *)
+(*Common matrices*)
+
 
 BaseVectors::usage = "BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space \!\(\*SuperscriptBox[\"\[DoubleStruckCapitalC]\", \"n\"]\). See also: BaseMatrices.";
 
@@ -35,7 +48,8 @@ Ket::usage = "Ket[i,d] returns |i\[RightAngleBracket] in d-dimensional Hilbert s
 
 Ketbra::usage = "This function can be used in two ways. Ketbra[i,j,d] returns \[VerticalSeparator]i\[RightAngleBracket]\[LeftAngleBracket]j\[VerticalSeparator] acting on d-dimensional space. See also: Proj. Ketbra[v1,v2] returns the appropriate operator for vectors v1 and v2..";
 
-KetFromDigits::usage = "KetFromDigits[list,base] - ket vector labeled by a list of digits represented in given base.";
+KetFromDigits::usage = "<f>KetFromDigits</f>[<v>str</v>,<v>bs</v>] - ket vector labeled by a number given as a string <v>str</v> in the base <v>bs</v>.\n
+<f>KetFromDigits</f>[<v>ls</v>,<v>bs</v>] - ket vector labeled by a number with digits, in the base <v>bs</v>, provided in the list <v>ls</v>.";
 
 MaxMix::usage = "MaxMix[n] - the maximally mixed state in a n-dimensional space of density matrices.";
 
@@ -140,7 +154,7 @@ QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy o
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Distribution of eigenvalues*)
 
 
@@ -164,7 +178,6 @@ ProbHSNorm::usage = "Normalization factor used for calculating probability distr
 
 
 ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)},\[Delta]] Probability distribution of eigenvalues \[Lambda] = {\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)} of a matrix according to Hilbert-Schmidt distance. By default \[Delta] is assumed to be Dirac delta. Other possible values: ''Indicator''";
-
 
 
 RandomProductKet::usage = "RandomProductKet[{dim1,dim2,...,dimN}] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.";
@@ -193,6 +206,8 @@ See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 Mub::usage ="<f>Mub</f>[<v>p,m</v>] for prime number <v>p</v> and positive integer <v>m</v> returns <v>p^m+1</v> mutually unbaised bases of <v>p^m</v> dimensional Hilbert space." 
 
 
+(* ::Section:: *)
+(*Private definitions*)
 
 
 Begin["`Private`"] (* Begin Private Context *) 
@@ -201,9 +216,38 @@ QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!
 (MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QIExtras`*"];
 
 
-BaseVectors[n_Integer]:=Table[UnitVector[n,k],{k,1,n}]
+(* ::Subsection:: *)
+(*Internal functions (without usage strings)*)
+
+
+qiExtrasAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
+
+qiExtrasLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
+
+qiExtrasHistory = {
+	{"0.0.1", "13/10/2011", "Zbyszek,Jarek,Piotr", "Some functions moved from QI to QIExtras."},
+	{"0.0.6", "17/12/2011", "Jarek", "Fixed Negativity"},
+	{"0.0.7", "23/12/2011", "Zbyszek", "Mubs"},
+	{"0.0.8", "23/01/2012", "Jarek", "Versioning added and KetFromDigits improved."}
+};  
+
+qiExtrasVersion = Last[qiExtrasHistory][[1]];
+
+qiExtrasLastModification = Last[qiExtrasHistory][[2]];
+
+qiExtrasAbout = "QIExtrtas is a package of functions for Mathematica computer algebra system, .";
+
+
+
+(* ::Subsection:: *)
+(*Common matrices*)
+
+
+BaseVectors[n_Integer]:=Table[UnitVector[n,k],{k,1,n}];
+
 
 BaseMatrices[n_Integer]:=Table[Unres[UnitVector[n^2,k]],{k,1,n^2}];
+
 
 KroneckerDeltaMatrix[m_,n_,dim_]:=Block[{mtx},
     mtx=Table[0,{dim},{dim}];
@@ -211,11 +255,15 @@ KroneckerDeltaMatrix[m_,n_,dim_]:=Block[{mtx},
     mtx
 ];
 
+
 PauliMatrices = GeneralizedPauliMatrices[2];
+
 
 GellMannMatrices = GeneralizedPauliMatrices[3];
 
+
 UpperTriangularOnes[rn_,dim_]:=Table[If[i<j&&j-i<rn+1,1,0],{i,1,dim},{j,1,dim}];
+
 
 UpperBandOnes[bandNo_,dim_]:=Table[If[i<j&&j-i==bandNo,1,0],{i,1,dim},{j,1,dim}];
 
@@ -248,7 +296,10 @@ Ketbra[i_,j_,dim_]:=KroneckerProduct[Ket[i,dim],Ket[j,dim]];
 Ketbra[v1_?VectorQ,v2_?VectorQ]:={v1}\[ConjugateTranspose]\[CircleTimes]{v2};
 
 
-KetFromDigits[l_,b_:2]:=Ket[FromDigits[l,b],b^Length[l]];
+KetFromDigits[l_List,b_:2]:=Ket[FromDigits[l,b],b^Length[l]];
+
+
+KetFromDigits[l_String,b_:2]:=Ket[FromDigits[Characters[l],b],b^Length[Characters[l]]];
 
 
 MaxMix[n_Integer]:=(1/n)*IdentityMatrix[n];
@@ -550,7 +601,11 @@ Mub[p_, m_: 1] := Block[{},
 
 
 
-Print["Package QIExtras for QI version ", QI`Private`qiVersion, " (last modification: ", QI`Private`qiLastModification, ")."];
+(* ::Section:: *)
+(*Package footer*)
+
+
+Print["Package QIExtras ", QIExtras`Private`qiExtrasVersion, " (last modification: ", QIExtras`Private`qiExtrasLastModification, ")."];
 
 
 
