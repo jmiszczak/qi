@@ -299,7 +299,7 @@ Ketbra[v1_?VectorQ,v2_?VectorQ]:={v1}\[ConjugateTranspose]\[CircleTimes]{v2};
 KetFromDigits[l_List,b_:2]:=Ket[FromDigits[l,b],b^Length[l]];
 
 
-KetFromDigits[l_String,b_:2]:=Ket[FromDigits[Characters[l],b],b^Length[Characters[l]]];
+KetFromDigits[str_String,b_:2]:=Block[{l=IntegerDigits[FromDigits[str,b],b,Length[Characters[str]]]},KetFromDigits[l,b]];
 
 
 MaxMix[n_Integer]:=(1/n)*IdentityMatrix[n];
