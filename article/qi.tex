@@ -1,8 +1,11 @@
 % v. 0.01 - 11/01/2012 - initial version 
 % v. 0.02 - 11/01/2012 - 
+% v. 0.03 - 25/01/2012 - Gawron - 
 \documentclass[11pt,a4paper]{article}
+\date{25/01/2012 (v. 0.03)}
+
 \usepackage{fullpage}
-\usepackage{amsmath}
+\usepackage{amsmath,amsfonts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\qi}{\texttt{QI}}
 \newcommand{\Mathematica}{\emph{Mathematica}}
@@ -17,6 +20,11 @@
 \newcommand{\scalar}[2]{\ensuremath{\langle#1\ket{#2}}}
 \newcommand{\Hilb}[1]{\mathcal{H}_{#1}}
 \newcommand{\Lin}{\mathrm{L}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\1}{{\bf 1}}
+\newcommand{\fname}[1]{\text{\texttt{#1}}}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -29,8 +37,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\qi: A package for the analysis of quantum states and operations in
 \Mathematica}
-\date{11/01/2012 (v. 0.02)}
-\author{ZKSI}
+
+\author{Jarosław Adam Miszczak \and Zbigniew Pucha\l{}a \and Piotr Gawron}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -56,6 +64,36 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Algebraic tools}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Symbolic matrices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The power of \Mathematica{} lies in its ability to operate on symbolic objects.
+To facilitate work with \qi{} the package there are several functions that 
+return various types of symbolic matrices.
+
+Function $\fname{SymbolicMatrix}[a,d]$ returns $d$-dimensional square matrix 
+$\{a_{ij}\}$, the same function called with three parameters 
+$\fname{SymbolicMatrix}[a,d_1,d_2]$ returns $d_1 \times d_2$-dimensional 
+matrix $\{a_{ij}\}$. Accordingly one can call function 
+$\fname{SymbolicVector}[a,d]$ to obtain $d$-dimensional vector $(a_i)$.
+A~$d$-dimensional Hermitian matrix can be obtained using function 
+$\fname{SymbolicHermitianMatrix}[a,d]$. 
+
+For example a call to $\fname{SymbolicHermitianMatrix}[a,3]$ gives the 
+following result
+\begin{equation}
+\left(
+\begin{array}{ccc}
+ a_{1,1} & \left(a_{2,1}\right){}^* & \left(a_{3,1}\right){}^* \\
+ a_{2,1} & a_{2,2} & \left(a_{3,2}\right){}^* \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{array}
+\right).
+\end{equation}
+
+%And a~bistochastic matrix using function
+%$\fname{SymbolicBistochasticMatrix}[a, d]$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Kronecker product and friends}
@@ -124,7 +162,7 @@ where
 To perform operator Schmidt decomposition on an operator $A \in \Lin(\Hilb{m_1}\otimes \Hilb{m_2},\Hilb{n_1}\otimes \Hilb{n_2})$ 
 in the package \qi{} one can call function
 \begin{equation}
-\text{\texttt{SchmidtDecomposition}}[ A, \{... , ... \}]
+\fname{SchmidtDecomposition}[ A, \{... , ... \}]
 \end{equation} 
 in the case, when ...... $K=M$, the dimension specification can be omitted.
 See the function list in the appendix for specification of the function
@@ -146,13 +184,39 @@ See the function list in the appendix for specification of the function
 % \sum \sigma_i \res^{-1}(\ket{U(i)}) \otimes \res^{-1}(\ket{V(i)})^{\star}
 %\end{equation}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Partial trace and transposition (PG)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Partial trace}
+Let $A\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots \otimes \Hilb{m_n})$,
+the \emph{partial trace} of $A$ over subsystems indexed with indices 
+$I=\{i_1, i_2, \ldots, i_k\}\subset \{1,2,\ldots, n\}$, where $k\leq n$, is 
+operator $B\in \Lin(\bigotimes_{i\notin I} \Hilb{m_i})$, such that
+$B=(\bigotimes_{i=1}^{n} \mathrm{op}(i))(A)$, where $\mathrm{op}(i)=\tr$ if 
+$i\in I$ and $\mathrm{op}(i)=\1_{m_i}$ if $i\notin I$.
+
+To perform the partial trace of an operator $A$, defined as above, in the 
+package \qi{} one can call function
+\begin{equation}
+B=\fname{PartialTrace}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2, 
+\ldots, i_k\}].
+\end{equation} 
+
+\paragraph{Partial transpose}
+Let $A\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots \otimes \Hilb{m_n})$,
+the \emph{partial transpose} of $A$ with respect to subsystems indexed with 
+indices $I=\{i_1, i_2, \ldots, i_k\}\subset \{1,2,\ldots, n\}$, where $k\leq 
+n$, is the operator $B\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots 
+\otimes \Hilb{m_n})$, such that $B=(\bigotimes_{i=1}^{n} \mathrm{op}(i))(A)$, 
+where $\mathrm{op}(i)=\cdot^{\mathrm T}$ if $i\in I$ and 
+$\mathrm{op}(i)=\1_{m_i}$ if $i\notin I$.
+
+To perform the partial transpose of an operator $A$, defined as above, in the 
+package \qi{} one can call function
+\begin{equation}
+B=\fname{PartialTranspose}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2, 
+\ldots, i_k\}].
+\end{equation} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Geometric tools}
