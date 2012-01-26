@@ -190,6 +190,8 @@ Unitary2Euler::usage = "<f>Unitary2</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>,<s>\[Gamm
 SpecialUnitary2::usage ="<f>SpecialUnitary2</f>[<s>\[Beta],\[Gamma],\[Delta]</s>] returns a parametrization of <v>SU</v>(2). \
 This is equivalent to <f>Unitary2</f>[<s>0,\[Beta],\[Gamma],\[Delta]</s>].";
 
+SpecialUnitary::usage = "<f>SpecialUnitary</f>[<v>d</v>,<v>params</v>] returns the special unitary matrix of size <v>d</v> with Euler parameters given in <v>params</v>. \
+<v>params</v> must be a list of length <v>d^2 - 1</v>."
 
 StateVector::usage = "<f>StateVector</f>[{<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\),\!\(\*SubscriptBox[\"\[Phi]\", 
 RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \
@@ -355,8 +357,8 @@ qiHistory = {
 	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."},
 	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."},
 	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."},
-    {"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
-    {"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
+	{"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
+	{"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
 	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."},
 	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package."},
 	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation improved."},
@@ -365,8 +367,8 @@ qiHistory = {
 	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
 	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
-	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"}
-
+	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"},
+	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -694,6 +696,30 @@ Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gam
 Unitary2Euler[\[Alpha]_,\[Theta]_,\[Phi]_,\[Psi]_]:={{E^(I*\[Alpha] + I*\[Phi])*Cos[\[Theta]], E^(I*\[Alpha] + I*\[Psi])*Sin[\[Theta]]}, {-(E^(I*\[Alpha] - I*\[Psi])*Sin[\[Theta]]), E^(I*\[Alpha] - I*\[Phi])*Cos[\[Theta]]}}
 
 SpecialUnitary2[\[Beta]_,\[Gamma]_,\[Delta]_]:=Unitary2[0,\[Beta],\[Gamma],\[Delta]];
+
+SpecialUnitary[d_, params_] :=  
+  Block[{psi, chi, r, s, phi, i, j, u, e, phi0, psi0, chi0, lparams,k = 1}, 
+   lparams = Map[FractionalPart[Abs[#]] &, params];
+   Do[psi[r, s] = 2*Pi*lparams[[k++]];, {r, 1, d - 1}, {s, r + 1, d}];
+   Do[chi[r, s] = 0;, {r, 2, d - 1}, {s, r + 1, d}];
+   Do[chi[1, s] = 2*Pi*lparams[[k++]];, {s, 2, d}];
+   Do[phi[r, s] = ArcSin[(lparams[[k++]])^(1/(2 r))];, {r, 1, d - 1}, {s, r + 1, d}];
+   e=SparseArray[{}, {d,d,d,d}];
+   Do[
+   	e[[r, s]] = IdentityMatrix[d];
+    e[[r, s, r, r]] = Cos[phi0]*Exp[I*psi0];
+    e[[r, s, s, s]] = Cos[phi0]*Exp[-I*psi0];
+    e[[r, s, r, s]] = Sin[phi0]*Exp[I*chi0];
+    e[[r, s, s, r]] = -Sin[phi0]*Exp[-I*chi0];, 
+    	{r, 1, d - 1}, 
+    		{s, r + 1, d}
+    		];
+   u = IdentityMatrix[d];
+   Do[u = (Normal[e[[r, r + 1]]] /. {phi0 -> phi[d - r, s + 1], 
+          psi0 -> psi[d - r, s + 1], 
+          chi0 -> chi[d - r, s + 1]}).u;, {s, d - 1, 1, -1}, {r, 
+     d - 1, d - s, -1}];
+   u];
 
 
 StateVector[l_]:=Block[{pr,ph,N,ProbablityVector},

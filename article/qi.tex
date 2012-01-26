@@ -22,7 +22,9 @@
 \newcommand{\Lin}{\mathrm{L}}
 \newcommand{\tr}{\mathrm{tr}}
 \newcommand{\1}{{\bf 1}}
+\newcommand{\ii}{\mathrm{i}}
 \newcommand{\fname}[1]{\text{\texttt{#1}}}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -235,9 +237,44 @@ B=\fname{PartialTranspose}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Parameterizations}
+\subsubsection{Parametrizations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\qi{} package provides several parametrizations of quantum states. 
 
+\paragraph{Pure states}
+Any pure $N$-dimensional quantum state vector can be parametrized by set of 
+$2N-2$ parameters \cite{vedra98entanglement}: $N-1$ parameters $\{\phi_1, 
+\ldots, 
+\phi_{N-1}\}$ parametrize probability vector according to the following equation
+\begin{equation}
+p_i=\sin^2\phi_{i-1} \prod\limits_{j=i}^{N-1}\cos^2\phi_j\text{\ \ with 
+}\phi_0=\pi/2,
+\end{equation}
+and further $N-1$ parameters $\{\theta_1, \ldots
+\theta_{N-1}\}$ parametrize relative phases. The resulting pure state 
+is of the form
+\begin{equation}
+\ket{\psi}=
+\left(
+\begin{array}{c}
+\sqrt{p_0}\\
+\sqrt{p_1}e^{\ii \theta_1}\\
+\vdots\\
+\sqrt{p_{N-1}}e^{\ii \theta_{N-1}}
+\end{array}
+\right).
+\end{equation}
+This parametrization is implemented in \qi{} in function
+$\fname{StateVector}[l]$ where $l=\{\phi_1, \ldots, \phi_{N-1}, \theta_1, \ldots
+\theta_{N-1}\}$.
+
+\paragraph{Special unitary matrices}
+$d$-dimensional special unitary matrix can be parametrized using 
+$d-1$-parameters. In \qi{} function 
+$\fname{SpecialUnitary}[d,\{l_1,\ldots,l_{d-1}\}]$ 
+implements Euler angles parametrization introduced in 
+\cite{zyczkowski94random}. Parameters $l_i$ are 
+truncated so that they belong to the interval $l_i\in [0,1]$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Random states}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,5 +297,8 @@ B=\fname{PartialTranspose}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2,
 This work was supported by the Polish National Science Centre under the research
 project \dots. Authors would like to thank K.~\.Zyczkowski for interesting
 discussions.
+
+\bibliographystyle{plain}
+\bibliography{qi}
 
 \end{document}
