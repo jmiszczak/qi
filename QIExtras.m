@@ -202,6 +202,8 @@ Unitary3::usage = "<f>Unitary3</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v
 Unitary4Canonical::usage = "<f>Unitary4Canonical</f>[<v>a1</v>,<v>a2</v>,<v>a3</v>] returns the parametrization of non-local unitary matrices for two qubits. \
 See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 
+SpecialUnitary::usage = "<f>SpecialUnitary</f>[<v>d</v>,<v>params</v>] returns the special unitary matrix of size <v>d</v> with Euler parameters given in <v>params</v>. \
+<v>params</v> must be a list of length <v>d^2 - 1</v>."
 
 Mub::usage ="<f>Mub</f>[<v>p,m</v>] for prime number <v>p</v> and positive integer <v>m</v> returns <v>p^m+1</v> mutually unbaised bases of <v>p^m</v> dimensional Hilbert space." 
 
@@ -549,6 +551,27 @@ Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*
 
 Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I*a1*KroneckerProduct[sx,sx]+a2*I*KroneckerProduct[sy,sy]+a3*I*KroneckerProduct[sz,sz]];
 
+
+SpecialUnitary[d_, params_] :=  
+  Module[{psi, chi, r, s, phi, i, j, u, e, phi0, psi0, chi0, k = 1}, 
+   Do[psi[r, s] = 2*Pi*params[[k++]];, {r, 1, d - 1}, {s, r + 1, d}];
+   Do[chi[r, s] = 0;, {r, 2, d - 1}, {s, r + 1, d}];
+   Do[chi[1, s] = 2*Pi*params[[k++]];, {s, 2, d}];
+   Do[phi[r, s] = ArcSin[(params[[k++]])^(1/(2 r))];, {r, 1, 
+     d - 1}, {s, r + 1, d}];
+   e = Table[0, {r, 1, d}, {s, 1, d}, {i, 1, d}, {j, 1, d}];
+   Do[e[[r, s]] = IdentityMatrix[d];
+    e[[r, s, r, r]] = Cos[phi0]*Exp[I*psi0];
+    e[[r, s, s, s]] = Cos[phi0]*Exp[-I*psi0];
+    e[[r, s, r, s]] = Sin[phi0]*Exp[I*chi0];
+    e[[r, s, s, r]] = -Sin[phi0]*Exp[-I*chi0];, {r, 1, d - 1}, {s, 
+     r + 1, d}];
+   u = IdentityMatrix[d];
+   Do[u = (e[[r, r + 1]] /. {phi0 -> phi[d - r, s + 1], 
+          psi0 -> psi[d - r, s + 1], 
+          chi0 -> chi[d - r, s + 1]}).u;, {s, d - 1, 1, -1}, {r, 
+     d - 1, d - s, -1}];
+   u];
 
 Needs["FiniteFields`"]
 
