@@ -227,6 +227,41 @@ B=\fname{PartialTranspose}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Distance measures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In \qi{} following distance measures between density matrices are implemented.
+\paragraph{Trace distance} \ldots 
+
+\begin{equation}
+D_{\tr}(\rho_1,\rho_2)=\frac12\tr|\rho_1-\rho_2|
+\end{equation}
+In \qi{} the function $\fname{TraceDistance}[\rho_1,\rho_2]$ calculates the 
+value of $D_{\tr}(\rho_1,\rho_2)$.
+
+\paragraph{Fidelity}  \ldots
+\begin{equation}
+F(\rho_1,\rho_2)=
+\left(\tr\sqrt{\sqrt{\rho_1}\rho_2\sqrt{\rho_1}}\right)^2
+\end{equation}
+In \qi{} the function $\fname{Fidelity}[\rho_1,\rho_2]$ calculates the 
+value of $F(\rho_1,\rho_2)$.
+
+\paragraph{Subfidelity}
+Superfidelity is an lower bound on fidelity 
+\cite{miszczak2008sup}
+and is given by the following equation
+\begin{equation}
+E(\rho_1,\rho_2)=
+\tr\rho_1\rho_2+\sqrt{2[(\tr\rho_1\rho_2)^2-\tr\rho_1\rho_2\rho_1\rho_2)]}
+\end{equation}
+In \qi{} the function $\fname{Subfidelity}[\rho_1,\rho_2]$ calculates the 
+value of $E(\rho_1,\rho_2)$.
+
+\paragraph{Superfidelity} Superfidelity is an upper bound on fidelity,
+it is given by the following equation
+\begin{equation}
+G(\rho_1,\rho_2)=\tr\rho_1\rho_2+\sqrt{1-\tr\rho_1^2}\sqrt{1-\tr\rho_2^2}
+\end{equation}
+In \qi{} the function $\fname{Superfidelity}[\rho_1,\rho_2]$ calculates the 
+value of $G(\rho_1,\rho_2)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Bloch Representation}
