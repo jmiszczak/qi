@@ -1,13 +1,20 @@
+\pdfoutput=1
 % v. 0.01 - 11/01/2012 - initial version 
 % v. 0.02 - 11/01/2012 - 
 % v. 0.03 - 25/01/2012 - Gawron - 
+% v. 0.04 - 26/01/2012 - Gawron - 
+% v. 0.05 - 27/01/2012 - Gawron - 
+% v. 0.06 - 30/01/2012 - Jarek - introduction and related work
 \documentclass[11pt,a4paper]{article}
-\date{25/01/2012 (v. 0.03)}
+
+\date{30/01/2012 (v. 0.06)}
 
 \usepackage{fullpage}
+\usepackage{hyperref}
 \usepackage{amsmath,amsfonts}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\qi}{\texttt{QI}}
+\newcommand{\qi}{\texttt{Qi}}
 \newcommand{\Mathematica}{\emph{Mathematica}}
 \newcommand{\res}{\mathrm{res}}
 \newcommand{\vek}{\mathrm{vek}}
@@ -24,9 +31,6 @@
 \newcommand{\1}{{\bf 1}}
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\fname}[1]{\text{\texttt{#1}}}
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -47,13 +51,55 @@
 
 \maketitle
 
+\begin{abstract}
+\end{abstract}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Quantum information theory aims to harness the behavior of quantum mechanical
+objects to store, transfer and process information. This behavior is in many
+cases very different from the one we observe in the classical world. Quantum
+algorithms and protocols take advantage of superposition of states and require
+the presence of entangled states. Both phenomena arise from the rich structure
+of the space of quantum states. Hence, to explore the capabilities of quantum
+information processing, one needs to fully understand this space~\cite{BZ06}.
+Quantum mechanics provides us also with much larger than in classical case space
+of allowed operations which can be used to manipulate quantum
+states~\cite{BZ06}. Recent results concerning additivity
+problems~\cite{hastings09superadditivity} show that we are far from full
+understanding the nature of quantum channels. Exploring the space of quantum
+operations is fascinating, but cumbersome task.
+
+In this paper we present a~package of functions developed for \Mathematica\
+computing system which aims to simplify the analysis of quantum states and
+quantum operations. The package was developed in simplicity in mind and thus it
+uses only basic data structures available in \Mathematica. This allows to
+relatively easily port implemented functions to other scientific software
+systems. Also, in contrast to most quantum computing packages
+available~\cite{quantum2, qdensity, qcwave, qucalc}, \qi\ is not aimed at
+providing tool for simulating quantum algorithms and protocols. We rather focus
+on the analysis of quantum states used in those protocols and quantum channels,
+which are used to describe allowed physical operations. The main goal of
+presented package is to provide basic mathematical tools useful for studding
+geometrical properties of quantum stats and quantum channels.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Related work}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+During the last several years many simulators of quantum computers have been
+developed and the most up-to-date list of available software is available
+at~\cite{quantiki-simulators}. A number of simulators of quantum information
+processing was developed using \Mathematica\ computing system~\cite{qucalc,
+qdensity, quantum2, miszczak12generating, qcwave}. Also some attention has been
+devoted to utilising new programming \cite{gutierrez10cuda} and parallel
+processing model~\cite{glendinning03parallelization, deraedt07massively,
+tabakin09qcmpi}. The research effort in using parallel and distributed computing
+for the purpose of quantum information processing was motivated by the amount of
+computation resource needed in order to perform a simulation of quantum
+computation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Preliminaries}
@@ -87,8 +133,8 @@ following result
 \begin{equation}
 \left(
 \begin{array}{ccc}
- a_{1,1} & \left(a_{2,1}\right){}^* & \left(a_{3,1}\right){}^* \\
- a_{2,1} & a_{2,2} & \left(a_{3,2}\right){}^* \\
+ a_{1,1} & a_{2,1}^* & a_{3,1}^* \\
+ a_{2,1} & a_{2,2} & a_{3,2}^* \\
  a_{3,1} & a_{3,2} & a_{3,3} \\
 \end{array}
 \right).
@@ -108,8 +154,8 @@ following result
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Schmidt decomposition (ZP)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section we present Schmidt decomposition for vectors and operators
-on bipartite Hilbert space.
+In this section we present Schmidt decomposition for vectors and operators on
+bipartite Hilbert space.
 
 \paragraph{Vector Schmidt decomposition}
 \begin{theorem} \label{th:Schmidt-Decomposition}
@@ -132,13 +178,13 @@ $\Psi^{\dagger} \Psi$
 \end{itemize}
 \end{theorem}
 
-To perform Schmidt decomposition on a vector $\psi \in \Hilb{K}\otimes
-\Hilb{M}$ in package \qi{} one can call function
+To perform Schmidt decomposition on a vector $\psi \in \Hilb{K}\otimes \Hilb{M}$
+in package \qi{} one can call function
 \begin{equation}
 \text{\texttt{SchmidtDecomposition}}[ \psi, \{K,M\}]
 \end{equation} 
-in the case, when $K=M$, the dimension specification can be omitted.
-See the function list in the appendix for specification of the function
+in the case, when $K=M$, the dimension specification can be omitted. See the
+function list in the appendix for specification of the function
 \texttt{SchmidtDecomposition}.
 %Example of performing Schmidt decomposition in the package \qi. 
 
@@ -153,21 +199,24 @@ then there exists decomposition
 \end{equation}
 where 
 \begin{itemize}
- \item $\sqrt{\lambda_i}$ are singular values of matrix $\reshuffle{A}$,
- \item $U(i) \in \Lin(\Hilb{m_1}, \Hilb{n_1})$, such that $\res(U(i))$ is eigenvector of $\reshuffle{A} (\reshuffle{A})^{\dagger}$
- with the eigenvalue $\lambda_i$,
-\item $V(i) \in \Lin(\Hilb{m_2}, \Hilb{n_2})$, such that $\res(V(i))$ is eigenvector of $(\reshuffle{A})^{\dagger} \reshuffle{A}$
- with the eigenvalue $\lambda_i$.
+    \item $\sqrt{\lambda_i}$ are singular values of matrix $\reshuffle{A}$,
+    \item $U(i) \in \Lin(\Hilb{m_1}, \Hilb{n_1})$, such that $\res(U(i))$ is
+    eigenvector of $\reshuffle{A} (\reshuffle{A})^{\dagger}$ with the eigenvalue
+    $\lambda_i$,
+    \item $V(i) \in \Lin(\Hilb{m_2}, \Hilb{n_2})$, such that $\res(V(i))$ is
+    eigenvector of $(\reshuffle{A})^{\dagger} \reshuffle{A}$ with the eigenvalue
+    $\lambda_i$.
 \end{itemize}
 \end{theorem}
 
-To perform operator Schmidt decomposition on an operator $A \in \Lin(\Hilb{m_1}\otimes \Hilb{m_2},\Hilb{n_1}\otimes \Hilb{n_2})$ 
-in the package \qi{} one can call function
+To perform operator Schmidt decomposition on an operator $A \in
+\Lin(\Hilb{m_1}\otimes \Hilb{m_2},\Hilb{n_1}\otimes \Hilb{n_2})$ in the package
+\qi{} one can call function
 \begin{equation}
 \fname{SchmidtDecomposition}[ A, \{... , ... \}]
 \end{equation} 
-in the case, when ...... $K=M$, the dimension specification can be omitted.
-See the function list in the appendix for specification of the function
+in the case, when ...... $K=M$, the dimension specification can be omitted. See
+the function list in the appendix for specification of the function
 \texttt{SchmidtDecomposition}.
 
 %Let $A \in M_{n_1 n_2,m_1 m_2}$. 
@@ -189,31 +238,36 @@ See the function list in the appendix for specification of the function
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Partial trace and transposition (PG)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Partial trace}
-Let $A\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots \otimes \Hilb{m_n})$,
-the \emph{partial trace} of $A$ over subsystems indexed with indices 
-$I=\{i_1, i_2, \ldots, i_k\}\subset \{1,2,\ldots, n\}$, where $k\leq n$, is 
-operator $B\in \Lin(\bigotimes_{i\notin I} \Hilb{m_i})$, such that
-$B=(\bigotimes_{i=1}^{n} \mathrm{op}(i))(A)$, where $\mathrm{op}(i)=\tr$ if 
-$i\in I$ and $\mathrm{op}(i)=\1_{m_i}$ if $i\notin I$.
 
-To perform the partial trace of an operator $A$, defined as above, in the 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Partial trace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Let $A\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots \otimes \Hilb{m_n})$,
+the \emph{partial trace} of $A$ over subsystems indexed with indices $I=\{i_1,
+i_2, \ldots, i_k\}\subset \{1,2,\ldots, n\}$, where $k\leq n$, is operator $B\in
+\Lin(\bigotimes_{i\notin I} \Hilb{m_i})$, such that $B=(\bigotimes_{i=1}^{n}
+\mathrm{op}(i))(A)$, where $\mathrm{op}(i)=\tr$ if $i\in I$ and
+$\mathrm{op}(i)=\1_{m_i}$ if $i\notin I$.
+
+To perform the partial trace of an operator $A$, defined as above, in the
 package \qi{} one can call function
 \begin{equation}
 B=\fname{PartialTrace}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2, 
 \ldots, i_k\}].
 \end{equation} 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Partial transpose}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Let $A\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots \otimes \Hilb{m_n})$,
-the \emph{partial transpose} of $A$ with respect to subsystems indexed with 
-indices $I=\{i_1, i_2, \ldots, i_k\}\subset \{1,2,\ldots, n\}$, where $k\leq 
-n$, is the operator $B\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots 
-\otimes \Hilb{m_n})$, such that $B=(\bigotimes_{i=1}^{n} \mathrm{op}(i))(A)$, 
-where $\mathrm{op}(i)=\cdot^{\mathrm T}$ if $i\in I$ and 
-$\mathrm{op}(i)=\1_{m_i}$ if $i\notin I$.
+the \emph{partial transpose} of $A$ with respect to subsystems indexed with
+indices $I=\{i_1, i_2, \ldots, i_k\}\subset \{1,2,\ldots, n\}$, where $k\leq n$,
+is the operator $B\in \Lin(\Hilb{m_1}\otimes \Hilb{m_2}\otimes \ldots \otimes
+\Hilb{m_n})$, such that $B=(\bigotimes_{i=1}^{n} \mathrm{op}(i))(A)$, where
+$\mathrm{op}(i)=\cdot^{\mathrm T}$ if $i\in I$ and $\mathrm{op}(i)=\1_{m_i}$ if
+$i\notin I$.
 
-To perform the partial transpose of an operator $A$, defined as above, in the 
+To perform the partial transpose of an operator $A$, defined as above, in the
 package \qi{} one can call function
 \begin{equation}
 B=\fname{PartialTranspose}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2, 
@@ -228,6 +282,7 @@ B=\fname{PartialTranspose}[A, \{m_1, m_2, \ldots, m_n\}, \{i_1, i_2,
 \subsubsection{Distance measures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In \qi{} following distance measures between density matrices are implemented.
+
 \paragraph{Trace distance} \ldots 
 
 \begin{equation}
@@ -304,11 +359,10 @@ $\fname{StateVector}[l]$ where $l=\{\phi_1, \ldots, \phi_{N-1}, \theta_1, \ldots
 \theta_{N-1}\}$.
 
 \paragraph{Special unitary matrices}
-$d$-dimensional special unitary matrix can be parametrized using 
-$d-1$-parameters. In \qi{} function 
-$\fname{SpecialUnitary}[d,\{l_1,\ldots,l_{d-1}\}]$ 
-implements Euler angles parametrization introduced in 
-\cite{zyczkowski94random}. Parameters $l_i$ are 
+$d$-dimensional special unitary matrix can be parametrized using
+$d-1$-parameters. In \qi{} function
+$\fname{SpecialUnitary}[d,\{l_1,\ldots,l_{d-1}\}]$ implements Euler angles
+parametrization introduced in \cite{zyczkowski94random}. Parameters $l_i$ are
 truncated so that they belong to the interval $l_i\in [0,1]$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Random states}
@@ -330,8 +384,11 @@ truncated so that they belong to the interval $l_i\in [0,1]$.
 \section{Acknowledgements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 This work was supported by the Polish National Science Centre under the research
-project \dots. Authors would like to thank K.~\.Zyczkowski for interesting
-discussions.
+project N N519 442339. Authors would like to thank Rafa{\l}
+Demkowicz-Dobrza\'nski, Wojtek Bruzda and Karol \.Zyczkowski for their
+assistance with functions related to random operations. Thanks goes also Fatih
+\"Ozayd{\i}n, David Jennings, Silvestre Abruzzo and Bart{\l}omiej Gardas for the
+testing the package.
 
 \bibliographystyle{plain}
 \bibliography{qi}
