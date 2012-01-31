@@ -5,9 +5,10 @@
 % v. 0.04 - 26/01/2012 - Gawron - 
 % v. 0.05 - 27/01/2012 - Gawron - 
 % v. 0.06 - 30/01/2012 - Jarek - introduction and related work
+% v. 0.07 - 31/01/2012 - Jarek - minor update in bib and introduction
 \documentclass[11pt,a4paper]{article}
 
-\date{30/01/2012 (v. 0.06)}
+\date{31/01/2012 (v. 0.07)}
 
 \usepackage{fullpage}
 \usepackage{hyperref}
@@ -31,6 +32,10 @@
 \newcommand{\1}{{\bf 1}}
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\fname}[1]{\text{\texttt{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% to be removed in the final version
+\newcommand{\todo}[1]{\vspace{6pt}\noindent\underline{\textsc{TODO:}} \textit{{#1}}\vspace{6pt}}
+\newcommand{\note}[1]{\vspace{6pt}\noindent\underline{\textsc{Note:}} \textit{{#1}}\vspace{6pt}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -90,16 +95,22 @@ geometrical properties of quantum stats and quantum channels.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 During the last several years many simulators of quantum computers have been
-developed and the most up-to-date list of available software is available
-at~\cite{quantiki-simulators}. A number of simulators of quantum information
-processing was developed using \Mathematica\ computing system~\cite{qucalc,
-qdensity, quantum2, miszczak12generating, qcwave}. Also some attention has been
-devoted to utilising new programming \cite{gutierrez10cuda} and parallel
-processing model~\cite{glendinning03parallelization, deraedt07massively,
-tabakin09qcmpi}. The research effort in using parallel and distributed computing
-for the purpose of quantum information processing was motivated by the amount of
-computation resource needed in order to perform a simulation of quantum
-computation.
+developed. The most up-to-date list of available software is hosted
+at~\cite{quantiki-simulators}. A number of simulators of quantum
+information processing was developed using \Mathematica\ computing
+system~\cite{qucalc, qdensity, quantum2, miszczak12generating, qcwave}. 
+
+\note{One sentence about each of the above mentioned}
+
+
+%Also some attention has been devoted to utilising
+%new programming \cite{gutierrez10cuda} and parallel processing
+%model~\cite{glendinning03parallelization, deraedt07massively, tabakin09qcmpi}.
+%The research effort in using parallel and distributed computing for the purpose
+%of quantum information processing is motivarted by the amount of computation
+%resource needed in order to perform a simulation of quantum computation.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Preliminaries}
