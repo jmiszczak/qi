@@ -227,7 +227,8 @@ qiExtrasHistory = {
 	{"0.0.1", "13/10/2011", "Zbyszek,Jarek,Piotr", "Some functions moved from QI to QIExtras."},
 	{"0.0.6", "17/12/2011", "Jarek", "Fixed Negativity"},
 	{"0.0.7", "23/12/2011", "Zbyszek", "Mubs"},
-	{"0.0.8", "23/01/2012", "Jarek", "Versioning added and KetFromDigits improved."}
+    {"0.0.8", "23/01/2012", "Jarek", "Versioning added and KetFromDigits improved."},
+    {"0.0.9", "02/02/2012", "Gawron", "Concurrence4 fixed, thanks Maciej Demianowicz."}
 };  
 
 qiExtrasVersion = Last[qiExtrasHistory][[1]];
@@ -370,11 +371,12 @@ GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower
 
 ExtendKraus[operators_,n_] := Block[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
-Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl},
-evl=Eigenvalues[MatrixSqrt[sqrtM.(sy\[CircleTimes]sy).m.(sy\[CircleTimes]sy).sqrtM]];
-Max[0,Re[Sqrt[evl[[1]]]-Sqrt[evl[[2]]]-Sqrt[evl[[3]]]-Sqrt[evl[[4]]]]]
+Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl,R,rhotilde},
+	rhotilde=(sy\[CircleTimes]sy).Conjugate[m].(sy\[CircleTimes]sy);
+	R=MatrixSqrt[sqrtM.rhotilde.sqrtM];
+	evl=Eigenvalues[R];
+    Max[ 0 , Re[evl[[1]]-evl[[2]]-evl[[3]]-evl[[4]]] ]
 ];
-
 
 EntanglementOfFormation4[rho_] := Block[{h},
   h[x_] := -x*Log0[x] - (1 - x)*Log0[1 - x];
@@ -382,8 +384,6 @@ EntanglementOfFormation4[rho_] := Block[{h},
 ];
 
 Negativity[\[Rho]_, {m_, n_}] := Plus@@Abs[Select[Eigenvalues[PartialTranspose[\[Rho], {m, n}, {1}]], # < 0 &]];
-
-   
 
 
 (* ::Subsection::Closed:: *)
