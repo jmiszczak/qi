@@ -18,11 +18,11 @@ Clear@@Names["QI`*" ]
 $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Help messages*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Commonly used matrices*)
 
 
@@ -33,6 +33,12 @@ id::usage = "<v>id</v> - Identity matrix for one qubit. See also: IdentityMatrix
 wh::usage = "<v>wh</v> - Hadamard gate for one qubit.";
 cnot::usage = "<v>cnot</v> - Controlled not matrix for two qubits.";
 Id::usage = "<f>Id</f>[<v>n</v>] returns an identity matrix of dimension <v>n</v>. This is equivalent to IdentityMatrix[<v>n</v>].";
+
+
+BaseVectors::usage = "<f>BaseVectors</f>[<v>n</v>] returns a list with the canonical basis in </v>n</v>-dimensional Hilbert space. See also: BaseMatrices.";
+
+
+BaseMatrices::usage = "<f>BaseMatrices</f>[<v>n</v>] returns a list with the canonical basis in <v>n</v>\[Cross]</v>n</v>-dimensional Hilbert-Schmidt space of matrices. See also: BaseVectors.";
 
 
 (* ::Subsection::Closed:: *)
@@ -288,19 +294,19 @@ ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<s>\[CapitalPsi]</s>,
 computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[CapitalPhi]</s>.";
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Private definitions*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Internal functions (without usage strings)*)
 
 
 Begin["`Private`"];
 
-QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
+(*QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""}
 (MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QI`*"];
-
+*)
 qiAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>, Piotr Gawron <gawron[at]iitis[dot]pl>, Zbigniew Puchala <z.puchala[at]iitis[dot]pl>";
 
 qiLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
@@ -368,7 +374,8 @@ qiHistory = {
 	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
 	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"},
-	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"}
+	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"},
+	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -392,7 +399,7 @@ DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Activ
 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Commonly used matrices*)
 
 
@@ -403,6 +410,12 @@ id = {{1,0},{0,1}};
 wh = {{1,1},{1,-1}};
 cnot = {{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,0,1,0}};
 Id[n_]:=IdentityMatrix[n];
+
+
+BaseVectors[n_Integer]:=Table[UnitVector[n,k],{k,1,n}];
+
+
+BaseMatrices[n_Integer]:=Table[Unres[UnitVector[n^2,k]],{k,1,n^2}];
 
 
 (* ::Subsection::Closed:: *)
@@ -863,7 +876,7 @@ RandomDynamicalMatrix[n_,m_:0]:=Block[{X,Y,sY},
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package footer*)
 
 

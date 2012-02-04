@@ -16,13 +16,9 @@ Clear@@Names["QIExtras`*" ]
 (*Public definitions*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Common matrices*)
 
-
-BaseVectors::usage = "BaseVectors[n] returns a list with the canonical basis in n-dimensional Hilbert space \!\(\*SuperscriptBox[\"\[DoubleStruckCapitalC]\", \"n\"]\). See also: BaseMatrices.";
-
-BaseMatrices::usage = "BaseMatrices[n] returns a list with the canonical basis in n\[Cross]n-dimensional Hilbert-Schmidt space \!\(\*SubscriptBox[\"\[DoubleStruckCapitalM]\", \"n\"]\). See also: BaseVectors.";
 
 KroneckerDeltaMatrix::usage = "KroneckerDeltaMatrix[i,j,d] returns d\[Cross]d matrix with 1 at position (i,j) and zeros elsewhere.";
 
@@ -228,7 +224,8 @@ qiExtrasHistory = {
 	{"0.0.6", "17/12/2011", "Jarek", "Fixed Negativity"},
 	{"0.0.7", "23/12/2011", "Zbyszek", "Mubs"},
     {"0.0.8", "23/01/2012", "Jarek", "Versioning added and KetFromDigits improved."},
-    {"0.0.9", "02/02/2012", "Gawron", "Concurrence4 fixed, thanks Maciej Demianowicz."}
+    {"0.0.9", "02/02/2012", "Gawron", "Concurrence4 fixed, thanks Maciej Demianowicz."},
+	{"0.0.10", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI"}
 };  
 
 qiExtrasVersion = Last[qiExtrasHistory][[1]];
@@ -239,14 +236,8 @@ qiExtrasAbout = "QIExtrtas is a package of functions for Mathematica computer al
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Common matrices*)
-
-
-BaseVectors[n_Integer]:=Table[UnitVector[n,k],{k,1,n}];
-
-
-BaseMatrices[n_Integer]:=Table[Unres[UnitVector[n^2,k]],{k,1,n^2}];
 
 
 KroneckerDeltaMatrix[m_,n_,dim_]:=Block[{mtx},

@@ -3,7 +3,7 @@
 \usepackage{fullpage}
 \parindent=0pt
 \begin{document}
-\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.4.34)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
+\title{QI Package for \emph{Mathematica} 7.0 \\(version 0.4.36)}\author{Jaros{\l}aw Adam Miszczak \quad Piotr Gawron \quad Zbigniew Pucha{\l}a\\
 {The Institute of Theoretical and Applied Informatics}\\
 {Polish Academy of Sciences},\\
 {Ba{\l}tycka 5, 44-100 Gliwice, Poland}}
@@ -16,6 +16,8 @@
 \begin{itemize} 
 \item  \textbf{ApplayChannel}[$f$,$\rho$] - apply channel $f$, given as a pure function, to the input state $\rho$. See also: \textbf{ApplyUnitary}, \textbf{ApplyKraus}.
 \item  \textbf{ApplyKraus}[$ck$,$\rho$] - apply channel $ck$, given as a list of Kraus operators, to the input state $\rho$. See also: \textbf{ApplyUnitary}, \textbf{ApplyChannel}.
+\item  \textbf{BaseMatrices}[$n$] returns a list with the canonical basis in $n$xn-dimensional Hilbert-Schmidt space of matrices. See also: BaseVectors.
+\item  \textbf{BaseVectors}[$n$] returns a list with the canonical basis in n-dimensional Hilbert space. See also: BaseMatrices.
 \item  \textbf{BlochToState}[$v$] - returns a matrix of appropriate dimension from Bloch vector, i.e. coefficients treated as coefficients from expansion on normalized generalized Pauli matrices. See also: \textbf{GeneralizedPauliMatrices}.
 \item  \textbf{ChannelToMatrix}[$E$,$d$] returns matrix representation of a channel $E$ acting on $d$-dimensional state space. First argument should be a pure function $E$ such that $E$[$\rho$] transforms input state according to the channel definition.
 \item  $cnot$ - Controlled not matrix for two qubits.
@@ -76,6 +78,7 @@ For example, for a matrix $mtx$ of dimension $r1 r2x c1 c2$ one can obtain a Sch
 \indent{} $sd$ = \textbf{SchmidtDecomposition}[$mtx$, {{$r1$, $r2$}, {$c1$, $c2$}}];\newline{}
 and reconstruct the original matrix as\newline{}
 \indent{} $mtx$ == Sum[$sd$[[$i$,1]]*KroneckerProduct[$sd$[[$i$,2]], $sd$[[$i$,3]]], {$i$, Length[$sd$]}];
+\item  \textbf{SpecialUnitary}[$d$,$params$] returns the special unitary matrix of size $d$ with Euler parameters given in $params$. $params$ must be a list of length $d^2 - 1$.
 \item  \textbf{SpecialUnitary2}[$\text{$\beta $,$\gamma $,$\delta $}$] returns a parametrization of $SU$(2). This is equivalent to \textbf{Unitary2}[$\text{0,$\beta $,$\gamma $,$\delta $}$].
 \item  \textbf{SquareMatrixQ}[$A$] returns True only if $A$ is a square matrix, and gives False otherwise.
 \item  \textbf{StateToBloch}[$A$] - for a square matrix $A$ returns a vector of coefficients obtained from expansion on normed generalized Pauli matrices. See also: \textbf{GeneralizedPauliMatrices}.
