@@ -22,7 +22,7 @@ $PrePrint = If[SquareMatrixQ[#], MatrixForm[#], #]&;
 (*Help messages*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
@@ -370,12 +370,13 @@ qiHistory = {
 	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
 	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
-	{"0.4.31",  "25/10/2011", "Zbyszek", "Small changes."},
-	{"0.4.32",  "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
-	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - tanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
+	{"0.4.31", "25/10/2011", "Zbyszek", "Small changes."},
+	{"0.4.32", "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
+	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - thanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
 	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"},
 	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"},
-	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."}
+	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
+	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -399,7 +400,7 @@ DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Activ
 
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Commonly used matrices*)
 
 
@@ -860,7 +861,7 @@ Jamiolkowski[fun_Function,dim_Integer] := 1/dim*DynamicalMatrix[fun,dim];
 
 TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
 
-SuperoperatorToKraus[m_]:=Block[{val,vec}, {val,vec} = Eigensystem[Reshuffle[m]]; Sqrt[val] (Unres[#]&/@vec)];
+SuperoperatorToKraus[m_] :=  Block[{val, vec}, {val, vec} = Eigensystem[Reshuffle[m]];   Sqrt[val] (Unvec[#/Norm[#]] & /@ vec)];
 
 
 ProductSuperoperator[M1_,M2_]:=Block[{prod = M1\[CircleTimes]M2, q1, d1 = Sqrt[Length[M1]], d2 = Sqrt[Length[M2]]},
