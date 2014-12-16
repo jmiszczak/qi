@@ -376,7 +376,8 @@ qiHistory = {
 	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"},
 	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"},
 	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
-	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."}
+	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."},
+	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to Łukasz Pawela."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -861,7 +862,7 @@ Jamiolkowski[fun_Function,dim_Integer] := 1/dim*DynamicalMatrix[fun,dim];
 
 TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
 
-SuperoperatorToKraus[m_] :=  Block[{val, vec}, {val, vec} = Eigensystem[Reshuffle[m]];   Sqrt[val] (Unvec[#/Norm[#]] & /@ vec)];
+SuperoperatorToKraus[m_] :=  Block[{val, vec}, {val, vec} = Eigensystem[Reshuffle[m]];   Sqrt[val] (Unres[#/Norm[#]] & /@ vec)];
 
 
 ProductSuperoperator[M1_,M2_]:=Block[{prod = M1\[CircleTimes]M2, q1, d1 = Sqrt[Length[M1]], d2 = Sqrt[Length[M2]]},
