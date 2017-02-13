@@ -44,8 +44,9 @@ BaseMatrices::usage = "<f>BaseMatrices</f>[<v>n</v>] returns a list with the can
 (* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
 
-
+If[$VersionNumber < 10,
 SquareMatrixQ::usage = "<f>SquareMatrixQ</f>[<v>A</v>] returns True only if <v>A</v> is a square matrix, and gives False otherwise.";
+]
 
 SymbolicMatrix::usage = "<f>SymbolicMatrix</f>[<v>a,m,n</v>] returns <s>m\[Cross]n</s>-matrix with elements <v>a[i,j], i=1,...,m, j=1,...,n</v>.\
 If the third argument is ommited this function returns square <s>m\[Cross]m</s> matrix. This functions can save you some keystrokes and, thanks \
@@ -377,7 +378,8 @@ qiHistory = {
 	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"},
 	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
 	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."},
-	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to Łukasz Pawela."}
+	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to Łukasz Pawela."},
+	{"0.4.39", "13/02/2017", "Jarek", "Removed warning message related to SquareMatrixQ in MMA10 and RandomSpecialUnitary normalization- thanks to Bartosz Regula."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -388,8 +390,6 @@ qiAbout = "QI is a package of functions for Mathematica computer algebra system,
 number of functions used in the analysis of quantum states and quantum operations. In contrast to \
 many available packages for symbolic and numerical simulation of quantum computation presented \
 package is focused on geometrical aspects of quantum information theory.";
-
-
 
 HyperlinkToString::usage = "HyperlinkToString[text,link] creates a link labeled with text to the given URL and returns it as a Mathematica string.";
 
@@ -428,9 +428,11 @@ CircleTimes[x_?MatrixQ,y_?MatrixQ] := KroneckerProduct[x,y];
 CircleTimes[x_?VectorQ,y_?VectorQ] := Flatten[KroneckerProduct[x,y]];
 CircleTimes[a_,b__] := CircleTimes[a, CircleTimes[b]]
 
+If[$VersionNumber < 10,
 SquareMatrixQ[A_]:= Block[{dims=Dimensions[A]},
 	(Length[dims]==2 )&&(dims[[1]]==dims[[2]])
 ];
+]
 
 SymbolicMatrix[sym_,d1_?IntegerQ]:=SymbolicMatrix[sym,d1,d1];
 SymbolicMatrix[sym_,d1_?IntegerQ,d2_?IntegerQ] := Table[Subscript[sym, i,j], {i,1,d1}, {j,1,d2}];
@@ -797,7 +799,7 @@ GinibreMatrix[m_,n_]:=RandomReal[NormalDistribution[0,1],{m,n}] + I RandomReal[N
 
 RandomSpecialUnitary[dim_]:=Module[{U},
 	U=RandomUnitary[dim];
-	U/Det[U]
+	U/Det[U]^(1/dim)
 ];
 
 RandomUnitary[dim_]:=Module[{q,r,d,ph},
