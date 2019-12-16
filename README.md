@@ -1,12 +1,25 @@
 # QI
 
-QI is a package for Mathematica computer algebra system developed 
+QI is a package for Mathematica computer algebra system developed to support symbolic analysis of quantum states and operations.
 
-##
+## Usage
 
+Package funcionality is defined in `QI.m` and `QIEstras.m` files, whish should pbe placed in `Applications` subdirectory in `.Mathematica` directory (on Unix-based systems).
 
-##
+The main package can be loaded
+```
+<<QI`
+```
 
+Additional functionality is available in `QIExtras` package
+
+```
+<<QIExtras`
+```
+
+## Documentation
+
+Documentation, including description of all functions, is available in `doc` subdirectory.
 
 ## Authors
 
