@@ -32,6 +32,9 @@ J.A. Miszczak, Z. Puchała, P. Gawron, ``QI package for anaylsis of quantum syst
 
 
 Parts of the packages were also described in
+J.A. Miszczak,  ``Singular values decomposition and matrix reorderings in quantum information theory``, International Journal of Modern Physics C 22 (9), DOI:[10.1142/S0129183111016683](https://doi.org/10.1142/S0129183111016683), arXiv:[1011.1585
+](https://arxiv.org/abs/1011.1585).
+
 ```
 @article{miszczak2011singular,
   title={Singular value decomposition and matrix reorderings in quantum information theory},
