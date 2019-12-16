@@ -15,7 +15,7 @@ J.A. Miszczak, Z. Puchała, P. Gawron, Quantum Sytstems of Informatics Groups, I
 ## Cite us
 
 
-J.A. Miszczak, Z. Puchała, P. Gawron, ``QI package for anaylsis of quantum systems, 2011-``, [https://github.com/iitis/qi]
+J.A. Miszczak, Z. Puchała, P. Gawron, ``QI package for anaylsis of quantum systems, 2011-``, https://github.com/iitis/qi
 
 
 Parts of the packages were also described in
