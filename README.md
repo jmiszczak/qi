@@ -1,3 +1,9 @@
+
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3988569.svg)](https://doi.org/10.5281/zenodo.3988569)
+
+
+
 # QI
 
 QI is a package for Mathematica computer algebra system developed to support symbolic analysis of quantum states and operations.
