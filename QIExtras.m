@@ -219,13 +219,6 @@ See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 Mub::usage ="<f>Mub</f>[<v>p,m</v>] for prime number <v>p</v> and positive integer <v>m</v> returns <v>p^m+1</v> mutually unbaised bases of <v>p^m</v> dimensional Hilbert space.";
 
 
-(* ::Subsection:: *)
-(* Fidelity and friends *)
-
-
-TruncatedFidelity::usage = "<f>TruncatedFidelity</f>[<v>r, s ,m, d</v>] returns quantum fidelity between <v>r</v> and <v>s</v> calculated by projecting <v>s</s> onto the <v>m</v> largest eigenvalues of <v>r</v>. Parameter <v>d</v> controls the accuarys of calculations of the eigenvalues and has default value 10e-6.";
-
-
 (* ::Section:: *)
 (*Private definitions*)
 
@@ -253,7 +246,8 @@ qiExtrasHistory = {
     {"0.0.8", "23/01/2012", "Jarek", "Versioning added and KetFromDigits improved."},
     {"0.0.9", "02/02/2012", "Gawron", "Concurrence4 fixed, thanks Maciej Demianowicz."},
 	{"0.0.10", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI"},
-	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities"}
+	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities"},
+	{"0.0.12", "12/04/2021", "Jarek", "truncated fidelities morved to new subpackage."}
 };  
 
 
@@ -623,17 +617,6 @@ Mub[p_, m_: 1] := Block[{},
     , {b, 0, p^m}
     ]
    ];
-
-
-(* ::Subsection:: *)
-(* Fidelity and friends *)
-
-
-TruncatedFidelity[rho_,sigma_,m_,delta_:10^-6]:=Block[{vec,val,proj},
-	{val,vec}=Chop[Eigensystem[rho]];
-	proj=Plus@@(Proj/@vec[[1;;m]]);
-	Chop[Fidelity[proj.rho.proj,proj.sigma.proj],delta]
-]
 
 
 (* ::Section:: *)

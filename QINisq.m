@@ -29,6 +29,13 @@ RY::usage = "RX[theta] one-qubit rotation wrt Y axis.";
 RZ::usage = "RX[theta] one-qubit rotation wrt Z axis.";
 
 
+(* ::Subsection:: *)
+(* Fidelity and friends *)
+
+
+TruncatedFidelity::usage = "<f>TruncatedFidelity</f>[<v>r, s ,m, d</v>] returns quantum fidelity between <v>r</v> and <v>s</v> calculated by projecting <v>s</s> onto the <v>m</v> largest eigenvalues of <v>r</v>. Parameter <v>d</v> controls the accuarys of calculations of the eigenvalues and has default value 10e-6.";
+
+
 (* ::Section:: *)
 (*Private definitions*)
 
@@ -50,7 +57,8 @@ qiNisqLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 
 
 qiNisqHistory = {
-	{"0.0.1", "15/03/2021", "Jarek", "Basic rotation gates."}
+	{"0.0.1", "15/03/2021", "Jarek", "Basic rotation gates."},
+	{"0.0.2", "12/04/2021", "Jarek", "TruncatedFidelity moved from QIExtras."},
 };  
 
 
@@ -74,6 +82,17 @@ RY[theta_]:=MatrixExp[-I theta/2 sy];
 
 
 RZ[theta_]:=MatrixExp[-I theta/2 sz];
+
+
+(* ::Subsection:: *)
+(* Fidelity and friends *)
+
+
+TruncatedFidelity[rho_,sigma_,m_,delta_:10^-6]:=Block[{vec,val,proj},
+	{val,vec}=Chop[Eigensystem[rho]];
+	proj=Plus@@(Proj/@vec[[1;;m]]);
+	Chop[Fidelity[proj.rho.proj,proj.sigma.proj],delta]
+];
 
 
 (* ::Section:: *)
