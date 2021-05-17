@@ -29,6 +29,12 @@ RY::usage = "RX[theta] one-qubit rotation wrt Y axis.";
 RZ::usage = "RX[theta] one-qubit rotation wrt Z axis.";
 
 
+RXP::usage = "PXR[phi, theta] one-qubit rotation of the Bloch vector by an angle theta, where phi is the angle between the rotation axis and the X axis.";
+
+
+XX::usage = "Ising gate with parameter \[Theta]."
+
+
 (* ::Subsection:: *)
 (* Fidelity and friends *)
 
@@ -59,6 +65,8 @@ qiNisqLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 qiNisqHistory = {
 	{"0.0.1", "15/03/2021", "Jarek", "Basic rotation gates."},
 	{"0.0.2", "12/04/2021", "Jarek", "TruncatedFidelity moved from QIExtras."},
+	{"0.0.2", "07/05/2021", "Jarek", "Added XX gate."},
+	{"0.0.3", "17/05/2021", "Jarek", "Added Bloch verctor rotation wrt rotatet X axis."}
 };  
 
 
@@ -84,6 +92,12 @@ RY[theta_]:=MatrixExp[-I theta/2 sy];
 RZ[theta_]:=MatrixExp[-I theta/2 sz];
 
 
+RXP[phi_,theta_]:={ {Cos[theta/2], -I Sin[theta/2] Exp[-I phi]}, {-I Sin[theta/2] Exp[I phi], Cos[theta/2]} };
+
+
+XX[theta_]:=Cos[theta](Id[2]\[CircleTimes]Id[2])-I Sin[theta](sx\[CircleTimes]sx);
+
+
 (* ::Subsection:: *)
 (* Fidelity and friends *)
 
@@ -91,7 +105,7 @@ RZ[theta_]:=MatrixExp[-I theta/2 sz];
 TruncatedFidelity[rho_,sigma_,m_,delta_:10^-6]:=Block[{vec,val,proj},
 	{val,vec}=Chop[Eigensystem[rho]];
 	proj=Plus@@(Proj/@vec[[1;;m]]);
-	Chop[Fidelity[proj.rho.proj,proj.sigma.proj],delta]
+	Chop[Fidelity[proj . rho . proj,proj . sigma . proj],delta]
 ];
 
 
@@ -108,6 +122,9 @@ End[] (* End Private Context *)
 Protect@@Names["QINisq`*"]
 
 EndPackage[]
+
+
+
 
 
 
