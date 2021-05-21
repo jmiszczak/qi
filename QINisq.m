@@ -38,7 +38,7 @@ S::usage = "S = RZ[pi/2]";
 T::usage = "T = RZ[pi/4]";
 
 
-toffoli:: = "Toffoli/controlled-controlled-not gate.";
+toffoli::usage = "Toffoli/controlled-controlled-not gate.";
 
 
 XX::usage = "Ising gate with parameter \[Theta]."
