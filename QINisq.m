@@ -32,6 +32,15 @@ RZ::usage = "RX[theta] one-qubit rotation wrt Z axis.";
 RXP::usage = "PXR[phi, theta] one-qubit rotation of the Bloch vector by an angle theta, where phi is the angle between the rotation axis and the X axis.";
 
 
+S::usage = "S = RZ[pi/2]";
+
+
+T::usage = "T = RZ[pi/4]";
+
+
+toffoli:: = "Toffoli/controlled-controlled-not gate.";
+
+
 XX::usage = "Ising gate with parameter \[Theta]."
 
 
@@ -66,7 +75,8 @@ qiNisqHistory = {
 	{"0.0.1", "15/03/2021", "Jarek", "Basic rotation gates."},
 	{"0.0.2", "12/04/2021", "Jarek", "TruncatedFidelity moved from QIExtras."},
 	{"0.0.2", "07/05/2021", "Jarek", "Added XX gate."},
-	{"0.0.3", "17/05/2021", "Jarek", "Added Bloch verctor rotation wrt rotatet X axis."}
+	{"0.0.3", "17/05/2021", "Jarek", "Added Bloch verctor rotation wrt rotatet X axis."},
+	{"0.0.4", "21/05/2021", "Jarek", "Added toffoli, S and T gates"}
 };  
 
 
@@ -92,7 +102,16 @@ RY[theta_]:=MatrixExp[-I theta/2 sy];
 RZ[theta_]:=MatrixExp[-I theta/2 sz];
 
 
+S = RZ[Pi/2];
+
+
+T = RZ[Pi/4];
+
+
 RXP[phi_,theta_]:={ {Cos[theta/2], -I Sin[theta/2] Exp[-I phi]}, {-I Sin[theta/2] Exp[I phi], Cos[theta/2]} };
+
+
+toffoli = Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]]\[CircleTimes]sx + (Id[4]-Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]])\[CircleTimes]id;
 
 
 XX[theta_]:=Cos[theta](Id[2]\[CircleTimes]Id[2])-I Sin[theta](sx\[CircleTimes]sx);
