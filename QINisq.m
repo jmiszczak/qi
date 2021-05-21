@@ -93,19 +93,19 @@ qiNisqAbout = "QINisq is a Mathematica package encapsulating functions useful fo
 (*Quantum gates*)
 
 
-RX[theta_]:=MatrixExp[-I theta/2 sx];
+RX[theta_]:=MatrixExp[- I theta/2 sx];
 
 
-RY[theta_]:=MatrixExp[-I theta/2 sy];
+RY[theta_]:=MatrixExp[- I theta/2 sy];
 
 
-RZ[theta_]:=MatrixExp[-I theta/2 sz];
+RZ[theta_]:=MatrixExp[- I theta/2 sz];
 
 
-S = RZ[Pi/2];
+S = MatrixPower[sz,1/2]
 
 
-T = RZ[Pi/4];
+T = MatrixPower[sz,1/4]
 
 
 RXP[phi_,theta_]:={ {Cos[theta/2], -I Sin[theta/2] Exp[-I phi]}, {-I Sin[theta/2] Exp[I phi], Cos[theta/2]} };
