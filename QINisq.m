@@ -7,7 +7,7 @@
 (* Mathematica Package *)
 
 BeginPackage["QINisq`", { "QI`", "QIExtras`"}]
-(* Exported symbols added here with SymbolName::usage *)  
+(* Exported symbols added here with SymbolName::usage *) 
 Unprotect@@Names["QINisq`*"]
 Clear@@Names["QINisq`*" ]
 
@@ -44,6 +44,12 @@ toffoli::usage = "Toffoli/controlled-controlled-not gate.";
 XX::usage = "Ising gate with parameter \[Theta]."
 
 
+CGate::usage = "CGate[g,c,t,q] returns controlled version of one-qubit gate g with control qubits c and target qubits q, acring on q qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
+
+
+CX::usage = "CX[c,t,qdim_] generalized controlled not operation with control qubits c and target qubits t, acting on qdim qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
+
+
 (* ::Subsection:: *)
 (* Fidelity and friends *)
 
@@ -76,7 +82,8 @@ qiNisqHistory = {
 	{"0.0.2", "12/04/2021", "Jarek", "TruncatedFidelity moved from QIExtras."},
 	{"0.0.2", "07/05/2021", "Jarek", "Added XX gate."},
 	{"0.0.3", "17/05/2021", "Jarek", "Added Bloch verctor rotation wrt rotatet X axis."},
-	{"0.0.4", "21/05/2021", "Jarek", "Added toffoli, S and T gates"}
+	{"0.0.4", "21/05/2021", "Jarek", "Added toffoli, S and T gates"},
+	{"0.0.5", "22/05/2021", "Jarek", "Added general controlled one qubit gate and templates for CX, CY and CZ gates."}
 };  
 
 
@@ -86,7 +93,7 @@ qiNisqVersion = Last[qiNisqHistory][[1]];
 qiNisqLastModification = Last[qiNisqHistory][[2]];
 
 
-qiNisqAbout = "QINisq is a Mathematica package encapsulating functions useful for NISQ quantum computing. It is based QI and QIExtras packages.";
+qiNisqAbout = "QINisq is a Mathematica package encapsulating functions useful for NISQ quantum computing. It is based QI and QIExtras packages. It provides functionality enabling the programming of quantum computers on a level similar to the one offered by Qiskit.";
 
 
 (* ::Subsection:: *)
@@ -117,6 +124,34 @@ toffoli = Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]]\[CircleTimes]sx + (Id[4]-Pr
 XX[theta_]:=Cos[theta](Id[2]\[CircleTimes]Id[2])-I Sin[theta](sx\[CircleTimes]sx);
 
 
+CGate[gate_,ctrl_,targ_,qdim_]:=Block[{idx,currIdx,idle},
+	idle = Complement[Range[1,qdim],ctrl~Join~targ];
+	idx=DeleteDuplicates[
+	Table[
+			currIdx=Reverse@IntegerDigits[i,2,qdim];
+			currIdx[[idle]]=Table[id,{idle}];
+			If[DeleteDuplicates[currIdx[[ctrl]]]=={1},
+				currIdx[[targ]]=Table[gate,{targ}],
+				currIdx[[targ]]=Table[id,{targ}]
+			];
+			currIdx[[ctrl]]=Map[Proj[Ket[#,2]]&,currIdx[[ctrl]]];
+			currIdx,
+			{i,0,2^qdim-1}
+		]
+	];
+	Plus@@Table[KroneckerProduct@@currIdx,{currIdx,idx}]
+];
+
+
+CX[c_,t_,qdim_]:=CGate[sx, Flatten[{c}], Flatten[{t}],qdim];
+
+
+CY[c_,t_,qdim_]:=CGate[sy, Flatten[{c}], Flatten[{t}],qdim]
+
+
+CZ[c_,t_,qdim_]:=CGate[sz, Flatten[{c}], Flatten[{t}],qdim]
+
+
 (* ::Subsection:: *)
 (* Fidelity and friends *)
 
@@ -135,15 +170,8 @@ TruncatedFidelity[rho_,sigma_,m_,delta_:10^-6]:=Block[{vec,val,proj},
 Print["Package QINisq ", QINisq`Private`qiNisqVersion, " (last modification: ", QINisq`Private`qiNisqLastModification, ")."];
 
 
-
 End[] (* End Private Context *)
 
 Protect@@Names["QINisq`*"]
 
 EndPackage[]
-
-
-
-
-
-
