@@ -51,6 +51,16 @@ CX::usage = "CX[c,t,qdim_] generalized controlled not operation with control qub
 
 
 (* ::Subsection:: *)
+(*Quantum computer*)
+
+
+Q::usage = "Q[qg, ops, qc] appends gate qg to the computer qc using options in the ops list.";
+
+
+QRun::usage = "QRun[qc] runs a simulation of the intructions in the list of gates, using the information about the paramters and the size of the computer qc.";
+
+
+(* ::Subsection:: *)
 (* Fidelity and friends *)
 
 
@@ -83,7 +93,8 @@ qiNisqHistory = {
 	{"0.0.2", "07/05/2021", "Jarek", "Added XX gate."},
 	{"0.0.3", "17/05/2021", "Jarek", "Added Bloch verctor rotation wrt rotatet X axis."},
 	{"0.0.4", "21/05/2021", "Jarek", "Added toffoli, S and T gates"},
-	{"0.0.5", "22/05/2021", "Jarek", "Added general controlled one qubit gate and templates for CX, CY and CZ gates."}
+	{"0.0.5", "22/05/2021", "Jarek", "Added general controlled one qubit gate and templates for CX, CY and CZ gates."},
+	{"0.0.6", "25/05/2021", "Jarek", "Added template for function managing virtual quantum devices."}
 };  
 
 
@@ -150,6 +161,19 @@ CY[c_,t_,qdim_]:=CGate[sy, Flatten[{c}], Flatten[{t}],qdim]
 
 
 CZ[c_,t_,qdim_]:=CGate[sz, Flatten[{c}], Flatten[{t}],qdim]
+
+
+(* ::Subsection:: *)
+(*Quantum computer*)
+
+
+Q[gate_,ops_,qc_]:=AppendTo[qc,{gate,ops}];
+SetAttributes[Q,HoldAll];
+
+
+QRun[qc_,init_:{}]:=Block[{dim=qc[[1]],inState},
+inState=Ket[0,dim];
+inState];
 
 
 (* ::Subsection:: *)
