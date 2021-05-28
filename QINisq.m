@@ -47,7 +47,7 @@ XX::usage = "Ising gate with parameter \[Theta]."
 CGate::usage = "CGate[g,c,t,q] returns controlled version of one-qubit gate g with control qubits c and target qubits q, acring on q qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
 
 
-CX::usage = "CX[c,t,qdim_] generalized controlled not operation with control qubits c and target qubits t, acting on qdim qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
+CX::usage = "CX[c,t,qdim] generalized controlled not operation with control qubits c and target qubits t, acting on qdim qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
 
 
 (* ::Subsection:: *)
@@ -172,7 +172,7 @@ SetAttributes[Q,HoldAll];
 
 
 QRun[qc_,init_:{}]:=Block[{dim=qc[[1]],inState},
-inState=Ket[0,dim];
+inState=Ket[0,2^dim];
 inState];
 
 
