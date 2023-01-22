@@ -56,10 +56,10 @@ CGate::usage = "CGate[g,c,t,q] returns controlled version of one-qubit gate g wi
 CX::usage = "CX[c,t,qdim] generalized controlled not operation with control qubits c and target qubits t, acting on qdim qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
 
 
-CY::usage = "CX[c,t,qdim] generalized controlled sy. See CX usage info for more details."
+CY::usage = "CX[c,t,qdim] generalized controlled sy. See CX usage for more details."
 
 
-CZ::usage = "CX[c,t,qdim] generalized controlled sz. See CX usage info for more details."
+CZ::usage = "CX[c,t,qdim] generalized controlled sz. See CX usage for more details."
 
 
 (* ::Subsection:: *)
@@ -113,7 +113,8 @@ qiNisqHistory = {
 	{"0.0.4", "21/05/2021", "Jarek", "Added toffoli, S and T gates"},
 	{"0.0.5", "22/05/2021", "Jarek", "Added general controlled one qubit gate and templates for CX, CY and CZ gates."},
 	{"0.0.6", "25/05/2021", "Jarek", "Added template for function managing virtual quantum devices."},
-	{"0.0.7", "28/05/2021", "Jarek", "Added function for extending one-qubit-gates and functions for executing non-parametric one-qubit gates and controlled gates."}
+	{"0.0.7", "28/05/2021", "Jarek", "Added function for extending one-qubit-gates and functions for executing non-parametric one-qubit gates and controlled gates."},
+	{"0.0.8", "22/01/2023", "Jarek", "Updated description"}
 };  
 
 
@@ -123,7 +124,7 @@ qiNisqVersion = Last[qiNisqHistory][[1]];
 qiNisqLastModification = Last[qiNisqHistory][[2]];
 
 
-qiNisqAbout = "QINisq is a Mathematica package encapsulating functions useful for NISQ quantum computing. It is based QI and QIExtras packages. It provides functionality enabling the programming of quantum computers on a level similar to the one offered by Qiskit.";
+qiNisqAbout = "QINisq is a Mathematica package encapsulating functions commonly used to developing quantum algorithms for noisy intermediate-scale quantum (NISQ) computers. The packages is based QI and QIExtras packages and provides functionality enabling the programming of quantum computers on a level similar to the one offered by Qiskit.";
 
 
 (* ::Subsection:: *)
@@ -253,6 +254,3 @@ End[] (* End Private Context *)
 Protect@@Names["QINisq`*"]
 
 EndPackage[]
-
-
-
