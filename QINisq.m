@@ -114,7 +114,7 @@ qiNisqHistory = {
 	{"0.0.5", "22/05/2021", "Jarek", "Added general controlled one qubit gate and templates for CX, CY and CZ gates."},
 	{"0.0.6", "25/05/2021", "Jarek", "Added template for function managing virtual quantum devices."},
 	{"0.0.7", "28/05/2021", "Jarek", "Added function for extending one-qubit-gates and functions for executing non-parametric one-qubit gates and controlled gates."},
-	{"0.0.8", "22/01/2023", "Jarek", "Updated description"}
+	{"0.0.8", "22/01/2023", "Jarek", "Updated description. Minor in usage messages."}
 };  
 
 
