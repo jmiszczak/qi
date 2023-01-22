@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package header*)
 
 
@@ -43,6 +43,7 @@ BaseMatrices::usage = "<f>BaseMatrices</f>[<v>n</v>] returns a list with the can
 
 (* ::Subsection::Closed:: *)
 (*Kronecker sum and product, symbolic matrix*)
+
 
 If[$VersionNumber < 10,
 SquareMatrixQ::usage = "<f>SquareMatrixQ</f>[<v>A</v>] returns True only if <v>A</v> is a square matrix, and gives False otherwise.";
@@ -277,7 +278,7 @@ for <f>ChannelToMatrix</f>[<v>fun</v>,<v>dim</v>] and returns matrix representat
 given as a pure function, acting on <v>dim</v>-dimensional space. \
 See also: <f>ChannelToMatrix</f>.";
 
-DynamicalMatrix::usage = "<f>DynamicalMatrix</f> returns a dynamical matrix of quantum channel
+DynamicalMatrix::usage = "<f>DynamicalMatrix</f> returns a dynamical matrix of quantum channel. The following options are available:\n
 <f>DynamicalMatrix</f>[<v>ch</v>] -  operates on a quantum channel given as a list of Kraus operators.
 <f>DynamicalMatrix</f>[<v>fun</v>,<v>dim</v>]  - operates on a a function <v>fun</v> acting on <v>dim</v>-dimensional space. 
 See also: <f>Superoperator</f>, <f>ChannelToMatrix</f>.";
@@ -299,7 +300,7 @@ computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[
 (*Private definitions*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Internal functions (without usage strings)*)
 
 
@@ -378,8 +379,9 @@ qiHistory = {
 	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"},
 	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
 	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."},
-	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to Łukasz Pawela."},
-	{"0.4.39", "13/02/2017", "Jarek", "Removed warning message related to SquareMatrixQ in MMA10 and RandomSpecialUnitary normalization- thanks to Bartosz Regula."}
+	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to \[CapitalLSlash]ukasz Pawela."},
+	{"0.4.39", "13/02/2017", "Jarek", "Removed warning message related to SquareMatrixQ in MMA10 and RandomSpecialUnitary normalization- thanks to Bartosz Regula."},
+	{"0.4.40", "22/01/2023", "Jarek", "Minor update in usage messages."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -648,13 +650,13 @@ PartialTranspose[\[Rho]_,dim_?VectorQ,sys_?VectorQ]:=Block[{offset,tensor,perm,i
 
 MatrixSqrt[m_?SquareMatrixQ]:=MatrixPower[m,1/2];
 
-MatrixAbs[a_?SquareMatrixQ]:=MatrixSqrt[a.(a\[ConjugateTranspose])];
+MatrixAbs[a_?SquareMatrixQ]:=MatrixSqrt[a . (a\[ConjugateTranspose])];
 
-Fidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=(Plus@@(Sqrt[Eigenvalues[a.b]]))^2;
+Fidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=(Plus@@(Sqrt[Eigenvalues[a . b]]))^2;
 
-Superfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Tr[a.b]+Sqrt[(1-Tr[a.a])]*Sqrt[(1-Tr[b.b])];
+Superfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Tr[a . b]+Sqrt[(1-Tr[a . a])]*Sqrt[(1-Tr[b . b])];
 
-Subfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Block[{prod = a.b}, Tr[prod] +Sqrt[2]Sqrt[(Tr[prod]*Tr[prod]-Tr[prod.prod])]];
+Subfidelity[a_?SquareMatrixQ,b_?SquareMatrixQ]:=Block[{prod = a . b}, Tr[prod] +Sqrt[2]Sqrt[(Tr[prod]*Tr[prod]-Tr[prod . prod])]];
 
 TraceNorm[a_?SquareMatrixQ]:=Plus@@SingularValueList[a];
 
@@ -662,7 +664,7 @@ TraceDistance[a_?SquareMatrixQ,b_?SquareMatrixQ]:=1/2*TraceNorm[a-b];
 
 GateFidelity[mU_?SquareMatrixQ,mV_?SquareMatrixQ]:=Block[{dimU=Dimensions[mU][[1]]},
 	If[dimU==Dimensions[mV][[1]],
-		1/dimU Abs[Tr[mU.ConjugateTranspose[mV]]],
+		1/dimU Abs[Tr[mU . ConjugateTranspose[mV]]],
 		Message[GateFidelity::argerr]
 	]
 ];
@@ -688,13 +690,13 @@ GeneralizedPauliMatrices[n_]:=Block[{l1,l2,l3,i,j},
 
 
 StateToBloch[A_]:=Block[{dim},
-  dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose].#]&/@GeneralizedPauliMatrices[dim])
+  dim=Length[A]; 1/Sqrt[2](Tr[A\[ConjugateTranspose] . #]&/@GeneralizedPauliMatrices[dim])
 ];
 
 BlochToState[vec_]:=Block[{dim},
 	If[IntegerQ[Sqrt[Length[vec]+1]],
 		dim= Sqrt[Length[vec]+1];
-		1/dim IdentityMatrix[dim] + vec.GeneralizedPauliMatrices[dim]/Sqrt[2],
+		1/dim IdentityMatrix[dim] + vec . GeneralizedPauliMatrices[dim]/Sqrt[2],
 		Message[StateFromBlochVector::argerr, vec];
 		Beep[];
 	]
@@ -704,11 +706,11 @@ BlochToState::argerr= "Given vector (`1`) is not a Bloch vector of any dimension
 
 
 (* ::Subsection::Closed:: *)
-(*Parametrizations*)
+(*Parametrizations\[AliasDelimiter]*)
 
 
 Unitary2[\[Alpha]_,\[Beta]_,\[Gamma]_,\[Delta]_]:=
-Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}].{{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}}.DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
+Exp[I \[Alpha]] DiagonalMatrix[{Exp[-I \[Beta]/2],Exp[I \[Beta]/2]}] . {{Cos[\[Gamma]/2],-Sin[\[Gamma]/2]},{Sin[\[Gamma]/2],Cos[\[Gamma]/2]}} . DiagonalMatrix[{Exp[-I \[Delta]/2],Exp[I \[Delta]/2]}];
 
 Unitary2Euler[\[Alpha]_,\[Theta]_,\[Phi]_,\[Psi]_]:={{E^(I*\[Alpha] + I*\[Phi])*Cos[\[Theta]], E^(I*\[Alpha] + I*\[Psi])*Sin[\[Theta]]}, {-(E^(I*\[Alpha] - I*\[Psi])*Sin[\[Theta]]), E^(I*\[Alpha] - I*\[Phi])*Cos[\[Theta]]}}
 
@@ -734,7 +736,7 @@ SpecialUnitary[d_, params_] :=
    u = IdentityMatrix[d];
    Do[u = (Normal[e[[r, r + 1]]] /. {phi0 -> phi[d - r, s + 1], 
           psi0 -> psi[d - r, s + 1], 
-          chi0 -> chi[d - r, s + 1]}).u;, {s, d - 1, 1, -1}, {r, 
+          chi0 -> chi[d - r, s + 1]}) . u;, {s, d - 1, 1, -1}, {r, 
      d - 1, d - s, -1}];
    u];
 
@@ -789,7 +791,7 @@ RandomKet[{d1_?IntegerQ, d2_?IntegerQ}, a_: "Sep"] :=
    v = Sum[Sqrt[l[[i]]]*(UnitVector[d1, i]\[CircleTimes]UnitVector[d2, i]), {i, 1,Length[l]}];
    U = RandomUnitary[d1];
    V = RandomUnitary[d2];
-   (U\[CircleTimes]V).v
+   (U\[CircleTimes]V) . v
    ];
 RandomKet::argerr = "Error - the last parameter should be a list of Schmidt numbers or one of the predefined values: ''Sep'' or ''MaxEnt''."; 
 
@@ -820,17 +822,17 @@ RandomState[d_,dist_:"HS"]:=Block[{A,U},
 	Switch[dist,
 		"HS",
 			A=GinibreMatrix[d,d];
-			A=(A.ConjugateTranspose[A]);
+			A=(A . ConjugateTranspose[A]);
 			A=Chop[A/Tr[A]],
 		"Bures",
 			A=GinibreMatrix[d,d];
 			U=RandomUnitary[d];
-			A=(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose];
+			A=(IdentityMatrix[d]+U) . A . A\[ConjugateTranspose] . (IdentityMatrix[d]+U)\[ConjugateTranspose];
 			Chop[A]\[ConjugateTranspose]/Tr[A],		
 		_, 
 			If[IntegerQ[dist] && dist >=d,
 				A=GinibreMatrix[d,dist];
-				A=(A.ConjugateTranspose[A]);
+				A=(A . ConjugateTranspose[A]);
 				A=Chop[A/Tr[A]],
 				Message[RandomState::argerr,dist]
 			]
@@ -844,7 +846,7 @@ RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an i
 (*Quantum channels*)
 
 
-ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]].\[Rho].(ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
+ApplyKraus[ch_,\[Rho]_]:=Sum[ch[[k]] . \[Rho] . (ch[[k]]\[ConjugateTranspose]),{k,1,Length[ch]}];
 
 ApplyChannel[f_,\[Rho]_] := Map[f,\[Rho],{0}];
 
@@ -862,7 +864,7 @@ Jamiolkowski[ch_List] := 1/Length[ch[[1]]]*DynamicalMatrix[ch];
 
 Jamiolkowski[fun_Function,dim_Integer] := 1/dim*DynamicalMatrix[fun,dim];
 
-TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose].operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
+TPChannelQ[operators_] := Sum[operators[[i]]\[ConjugateTranspose] . operators[[i]],{i,Length[operators]}] == IdentityMatrix[Length[operators[[1]]]];
 
 SuperoperatorToKraus[m_] :=  Block[{val, vec}, {val, vec} = Eigensystem[Reshuffle[m]];   Sqrt[val] (Unres[#/Norm[#]] & /@ vec)];
 
@@ -874,9 +876,9 @@ ProductSuperoperator[M1_,M2_]:=Block[{prod = M1\[CircleTimes]M2, q1, d1 = Sqrt[L
 
 RandomDynamicalMatrix[n_,m_:0]:=Block[{X,Y,sY},	
 	X=GinibreMatrix[n^2,n^2-m];
-	Y=PartialTrace[X.X\[ConjugateTranspose],{n,n},{1}];
+	Y=PartialTrace[X . X\[ConjugateTranspose],{n,n},{1}];
 	sY=MatrixPower[Y,-1/2];
-	KroneckerProduct[IdentityMatrix[n],sY].X.X\[ConjugateTranspose].KroneckerProduct[IdentityMatrix[n],sY]
+	KroneckerProduct[IdentityMatrix[n],sY] . X . X\[ConjugateTranspose] . KroneckerProduct[IdentityMatrix[n],sY]
 ];
 
 
