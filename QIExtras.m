@@ -5,8 +5,12 @@
 
 
 (* Mathematica Package *)
+(* File: QIExtras.m *)
+(* Authors: Jaroslaw Miszczak <miszczak@iitis.pl> *)
+(* License: GPLv3 *)
 
-BeginPackage["QIExtras`", { "QI`"}]
+
+BeginPackage["QIExtras`", {"QI`"}]
 (* Exported symbols added here with SymbolName::usage *)  
 Unprotect@@Names["QIExtras`*"]
 Clear@@Names["QIExtras`*" ]
@@ -41,10 +45,10 @@ Swap::usage="Swap[d] returns permutation operator \!\(\*UnderoverscriptBox[RowBo
 QFT::usage = "QFT[n,method] - quantum Fourier transform of dimension n. This function accepts second optional argument, which specifies method used in calculation. Parameter method can be equal to 'Symbolic', which is default, or 'Numerical'. The second option makes this function much faster.";
 
 
-GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\[Sigma]\_x\)";
+GeneralizedPauliX::usage = "Generalized Pauli matrix X. See also: \!\(\[Sigma]\_x\).";
 
 
-GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\[Sigma]\_z\)";
+GeneralizedPauliZ::usage = "Generalized Pauli matrix Z. See also: \!\(\[Sigma]\_z\).";
 
 
 Ket::usage = "Ket[i,d] returns |i\[RightAngleBracket] in d-dimensional Hilbert space. See also: StateVector for a different parametrization.";
@@ -242,12 +246,13 @@ qiExtrasLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
 qiExtrasHistory = {
 	{"0.0.1", "13/10/2011", "Zbyszek,Jarek,Piotr", "Some functions moved from QI to QIExtras."},
 	{"0.0.6", "17/12/2011", "Jarek", "Fixed Negativity"},
-	{"0.0.7", "23/12/2011", "Zbyszek", "Mubs"},
+	{"0.0.7", "23/12/2011", "Zbyszek", "Mubs."},
     {"0.0.8", "23/01/2012", "Jarek", "Versioning added and KetFromDigits improved."},
     {"0.0.9", "02/02/2012", "Gawron", "Concurrence4 fixed, thanks Maciej Demianowicz."},
-	{"0.0.10", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI"},
-	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities"},
-	{"0.0.12", "12/04/2021", "Jarek", "truncated fidelities morved to new subpackage."}
+	{"0.0.10", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
+	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities."},
+	{"0.0.12", "12/04/2021", "Jarek", "Truncated fidelities moved to a new subpackage."},
+	{"0.0.13", "12/02/2023", "Jarek", "Documentation improvements."}
 };  
 
 
@@ -257,7 +262,7 @@ qiExtrasVersion = Last[qiExtrasHistory][[1]];
 qiExtrasLastModification = Last[qiExtrasHistory][[2]];
 
 
-qiExtrasAbout = "QIExtrtas is a package of functions for Mathematica computer algebra system, extending the functionality of QI package.";
+qiExtrasAbout = "QIExtras is a package of functions for Mathematica computer algebra system, extending the functionality of QI package.";
 
 
 (* ::Subsection::Closed:: *)
@@ -371,24 +376,24 @@ ReshufflePrim[A_,{n_,m_}]:=Flatten[
 
 
 
-IdentityChannel=Function[{dim,\[Rho]},IdentityMatrix[dim].\[Rho]];
+IdentityChannel=Function[{dim,\[Rho]},IdentityMatrix[dim] . \[Rho]];
 
 
-TransposeChannel=Function[{dim,\[Rho]},IdentityMatrix[dim].\[Rho]\[Transpose]];
+TransposeChannel=Function[{dim,\[Rho]},IdentityMatrix[dim] . \[Rho]\[Transpose]];
 
 
-DepolarizingChannel=Function[{dim,p,\[Rho]},(1-p) IdentityMatrix[dim].\[Rho]+(p) Tr[\[Rho]]MaxMix[dim]];
+DepolarizingChannel=Function[{dim,p,\[Rho]},(1-p) IdentityMatrix[dim] . \[Rho]+(p) Tr[\[Rho]]MaxMix[dim]];
 
 HolevoWernerChannel=Function[{dim,p,\[Rho]},( p \[Rho]\[Transpose]+ (1-p)Tr[\[Rho]]MaxMix[dim])];
 
 
-GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower[GeneralizedPauliX[d],i].MatrixPower[GeneralizedPauliZ[d],j])\[ConjugateTranspose],{i,0,d-1},{j,0,d-1}],1];
+GeneralizedPauliKraus[d_,p_]:= Flatten[Table[Sqrt[ p[[i+1]][[j+1]]] (MatrixPower[GeneralizedPauliX[d],i] . MatrixPower[GeneralizedPauliZ[d],j])\[ConjugateTranspose],{i,0,d-1},{j,0,d-1}],1];
 
 ExtendKraus[operators_,n_] := Block[{tpl},tpl=Tuples[operators,n];Table[KroneckerProduct@@tpl[[i]],{i,1,Length[tpl]}]];
 
 Concurrence4[m_]:=Block[{sqrtM=MatrixSqrt[m],evl,R,rhotilde},
-	rhotilde=(sy\[CircleTimes]sy).Conjugate[m].(sy\[CircleTimes]sy);
-	R=MatrixSqrt[sqrtM.rhotilde.sqrtM];
+	rhotilde=(sy\[CircleTimes]sy) . Conjugate[m] . (sy\[CircleTimes]sy);
+	R=MatrixSqrt[sqrtM . rhotilde . sqrtM];
 	evl=Eigenvalues[R];
     Max[ 0 , Re[evl[[1]]-evl[[2]]-evl[[3]]-evl[[4]]] ]
 ];
@@ -405,13 +410,13 @@ Negativity[\[Rho]_, {m_, n_}] := Plus@@Abs[Select[Eigenvalues[PartialTranspose[\
 (*One-qubit quantum channels*)
 
 
-QubitBitflipChannel=Function[{p,\[Rho]},(1-p) id.\[Rho]+p sx.\[Rho].sx\[ConjugateTranspose]];
+QubitBitflipChannel=Function[{p,\[Rho]},(1-p) id . \[Rho]+p sx . \[Rho] . sx\[ConjugateTranspose]];
 
 
-QubitPhaseflipChannel=Function[{p,\[Rho]},(1-p) id.\[Rho]+p sz.\[Rho].sz\[ConjugateTranspose]];
+QubitPhaseflipChannel=Function[{p,\[Rho]},(1-p) id . \[Rho]+p sz . \[Rho] . sz\[ConjugateTranspose]];
 
 
-QubitBitphaseflipChannel=Function[{dim,p,\[Rho]},(1-p) id.\[Rho]+p sy.\[Rho].sy\[ConjugateTranspose]];
+QubitBitphaseflipChannel=Function[{dim,p,\[Rho]},(1-p) id . \[Rho]+p sy . \[Rho] . sy\[ConjugateTranspose]];
 
 
 QubitDepolarizingKraus[p_]:={\[Sqrt](1-3p/4)*id,\[Sqrt](p/4)*sx,\[Sqrt](p/4)*sy,\[Sqrt](p/4)*sz};
@@ -511,13 +516,13 @@ RandomProductKet[n_?ListQ]:=Flatten[Fold[KroneckerProduct[#1,RandomKet[#2]]&,{1}
 
 
 RandomProductNumericalRange[A_,sys_,noPoints_:1]:=Block[{prod},
-    Table[prod=RandomProductKet[sys];Tr[Proj[prod].A],{noPoints}]
+    Table[prod=RandomProductKet[sys];Tr[Proj[prod] . A],{noPoints}]
 ];
 
 
 RandomMaximallyEntangledNumericalRange[A_,noPoints_]:=Block[{ent,dim},
     dim=Dimensions[A][[1]];
-    Table[ent=RandomEntangledUnitVector[dim];ent\[Conjugate].A.ent,{noPoints}]
+    Table[ent=RandomEntangledUnitVector[dim];ent\[Conjugate] . A . ent,{noPoints}]
 ];
 
 
@@ -533,16 +538,16 @@ NumericalRangeBound[A_?MatrixQ,step_:0.01]:=Block[
     s=Position[e,m];
     If[
         Length[s]==1,(*then*)
-        AppendTo[w,ArrayFlatten[Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose]]],
+        AppendTo[w,ArrayFlatten[Extract[r,s]\[Conjugate] . A . Extract[r,s]\[Transpose]]],
         (*else*)
         Kth=I*(Hth-Ath); 
-        pKp=Extract[r,s]\[Conjugate].Kth.Extract[r,s]\[Transpose]; 
+        pKp=Extract[r,s]\[Conjugate] . Kth . Extract[r,s]\[Transpose]; 
         {ee,rr}=Eigensystem[pKp]; 
         ee=Re[ee]; mm=Min[ee]; 
         sm=Position[ee,mm];
-        AppendTo[w,ArrayFlatten[Extract[rr,sm]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sm]\[Transpose]]];
+        AppendTo[w,ArrayFlatten[Extract[rr,sm]\[Conjugate] . Extract[r,s]\[Conjugate] . A . Extract[r,s]\[Transpose] . Extract[rr,sm]\[Transpose]]];
         mM=Max[ee];
-        sM=Position[ee,mM];AppendTo[w,ArrayFlatten[Extract[rr,sM]\[Conjugate].Extract[r,s]\[Conjugate].A.Extract[r,s]\[Transpose].Extract[rr,sM]\[Transpose]]]
+        sM=Position[ee,mM];AppendTo[w,ArrayFlatten[Extract[rr,sM]\[Conjugate] . Extract[r,s]\[Conjugate] . A . Extract[r,s]\[Transpose] . Extract[rr,sM]\[Transpose]]]
     (*end if*)
     ]
     ,{\[Theta],0,2\[Pi],step}];
@@ -562,9 +567,9 @@ func = Expand[f/.replacement];
 ];
 
 
-Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al].MatrixExp[I*\[Lambda]2*be].
-    MatrixExp[I*\[Lambda]3*ga].MatrixExp[I*\[Lambda]5*th].MatrixExp[I*\[Lambda]3*a].
-    MatrixExp[I*\[Lambda]2*b].MatrixExp[I*\[Lambda]3*c].MatrixExp[I*\[Lambda]8*ph];
+Unitary3[al_,be_,ga_,th_,a_,b_,c_,ph_]:=MatrixExp[I *\[Lambda]3*al] . MatrixExp[I*\[Lambda]2*be] .
+    MatrixExp[I*\[Lambda]3*ga] . MatrixExp[I*\[Lambda]5*th] . MatrixExp[I*\[Lambda]3*a] .
+    MatrixExp[I*\[Lambda]2*b] . MatrixExp[I*\[Lambda]3*c] . MatrixExp[I*\[Lambda]8*ph];
 
 
 Unitary4Canonical[a1_,a2_,a3_]:=MatrixExp[I*a1*KroneckerProduct[sx,sx]+a2*I*KroneckerProduct[sy,sy]+a3*I*KroneckerProduct[sz,sz]];
@@ -626,9 +631,6 @@ Mub[p_, m_: 1] := Block[{},
 Print["Package QIExtras ", QIExtras`Private`qiExtrasVersion, " (last modification: ", QIExtras`Private`qiExtrasLastModification, ")."];
 
 
-
 End[] (* End Private Context *)
-
 Protect@@Names["QIExtras`*"]
-
 EndPackage[]
