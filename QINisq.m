@@ -4,6 +4,12 @@
 (*Package header*)
 
 
+(* File: QINisq.m *)
+(* Description: Mathematica package for developing code for NISQ computers. *)
+(* Authors: Jaroslaw Miszczak <miszczak@iitis.pl> *)
+(* License: GPLv3 *)
+
+
 (* Mathematica Package *)
 
 BeginPackage["QINisq`", { "QI`", "QIExtras`"}]
@@ -38,13 +44,13 @@ S::usage = "S[] = RZ[pi/2]";
 T::usage = "T[] = RZ[pi/4]";
 
 
-H::usage = "H[] = Hadamard gate.";
+H::usage = "H[] = Hadamard gate. Defined usin wh.";
 
 
 Toff::usage = "Toff[] = Toffoli/controlled-controlled-not gate.";
 
 
-XX::usage = "Ising gate with parameter \[Theta]."
+XX::usage = "Ising gate with parameter \[Theta].";
 
 
 Gate::usage = "Gate[g,t,q] returns quantum gate applied on systems specified in list t, on the computer with q qubits.";
@@ -56,10 +62,10 @@ CGate::usage = "CGate[g,c,t,q] returns controlled version of one-qubit gate g wi
 CX::usage = "CX[c,t,qdim] generalized controlled not operation with control qubits c and target qubits t, acting on qdim qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
 
 
-CY::usage = "CX[c,t,qdim] generalized controlled sy. See CX usage for more details."
+CY::usage = "CX[c,t,qdim] generalized controlled sy. See CX usage for more details.";
 
 
-CZ::usage = "CX[c,t,qdim] generalized controlled sz. See CX usage for more details."
+CZ::usage = "CX[c,t,qdim] generalized controlled sz. See CX usage for more details.";
 
 
 (* ::Subsection:: *)
@@ -82,7 +88,7 @@ QRun::usage = "QRun[qc] runs a simulation of the intructions in the list of gate
 (* Fidelity and friends *)
 
 
-TruncatedFidelity::usage = "<f>TruncatedFidelity</f>[<v>r, s ,m, d</v>] returns quantum fidelity between <v>r</v> and <v>s</v> calculated by projecting <v>s</s> onto the <v>m</v> largest eigenvalues of <v>r</v>. Parameter <v>d</v> controls the accuarys of calculations of the eigenvalues and has default value 10e-6.";
+TruncatedFidelity::usage = "<f>TruncatedFidelity</f>[<v>r, s ,m, d</v>] returns quantum fidelity between <v>r</v> and <v>s</v> calculated by projecting <v>s</s> onto the <v>m</v> largest eigenvalues of <v>r</v>. Parameter <v>d</v> controls the accuarys of calculations of the eigenvalues and has default value set to 10E-6.";
 
 
 (* ::Section:: *)
@@ -114,7 +120,8 @@ qiNisqHistory = {
 	{"0.0.5", "22/05/2021", "Jarek", "Added general controlled one qubit gate and templates for CX, CY and CZ gates."},
 	{"0.0.6", "25/05/2021", "Jarek", "Added template for function managing virtual quantum devices."},
 	{"0.0.7", "28/05/2021", "Jarek", "Added function for extending one-qubit-gates and functions for executing non-parametric one-qubit gates and controlled gates."},
-	{"0.0.8", "22/01/2023", "Jarek", "Updated description. Minor in usage messages."}
+	{"0.0.8", "22/01/2023", "Jarek", "Updated description. Minor in usage messages."},
+	{"0.0.9", "12/02/2023", "Jarek", "Minor update: description, usage messages."}
 };  
 
 
@@ -124,7 +131,7 @@ qiNisqVersion = Last[qiNisqHistory][[1]];
 qiNisqLastModification = Last[qiNisqHistory][[2]];
 
 
-qiNisqAbout = "QINisq is a Mathematica package encapsulating functions commonly used to developing quantum algorithms for noisy intermediate-scale quantum (NISQ) computers. The packages is based QI and QIExtras packages and provides functionality enabling the programming of quantum computers on a level similar to the one offered by Qiskit.";
+qiNisqAbout = "QINisq is a Mathematica package encapsulating functions commonly used to developing quantum algorithms for noisy intermediate-scale quantum (NISQ) computers. The packages is based QI and QIExtras packages. Its goal is to providee functionality enabling the programming of quantum computers on a level similar to the one offered by Qiskit.";
 
 
 (* ::Subsection:: *)
@@ -146,7 +153,7 @@ S[] = MatrixPower[sz,1/2];
 T[] = MatrixPower[sz,1/4];
 
 
-H[] = 1/Sqrt[2]{{1,1},{1,-1}};
+H[] = wh;
 
 
 RXP[phi_,theta_]:={ {Cos[theta/2], -I Sin[theta/2] Exp[-I phi]}, {-I Sin[theta/2] Exp[I phi], Cos[theta/2]} };
@@ -254,3 +261,6 @@ End[] (* End Private Context *)
 Protect@@Names["QINisq`*"]
 
 EndPackage[]
+
+
+
