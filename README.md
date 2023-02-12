@@ -42,7 +42,7 @@ Documentation, including description of all functions, is available in `doc` sub
 J.A. Miszczak, Z. Puchała, P. Gawron, *QI package for analysis of quantum states and operations, 2011-*, https://github.com/iitis/qi
 
 Parts of the packages were also described in
-J.A. Miszczak,  *Singular values decomposition and matrix reorderings in quantum information theory*, International Journal of Modern Physics C 22 (9), DOI:[10.1142/S0129183111016683](https://doi.org/10.1142/S0129183111016683), arXiv:[1011.1585](https://arxiv.org/abs/1011.1585).
+J.A. Miszczak, *Singular values decomposition and matrix reorderings in quantum information theory*, International Journal of Modern Physics C, Vol. 22, No. 09, pp. 897-918 (2011). DOI:[10.1142/S0129183111016683](https://doi.org/10.1142/S0129183111016683), arXiv:[1011.1585](https://arxiv.org/abs/1011.1585).
 
 ```
 @article{miszczak2011singular,
@@ -53,6 +53,8 @@ J.A. Miszczak,  *Singular values decomposition and matrix reorderings in quantum
   number={09},
   pages={897--918},
   year={2011},
-  publisher={World Scientific}
+  publisher={World Scientific},
+  doi = {10.1142/S0129183111016683},
+  url = {https://arxiv.org/abs/1011.1585}
 }
 ```
