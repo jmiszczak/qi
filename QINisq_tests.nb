@@ -10,32 +10,38 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     20157,        566]
-NotebookOptionsPosition[     18695,        532]
-NotebookOutlinePosition[     19096,        548]
-CellTagsIndexPosition[     19053,        545]
+NotebookDataLength[     64259,       1591]
+NotebookOptionsPosition[     60410,       1514]
+NotebookOutlinePosition[     60811,       1530]
+CellTagsIndexPosition[     60768,       1527]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Quit", "[", "]"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.900919077614641*^9, 3.90091908084118*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"a7b7252b-3cf6-419d-92cd-b6c17f30d726"],
 
 Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"<<", "QINisq`"}]], "Input",
  CellChangeTimes->{{3.830648215723124*^9, 3.8306482193526373`*^9}},
- CellLabel->"In[1]:=",ExpressionUUID->"61794e45-23fc-4928-9626-8e927de93aee"],
+ CellLabel->"In[2]:=",ExpressionUUID->"61794e45-23fc-4928-9626-8e927de93aee"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Package QI version \"\>", 
-   "\[InvisibleSpace]", "\<\"0.4.39\"\>", 
+   "\[InvisibleSpace]", "\<\"0.4.40\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"13/02/2017\"\>", 
+   "\[InvisibleSpace]", "\<\"22/01/2023\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QI version ", "0.4.39", " (last modification: ", "13/02/2017", 
+  "Package QI version ", "0.4.40", " (last modification: ", "22/01/2023", 
    ")."],
   Editable->False]], "Print",
  CellChangeTimes->{
@@ -45,19 +51,26 @@ Cell[BoxData[
    3.831209703304184*^9, 3.8312113069017467`*^9, 3.831212007171606*^9, {
    3.8312121746422043`*^9, 3.83121218903087*^9}, 3.831215149660405*^9, 
    3.831215417421937*^9, 3.831215610826185*^9, 3.8312156511084757`*^9, 
-   3.831218127771096*^9},
+   3.831218127771096*^9, 3.90091449782275*^9, 3.900914858734227*^9, 
+   3.9009148968097754`*^9, 3.900914954635579*^9, 3.900915001087996*^9, {
+   3.9009150461329813`*^9, 3.900915062086294*^9}, 3.90091527239388*^9, {
+   3.900915313331406*^9, 3.900915319514924*^9}, 3.9009153510192127`*^9, 
+   3.900915542422214*^9, {3.900915592986123*^9, 3.9009156344287577`*^9}, 
+   3.900915666976315*^9, 3.9009157018219633`*^9, 3.900916215422501*^9, 
+   3.900916256177553*^9, {3.900916306447404*^9, 3.900916318242346*^9}, 
+   3.900916415819272*^9, 3.900919086262949*^9},
  CellLabel->
   "During evaluation of \
-In[1]:=",ExpressionUUID->"77d6fa4e-dfc3-4bca-8c1a-538357ca68f1"],
+In[2]:=",ExpressionUUID->"791fb7e5-8891-44d4-b3ca-704db433f72c"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Package QIExtras \"\>", "\[InvisibleSpace]", "\<\"0.0.12\"\>", 
+  RowBox[{"\<\"Package QIExtras \"\>", "\[InvisibleSpace]", "\<\"0.0.13\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"12/04/2021\"\>", 
+   "\[InvisibleSpace]", "\<\"12/02/2023\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QIExtras ", "0.0.12", " (last modification: ", "12/04/2021", ")."],
+  "Package QIExtras ", "0.0.13", " (last modification: ", "12/02/2023", ")."],
   
   Editable->False]], "Print",
  CellChangeTimes->{
@@ -67,19 +80,26 @@ Cell[BoxData[
    3.831209703304184*^9, 3.8312113069017467`*^9, 3.831212007171606*^9, {
    3.8312121746422043`*^9, 3.83121218903087*^9}, 3.831215149660405*^9, 
    3.831215417421937*^9, 3.831215610826185*^9, 3.8312156511084757`*^9, 
-   3.831218127835903*^9},
+   3.831218127771096*^9, 3.90091449782275*^9, 3.900914858734227*^9, 
+   3.9009148968097754`*^9, 3.900914954635579*^9, 3.900915001087996*^9, {
+   3.9009150461329813`*^9, 3.900915062086294*^9}, 3.90091527239388*^9, {
+   3.900915313331406*^9, 3.900915319514924*^9}, 3.9009153510192127`*^9, 
+   3.900915542422214*^9, {3.900915592986123*^9, 3.9009156344287577`*^9}, 
+   3.900915666976315*^9, 3.9009157018219633`*^9, 3.900916215422501*^9, 
+   3.900916256177553*^9, {3.900916306447404*^9, 3.900916318242346*^9}, 
+   3.900916415819272*^9, 3.900919086365479*^9},
  CellLabel->
   "During evaluation of \
-In[1]:=",ExpressionUUID->"8b2cf6a9-2347-4140-8dd6-3a274f8f344e"],
+In[2]:=",ExpressionUUID->"ef134403-5963-4c56-bf74-2148cc570744"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Package QINisq \"\>", "\[InvisibleSpace]", "\<\"0.0.7\"\>", 
+  RowBox[{"\<\"Package QINisq \"\>", "\[InvisibleSpace]", "\<\"0.0.10\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"28/05/2021\"\>", 
+   "\[InvisibleSpace]", "\<\"12/08/2023\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package QINisq ", "0.0.7", " (last modification: ", "28/05/2021", ")."],
+  "Package QINisq ", "0.0.10", " (last modification: ", "12/08/2023", ")."],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.830648219575678*^9, 3.830679441685121*^9, 3.830679558948667*^9, 
@@ -88,126 +108,1014 @@ Cell[BoxData[
    3.831209703304184*^9, 3.8312113069017467`*^9, 3.831212007171606*^9, {
    3.8312121746422043`*^9, 3.83121218903087*^9}, 3.831215149660405*^9, 
    3.831215417421937*^9, 3.831215610826185*^9, 3.8312156511084757`*^9, 
-   3.831218127857135*^9},
+   3.831218127771096*^9, 3.90091449782275*^9, 3.900914858734227*^9, 
+   3.9009148968097754`*^9, 3.900914954635579*^9, 3.900915001087996*^9, {
+   3.9009150461329813`*^9, 3.900915062086294*^9}, 3.90091527239388*^9, {
+   3.900915313331406*^9, 3.900915319514924*^9}, 3.9009153510192127`*^9, 
+   3.900915542422214*^9, {3.900915592986123*^9, 3.9009156344287577`*^9}, 
+   3.900915666976315*^9, 3.9009157018219633`*^9, 3.900916215422501*^9, 
+   3.900916256177553*^9, {3.900916306447404*^9, 3.900916318242346*^9}, 
+   3.900916415819272*^9, 3.900919086426244*^9},
  CellLabel->
   "During evaluation of \
-In[1]:=",ExpressionUUID->"c9939a71-234f-4382-9a9f-46ac956bc96d"]
+In[2]:=",ExpressionUUID->"e68a33fd-e917-4982-8c36-4e75a66bc76c"]
 }, Open  ]]
 }, Open  ]],
 
-Cell[BoxData[{
+Cell[CellGroupData[{
+
+Cell["Basic example", "Section",
+ CellChangeTimes->{{3.9009188503987703`*^9, 
+  3.900918856678707*^9}},ExpressionUUID->"a6866251-818d-4d13-a738-\
+bdc0d14693e8"],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Subsection",
+ CellChangeTimes->{{3.900918840255019*^9, 
+  3.90091887285946*^9}},ExpressionUUID->"71f2c3ad-ca3b-40a1-82a0-\
+1ed2055ff4e8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "InitQC"}]], "Input",
+ CellChangeTimes->{{3.900918901693801*^9, 3.900918901810556*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"01cb6028-71d9-4992-89c1-2f8b06d7a88c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"InitQC[dim] initializes a (virtual) quantum \
+computer with d qubit quantum memory. When necessary, this function will \
+reseted the initilized quantum computer.\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"InitQC", "[", "QINisq`Private`dim_", "]"}], ":=", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{
+                    RowBox[{"Print", "[", 
+                    
+                    RowBox[{"\"[Info] Initializing quantum computer with \"", 
+                    "<>", 
+                    RowBox[{"ToString", "[", "QINisq`Private`dim", "]"}], 
+                    "<>", "\" qubits.\""}], "]"}], ";", 
+                    RowBox[{"Unprotect", "[", "QC", "]"}], ";", 
+                    RowBox[{"QC", "=", 
+                    RowBox[{"{", "QINisq`Private`dim", "}"}]}], ";", 
+                    RowBox[{"Protect", "[", "QC", "]"}], ";"}]}], "]"}]}]}, {
+                   " "}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", "Protected", "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"QINisq`InitQC\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"InitQC[dim] initializes a (virtual) quantum \
+computer with d qubit quantum memory. When necessary, this function will \
+reseted the initilized quantum computer.\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "InitQC[dim] initializes a (virtual) quantum computer with d qubit \
+quantum memory. When necessary, this function will reseted the initilized \
+quantum computer.", "Documentation" -> None, "OwnValues" -> None, "UpValues" -> 
+    None, "DownValues" -> 
+    Information`InformationValueForm[DownValues, QINisq`InitQC, {QINisq`InitQC[
+         Pattern[QINisq`Private`dim, 
+          Blank[]]] :> 
+       Module[{}, 
+         Print["[Info] Initializing quantum computer with " <> 
+           ToString[QINisq`Private`dim] <> " qubits."]; Unprotect[QINisq`QC]; 
+         QINisq`QC = {QINisq`Private`dim}; Protect[QINisq`QC]; Null]}], 
+    "SubValues" -> None, "DefaultValues" -> None, "NValues" -> None, 
+    "FormatValues" -> None, "Options" -> None, "Attributes" -> {Protected}, 
+    "FullName" -> "QINisq`InitQC"|>, False]]], "Output",
+ CellChangeTimes->{3.900918902073905*^9, 3.9009190867649317`*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"e3e45d1b-89cd-4955-852f-6552302d213e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InitQC", "[", "2", "]"}]], "Input",
+ CellChangeTimes->{{3.900914847643667*^9, 3.900914853855339*^9}, {
+  3.900916130153261*^9, 3.900916130883931*^9}, {3.900919124535398*^9, 
+  3.9009191246565933`*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"3e1383ad-0e3f-41b5-a7fa-857bd57af0fa"],
+
+Cell[BoxData["\<\"[Info] Initializing quantum computer with 2 qubits.\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.9009157046879587`*^9, 3.900916131337574*^9, 3.900916218289205*^9, 
+   3.900916259077376*^9, 3.900916321042035*^9, 3.9009164186907997`*^9, 
+   3.90091887422926*^9, 3.900918956250874*^9, 3.900919004253911*^9, 
+   3.900919086822089*^9, {3.900919125991723*^9, 3.900919145521512*^9}},
+ CellLabel->
+  "During evaluation of \
+In[27]:=",ExpressionUUID->"f355cb77-a675-4f37-b3d1-d36a99caab41"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QC", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "QC", " ", "is", " ", "only", " ", "a", " ", "list", " ", "with", " ", 
+    "an", " ", 
+    RowBox[{"integer", "."}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.900915065841433*^9, 3.900915066102703*^9}, {
+  3.900918877599926*^9, 3.900918890215523*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"da9ab51c-5b75-46a7-9ad9-f7d45efd0f74"],
+
+Cell[BoxData[
+ RowBox[{"{", "2", "}"}]], "Output",
+ CellChangeTimes->{
+  3.900915067838381*^9, 3.900915272692524*^9, 3.90091530587171*^9, 
+   3.900915353866884*^9, 3.900916326966457*^9, 3.900916419562354*^9, {
+   3.900918875551362*^9, 3.900918893807516*^9}, 3.900918957142338*^9, 
+   3.900919087514186*^9, {3.90091912603942*^9, 3.9009191463272*^9}},
+ CellLabel->"Out[28]=",ExpressionUUID->"c01252cb-9951-455b-91cb-0e890de4bfcf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "QC"}]], "Input",
+ CellChangeTimes->{{3.900914596746089*^9, 3.900914610129346*^9}, 
+   3.900916342191979*^9, {3.900918892471271*^9, 3.900918895446356*^9}, {
+   3.9009189580162163`*^9, 3.900918958565255*^9}, 3.900919093265169*^9},
+ CellLabel->"In[29]:=",ExpressionUUID->"34ac72e7-85bb-4fa0-9dde-c28b518f3b8d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"QC is a list representing the quantum computer used \
+during the calculations. Its first element is the number of qubits. Next \
+elements are quantum gates, added using Q function. See also: Q\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Assignment\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"OwnValues\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "OwnValues", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{"QC", "=", 
+                    RowBox[{"{", "2", "}"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", "Protected", "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"QINisq`QC\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"QC is a list representing the quantum computer used \
+during the calculations. Its first element is the number of qubits. Next \
+elements are quantum gates, added using Q function. See also: Q\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "QC is a list representing the quantum computer used during the \
+calculations. Its first element is the number of qubits. Next elements are \
+quantum gates, added using Q function. See also: Q", "Documentation" -> None, 
+    "OwnValues" -> 
+    Information`InformationValueForm[
+     OwnValues, QINisq`QC, {QINisq`QC -> {2}}], "UpValues" -> None, 
+    "DownValues" -> None, "SubValues" -> None, "DefaultValues" -> None, 
+    "NValues" -> None, "FormatValues" -> None, "Options" -> None, 
+    "Attributes" -> {Protected}, "FullName" -> "QINisq`QC"|>, 
+   False]]], "Output",
+ CellChangeTimes->{{3.900914597311399*^9, 3.900914610454237*^9}, {
+   3.9009163351089897`*^9, 3.9009163426337013`*^9}, 3.900916420651372*^9, 
+   3.900918896529398*^9, 3.900918959075213*^9, {3.900919088329262*^9, 
+   3.900919146974346*^9}},
+ CellLabel->"Out[29]=",ExpressionUUID->"e4c83fee-a896-4d65-8d97-df5c2a74b27e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Q"}]], "Input",
+ CellChangeTimes->{{3.9009190975526257`*^9, 3.900919097771225*^9}},
+ CellLabel->"In[30]:=",ExpressionUUID->"3ef7ccb1-ea1c-494c-964c-da5e24276a5c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"Q[qg, ops, qc] appends gate qg to the computer qc \
+using options in the ops list. It is expected that the first element of qc \
+list is an integer representing the number of available qubits.\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"Q", "[", 
+                    
+                    RowBox[{
+                    "QINisq`Private`gate_", ",", "QINisq`Private`ops_", ",", 
+                    RowBox[{"QINisq`Private`qc_", ":", "QC"}]}], "]"}], ":=", 
+                    
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{
+                    RowBox[{"Unprotect", "[", "QC", "]"}], ";", 
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"QINisq`Private`qc", ",", 
+                    RowBox[{"{", 
+                    
+                    RowBox[{"QINisq`Private`gate", ",", 
+                    "QINisq`Private`ops"}], "}"}]}], "]"}], ";", 
+                    RowBox[{"Protect", "[", "QC", "]"}], ";"}]}], "]"}]}]}, {
+                   " "}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", 
+                    RowBox[{"HoldAll", ",", "Protected"}], "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"QINisq`Q\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"Q[qg, ops, qc] appends gate qg to the computer qc \
+using options in the ops list. It is expected that the first element of qc \
+list is an integer representing the number of available qubits.\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "Q[qg, ops, qc] appends gate qg to the computer qc using options in the \
+ops list. It is expected that the first element of qc list is an integer \
+representing the number of available qubits.", "Documentation" -> None, 
+    "OwnValues" -> None, "UpValues" -> None, "DownValues" -> 
+    Information`InformationValueForm[DownValues, QINisq`Q, {QINisq`Q[
+         Pattern[QINisq`Private`gate, 
+          Blank[]], 
+         Pattern[QINisq`Private`ops, 
+          Blank[]], 
+         Optional[
+          Pattern[QINisq`Private`qc, 
+           Blank[]], QINisq`QC]] :> 
+       Module[{}, Unprotect[QINisq`QC]; 
+         AppendTo[
+          QINisq`Private`qc, {QINisq`Private`gate, QINisq`Private`ops}]; 
+         Protect[QINisq`QC]; Null]}], "SubValues" -> None, "DefaultValues" -> 
+    None, "NValues" -> None, "FormatValues" -> None, "Options" -> None, 
+    "Attributes" -> {HoldAll, Protected}, "FullName" -> "QINisq`Q"|>, 
+   False]]], "Output",
+ CellChangeTimes->{{3.900919098079945*^9, 3.900919147627122*^9}},
+ CellLabel->"Out[30]=",ExpressionUUID->"9c247aac-2893-4299-9948-63e2fff513b4"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Add some gates and check the state of QC", "Subsection",
+ CellChangeTimes->{{3.9009189782325163`*^9, 
+  3.9009189956492777`*^9}},ExpressionUUID->"50a2fee2-2b55-43bc-945c-\
+415c5937cf2a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{
-  RowBox[{"QC", "=", 
-   RowBox[{"{", "4", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Q", "[", 
-   RowBox[{"CX", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"1", ",", "2"}], "}"}], ",", 
-      RowBox[{"{", "4", "}"}]}], "}"}], ",", "QC"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Q", "[", 
-   RowBox[{"CX", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"2", ",", "1"}], "}"}], ",", 
-      RowBox[{"{", "3", "}"}]}], "}"}], ",", "QC"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Q", "[", 
-   RowBox[{"H", ",", 
-    RowBox[{"{", 
-     RowBox[{"2", ",", "3"}], "}"}], ",", "QC"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Q", "[", 
-   RowBox[{"CX", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"1", ",", "3"}], "}"}], ",", 
-      RowBox[{"{", "4", "}"}]}], "}"}], ",", "QC"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Q", "[", 
-   RowBox[{"H", ",", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", "3"}], "}"}], ",", "QC"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Q", "[", 
-   RowBox[{"S", ",", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", "3"}], "}"}], ",", "QC"}], "]"}], ";"}]}], "Input",
- CellChangeTimes->{{3.8306480915354967`*^9, 3.8306481161272373`*^9}, {
-   3.830648903719302*^9, 3.830648904068596*^9}, {3.830648972938488*^9, 
-   3.8306489752097797`*^9}, {3.83064901686093*^9, 3.8306490187450953`*^9}, {
-   3.830649443934081*^9, 3.830649455979272*^9}, {3.8306794553106318`*^9, 
-   3.830679470388344*^9}, {3.831212016471446*^9, 3.831212060673039*^9}, {
-   3.831212124987002*^9, 3.831212128185568*^9}, {3.831212170002657*^9, 
-   3.8312122161163197`*^9}, 3.8312161555682783`*^9, {3.831216392803774*^9, 
-   3.831216400115048*^9}, 3.8312173260738573`*^9, {3.831217383877124*^9, 
-   3.8312174207490273`*^9}, {3.8312174552887278`*^9, 3.83121745781668*^9}, {
-   3.8312182557092733`*^9, 3.8312182858763933`*^9}, 3.831218354621524*^9, 
-   3.831218414525882*^9},
- CellLabel->"In[53]:=",ExpressionUUID->"729ce1e8-ff47-422d-be6e-2dbc54974935"],
+  RowBox[{"InitQC", "[", "2", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"reset", " ", "the", " ", "computer"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.900919154826818*^9, 3.900919162787797*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"ec4f9424-4913-4bf6-afa4-9736dda004cd"],
+
+Cell[BoxData["\<\"[Info] Initializing quantum computer with 2 qubits.\"\>"], \
+"Print",
+ CellChangeTimes->{3.900919163113007*^9},
+ CellLabel->
+  "During evaluation of \
+In[31]:=",ExpressionUUID->"2ea576a7-7216-46ff-bd12-bd89d184f82f"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Q", "[", 
+  RowBox[{"H", ",", 
+   RowBox[{"{", "1", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.900918929836154*^9, 3.9009189618327723`*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"d3e3c7a2-61c4-4c66-826e-26add444b2e8"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["QC"], "Input",
- CellChangeTimes->{{3.830649459176606*^9, 3.830649459339308*^9}},
- CellLabel->"In[60]:=",ExpressionUUID->"e325382c-59ea-476b-aa61-b3a06d96d8f9"],
+ CellChangeTimes->{{3.900918942000074*^9, 3.90091894220151*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"38b4299d-33c3-45a7-a2e0-020d7de1d4df"],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"4", ",", 
-   RowBox[{"{", 
-    RowBox[{"CX", ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", "2"}], "}"}], ",", 
-       RowBox[{"{", "4", "}"}]}], "}"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"CX", ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"2", ",", "1"}], "}"}], ",", 
-       RowBox[{"{", "3", "}"}]}], "}"}]}], "}"}], ",", 
+  RowBox[{"2", ",", 
    RowBox[{"{", 
     RowBox[{"H", ",", 
-     RowBox[{"{", 
-      RowBox[{"2", ",", "3"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.9009189436315823`*^9, 3.900918963224216*^9}, 
+   3.900918999780731*^9, 3.900919065559366*^9, {3.900919103520255*^9, 
+   3.900919129135818*^9}, 3.900919164979313*^9},
+ CellLabel->"Out[33]=",ExpressionUUID->"1e70d7b4-4e9a-4f7a-a47f-3c18d0eef42f"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Q", "[", 
+  RowBox[{"CX", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "2", "}"}], ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.900918969918579*^9, 3.900918970011299*^9}, {
+  3.900919105164275*^9, 3.9009191395338163`*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"8a8b5e2a-1565-49c4-a0d7-08eebbb8c0ec"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["QC"], "Input",
+ CellChangeTimes->{{3.9009189722624073`*^9, 3.900918972439103*^9}},
+ CellLabel->"In[35]:=",ExpressionUUID->"38b0d651-c496-4481-8a3d-1c1a176e663b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", 
+   RowBox[{"{", 
+    RowBox[{"H", ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"CX", ",", 
      RowBox[{"{", 
       RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", "3"}], "}"}], ",", 
-       RowBox[{"{", "4", "}"}]}], "}"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"H", ",", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", "3"}], "}"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"S", ",", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", "3"}], "}"}]}], "}"}]}], "}"}]], "Output",
+       RowBox[{"{", "2", "}"}], ",", 
+       RowBox[{"{", "1", "}"}]}], "}"}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{
-  3.830649459671563*^9, {3.830679446918573*^9, 3.830679486060658*^9}, 
-   3.830954556246695*^9, 3.8312097164683943`*^9, {3.831212033439034*^9, 
-   3.831212134852706*^9}, {3.831212178093989*^9, 3.831212226346838*^9}, 
-   3.831215153301108*^9, 3.8312154208786383`*^9, 3.831216158597622*^9, 
-   3.831216404186651*^9, 3.831217327351259*^9, {3.831217386803145*^9, 
-   3.83121742230792*^9}, 3.831217459755603*^9, {3.831218108785638*^9, 
-   3.831218131071966*^9}, 3.831218290217794*^9, {3.831218356241962*^9, 
-   3.831218383074761*^9}, 3.831218415741238*^9},
- CellLabel->"Out[60]=",ExpressionUUID->"c1b5d423-e6cf-4355-a430-ef00a3085961"]
+  3.900918974077173*^9, 3.9009190669264097`*^9, {3.9009191152515078`*^9, 
+   3.900919166241726*^9}},
+ CellLabel->"Out[35]=",ExpressionUUID->"61dd5d28-be38-4925-a071-0b033ed21f86"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -215,255 +1123,25 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"QRun", "[", "QC", "]"}]], "Input",
  CellChangeTimes->{{3.831218110231072*^9, 3.831218115942346*^9}},
- CellLabel->"In[62]:=",ExpressionUUID->"1a1124c1-6cfd-4b17-b3cf-189cb7baf5f6"],
+ CellLabel->"In[36]:=",ExpressionUUID->"1a1124c1-6cfd-4b17-b3cf-189cb7baf5f6"],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
      {
-      FractionBox["1", "2"], "0", "0", "0", 
-      FractionBox["1", "2"], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0"},
-     {"0", 
-      FractionBox["1", "2"], "0", "0", "0", 
-      FractionBox["1", "2"], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0"},
-     {"0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0"},
-     {"0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}]},
-     {
-      FractionBox["1", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "2"]}], "0", "0", "0"},
-     {"0", 
-      FractionBox["1", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "2"]}], "0", "0"},
-     {"0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "2"]}], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0", "0", "0", 
+      FractionBox["1", "2"], "0", 
       FractionBox["1", "2"], "0"},
-     {"0", "0", "0", 
-      FractionBox["\[ImaginaryI]", "2"], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "2"]}], "0", "0", "0", 
-      RowBox[{"-", 
-       FractionBox["1", "2"]}], "0", "0", "0", 
+     {"0", 
+      FractionBox["1", "2"], "0", 
       FractionBox["1", "2"]},
      {
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
+      FractionBox["1", "2"], "0", 
       RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
+       FractionBox["1", "2"]}], "0"},
+     {"0", 
       RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}]},
-     {
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"]},
-     {
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"]},
-     {
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"]},
-     {
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}]},
-     {
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}]},
-     {
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}]},
-     {
-      FractionBox["1", "4"], 
-      FractionBox["1", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      RowBox[{"-", 
-       FractionBox["\[ImaginaryI]", "4"]}], 
-      FractionBox["1", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      FractionBox["\[ImaginaryI]", "4"], 
-      RowBox[{"-", 
-       FractionBox["1", "4"]}], 
-      FractionBox["1", "4"]}
+       FractionBox["1", "2"]}], "0", 
+      FractionBox["1", "2"]}
     },
     GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
     GridBoxSpacings->{"Columns" -> {
@@ -477,8 +1155,309 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{{3.83121811270082*^9, 3.831218131789515*^9}, 
    3.831218260032672*^9, 3.831218294290509*^9, {3.831218359219941*^9, 
-   3.8312183856767387`*^9}, 3.831218420876552*^9},
- CellLabel->"Out[62]=",ExpressionUUID->"daeead5a-17e2-4d02-9b22-dd74bad6f9f9"]
+   3.8312183856767387`*^9}, 3.831218420876552*^9, 3.900914506782385*^9, {
+   3.9009145503452168`*^9, 3.900914558922607*^9}, {3.900916599915681*^9, 
+   3.900916661596972*^9}, {3.900919061934112*^9, 3.900919067642892*^9}, {
+   3.900919119929796*^9, 3.900919166918495*^9}},
+ CellLabel->"Out[36]=",ExpressionUUID->"7300f77a-13dd-4913-9fda-5b72b63b6221"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "RunCGate"}]], "Input",
+ CellChangeTimes->{{3.9009191801916037`*^9, 3.900919180324294*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"351e38d7-f671-4087-aa8d-cb3780ca9e5c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"RunCGate[g,ops,q] runs controlled gate g with \
+control and target qubits specified in ops on a system with q qubits.\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"RunCGate", "[", 
+                    
+                    RowBox[{
+                    "QINisq`Private`g_", ",", "QINisq`Private`ops_", ",", 
+                    "QINisq`Private`qdim_"}], "]"}], ":=", 
+                    RowBox[{"ToExpression", "[", 
+                    RowBox[{
+                    
+                    RowBox[{
+                    "StringTemplate", "[", "\"`OP`[`ctrl`,`targ`,`qdim`]\"", 
+                    "]"}], "[", 
+                    RowBox[{"Association", "[", 
+                    RowBox[{
+                    RowBox[{"\"OP\"", "\[Rule]", "QINisq`Private`g"}], ",", 
+                    RowBox[{"\"ctrl\"", "\[Rule]", 
+                    
+                    RowBox[{"QINisq`Private`ops", "\[LeftDoubleBracket]", "1",
+                     "\[RightDoubleBracket]"}]}], ",", 
+                    RowBox[{"\"targ\"", "\[Rule]", 
+                    
+                    RowBox[{"QINisq`Private`ops", "\[LeftDoubleBracket]", "2",
+                     "\[RightDoubleBracket]"}]}], ",", 
+                    RowBox[{"\"qdim\"", "\[Rule]", "QINisq`Private`qdim"}]}], 
+                    "]"}], "]"}], "]"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", "Protected", "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"QINisq`RunCGate\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"RunCGate[g,ops,q] runs controlled gate g with \
+control and target qubits specified in ops on a system with q qubits.\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "RunCGate[g,ops,q] runs controlled gate g with control and target qubits \
+specified in ops on a system with q qubits.", "Documentation" -> None, 
+    "OwnValues" -> None, "UpValues" -> None, "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, QINisq`RunCGate, {QINisq`RunCGate[
+         Pattern[QINisq`Private`g, 
+          Blank[]], 
+         Pattern[QINisq`Private`ops, 
+          Blank[]], 
+         Pattern[QINisq`Private`qdim, 
+          Blank[]]] :> ToExpression[
+         StringTemplate[
+         "`OP`[`ctrl`,`targ`,`qdim`]"][<|
+          "OP" -> QINisq`Private`g, "ctrl" -> Part[QINisq`Private`ops, 1], 
+           "targ" -> Part[QINisq`Private`ops, 2], "qdim" -> 
+           QINisq`Private`qdim|>]]}], "SubValues" -> None, "DefaultValues" -> 
+    None, "NValues" -> None, "FormatValues" -> None, "Options" -> None, 
+    "Attributes" -> {Protected}, "FullName" -> "QINisq`RunCGate"|>, 
+   False]]], "Output",
+ CellChangeTimes->{3.900919180568137*^9},
+ CellLabel->"Out[38]=",ExpressionUUID->"3520cf99-aa02-40fc-8db2-1ef9f0ea432c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -496,7 +1475,7 @@ Cell[BoxData[
   3.831215061435135*^9}, {3.831215179270014*^9, 3.831215317259536*^9}, {
   3.831215431797662*^9, 3.83121543575445*^9}, {3.83121563136751*^9, 
   3.831215633211541*^9}, {3.831215681309883*^9, 3.8312156880035667`*^9}},
- CellLabel->"In[63]:=",ExpressionUUID->"4266e4a8-f2f3-475b-b14d-76be10f7ff11"],
+ CellLabel->"In[37]:=",ExpressionUUID->"4266e4a8-f2f3-475b-b14d-76be10f7ff11"],
 
 Cell[BoxData[
  TagBox[
@@ -526,13 +1505,16 @@ Cell[BoxData[
    3.831215061873019*^9, 3.831215113866665*^9}, {3.831215172866596*^9, 
    3.831215317528831*^9}, {3.831215428494216*^9, 3.831215436396174*^9}, 
    3.8312155372076607`*^9, {3.8312156133046513`*^9, 3.831215700608865*^9}, 
-   3.831215761327734*^9, 3.831218136623143*^9, 3.83121842393684*^9},
- CellLabel->"Out[63]=",ExpressionUUID->"18e14ec3-318d-4547-84bb-522dd082a224"]
+   3.831215761327734*^9, 3.831218136623143*^9, 3.83121842393684*^9, 
+   3.9009145128968973`*^9, 3.900916638439845*^9, 3.900919170572176*^9},
+ CellLabel->"Out[37]=",ExpressionUUID->"c3e8b68b-374e-4feb-9de4-76d86715f699"]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 },
 WindowSize->{920.25, 750.},
-WindowMargins->{{Automatic, 300.75}, {128.25, Automatic}},
-FrontEndVersion->"12.3 for Linux x86 (64-bit) (May 11, 2021)",
+WindowMargins->{{Automatic, 208.5}, {-38.25, Automatic}},
+FrontEndVersion->"13.1 for Linux x86 (64-bit) (June 16, 2022)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"c01ed19b-26cd-4fa7-9085-5d62099eacda"
 ]
@@ -547,26 +1529,69 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[558, 20, 220, 4, 29, "Input",ExpressionUUID->"a7b7252b-3cf6-419d-92cd-b6c17f30d726"],
 Cell[CellGroupData[{
-Cell[580, 22, 197, 3, 29, "Input",ExpressionUUID->"61794e45-23fc-4928-9626-8e927de93aee"],
+Cell[803, 28, 197, 3, 29, "Input",ExpressionUUID->"61794e45-23fc-4928-9626-8e927de93aee"],
 Cell[CellGroupData[{
-Cell[802, 29, 971, 21, 23, "Print",ExpressionUUID->"77d6fa4e-dfc3-4bca-8c1a-538357ca68f1"],
-Cell[1776, 52, 962, 20, 23, "Print",ExpressionUUID->"8b2cf6a9-2347-4140-8dd6-3a274f8f344e"],
-Cell[2741, 74, 953, 19, 23, "Print",ExpressionUUID->"c9939a71-234f-4382-9a9f-46ac956bc96d"]
+Cell[1025, 35, 1499, 28, 25, "Print",ExpressionUUID->"791fb7e5-8891-44d4-b3ca-704db433f72c"],
+Cell[2527, 65, 1490, 27, 25, "Print",ExpressionUUID->"ef134403-5963-4c56-bf74-2148cc570744"],
+Cell[4020, 94, 1483, 26, 25, "Print",ExpressionUUID->"e68a33fd-e917-4982-8c36-4e75a66bc76c"]
 }, Open  ]]
 }, Open  ]],
-Cell[3721, 97, 2159, 59, 154, "Input",ExpressionUUID->"729ce1e8-ff47-422d-be6e-2dbc54974935"],
 Cell[CellGroupData[{
-Cell[5905, 160, 173, 2, 29, "Input",ExpressionUUID->"e325382c-59ea-476b-aa61-b3a06d96d8f9"],
-Cell[6081, 164, 1644, 45, 33, "Output",ExpressionUUID->"c1b5d423-e6cf-4355-a430-ef00a3085961"]
+Cell[5552, 126, 160, 3, 68, "Section",ExpressionUUID->"a6866251-818d-4d13-a738-bdc0d14693e8"],
+Cell[CellGroupData[{
+Cell[5737, 133, 161, 3, 54, "Subsection",ExpressionUUID->"71f2c3ad-ca3b-40a1-82a0-1ed2055ff4e8"],
+Cell[CellGroupData[{
+Cell[5923, 140, 193, 3, 29, "Input",ExpressionUUID->"01cb6028-71d9-4992-89c1-2f8b06d7a88c"],
+Cell[6119, 145, 11307, 274, 116, "Output",ExpressionUUID->"e3e45d1b-89cd-4955-852f-6552302d213e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7762, 214, 203, 3, 29, "Input",ExpressionUUID->"1a1124c1-6cfd-4b17-b3cf-189cb7baf5f6"],
-Cell[7968, 219, 8630, 261, 416, "Output",ExpressionUUID->"daeead5a-17e2-4d02-9b22-dd74bad6f9f9"]
+Cell[17463, 424, 304, 5, 29, "Input",ExpressionUUID->"3e1383ad-0e3f-41b5-a7fa-857bd57af0fa"],
+Cell[17770, 431, 496, 9, 25, "Print",ExpressionUUID->"f355cb77-a675-4f37-b3d1-d36a99caab41"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16635, 485, 660, 13, 29, "Input",ExpressionUUID->"4266e4a8-f2f3-475b-b14d-76be10f7ff11"],
-Cell[17298, 500, 1381, 29, 151, "Output",ExpressionUUID->"18e14ec3-318d-4547-84bb-522dd082a224"]
+Cell[18303, 445, 410, 9, 32, "Input",ExpressionUUID->"da9ab51c-5b75-46a7-9ad9-f7d45efd0f74"],
+Cell[18716, 456, 428, 7, 33, "Output",ExpressionUUID->"c01252cb-9951-455b-91cb-0e890de4bfcf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19181, 468, 336, 5, 29, "Input",ExpressionUUID->"34ac72e7-85bb-4fa0-9dde-c28b518f3b8d"],
+Cell[19520, 475, 10581, 261, 116, "Output",ExpressionUUID->"e4c83fee-a896-4d65-8d97-df5c2a74b27e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30138, 741, 191, 3, 29, "Input",ExpressionUUID->"3ef7ccb1-ea1c-494c-964c-da5e24276a5c"],
+Cell[30332, 746, 11607, 285, 116, "Output",ExpressionUUID->"9c247aac-2893-4299-9948-63e2fff513b4"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41988, 1037, 192, 3, 54, "Subsection",ExpressionUUID->"50a2fee2-2b55-43bc-945c-415c5937cf2a"],
+Cell[CellGroupData[{
+Cell[42205, 1044, 304, 6, 32, "Input",ExpressionUUID->"ec4f9424-4913-4bf6-afa4-9736dda004cd"],
+Cell[42512, 1052, 234, 5, 25, "Print",ExpressionUUID->"2ea576a7-7216-46ff-bd12-bd89d184f82f"]
+}, Open  ]],
+Cell[42761, 1060, 248, 5, 29, "Input",ExpressionUUID->"d3e3c7a2-61c4-4c66-826e-26add444b2e8"],
+Cell[CellGroupData[{
+Cell[43034, 1069, 172, 2, 29, "Input",ExpressionUUID->"38b4299d-33c3-45a7-a2e0-020d7de1d4df"],
+Cell[43209, 1073, 415, 9, 33, "Output",ExpressionUUID->"1e70d7b4-4e9a-4f7a-a47f-3c18d0eef42f"]
+}, Open  ]],
+Cell[43639, 1085, 375, 9, 29, "Input",ExpressionUUID->"8a8b5e2a-1565-49c4-a0d7-08eebbb8c0ec"],
+Cell[CellGroupData[{
+Cell[44039, 1098, 175, 2, 29, "Input",ExpressionUUID->"38b0d651-c496-4481-8a3d-1c1a176e663b"],
+Cell[44217, 1102, 517, 15, 33, "Output",ExpressionUUID->"61dd5d28-be38-4925-a071-0b033ed21f86"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44771, 1122, 203, 3, 29, "Input",ExpressionUUID->"1a1124c1-6cfd-4b17-b3cf-189cb7baf5f6"],
+Cell[44977, 1127, 1288, 34, 114, "Output",ExpressionUUID->"7300f77a-13dd-4913-9fda-5b72b63b6221"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46302, 1166, 198, 3, 29, "Input",ExpressionUUID->"351e38d7-f671-4087-aa8d-cb3780ca9e5c"],
+Cell[46503, 1171, 11714, 288, 92, "Output",ExpressionUUID->"3520cf99-aa02-40fc-8db2-1ef9f0ea432c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58254, 1464, 660, 13, 29, "Input",ExpressionUUID->"4266e4a8-f2f3-475b-b14d-76be10f7ff11"],
+Cell[58917, 1479, 1453, 30, 151, "Output",ExpressionUUID->"c3e8b68b-374e-4feb-9de4-76d86715f699"]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 }
 ]
