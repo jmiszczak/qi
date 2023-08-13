@@ -72,13 +72,19 @@ CZ::usage = "CX[c,t,qdim] generalized controlled sz. See CX usage for more detai
 (*Quantum computer*)
 
 
+QC::usage = "QC is a list representing the quantum computer used during the calculations. Its first element is the number of qubits. Next elements are quantum gates, added using Q function. See also: Q";
+
+
+InitQC::usage = "InitQC[dim] initializes a (virtual) quantum computer with d qubit quantum memory. When necessary, this function will reseted the initilized quantum computer.";
+
+
 Q::usage = "Q[qg, ops, qc] appends gate qg to the computer qc using options in the ops list. It is expected that the first element of qc list is an integer representing the number of available qubits.";
 
 
 RunGate::usage = "RunGate[g,t,q] executes one-qubit operation operation g on qubits listed in t on the register of q qubits.";
 
 
-RunCGate::usage = "RunCGate[g,ops,q] runs controlled gate c with control and target qubits specified in ops on a system with q qubits.";
+RunCGate::usage = "RunCGate[g,ops,q] runs controlled gate g with control and target qubits specified in ops on a system with q qubits.";
 
 
 QRun::usage = "QRun[qc] runs a simulation of the intructions in the list of gates, using the information about the paramters and the size of the computer qc.";
@@ -121,7 +127,8 @@ qiNisqHistory = {
 	{"0.0.6", "25/05/2021", "Jarek", "Added template for function managing virtual quantum devices."},
 	{"0.0.7", "28/05/2021", "Jarek", "Added function for extending one-qubit-gates and functions for executing non-parametric one-qubit gates and controlled gates."},
 	{"0.0.8", "22/01/2023", "Jarek", "Updated description. Minor in usage messages."},
-	{"0.0.9", "12/02/2023", "Jarek", "Minor update: description, usage messages."}
+	{"0.0.9", "12/02/2023", "Jarek", "Minor update: description, usage messages."},
+	{"0.0.10", "12/08/2023", "Jarek", "Better quantum computer initilization and management, fixed H gate, minor in usage messages."}
 };  
 
 
@@ -153,13 +160,13 @@ S[] = MatrixPower[sz,1/2];
 T[] = MatrixPower[sz,1/4];
 
 
-H[] = wh;
+H[] = 1/2 wh;
 
 
 RXP[phi_,theta_]:={ {Cos[theta/2], -I Sin[theta/2] Exp[-I phi]}, {-I Sin[theta/2] Exp[I phi], Cos[theta/2]} };
 
 
-toffoli = Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]]\[CircleTimes]sx + (Id[4]-Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]])\[CircleTimes]id;
+Toff = Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]]\[CircleTimes]sx + (Id[4]-Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]])\[CircleTimes]id;
 
 
 XX[theta_]:=Cos[theta](Id[2]\[CircleTimes]Id[2])-I Sin[theta](sx\[CircleTimes]sx);
@@ -204,7 +211,20 @@ CZ[c_,t_,qdim_]:=CGate[sz, Flatten[{c}], Flatten[{t}],qdim];
 (*Quantum computer*)
 
 
-Q[gate_,ops_,qc_]:=AppendTo[qc,{gate,ops}];
+InitQC[dim_]:=Module[{}, 
+	Print["[Info] Initializing quantum computer with " <> ToString[dim] <> " qubits."];
+	Unprotect[QC];
+	QC={dim};
+	Protect[QC];
+];
+
+
+Q[gate_,ops_,qc_:QC]:=
+Module[{}, 
+	Unprotect[QC];
+	AppendTo[qc,{gate,ops}];
+	Protect[QC];
+];
 SetAttributes[Q,HoldAll];
 
 
@@ -261,6 +281,3 @@ End[] (* End Private Context *)
 Protect@@Names["QINisq`*"]
 
 EndPackage[]
-
-
-
