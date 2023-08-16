@@ -29,10 +29,10 @@ Clear@@Names["QINisq`*" ]
 RX::usage = "RX[theta] one-qubit rotation wrt X axis.";
 
 
-RY::usage = "RX[theta] one-qubit rotation wrt Y axis.";
+RY::usage = "RY[theta] one-qubit rotation wrt Y axis.";
 
 
-RZ::usage = "RX[theta] one-qubit rotation wrt Z axis.";
+RZ::usage = "RZ[theta] one-qubit rotation wrt Z axis.";
 
 
 RXP::usage = "PXR[phi, theta] one-qubit rotation of the Bloch vector by an angle theta, where phi is the angle between the rotation axis and the X axis.";
@@ -47,25 +47,25 @@ T::usage = "T[] = RZ[pi/4]";
 H::usage = "H[] = Hadamard gate. Defined usin wh.";
 
 
-Toff::usage = "Toff[] = Toffoli/controlled-controlled-not gate.";
+Toff::usage = "Toff[] returns Toffoli, or controlled-controlled-not, gate.";
 
 
-XX::usage = "Ising gate with parameter \[Theta].";
+XX::usage = "XX[\[Theta]] Ising gate with parameter \[Theta].";
 
 
 Gate::usage = "Gate[g,t,q] returns quantum gate applied on systems specified in list t, on the computer with q qubits.";
 
 
-CGate::usage = "CGate[g,c,t,q] returns controlled version of one-qubit gate g with control qubits c and target qubits q, acring on q qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
+CGate::usage = "CGate[g,c,t,q] returns controlled version of one-qubit gate g with control qubits c and target qubits q, acting on q qubits. Please note that currently this function does not check if the dimensions are appropriate and qubits specification do not overlap.";
 
 
 CX::usage = "CX[c,t,qdim] generalized controlled not operation with control qubits c and target qubits t, acting on qdim qubits. Please note that this function does not check of the dimensions are appropriate and qubits specification do not overlap.";
 
 
-CY::usage = "CX[c,t,qdim] generalized controlled sy. See CX usage for more details.";
+CY::usage = "CY[c,t,qdim] generalized controlled sy. See CX usage for more details.";
 
 
-CZ::usage = "CX[c,t,qdim] generalized controlled sz. See CX usage for more details.";
+CZ::usage = "CZ[c,t,qdim] generalized controlled sz. See CX usage for more details.";
 
 
 (* ::Subsection:: *)
@@ -128,7 +128,8 @@ qiNisqHistory = {
 	{"0.0.7", "28/05/2021", "Jarek", "Added function for extending one-qubit-gates and functions for executing non-parametric one-qubit gates and controlled gates."},
 	{"0.0.8", "22/01/2023", "Jarek", "Updated description. Minor in usage messages."},
 	{"0.0.9", "12/02/2023", "Jarek", "Minor update: description, usage messages."},
-	{"0.0.10", "12/08/2023", "Jarek", "Better quantum computer initilization and management, fixed H gate, minor in usage messages."}
+	{"0.0.10", "12/08/2023", "Jarek", "Better quantum computer initilization and management, fixed H gate, minor in usage messages."},
+	{"0.0.11", "16/08/2023", "Jarek", "Fixed some usage messages."}
 };  
 
 
