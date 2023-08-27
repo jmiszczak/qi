@@ -174,7 +174,9 @@ QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy o
 (*Distribution of eigenvalues*)
 
 
+If[$VersionNumber < 13.2,
 VandermondeMatrix::usage = "VandermondeMatrix[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBox[\"x\", \"n\"]\)}] - Vandermonde matrix for variables (\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)).";
+]
 
 
 ProdSum::usage = "ProdSum[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...,\!\(\*SubscriptBox[\"x\", \"n\"]\)}] gives \!\(\*SubsuperscriptBox[\"\[Product]\", 
@@ -252,7 +254,8 @@ qiExtrasHistory = {
 	{"0.0.10", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
 	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities."},
 	{"0.0.12", "12/04/2021", "Jarek", "Truncated fidelities moved to a new subpackage."},
-	{"0.0.13", "12/02/2023", "Jarek", "Documentation improvements."}
+	{"0.0.13", "12/02/2023", "Jarek", "Documentation improvements."},
+	{"0.0.14", "27/08/2023", "Jarek", "Fixed compatability of VandermondeMatrix (defined in Mathematica 13.2)."}
 };  
 
 
@@ -265,7 +268,7 @@ qiExtrasLastModification = Last[qiExtrasHistory][[2]];
 qiExtrasAbout = "QIExtras is a package of functions for Mathematica computer algebra system, extending the functionality of QI package.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Common matrices*)
 
 
@@ -479,7 +482,7 @@ QuantumChannelEntropy[ch_List]:=QuantumEntropy[Jamiolkowski[ch]];
 QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun,dim]];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Distribution of eigenvalues*)
 
 
@@ -489,7 +492,9 @@ QuantumChannelEntropy[fun_Function,dim_Integer]:=QuantumEntropy[Jamiolkowski[fun
 ]; 
 
 
-VandermondeMatrix[l_]:=Table[Table[l[[j]]^i,{i,0,Length[l]-1}],{j,1,Length[l]}];
+If[$VersionNumber < 13.2,
+	VandermondeMatrix[l_]:=Table[Table[l[[j]]^i,{i,0,Length[l]-1}],{j,1,Length[l]}];
+	];
 
 
 ProdSum[l_]:=Times@@Flatten[Table[Table[l[[i]] + l[[j]], {i, 1, j - 1}], {j, 2, Length[l]}]];
