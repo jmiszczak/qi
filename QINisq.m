@@ -6,7 +6,7 @@
 
 (* File: QINisq.m *)
 (* Description: Mathematica package for developing code for NISQ computers. *)
-(* Authors: Jaroslaw Miszczak <miszczak@iitis.pl> *)
+(* Authors: Jaroslaw Miszczak <jarek@miszczak.eu> *)
 (* License: GPLv3 *)
 
 
@@ -44,7 +44,7 @@ S::usage = "S[] = RZ[pi/2]";
 T::usage = "T[] = RZ[pi/4]";
 
 
-H::usage = "H[] = Hadamard gate. Defined usin wh.";
+H::usage = "H[] = Hadamard gate. Defined using wh.";
 
 
 Toff::usage = "Toff[] returns Toffoli, or controlled-controlled-not, gate.";
@@ -72,13 +72,13 @@ CZ::usage = "CZ[c,t,qdim] generalized controlled sz. See CX usage for more detai
 (*Quantum computer*)
 
 
-QC::usage = "QC is a list representing the quantum computer used during the calculations. Its first element is the number of qubits. Next elements are quantum gates, added using Q function. See also: Q";
+QC::usage = "QC is the default list representing the quantum computer used during the calculations. Its first element is the number of qubits. Next elements are quantum gates, added using Q function. QC is initialized and reset using InitQC. See also: Q, InitQC.";
 
 
-InitQC::usage = "InitQC[dim] initializes a (virtual) quantum computer with d qubit quantum memory. When necessary, this function will reseted the initilized quantum computer.";
+InitQC::usage = "InitQC[qdim,name] initializes a (virtual) quantum computer with qdim qubits of quantum memory. The name ncan be specified to create a quantum coputer with a nono-default name. When necessary, this function will resete the initilized quantum computer.";
 
 
-Q::usage = "Q[qg, ops, qc] appends gate qg to the computer qc using options in the ops list. It is expected that the first element of qc list is an integer representing the number of available qubits.";
+Q::usage = "Q[qg, ops, qc] is used to change the instructions for the quantum computer. Itappends gate qg to the computer qc using options in the ops list. It is expected that the first element of qc list is an integer representing the number of available qubits.";
 
 
 RunGate::usage = "RunGate[g,t,q] executes one-qubit operation operation g on qubits listed in t on the register of q qubits.";
@@ -111,7 +111,7 @@ QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!
 (*Internal functions (without usage strings)*)
 
 
-qiNisqAuthors = "Jaroslaw Miszczak <miszczak[at]iitis[dot]pl>";
+qiNisqAuthors = "Jaroslaw Miszczak <jarek[at]miszczak[dot]eu>";
 
 
 qiNisqLicense = "GPLv3 <http://www.gnu.org/licenses/gpl.html>";
@@ -129,7 +129,8 @@ qiNisqHistory = {
 	{"0.0.8", "22/01/2023", "Jarek", "Updated description. Minor in usage messages."},
 	{"0.0.9", "12/02/2023", "Jarek", "Minor update: description, usage messages."},
 	{"0.0.10", "12/08/2023", "Jarek", "Better quantum computer initilization and management, fixed H gate, minor in usage messages."},
-	{"0.0.11", "16/08/2023", "Jarek", "Fixed some usage messages."}
+	{"0.0.11", "16/08/2023", "Jarek", "Fixed some usage messages."},
+	{"0.0.12", "21/09/2023", "Jarek", "Improved demo file. Improved usage messages."}
 };  
 
 
@@ -212,7 +213,7 @@ CZ[c_,t_,qdim_]:=CGate[sz, Flatten[{c}], Flatten[{t}],qdim];
 (*Quantum computer*)
 
 
-InitQC[dim_]:=Module[{}, 
+InitQC[dim_,name_:QC]:=Module[{}, 
 	Print["[Info] Initializing quantum computer with " <> ToString[dim] <> " qubits."];
 	Unprotect[QC];
 	QC={dim};
