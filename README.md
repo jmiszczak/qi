@@ -10,7 +10,7 @@ QI is a package for Mathematica computer algebra system developed to support sym
 
 ## Usage
 
-Package funcionality is defined in `QI.m`, `QIExtras.m`, `QINisq`, and `QIWalks` files, whish should be placed in `Applications` subdirectory in `.Mathematica` directory (on Unix-based systems).
+Package funcionality is defined in `QI.m`, `QIExtras.m`, `QINisq.m`, and `QIWalks.m` files, whish should be placed in `Applications` subdirectory in `.Mathematica` directory (on Unix-based systems).
 
 The main package can be loaded
 ```
