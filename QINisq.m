@@ -75,19 +75,28 @@ CZ::usage = "CZ[c,t,qdim] generalized controlled sz. See CX usage for more detai
 QC::usage = "QC is the default list representing the quantum computer used during the calculations. Its first element is the number of qubits. Next elements are quantum gates, added using Q function. QC is initialized and reset using InitQC. See also: Q, InitQC.";
 
 
-InitQC::usage = "InitQC[qdim,name] initializes a (virtual) quantum computer with qdim qubits of quantum memory. The name ncan be specified to create a quantum coputer with a nono-default name. When necessary, this function will resete the initilized quantum computer.";
+InitQC::usage = "InitQC[qdim,name] initializes a (virtual) quantum computer with qdim qubits of quantum memory. The name can be specified to create a quantum computer with a nono-default name. When necessary, this function will resete the initilized quantum computer.";
 
 
-Q::usage = "Q[qg, ops, qc] is used to change the instructions for the quantum computer. Itappends gate qg to the computer qc using options in the ops list. It is expected that the first element of qc list is an integer representing the number of available qubits.";
+Q::usage = "Q[g, ops, qc] is used to change the instructions for the quantum computer. It appends gate g to the computer qc using options in the ops list. It is expected that the first element of qc list is an integer representing the number of available qubits.";
 
 
-RunGate::usage = "RunGate[g,t,q] executes one-qubit operation operation g on qubits listed in t on the register of q qubits.";
+QRunGate::usage = "QRunGate[g,t,q] executes one-qubit operation g on each qubit listed in list t, using the register consisting of q qubits. This function is used internally for running the curcuits.";
 
 
-RunCGate::usage = "RunCGate[g,ops,q] runs controlled gate g with control and target qubits specified in ops on a system with q qubits.";
+QRunCGate::usage = "QRunCGate[g,ops,q] runs controlled gate g with control and target qubits specified in ops on a system with q qubits. This function is used internally for running the curcuits.";
 
 
-QRun::usage = "QRun[qc] runs a simulation of the intructions in the list of gates, using the information about the paramters and the size of the computer qc.";
+QRun::usage = "QRun[qc] runs a simulation of the intructions in the list of gates, using the information about the paramters and the size of the computer qc. This function is used internally for running the curcuits.";
+
+
+QTransGate::usage = "QRunCGate[g,ops,q] transpiles gate g on q qubits with options in ops into an alternative representation tgr.";
+
+
+QTransCGate::usage = "QRunCGate[g,ops,q,tgr] transpiles controlled gate g on q qubits with options in ops into an alternative representation tgr.";
+
+
+QTrans::usage = "QTrans[qc,tgr] displays the list of opertions transpiled into the tgr target.";
 
 
 (* ::Subsection:: *)
@@ -103,7 +112,7 @@ TruncatedFidelity::usage = "<f>TruncatedFidelity</f>[<v>r, s ,m, d</v>] returns 
 
 Begin["`Private`"] (* Begin Private Context *) 
 
-QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} 
+QIDocRep = {"<v>" -> "\!\(\*StyleBox[\"" , "</v>" -> "\", \"TI\"]\)", "<f>"->"\!\(\*StyleBox[\"", "</f>" -> "\", \"Input\"]\)", "<s>" -> "", "</s>" -> ""} ;
 (MessageName[Evaluate[ToExpression[#]], "usage"] = StringReplace[MessageName[Evaluate[ToExpression[#]], "usage"],QIDocRep])& /@ Names["QINisq`*"];
 
 
@@ -130,7 +139,8 @@ qiNisqHistory = {
 	{"0.0.9", "12/02/2023", "Jarek", "Minor update: description, usage messages."},
 	{"0.0.10", "12/08/2023", "Jarek", "Better quantum computer initilization and management, fixed H gate, minor in usage messages."},
 	{"0.0.11", "16/08/2023", "Jarek", "Fixed some usage messages."},
-	{"0.0.12", "21/09/2023", "Jarek", "Improved demo file. Improved usage messages."}
+	{"0.0.12", "21/09/2023", "Jarek", "Improved demo file. Improved usage messages."},
+	{"0.0.13", "18/10/2023", "Jarek", "Started transpilsation, some refactoring, extended usage messages."}
 };  
 
 
@@ -174,7 +184,7 @@ Toff = Proj[Ket[1,2]]\[CircleTimes]Proj[Ket[1,2]]\[CircleTimes]sx + (Id[4]-Proj[
 XX[theta_]:=Cos[theta](Id[2]\[CircleTimes]Id[2])-I Sin[theta](sx\[CircleTimes]sx);
 
 
-Gate[op_,targ_,qdim_]:=Block[{res},
+Gate[op_,targ_,qdim_]:=Block[{res, id},
 	res =Table[id,{qdim}];
 	res[[Flatten[{targ}]]] = Table[op,{Flatten[{targ}]}];
 	KroneckerProduct@@res
@@ -230,7 +240,7 @@ Module[{},
 SetAttributes[Q,HoldAll];
 
 
-RunGate[g_,ops_,qdim_]:=ToExpression[
+QRunGate[g_,ops_,qdim_]:=ToExpression[
 	StringTemplate["Gate[`OP`[],`targ`,`qdim`]"][
 		<|"OP"->g,
 		"targ"->ops ,
@@ -238,7 +248,7 @@ RunGate[g_,ops_,qdim_]:=ToExpression[
 ];
 
 
-RunCGate[g_,ops_,qdim_]:=ToExpression[
+QRunCGate[g_,ops_,qdim_]:=ToExpression[
 	StringTemplate["`OP`[`ctrl`,`targ`,`qdim`]"][
 		<|"OP"->g,
 		"ctrl"->ops[[1]] ,
@@ -252,8 +262,42 @@ QRun[qc_]:=Block[{dim=qc[[1]]},
 	Dot@@Table[
 	Switch[
 	Head[qc[[i]][[2]][[1]]],
-		Integer,RunGate[qc[[i]][[1]],qc[[i]][[2]],qc[[1]]],
-		List,RunCGate[qc[[i]][[1]],{qc[[i]][[2,1]],qc[[i]][[2,2]]},qc[[1]]]
+		(* simple gates have an integer as the (first) target *)
+		Integer, QRunGate[qc[[i]][[1]],qc[[i]][[2]],qc[[1]]],
+		(* controlled gates have a list of targets as the argument *)
+		List, QRunCGate[qc[[i]][[1]],{qc[[i]][[2,1]],qc[[i]][[2,2]]},qc[[1]]]
+		],
+	{i,2,Length[qc]}
+])
+];
+
+
+QTransGate[g_,ops_,qdim_,tgr_]:=ToString[
+	StringTemplate["Gate[`OP`[],`targ`,`qdim`]"][
+		<|"OP"->g,
+		"targ"->ops ,
+		"qdim"->qdim|>]
+];
+
+
+QTransCGate[g_,ops_,qdim_,tgr_]:=ToString[
+	StringTemplate["`OP`[`ctrl`,`targ`,`qdim`]"][
+		<|"OP"->g,
+		"ctrl"->ops[[1]] ,
+		"targ"->ops[[2]],
+		"qdim"->qdim|>]
+];
+
+
+QTrans[qc_,tgr_:"Qiskit"]:=Block[{dim=qc[[1]]},
+(
+	Dot@@Table[
+	Switch[
+	Head[qc[[i]][[2]][[1]]],
+		(* simple gates have an integer as the (first) target *)
+		Integer, QTransGate[qc[[i]][[1]],qc[[i]][[2]],qc[[1]],tgr],
+		(* controlled gates have a list of targets as the argument *)
+		List, QTransCGate[qc[[i]][[1]],{qc[[i]][[2,1]],qc[[i]][[2,2]]},qc[[1]],tgr]
 		],
 	{i,2,Length[qc]}
 ])
@@ -278,8 +322,8 @@ TruncatedFidelity[rho_,sigma_,m_,delta_:10^-6]:=Block[{vec,val,proj},
 Print["Package QINisq ", QINisq`Private`qiNisqVersion, " (last modification: ", QINisq`Private`qiNisqLastModification, ")."];
 
 
-End[] (* End Private Context *)
+End[]; (* End Private Context *)
 
-Protect@@Names["QINisq`*"]
+Protect@@Names["QINisq`*"];
 
-EndPackage[]
+EndPackage[];
