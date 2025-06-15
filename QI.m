@@ -210,7 +210,7 @@ See also: <f>SymbolicVector</f>.";
 
 
 QubitKet::usage = "<f>QubitKet</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>] parametrization of the pure state (as a state vector) for one qubit as \
-(<s>Cos[\[Alpha]] Exp[i\[Beta]], Sin[\[Alpha]]</s>). This is equivalent to <f>StateVector</f>[{<s>\[Alpha],\[Beta]</s>}]. See also: <f>QubitPureState</f>, <f>StateVector</f>.";
+(<s>Cos[\[Alpha]], Exp[i\[Beta]] Sin[\[Alpha]]</s>). This is equivalent to <f>StateVector</f>[{<s>\[Alpha],\[Beta]</s>}]. See also: <f>QubitPureState</f>, <f>StateVector</f>.";
 
 QubitPureState::usage = "<f>QubitPureState</f>[<s>\[Alpha],\[Beta]</s>] - \
 a parametrization of the pure state as a density matrix for one qubit. \
@@ -300,7 +300,7 @@ computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[
 (*Private definitions*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Internal functions (without usage strings)*)
 
 
@@ -381,7 +381,8 @@ qiHistory = {
 	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."},
 	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to \[CapitalLSlash]ukasz Pawela."},
 	{"0.4.39", "13/02/2017", "Jarek", "Removed warning message related to SquareMatrixQ in MMA10 and RandomSpecialUnitary normalization- thanks to Bartosz Regula."},
-	{"0.4.40", "22/01/2023", "Jarek", "Minor update in usage messages."}
+	{"0.4.40", "22/01/2023", "Jarek", "Minor update in usage messages."},
+	{"0.4.41", "15/06/2025", "Jarek", "Fixed usage message for QubitKet."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
