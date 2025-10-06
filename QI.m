@@ -120,7 +120,7 @@ and reconstruct the original matrix as
 \t <v>mtx</v> == Sum[<v>sd</v>[[<v>i</v>,1]]*KroneckerProduct[<v>sd</v>[[<v>i</v>,2]], <v>sd</v>[[<v>i</v>,3]]], {<v>i</v>, Length[<v>sd</v>]}];"; 
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Partial trace and transposition*)
 
 
@@ -382,7 +382,8 @@ qiHistory = {
 	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to \[CapitalLSlash]ukasz Pawela."},
 	{"0.4.39", "13/02/2017", "Jarek", "Removed warning message related to SquareMatrixQ in MMA10 and RandomSpecialUnitary normalization- thanks to Bartosz Regula."},
 	{"0.4.40", "22/01/2023", "Jarek", "Minor update in usage messages."},
-	{"0.4.41", "15/06/2025", "Jarek", "Fixed usage message for QubitKet."}
+	{"0.4.41", "15/06/2025", "Jarek", "Fixed usage message for QubitKet."},
+	{"0.4.42", "06/09/2025", "Jarek", "Removed debug messages."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -567,11 +568,11 @@ PartialTrace[A_, s_] := Block[ {d = Length[A], sys},
       Switch[sys[[1]],
        1, PartialTrace1[A],
        2, PartialTrace2[A],
-       _,Print["B1"]; Message[PartialTrace::syserr, sys]
+       _, Message[PartialTrace::syserr, sys]
        ], (*else*)
       If[ sys=={1,2} || sys=={2,1},
         Tr[A], (*else*)
-        Print["B2"]; Message[PartialTrace::syserr, sys]
+        Message[PartialTrace::syserr, sys]
       ]
     ]
     ,
