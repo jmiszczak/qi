@@ -50,7 +50,7 @@ SquareMatrixQ::usage = "<f>SquareMatrixQ</f>[<v>A</v>] returns True only if <v>A
 ]
 
 SymbolicMatrix::usage = "<f>SymbolicMatrix</f>[<v>a,m,n</v>] returns <s>m\[Cross]n</s>-matrix with elements <v>a[i,j], i=1,...,m, j=1,...,n</v>.\
-If the third argument is ommited this function returns square <s>m\[Cross]m</s> matrix. This functions can save you some keystrokes and, thanks \
+If the third argument is omitted, this function returns a square <s>m\[Cross]m</s> matrix. This function can save you some keystrokes and, thanks \
 to TeXForm function, its results can be easily incorporated in LaTeX documents.";
 
 SymbolicVector::usage = "<f>SymbolicVector</f>[<v>a,n</v>] returns a vector with <v>n</v> elements <v>a[i],i=1,...,n</v>.";
@@ -70,7 +70,7 @@ See also: <f>MatrixSqrt</f>.";
 
 MatrixRe::usage = "<f>MatrixRe</f>[<v>A</v>] returns a hermitian part of the matrix <v>A</v> i.e. <v>1/2(A+A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>)</v>.";
 
-MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an antyhermitian part of the matrix <v>A</v> i.e. <v>1/2(A-A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>)</v>.";
+MatrixIm::usage = "<f>MatrixIm</f>[<v>A</v>] returns an anti-Hermitian part of the matrix <v>A</v>, i.e. <v>1/2(A-A</v><s>\!\(\*SuperscriptBox[\" \", \"\[Dagger]\"]\)</s><v>)</v>.";
 
 Proj::usage = "<f>Proj</f>[<v>v</v>] returns projector of the vector <v>v</v>.";
 
@@ -96,7 +96,7 @@ If the second parameter is omitted, then it is assumed that <v>v</v> can be mapp
 Reshuffle::usage = "\
 <f>Reshuffle</f>[<s>\[Rho]</s>, {<v>drows</v>, <v>dcols</v>}] for a matrix of dimensions <s>(drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]])</s> \
 returns a reshuffled matrix with dimensions <s>(drows[[1]]\[Times]dcols[[1]])\[Times](drows[[2]]\[Times]dcols[[2]])</s>.
-Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dimension <s>n^2\[Times]n^2</s>.";
+Parameters {<v>drows</v>,<v>dcols</v>} can be omitted for a square matrix of dimension <s>n^2\[Times]n^2</s>.";
 
 
 (* ::Subsection::Closed:: *)
@@ -104,7 +104,7 @@ Parameters {<v>drows</v>,<v>dcols</v>} can be ommited for a square matrix of dim
 
 
 SchmidtDecomposition::usage = "<f>SchmidtDecomposition</f>[<v>x</v>,<v>dim</v>] - accepts a vector \
-or a matrix as a first argument and returns apropriate Schmidt decomposition. The second argument \
+or a matrix as a first argument and returns the appropriate Schmidt decomposition. The second argument \
 is optional and specifies the dimensions of subsystems.
 If <v>x</v> is a vector
 \t <f>SchmidtDecomposition</f>[<v>x</v>] assumes that <v>x</v> is (<v>n^2</v>)-dimensional,
@@ -203,7 +203,7 @@ SpecialUnitary::usage = "<f>SpecialUnitary</f>[<v>d</v>,<v>params</v>] returns t
 
 StateVector::usage = "<f>StateVector</f>[{<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\),\!\(\*SubscriptBox[\"\[Phi]\", 
 RowBox[{\"n\", \"+\", \"1\"}]]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \
-RowBox[{\"2\", \" \", \"n\"}]]\)</s>}] returns pure <v>n</v>+1-dimensional pure state (ket vector) constructed form probability distribution parametrize \
+RowBox[{\"2\", \" \", \"n\"}]]\)</s>}] returns a pure <v>n</v>+1-dimensional state (ket vector) constructed from a probability distribution parameterized \
 by numbers {<s>\!\(\*SubscriptBox[\"\[Theta]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Theta]\", \"n\"]\)</s>} and phases \
 {<s>\!\(\*SubscriptBox[\"\[Phi]\", \"1\"]\),...,\!\(\*SubscriptBox[\"\[Phi]\", \"n\"]\)</s>}. \
 See also: <f>SymbolicVector</f>.";
@@ -214,7 +214,7 @@ QubitKet::usage = "<f>QubitKet</f>[<s>\[Alpha]</s>,<s>\[Beta]</s>] parametrizati
 
 QubitPureState::usage = "<f>QubitPureState</f>[<s>\[Alpha],\[Beta]</s>] - \
 a parametrization of the pure state as a density matrix for one qubit. \
-This is just a alias for <f>Proj</f>[<f>QubitKet</f>[<s>\[Alpha],\[Beta]</s>]]. See also: <f>QubitKet</f>.";
+This is just an alias for <f>Proj</f>[<f>QubitKet</f>[<s>\[Alpha],\[Beta]</s>]]. See also: <f>QubitKet</f>.";
 
 
 
@@ -222,17 +222,17 @@ This is just a alias for <f>Proj</f>[<f>QubitKet</f>[<s>\[Alpha],\[Beta]</s>]]. 
 (*Random states*)
 
 
-RandomSimplex::usage = "<f>RandomSimplex</f>[<v>d</v>] generates a point on a <v>d</v>-dimensional simplex according to the uniform distibution.";
+RandomSimplex::usage = "<f>RandomSimplex</f>[<v>d</v>] generates a point on a <v>d</v>-dimensional simplex according to the uniform distribution.";
 
 RandomKet::usage = "<f>RandomKet</f>[<v>d</v>] - for integer <v>d</v> returns a random ket vector in <v>d</v>-dimensional space. \
 See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664. 
 <f>RandomKet</f>[{<v>d1</v>,<v>d2</v>}, <v>type</v>] - for integers <v>d1</v>, <v>d2</v> returns a random ket \
 vector in <v>d1 d2</v>-dimensional space with distribution specified by <v>type</v>. 
 The parameter <v>type</v> can be:
-\t ''Sep'' - in this case function returns separable random vectors,
-\t ''MaxEnt'' - in this case function returns maximally entangled random vectors,
+\t ''Sep'' - in this case, the function returns separable random vectors,
+\t ''MaxEnt'' - in this case, the function returns maximally entangled random vectors,
 \t <v>l</v> list of positive numbers summing up to 1, the length of the list must be less or equal to the Min[<v>d1</v>,<v>d2</v>] \
-- in this case function returns random vectors with fixed Schmidt numbers given by <v>l</v>.";
+- in this case, the function returns random vectors with fixed Schmidt numbers given by <v>l</v>.";
 
 (*<v>d</v> may be a list of integers in \
 this case ket will be in product form d[[1]]\[CircleTimes]...\[CircleTimes]d[[k]]. See: T. Radtke, S. Fritzsche, Comp. Phys. Comm., Vol. 179, No. 9, p. 647-664.";
@@ -252,7 +252,7 @@ RandomState::usage = "<f>RandomState</f>[<v>d</v>,<v>dist</v>] - random density 
 Argument <v>dist</v> can be ''<v>HS</v>'' (default value), ''<v>Bures</v>'' or an integer <v>K</v>. 
 \t ''<v>HS</v>'' - gives uniform distribution with respect to the Hilbert-Schmidt measure. 
 \t ''<v>Bures</v>'' - gives a random state distributed according to Bures measure. 
-\t Integer <v>K</v> - gives a random state generated with respect to induced measure with an ancilla system od dimension K.";
+\t Integer <v>K</v> - gives a random state generated with respect to an induced measure with an ancilla system of dimension K.";
 
 
 (* ::Subsection::Closed:: *)
@@ -273,27 +273,27 @@ ApplyChannel::usage = "<f>ApplayChannel</f>[<v>f</v>,<s>\[Rho]</s>] - apply chan
 pure function, to the input state <s>\[Rho]</s>. See also: <f>ApplyUnitary</f>, <f>ApplyKraus</f>."
 
 Superoperator::usage = "<f>Superoperator</f>[<v>kl</v>] returns matrix representation of quantum channel \
-given as a list of Kraus operators. <f>Superoperator</f>[<v>fun</v>,<v>dim</v>] is just am alternative name \
+given as a list of Kraus operators. <f>Superoperator</f>[<v>fun</v>,<v>dim</v>] is an alternative name \
 for <f>ChannelToMatrix</f>[<v>fun</v>,<v>dim</v>] and returns matrix representation of quantum channel, \
 given as a pure function, acting on <v>dim</v>-dimensional space. \
 See also: <f>ChannelToMatrix</f>.";
 
 DynamicalMatrix::usage = "<f>DynamicalMatrix</f> returns a dynamical matrix of quantum channel. The following options are available:\n
-<f>DynamicalMatrix</f>[<v>ch</v>] -  operates on a quantum channel given as a list of Kraus operators.
-<f>DynamicalMatrix</f>[<v>fun</v>,<v>dim</v>]  - operates on a a function <v>fun</v> acting on <v>dim</v>-dimensional space. 
+<f>DynamicalMatrix</f>[<v>ch</v>] - operates on a quantum channel given as a list of Kraus operators.
+<f>DynamicalMatrix</f>[<v>fun</v>,<v>dim</v>] - operates on a function <v>fun</v> acting on <v>dim</v>-dimensional space.
 See also: <f>Superoperator</f>, <f>ChannelToMatrix</f>.";
 
 Jamiolkowski::usage = "<f>Jamiolkowski</f>[<v>K</v>] gives the image of the Jamiolkowski isomorphism for the channel given as the list of \
-Karus operators <v>K</v>. 
+Kraus operators <v>K</v>.
 <f>Jamiolkowski</f>[<v>fun</v>,<v>dim</v>] gives the image of the Jamiolkowski isomorphism for the channel given \
-as a function fun action on <v>dim</v>-dimensional space. See also: <f>Superoperator</f>, <f>ChannelToMatrix</f>, <f>DynamicalMatrix</f>.";
+as a function <v>fun</v> acting on <v>dim</v>-dimensional space. See also: <f>Superoperator</f>, <f>ChannelToMatrix</f>, <f>DynamicalMatrix</f>.";
 
 TPChannelQ::usage = "<f>TPChannelQ</f>[<v>ck</v>] performs some checks on Kraus operators <v>ck</v>. Use this if you want to check if they represent quantum channel.";
 
 SuperoperatorToKraus::usage = "<f>SuperoperatorToKraus</f>[<v>m</v>] returns Kraus operators for a given super operator <v>m</v>.";
 
 ProductSuperoperator::usage = "<f>ProductSuperoperator</f>[<s>\[CapitalPsi]</s>,<s>\[CapitalPhi]</s>] \
-computes a product superoperator of superoperatos <s>\[CapitalPsi]</s> and <s>\[CapitalPhi]</s>.";
+computes a product superoperator of superoperators <s>\[CapitalPsi]</s> and <s>\[CapitalPhi]</s>.";
 
 
 (* ::Section:: *)
@@ -334,7 +334,7 @@ qiHistory = {
 	{"0.3.2", "17/11/2009", "Jarek", "Documentation improvements, SquareMatrixQ predicate."},
 	{"0.3.3", "18/11/2009", "Jarek", "All qi* functions and constants moved to the QI`Private context, added list of QI`* names."},
 	{"0.3.4", "19/11/2009", "", "Added Negativity, fixed SchmidtDecomposition."},
-	{"0.3.5", "21/11/2009", "Jarek", "SchmidtDecomposition now accepts vectos as well as matrices."},
+	{"0.3.5", "21/11/2009", "Jarek", "SchmidtDecomposition now accepts vectors as well as matrices."},
 	{"0.3.6", "24/11/2009", "Jarek", "Minor update in qiNames."},
 	{"0.3.7", "04/12/2009", "", "OperatorSchmidtDecomposition fixed."},
 	{"0.3.8", "04/01/2010", "", "Added local vars in RandomState."},
@@ -347,11 +347,11 @@ qiHistory = {
 	{"0.3.15", "07/06/2010", "", "RandomMaximallyEntangledNumericalRange added."},
 	{"0.3.16", "20/06/2010", "", "Alternative version of Ketbra function."},
 	{"0.3.17", "11/07/2010", "Jarek", "Name changed for Davies map."},
-	{"0.3.18", "11/08/2010", "Jarek", "Fiexd bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
+	{"0.3.18", "11/08/2010", "Jarek", "Fixed bug in GeneralizedPauliKraus function reported by Fatih Ozaydin and one syntax error."},
 	{"0.3.19", "13/09/2010", "Gawron", "Fixed bug in QubitDecayKraus and QubitDepolarizingKraus, QubitBitflipKraus, QubitPhaseflipKraus, QubitBitphaseflipKraus."},
 	{"0.3.20", "04/10/2010", "Jarek", "Fixed inconsistency in QubitDepolarizingKraus and DepolarizingChannel."},
-	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2, qiHistory now stores commiter name."},
-	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUniatryEuler, new RandomUnitary based on QR decomposition."},
+	{"0.3.21", "08/10/2010", "Jarek", "Added ReshufflePermutation2 and fixed Reshuffle2; qiHistory now stores committer name."},
+	{"0.3.22", "09/11/2010", "Gawron", "RandomUnitary -> RandomUnitaryEuler; new RandomUnitary based on QR decomposition."},
 	{"0.3.23", "09/11/2010", "Jarek", "Fixed package loading. New function RandomUnitaryQR and modified RandomUnitary. Improved usage messages."},
 	{"0.3.24", "17/11/2010", "Zbyszek", "New function SuperoperatorToKraus."},
 	{"0.3.25", "18/11/2010", "Zbyszek", "Renaming of Reshuffling functions."},
@@ -364,19 +364,19 @@ qiHistory = {
 	{"0.3.32", "05/04/2011", "Gawron", "RandomSimplex changed."},
 	{"0.3.33", "08/04/2011", "Gawron, Zbyszek", "*SchmidtDecomposition changed."},
 	{"0.3.34", "29/04/2011", "Gawron, Zbyszek", "ProdSum fixed."},
-	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed, RandomKet enhenced."},
+	{"0.3.35", "11/05/2011", "Gawron, Zbyszek", "SchmidtDecomposition fixed; RandomKet enhanced."},
 	{"0.3.36", "18/05/2011", "Zbyszek", "Added functions: Unitary2Euler, IntegrateSU2, RandomOrthogonal."},
-	{"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrtix."},
+	{"0.3.37", "07/07/2011", "Gawron, Jarek", "Added function: SymbolicBistochasticMatrix."},
 	{"0.3.38", "05/08/2011", "Zbyszek, Jarek", "Added HyperlinkToString and DOIToString functions."},
-	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes , some functions moved to QIExtras Package."},
+	{"0.4.0",  "13/10/2011", "Zbyszek, Jarek, Gawron", "Big changes; some functions moved to the QIExtras package."},
 	{"0.4.1",  "14/10/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.2",  "18/10/2011", "Zbyszek, Jarek", "Partial trace improved."},
-	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator impoved."},
+	{"0.4.3",  "19/10/2011", "Zbyszek, Jarek", "ProductSuperoperator improved."},
 	{"0.4.31", "25/10/2011", "Zbyszek", "Small changes."},
 	{"0.4.32", "16/12/2011", "Zbyszek, Jarek", "Documentation improved."},
 	{"0.4.33", "17/12/2011", "Jarek", "Negativity fixed - thanks to Fatih \[CapitalODoubleDot]zayd\[DotlessI]n"},
 	{"0.4.34", "11/01/2012", "Zbyszek", "VectorSchmidtDecomposition fixed"},
-	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary prametrization"},
+	{"0.4.35", "26/01/2012", "Gawron", "Reintroduced special unitary parametrization"},
 	{"0.4.36", "04/02/2012", "Jarek", "BaseVectors and BaseMatrices moved from QIExtras to QI."},
 	{"0.4.37", "21/12/2012", "Jarek", "Fixed SuperoperatorToKraus function - thanks to Vinayak Jagadish."},
 	{"0.4.38", "16/12/2014", "Zbyszek", "Fixed!!! SuperoperatorToKraus function - thanks to \[CapitalLSlash]ukasz Pawela."},
@@ -604,7 +604,7 @@ PartialTrace[A_,dim_?VectorQ,s_]:=Block[{sys},
 
 PartialTrace::syserr = "The second argument is expected to be 1, 2 or {1,2} (`1` was given)";
 PartialTrace::dimerr = "This function expects square matrix of size d^2\[Times]d^2 (the matrix of size `1` was given)";
-PartialTrace::sysspecerr = "The system specification is invalid. In the case of `1`-partite systems, it is inpossible to trace out with respect to sub-systems `2`.";
+PartialTrace::sysspecerr = "The system specification is invalid. In the case of `1`-partite systems, it is impossible to trace out subsystems `2`.";
 
 PartialTrace1[X_] := Block[{d = Sqrt[Length[X]]}, Total[X[[1 + d # ;; d + d #, 1 + d # ;; d + d # ]] & /@ Range[0, d - 1]]];
 PartialTrace2[X_] := Block[{d = Sqrt[Length[X]]}, Total[X[[1 + # ;; d^2 ;; d, 1 + # ;; d^2 ;; d]] & /@ Range[0, d - 1]]];
@@ -840,7 +840,7 @@ RandomState[d_,dist_:"HS"]:=Block[{A,U},
 			]
 	]
 ];
-RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an integer K>2, mesure \"`1`\" not implemented yet.";
+RandomState::argerr = "The second argument should be \"HS\", \"Bures\", or an integer K>2; measure \"`1`\" is not implemented yet.";
 
 
 

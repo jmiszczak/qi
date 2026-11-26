@@ -27,16 +27,16 @@ Clear@@Names["QIExtras`*" ]
 KroneckerDeltaMatrix::usage = "KroneckerDeltaMatrix[i,j,d] returns d\[Cross]d matrix with 1 at position (i,j) and zeros elsewhere.";
 
 
-PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)}. Use Map[MatrixForm[#]&,PauliMatrices] to get this list in more readible form.";
+PauliMatrices::usage = "Predefined list of Pauli matrices {\!\(\*SubscriptBox[\"\[Sigma]\", \"x\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"y\"]\),\!\(\*SubscriptBox[\"\[Sigma]\", \"z\"]\)}. Use Map[MatrixForm[#]&,PauliMatrices] to get this list in a more readable form.";
 
 
 GellMannMatrices::usage = "List of Gell-Mann matrices. Use Map[MatrixForm[#]&,GellMannMatrices] to get this list in more readable form.";
 
 
-UpperTriangularOnes::usage = "UpperTriangularOnes[k,dim] returns not normal matirx of dimension dim with 1<k<dim-1 bands of ones over the diagonal.";
+UpperTriangularOnes::usage = "UpperTriangularOnes[k,dim] returns a non-normal matrix of dimension dim with 1<k<dim-1 bands of ones above the diagonal.";
 
 
-UpperBandOnes::usage = "UpperBandOnes[k,dim] returns not normal matirx of dimension dim with bands at position k of ones over the diagonal.";
+UpperBandOnes::usage = "UpperBandOnes[k,dim] returns a non-normal matrix of dimension dim with a band of ones at position k above the diagonal.";
 
 
 Swap::usage="Swap[d] returns permutation operator \!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"i\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)\!\(\*UnderoverscriptBox[RowBox[{\" \", \"\[Sum]\"}], RowBox[{\"j\", \"=\", \"0\"}], RowBox[{\"n\", \"-\", \"1\"}]]\)|i\[RightAngleBracket]\[LeftAngleBracket]j|\[CircleTimes]|j\[RightAngleBracket]\[LeftAngleBracket]i\[VerticalSeparator] acting on d-dimensional, d=\!\(\*SuperscriptBox[\"n\", \"2\"]\) space and exchanging two \[Sqrt]d-dimensional subsystems.";
@@ -82,22 +82,22 @@ ReshufflePermutationPrim::usage = "ReshufflePermutation2[dim1,dim2] - permutatio
 ReshufflePrim::usage = "\
 ReshufflePrim[\[Rho], drows, dcols] for a matrix of dimensions (drows[[1]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]dcols[[2]]) returns reshuffled (prim) matrix with dimensions \
 (dcols[[2]]\[Times]drows[[2]])\[Times](dcols[[1]]\[Times]drows[[1]]), \
-drows and dcols parameters can be ommited for a square matrix.";
+drows and dcols parameters can be omitted for a square matrix.";
 
 
-IdentityChannel::usage = "IdentityChannel[n,\[Rho]] - apply the identity operation to a n-dimensional density matrix \[Rho].";
+IdentityChannel::usage = "IdentityChannel[n,\[Rho]] - applies the identity operation to an n-dimensional density matrix \[Rho].";
 
 
-TransposeChannel::usage = "TransposeChannel[n,\[Rho]] - apply the transposition operation to a n-dimensional density matrix \[Rho]. Note that this operations is not completely positive.";
+TransposeChannel::usage = "TransposeChannel[n,\[Rho]] - applies the transposition operation to an n-dimensional density matrix \[Rho]. Note that this operation is not completely positive.";
 
 
-DepolarizingChannel::usage = "DepolarizingChannel[n,p,\[Rho]] - apply the completely depolarizing channel with parameter p acting to a n-dimensional input state \[Rho]. See also: QubitDepolarizingKraus, HolevoWernerChannel.";
+DepolarizingChannel::usage = "DepolarizingChannel[n,p,\[Rho]] - applies the completely depolarizing channel with parameter p to an n-dimensional input state \[Rho]. See also: QubitDepolarizingKraus, HolevoWernerChannel.";
 
 
-HolevoWernerChannel::usage = "HolevoWernerChannel[n,p,\[Rho]] - apply the Holeve-Werner channel, also known as transpose-depolarizing channel, with parameter p acting to a n-dimensional input state \[Rho]. See also: DepolarizingChannel.";
+HolevoWernerChannel::usage = "HolevoWernerChannel[n,p,\[Rho]] - applies the Holevo-Werner channel, also known as the transpose-depolarizing channel, with parameter p to an n-dimensional input state \[Rho]. See also: DepolarizingChannel.";
 
 
-GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus operators for d-dimensional generalized Pauli channel with the d-dimesnional matrix of parameters P. See: M. Hayashi, Quantum Information An Introduction, Springer 2006, Example 5.8, p. 126.";
+GeneralizedPauliKraus::usage = "GeneralizedPauliKraus[d,P] - list of Kraus operators for a d-dimensional generalized Pauli channel with the d-dimensional parameter matrix P. See: M. Hayashi, Quantum Information: An Introduction, Springer 2006, Example 5.8, p. 126.";
 
 
 ExtendKraus::usage = "ExtendKraus[ch,n] - produces n-fold tensor products of Kraus operators from the list ch.";
@@ -117,7 +117,7 @@ RowBox[{\"m\", \"\[Cross]\", \"n\"}]]\) after their partial transposition with r
 (*One-qubit quantum channels*)
 
 
-QubitBitflipChannel::usage = "BitflipChannel[p,\[Rho]] applies bif-flip channel to the input state \[Rho]. See also: QubitBitflipKraus.";
+QubitBitflipChannel::usage = "BitflipChannel[p,\[Rho]] applies a bit-flip channel to the input state \[Rho]. See also: QubitBitflipKraus.";
 
 
 QubitPhaseflipChannel::usage  = "QubitPhaseflipChannel[p,\[Rho]] applies phase-flip channel to the input state \[Rho]. See also: QubitPhaseflipKraus.";
@@ -129,7 +129,7 @@ QubitBitphaseflipChannel::usage  = "QubitBitphaseflipChannel[p,\[Rho]] applies b
 QubitDepolarizingKraus::usage = "Kraus operators of the depolarizing channel for one qubit. Note that it gives maximally mixed state for p=1.";
 
 
-QubitDecayKraus::usage = "Kraus operators of the decay channel, also know as amplitude damping, for one qubit.";
+QubitDecayKraus::usage = "Kraus operators of the decay channel, also known as amplitude damping, for one qubit.";
 
 
 QubitPhaseKraus::usage = "Kraus operators for one qubit phase damping channel.";
@@ -164,10 +164,10 @@ QutritSpontaneousEmissionKraus::usage="QutritSpontaneousEmissionKraus[A1,A2,t] K
 Log0::usage = "Log0[x] is equal to Log[2,x] for x>0 and 1 for x=0.";
 
 
-QuantumEntropy::usage = "QuantumEntropy[m] - von Neuman entropy for the matrix m.";
+QuantumEntropy::usage = "QuantumEntropy[m] - von Neumann entropy of the matrix m.";
 
 
-QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neuman entropy of the quantum channel calculated as a von Neuman entropy for the image of this channel in Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.";
+QuantumChannelEntropy::usage = "QuantumChannelEntropy[ch] - von Neumann entropy of a quantum channel, calculated as the von Neumann entropy of its image under the Jamiolkowski isomorphism. See also: Jamiolkowski, Superoperator.";
 
 
 (* ::Subsection:: *)
@@ -212,7 +212,7 @@ NumericalRangeBound::usage = "NumericalRangeBound[A,dx] - bound of numerical ran
 
 IntegrateSU2::usage = "IntegrateSU2[f,U] - gives the integral \[Integral]f dU, where dU is Haar measure on the group SU(2) - special unitary matrices of size 2. 
 \nIntegrateSU2[f,U,V,...] - gives the multiple integral  \[Integral]f dU dV dW ... on the group SU(2). 
-\nExample: Integration squares of absolute values of elements of ranom unitary matrix: IntegrateSU2[Abs[U\!\(\*SuperscriptBox[\(]\), \(2\)]\),U]"
+\nExample: Integrate squares of absolute values of elements of a random unitary matrix: IntegrateSU2[Abs[U\!\(\*SuperscriptBox[\(]\), \(2\)]\),U]"
 
 
 Unitary3::usage = "<f>Unitary3</f>[<v>\[Alpha]</v>,<v>\[Beta]</v>,<v>\[Gamma]</v>,<v>\[Tau]</v>,<v>a</v>,<v>b</v>,<v>c</v>,<v>ph</v>] returns the Euler parametrization of <v>U</v>(3).";
@@ -222,7 +222,7 @@ Unitary4Canonical::usage = "<f>Unitary4Canonical</f>[<v>a1</v>,<v>a2</v>,<v>a3</
 See: B. Kraus, J.I. Cirac, Phys. Rev. A 63, 062309 (2001), quant-ph/0011050v1.";
 
 
-Mub::usage ="<f>Mub</f>[<v>p,m</v>] for prime number <v>p</v> and positive integer <v>m</v> returns <v>p^m+1</v> mutually unbaised bases of <v>p^m</v> dimensional Hilbert space.";
+Mub::usage ="<f>Mub</f>[<v>p,m</v>] for a prime number <v>p</v> and positive integer <v>m</v> returns <v>p^m+1</v> mutually unbiased bases of a <v>p^m</v>-dimensional Hilbert space.";
 
 
 (* ::Section:: *)
@@ -255,7 +255,7 @@ qiExtrasHistory = {
 	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities."},
 	{"0.0.12", "12/04/2021", "Jarek", "Truncated fidelities moved to a new subpackage."},
 	{"0.0.13", "12/02/2023", "Jarek", "Documentation improvements."},
-	{"0.0.14", "27/08/2023", "Jarek", "Fixed compatability of VandermondeMatrix (defined in Mathematica 13.2)."}
+	{"0.0.14", "27/08/2023", "Jarek", "Fixed compatibility of VandermondeMatrix (defined in Mathematica 13.2)."}
 };  
 
 
