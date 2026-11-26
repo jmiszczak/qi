@@ -2,12 +2,6 @@
 
 ## Executable defects
 
-- `QINisq.m`: `Gate` localizes `id`, shadowing QI's identity matrix; untargeted qubits are therefore not represented by identity operators.
-- `QINisq.m`: `H[]` uses `1/2 wh` rather than `wh/Sqrt[2]`, so it is not unitary.
-- `QINisq.m`: `Toff` is a matrix value while the public API documents `Toff[]`; the documented call does not evaluate.
-- `QINisq.m`: `InitQC[dim, name]` ignores `name` and always resets `QC`.
-- `QINisq.m`: `QTrans` combines multiple strings with `Dot`, producing an unevaluated dot expression instead of transpiled output.
-- `QINisq.m`: `TruncatedFidelity` documents `delta` as controlling eigensystem accuracy, but does not pass it to `Chop[Eigensystem[rho]]`.
 - `QI.m`: `BlochToState` sends `StateFromBlochVector::argerr`, but only `BlochToState::argerr` is defined.
 - `QI.m`: `RandomKet[{d1, d2}, "MaxEnt"]` applies an extra square root to its Schmidt coefficients and returns an unnormalized ket.
 - `QI.m`: `Unvec[v]` for a non-square vector evaluates `Mod[Length[v], 0]` rather than reporting a controlled argument error.
@@ -20,9 +14,18 @@
 
 ## Documentation/API inaccuracies
 
-- `QIExtras.m`: the `Log0` usage text says `Log0[0]` is `1`; its implementation returns `0`.
 - `QI.m`: `RandomState` documents induced-measure parameter `K > 2`, while the implementation accepts `K >= d`.
 - `QI.m`: the `ApplyChannel` usage string misspells its own exported name as `ApplayChannel`.
 - `QI.m`: `ApplyKraus` and `ApplyChannel` usage strings reference nonexistent `ApplyUnitary`.
-- `QINisq.m`: `QTransGate` and `QTransCGate` usage headers incorrectly name `QRunCGate`.
+- `QIExtras.m`: the `Log0` usage text says `Log0[0]` is `1`; its implementation returns `0`.
 - `QIExtras.m`: the `RandomProductNumericalRange` usage string documents `RandomLocalNumericalRange` instead.
+
+## Future work
+
+- `QINisq.m`: `QTransGate` and `QTransCGate` usage headers incorrectly name `QRunCGate`.
+- `QINisq.m`: `Gate` localizes `id`, shadowing QI's identity matrix; untargeted qubits are therefore not represented by identity operators.
+- `QINisq.m`: `H[]` uses `1/2 wh` rather than `wh/Sqrt[2]`, so it is not unitary.
+- `QINisq.m`: `Toff` is a matrix value while the public API documents `Toff[]`; the documented call does not evaluate.
+- `QINisq.m`: `InitQC[dim, name]` ignores `name` and always resets `QC`.
+- `QINisq.m`: `QTrans` combines multiple strings with `Dot`, producing an unevaluated dot expression instead of transpiled output.
+- `QINisq.m`: `TruncatedFidelity` documents `delta` as controlling eigensystem accuracy, but does not pass it to `Chop[Eigensystem[rho]]`.
