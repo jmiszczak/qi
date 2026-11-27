@@ -255,7 +255,8 @@ qiExtrasHistory = {
 	{"0.0.11", "30/11/2020", "Jarek", "Added truncated fidelities."},
 	{"0.0.12", "12/04/2021", "Jarek", "Truncated fidelities moved to a new subpackage."},
 	{"0.0.13", "12/02/2023", "Jarek", "Documentation improvements."},
-	{"0.0.14", "27/08/2023", "Jarek", "Fixed compatibility of VandermondeMatrix (defined in Mathematica 13.2)."}
+	{"0.0.14", "27/08/2023", "Jarek", "Fixed compatibility of VandermondeMatrix (defined in Mathematica 13.2)."},
+    {"0.0.15", "27/1/2026", "Jarek", "Fixed QFT normalization."}
 };  
 
 
@@ -294,8 +295,13 @@ UpperBandOnes[bandNo_,dim_]:=Table[If[i<j&&j-i==bandNo,1,0],{i,1,dim},{j,1,dim}]
 Swap[dim_]:=Plus@@Flatten[Table[KroneckerProduct[Ketbra[i,j,Sqrt[dim]],Ketbra[j,i,Sqrt[dim]]],{i,0,Sqrt[dim]-1},{j,0,Sqrt[dim]-1}],1];
 
 QFT[n_,method_:"Symbolic"]:=Block[{\[Omega]},
-    If [method=="Numerical",\[Omega]=N[Exp[2 \[Pi] I/n]],\[Omega]=Exp[2 \[Pi] I/n]];
-    Table[\[Omega]^(i*k) ,{i,1,n},{k,1,n}]
+    If [method=="Numerical",
+        \[Omega]=N[Exp[2 \[Pi] I/n]],
+        (*else*)
+        \[Omega]=Exp[2 \[Pi] I/n]
+        ];
+    
+    1/Sqrt[n]*Table[\[Omega]^(i*k) ,{i,1,n},{k,1,n}]
 ];
 
 GeneralizedPauliX[d_]:=Sum[Ketbra[Mod[j-1,d],j,d],{j,0,d-1}];
