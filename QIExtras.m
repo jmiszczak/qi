@@ -201,7 +201,7 @@ ProbHS::usage = "ProbHS[{\!\(\*SubscriptBox[\"x\", \"1\"]\),...\!\(\*SubscriptBo
 RandomProductKet::usage = "RandomProductKet[{dim1,dim2,...,dimN}] - random pure state (ket vector) of the tensor product form with dimensions of subspaces specified dim1, dim2,...,dimN.";
 
 
-RandomProductNumericalRange::usage = "RandomLocalNumericalRange[M,{dim1,dim2,...,dimN},n] returns n points from the product numerical range of the matrix M with respect to division specified as {dim1,dim2,...,dimN}. Note that dim1\[Cross]dim2\[Cross]...\[Cross]dimN must be equal to the dimension of matrix M.";
+RandomProductNumericalRange::usage = "RandomProductNumericalRange[M,{dim1,dim2,...,dimN},n] returns n points from the product numerical range of the matrix M with respect to division specified as {dim1,dim2,...,dimN}. Note that dim1\[Cross]dim2\[Cross]...\[Cross]dimN must be equal to the dimension of matrix M.";
 
 
 RandomMaximallyEntangledNumericalRange::usage = "RandomMaximallyEntangledNumericalRange[M,n] returns n points from the maximally entangled numerical range of the matrix M with respect to division Sqrt[dim[M]]\[Cross]Sqrt[dim[M]].";
