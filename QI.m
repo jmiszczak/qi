@@ -778,25 +778,25 @@ RandomKet[n_?IntegerQ]:=Block[{p,ph},
 	p*ph
 ];
 
-RandomKet[{d1_?IntegerQ, d2_?IntegerQ}, a_: "Sep"] := 
-  Block[{l, v, U, V, w},
-   Switch[a,
-    "MaxEnt", 
-            l = ConstantArray[1/Sqrt[Min[d1, d2]], Min[d1, d2]];,
-    "Sep", 
-            l = {1};,
-    _List, 
-            If[Total[a] == 1 && Length[a] <= Min[d1, d2], l = a, Message[RandomKet::argerr];],
-    _, 
-            Message[RandomKet::argerr];
-    ];
-   v = Sum[Sqrt[l[[i]]]*(UnitVector[d1, i]\[CircleTimes]UnitVector[d2, i]), {i, 1,Length[l]}];
-   U = RandomUnitary[d1];
-   V = RandomUnitary[d2];
-   (U\[CircleTimes]V) . v
-   ];
-RandomKet::argerr = "Error - the last parameter should be a list of Schmidt numbers or one of the predefined values: ''Sep'' or ''MaxEnt''."; 
-
+RandomKet[{d1_?IntegerQ, d2_?IntegerQ}, a_: "Sep"] :=  
+Block[{l, v, U, V, w},
+	Switch[a,
+    	"MaxEnt", 
+        	l = ConstantArray[1/Min[d1, d2], Min[d1, d2]];,
+    	"Sep", 
+        	l = {1};,
+    	_List, 
+        	If[Total[a] == 1 && Length[a] <= Min[d1, d2], l = a, Message[RandomKet::argerr];],
+    	_, 
+	        Message[RandomKet::argerr];
+	    ];
+		v = Sum[Sqrt[l[[i]]]*(UnitVector[d1, i] \[CircleTimes] UnitVector[d2, i]), {i, 1,Length[l]}];
+		U = RandomUnitary[d1];
+		V = RandomUnitary[d2];
+		(U\[CircleTimes]V) . v
+	];
+	
+RandomKet::argerr = "The last parameter should be ''Sep'', ''MaxEnt'' or a list of Schmidt numbers."; 
 
 
 GinibreMatrix[m_,n_]:=RandomReal[NormalDistribution[0,1],{m,n}] + I RandomReal[NormalDistribution[0,1],{m,n}];
