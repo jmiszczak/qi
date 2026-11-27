@@ -699,7 +699,7 @@ BlochToState[vec_]:=Block[{dim},
 	If[IntegerQ[Sqrt[Length[vec]+1]],
 		dim= Sqrt[Length[vec]+1];
 		1/dim IdentityMatrix[dim] + vec . GeneralizedPauliMatrices[dim]/Sqrt[2],
-		Message[StateFromBlochVector::argerr, vec];
+		Message[BlochToState::argerr, vec];
 		Beep[];
 	]
 ];
