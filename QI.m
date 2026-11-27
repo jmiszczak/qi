@@ -383,7 +383,7 @@ qiHistory = {
 	{"0.4.39", "13/02/2017", "Jarek", "Removed warning message related to SquareMatrixQ in MMA10 and RandomSpecialUnitary normalization- thanks to Bartosz Regula."},
 	{"0.4.40", "22/01/2023", "Jarek", "Minor update in usage messages."},
 	{"0.4.41", "15/06/2025", "Jarek", "Fixed usage message for QubitKet."},
-	{"0.4.42", "06/09/2025", "Jarek", "Removed debug messages."}
+	{"0.4.42", "06/09/2025", "Jarek", "Removed debug messages."},
 	{"0.4.43", "27/11/2026", "Jarek", "Several minor erros fixed."}
 };  
 
@@ -402,7 +402,7 @@ HyperlinkToString[text_,link_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"
 
 DOIToString::usage = "DOIToString[text,doi] creates a link labeled with text to the given DOI and returns it as a Mathematica string.";
 
-DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\"http://dx.doi.org/"<>doi<>"\"]\)";
+DOIToString[text_,doi_]:="\!\(\*ButtonBox[StyleBox[\""<>text<>"\", \"SR\"],Active->True,BaseStyle->\"Link\",ButtonData->\"https://doi.org/"<>doi<>"\"]\)";
 
 
 
@@ -476,8 +476,10 @@ Vec[m_]:=Flatten[Transpose[m]];
 
 Unvec[v_List,cols_:0]:=Which[
 	(cols==0)&&IntegerQ[\[Sqrt]Length[v]],
+		Print[cols]
 		Transpose[Partition[v,\[Sqrt]Length[v]]],
-	Mod[Length[v],cols]==0,
+	(cols!=0)&&Mod[Length[v],cols]==0,
+		Print[cols]
 		Transpose[Partition[v,cols]]
 ];
 
@@ -486,7 +488,7 @@ Res[m_List]:=Flatten[m];
 Unres[v_List,cols_:0]:=Which[
  	(cols==0)&&IntegerQ[\[Sqrt]Length[v]],
 		Partition[v,\[Sqrt]Length[v]],
- 	Mod[Length[v],cols]==0,
+ 	(cols!=0)&&Mod[Length[v],cols]==0,
 		Partition[v,cols]
 ];
 
@@ -565,20 +567,22 @@ PartialTrace[A_, dim_, {}]:=A;
 
 PartialTrace[A_, s_] := Block[ {d = Length[A], sys},
     If[ IntegerQ[s],
-      sys = {s}, (*else*)
-      sys = s
+		sys = {s}, (*else*)
+		sys = s
     ];  
-    If[  IntegerQ[Sqrt[d]],
+    If[ IntegerQ[Sqrt[d]],
     If[ Length[sys]==1 ,
-      Switch[sys[[1]],
-       1, PartialTrace1[A],
-       2, PartialTrace2[A],
-       _, Message[PartialTrace::syserr, sys]
-       ], (*else*)
-      If[ sys=={1,2} || sys=={2,1},
-        Tr[A], (*else*)
-        Message[PartialTrace::syserr, sys]
-      ]
+		Switch[sys[[1]],
+			1, PartialTrace1[A],
+			2, PartialTrace2[A],
+			_, Message[PartialTrace::syserr, sys]
+		], (*else*)
+		If[ 
+			sys=={1,2} || sys=={2,1},
+			Tr[A], 
+			(*else*)
+			Message[PartialTrace::syserr, sys]
+		]
     ]
     ,
     Message[PartialTrace::dimerr, Dimensions[A]]    
