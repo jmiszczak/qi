@@ -384,6 +384,7 @@ qiHistory = {
 	{"0.4.40", "22/01/2023", "Jarek", "Minor update in usage messages."},
 	{"0.4.41", "15/06/2025", "Jarek", "Fixed usage message for QubitKet."},
 	{"0.4.42", "06/09/2025", "Jarek", "Removed debug messages."}
+	{"0.4.43", "27/11/2026", "Jarek", "Several minor erros fixed."}
 };  
 
 qiVersion = Last[qiHistory][[1]];
@@ -474,20 +475,24 @@ Proj[v_]:=Table[v[[i]]Conjugate[v[[j]]],{i,1,Length[v]},{j,1,Length[v]}];
 Vec[m_]:=Flatten[Transpose[m]]; 
 
 Unvec[v_List,cols_:0]:=Which[
- (cols== 0)&&IntegerQ[\[Sqrt]Length[v]],Transpose[Partition[v,\[Sqrt]Length[v]]],
- Mod[Length[v],cols]==0,Transpose[Partition[v,cols]]
+	(cols==0)&&IntegerQ[\[Sqrt]Length[v]],
+		Transpose[Partition[v,\[Sqrt]Length[v]]],
+	Mod[Length[v],cols]==0,
+		Transpose[Partition[v,cols]]
 ];
 
 Res[m_List]:=Flatten[m]; 
 
 Unres[v_List,cols_:0]:=Which[
- (cols== 0)&&IntegerQ[\[Sqrt]Length[v]],Partition[v,\[Sqrt]Length[v]],
- Mod[Length[v],cols]==0,Partition[v,cols]
+ 	(cols==0)&&IntegerQ[\[Sqrt]Length[v]],
+		Partition[v,\[Sqrt]Length[v]],
+ 	Mod[Length[v],cols]==0,
+		Partition[v,cols]
 ];
 
 Reshuffle[\[Rho]_]:=Block[{dim},
 	dim = Sqrt[Length[\[Rho]]];
-	If[And [SquareMatrixQ[\[Rho]] , IntegerQ[dim]] ,
+	If[And [SquareMatrixQ[\[Rho]], IntegerQ[dim]],
 		Reshuffle[\[Rho], {{dim,dim},{dim,dim}}]
 	(*else*),
 		Message[Reshuffle::argerr]
@@ -840,7 +845,7 @@ RandomState[d_,dist_:"HS"]:=Block[{A,U},
 			]
 	]
 ];
-RandomState::argerr = "The second argument should be \"HS\", \"Bures\", or an integer K>2; measure \"`1`\" is not implemented yet.";
+RandomState::argerr = "The second argument should be \"HS\", \"Bures\", or an integer K>d, where d is the dimension.";
 
 
 
