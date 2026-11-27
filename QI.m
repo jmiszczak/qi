@@ -263,14 +263,14 @@ RandomDynamicalMatrix::usage = "<f>RandomDynamicalMatrix</f>[<v>d</v>,<v>k</v>] 
 on <v>d</v>-dimensional states with <v>k</v> eigenvalues equal to 0. Thanks to Wojtek Bruzda. see Random Quantum Operations DOI[10.1016/j.physleta.2008.11.043].";
 
 ApplyKraus::usage = "<f>ApplyKraus</f>[<v>ck</v>,<s>\[Rho]</s>] - apply channel <v>ck</v>, given as a list of Kraus operators, \
-to the input state <s>\[Rho]</s>. See also: <f>ApplyUnitary</f>, <f>ApplyChannel</f>.";
+to the input state <s>\[Rho]</s>. See also: <f>ApplyChannel</f>.";
 
 ChannelToMatrix::usage = "<f>ChannelToMatrix</f>[<v>E</v>,<v>d</v>] returns matrix representation of a \
 channel <v>E</v> acting on <v>d</v>-dimensional state space. First argument should be a pure function <v>E</v> \
 such that <v>E</v>[<s>\[Rho]</s>] transforms input state according to the channel definition.";
 
-ApplyChannel::usage = "<f>ApplayChannel</f>[<v>f</v>,<s>\[Rho]</s>] - apply channel <v>f</v>, given as a \
-pure function, to the input state <s>\[Rho]</s>. See also: <f>ApplyUnitary</f>, <f>ApplyKraus</f>."
+ApplyChannel::usage = "<f>ApplyChannel</f>[<v>f</v>,<s>\[Rho]</s>] - apply channel <v>f</v>, given as a \
+pure function, to the input state <s>\[Rho]</s>. See also: <f>ApplyKraus</f>."
 
 Superoperator::usage = "<f>Superoperator</f>[<v>kl</v>] returns matrix representation of quantum channel \
 given as a list of Kraus operators. <f>Superoperator</f>[<v>fun</v>,<v>dim</v>] is an alternative name \
