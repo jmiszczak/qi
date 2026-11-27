@@ -161,7 +161,7 @@ QutritSpontaneousEmissionKraus::usage="QutritSpontaneousEmissionKraus[A1,A2,t] K
 (*Entropy*)
 
 
-Log0::usage = "Log0[x] is equal to Log[2,x] for x>0 and 1 for x=0.";
+Log0::usage = "Log0[x] is equal to Log[2,x] for x>0 and 0 for x=0.";
 
 
 QuantumEntropy::usage = "QuantumEntropy[m] - von Neumann entropy of the matrix m.";
