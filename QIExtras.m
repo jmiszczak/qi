@@ -256,7 +256,7 @@ qiExtrasHistory = {
 	{"0.0.12", "12/04/2021", "Jarek", "Truncated fidelities moved to a new subpackage."},
 	{"0.0.13", "12/02/2023", "Jarek", "Documentation improvements."},
 	{"0.0.14", "27/08/2023", "Jarek", "Fixed compatibility of VandermondeMatrix (defined in Mathematica 13.2)."},
-    {"0.0.15", "27/1/2026", "Jarek", "Fixed QFT normalization."}
+    {"0.0.15", "27/11/2026", "Jarek", "Fixed QFT normalization."}
 };  
 
 
